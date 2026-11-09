@@ -11,8 +11,13 @@ POST-only, HMAC token, token in the URL fragment).
     npx wrangler d1 execute mykola-site --local --file=schema.sql
     npx wrangler pages dev --port 8788
 
+## Blog
+Markdown posts in `content/blog/` are built into `public/blog/` (plus sitemap.xml, rss.xml, llms.txt) by `scripts/build-blog.mjs`.
+Drafts live in `content/drafts/` (git-ignored, never built for production). `npm run preview` renders them locally with a DRAFT banner.
+Front matter: title, description, date (YYYY-MM-DD), slug, optional summary, tags, updated.
+
 ## Deploy (only after owner approval)
-    npx wrangler pages deploy public --project-name mykola --branch main
+    npm run deploy        # builds the blog, then wrangler pages deploy
 Never run `wrangler deploy` here (creates a Workers project instead).
 
 ## Secrets (Pages project, production; never in files/chat)

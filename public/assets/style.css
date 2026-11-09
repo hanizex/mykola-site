@@ -93,3 +93,16 @@ footer.site a { color: var(--muted); }
   *, *::before, *::after { animation: none !important; transition: none !important; }
   .reveal { opacity: 1; transform: none; }
 }
+
+/* blog */
+.post h1 { margin-bottom: 14px; }
+.post h2 { margin: 36px 0 12px; }
+.post h3 { font-size: 1.1rem; margin: 26px 0 8px; }
+.post p, .post li { max-width: 40em; }
+.post ul, .post ol { padding-left: 1.3em; margin: 0 0 16px; }
+.post blockquote { margin: 18px 0; padding: 4px 18px; border-left: 3px solid var(--accent); color: var(--muted); }
+.post code { background: var(--accent-soft); padding: 1px 6px; border-radius: 6px; font-size: .92em; }
+.post table { border-collapse: collapse; width: 100%; margin: 16px 0; font-size: .95rem; }
+.post th, .post td { border: 1px solid var(--line); padding: 8px 10px; text-align: left; }
+.tldr { background: var(--accent-soft); border-radius: var(--radius); padding: 14px 18px; color: var(--fg); }
+.cta { margin: 40px 0 0; }

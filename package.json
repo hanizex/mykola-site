@@ -1,0 +1,13 @@
+{
+  "name": "mykola-site",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build-blog.mjs",
+    "preview": "node scripts/build-blog.mjs --drafts && npx wrangler pages dev --port 8788",
+    "deploy": "node scripts/build-blog.mjs && npx wrangler pages deploy public --project-name mykola --branch main"
+  },
+  "dependencies": {
+    "marked": "^15.0.0"
+  }
+}
