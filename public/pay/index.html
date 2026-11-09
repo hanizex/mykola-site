@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pay for your consultation — Mykola Kalakutsyi</title>
+  <meta name="robots" content="noindex">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+  <header class="site"><div class="wrap"><a class="brand" href="/">Mykola Kalakutsyi</a><nav><span class="muted">Step 1 of 3 · Pay</span></nav></div></header>
+  <main class="wrap">
+    <h1 style="font-size:2rem">Pay for your consultation</h1>
+    <p class="lead">€50 for one hour, online. Choose how you'd like to pay.</p>
+
+    <form id="f" class="panel" autocomplete="off">
+      <div class="choice" role="radiogroup" aria-label="Payment method">
+        <label><input type="radio" name="m" value="mono" required> Monobank <span class="note">(UAH, fixed rate)</span></label>
+        <label><input type="radio" name="m" value="revolut"> Revolut <span class="note">(EUR)</span></label>
+      </div>
+
+      <div class="panel" id="details" hidden style="background:var(--accent-soft);margin:16px 0 0">
+        <p style="margin:0 0 10px" id="how"></p>
+        <a class="btn" id="paylink" href="#" target="_blank" rel="noopener noreferrer">Open payment page</a>
+        <p class="note" style="margin:10px 0 0">Please send it as a <strong>personal transfer</strong>. A comment is not needed — I match your payment by the transaction ID below.</p>
+      </div>
+
+      <p style="margin:18px 0 6px"><label for="tx"><strong>Transaction ID</strong> <span class="note">— from your bank's receipt after you pay</span></label></p>
+      <input id="tx" type="text" maxlength="64" placeholder="e.g. the ID shown in the transfer details" required>
+      <p class="note" id="err" role="alert" hidden></p>
+
+      <p style="margin-top:18px"><button class="btn" type="submit" id="go">I've paid — next: pick a time</button></p>
+      <p class="note">You'll book your time on the next step. I confirm the payment and the booking myself, then send the invite.</p>
+    </form>
+  </main>
+  <footer class="site"><div class="wrap"><a href="/privacy/">Privacy</a></div></footer>
+  <script src="/assets/site.js" defer></script>
+  <script>
+    addEventListener('DOMContentLoaded', async () => {
+      const f = document.getElementById('f'), err = document.getElementById('err'), go = document.getElementById('go');
+      const post = (body) => fetch('/api/order', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(body) }).then(r => r.json()).catch(() => ({}));
+      const METHODS = {
+        mono: { url: 'https://base.monobank.ua/8RDvxE1Tcf8mXg', how: 'Pay the consultation in hryvnia at a fixed rate through Monobank.' },
+        revolut: { url: 'https://revolut.me/hanizex', how: 'Pay €50 through Revolut.' },
+      };
+      const box = document.getElementById('details');
+      f.querySelectorAll('input[name=m]').forEach((r) => r.addEventListener('change', () => {
+        const m = METHODS[r.value]; if (!m) return;
+        document.getElementById('how').textContent = m.how;
+        document.getElementById('paylink').href = m.url;
+        box.hidden = false;
+      }));
+      let id = new URLSearchParams(location.search).get('o') || '';
+      if (!id) { const r = await post({ a: 'start', t: window.__touch || {} }); id = r.id || ''; }
+      f.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const tx = document.getElementById('tx').value.trim();
+        const m = f.m.value;
+        if (!/^[\w\-:./ ]{4,64}$/.test(tx)) { err.hidden = false; err.textContent = 'Please enter the transaction ID exactly as shown on your receipt (4–64 characters).'; return; }
+        go.disabled = true;
+        await post({ a: 'paid', id, m, tx });
+        location.href = '/book/' + (id ? '?o=' + encodeURIComponent(id) : '');
+      });
+    });
+  </script>
+</body>
+</html>

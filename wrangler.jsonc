@@ -1,0 +1,15 @@
+{
+  // Cloudflare Pages project "mykola" -> https://mykola.pages.dev
+  // Deploy with: npx wrangler pages deploy public --project-name mykola --branch main
+  // (do NOT run `wrangler deploy` here — that creates a Workers project instead)
+  "name": "mykola",
+  "pages_build_output_dir": "public",
+  "compatibility_date": "2026-11-04",
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "mykola-site",
+      "database_id": "f7cdd98d-3d4c-4c66-adec-91b4d152193e"
+    }
+  ]
+}

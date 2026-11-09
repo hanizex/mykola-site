@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Pick a time — Mykola Kalakutsyi</title>
+  <meta name="robots" content="noindex">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+  <header class="site"><div class="wrap"><a class="brand" href="/">Mykola Kalakutsyi</a><nav><span class="muted">Step 2 of 3 · Book</span></nav></div></header>
+  <main class="wrap">
+    <h1 style="font-size:2rem">Pick a time</h1>
+    <p class="lead">Choose a slot for your one-hour consultation. I'll confirm your payment and the booking, then send the invite.</p>
+
+    <div class="panel">
+      <p class="note" style="margin-top:0">The calendar is provided by Calendly. It loads only after you click below, and Calendly may set its own cookies.</p>
+      <p><button class="btn" id="open" type="button" data-ev="book_open">Show available times</button></p>
+      <div id="cal" class="stub" hidden>
+        <!-- STUB: Calendly inline widget goes here once CALENDLY_URL is set. -->
+        Calendar will appear here.
+      </div>
+    </div>
+    <p class="note" id="manual" hidden>Already got your Calendly confirmation but this page didn't move on? <a href="#" id="manualgo">Continue</a>.</p>
+    <p class="note">Stuck? Your reference: <code id="ref">—</code></p>
+  </main>
+  <footer class="site"><div class="wrap"><a href="/privacy/">Privacy</a></div></footer>
+  <script src="/assets/site.js" defer></script>
+  <script>
+    const CALENDLY_URL = 'https://calendly.com/hanizex/1-hour-meeting';
+    addEventListener('DOMContentLoaded', () => {
+      const id = new URLSearchParams(location.search).get('o') || '';
+      document.getElementById('ref').textContent = id ? id.slice(0, 8) : '—';
+      const post = (body) => fetch('/api/order', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(body) }).catch(() => {});
+      let done = false;
+      const booked = () => { if (done) return; done = true; post({ a: 'booked', id }); location.href = '/done/' + (id ? '?o=' + encodeURIComponent(id) : ''); };
+
+      document.getElementById('manualgo').addEventListener('click', (e) => { e.preventDefault(); booked(); });
+      document.getElementById('open').addEventListener('click', () => {
+        const cal = document.getElementById('cal'); cal.hidden = false;
+        if (!CALENDLY_URL) return; // stub until the real link is provided
+        const s = document.createElement('script'); s.src = 'https://assets.calendly.com/assets/external/widget.js'; s.async = true;
+        s.onload = () => { cal.innerHTML = ''; cal.className = ''; window.Calendly.initInlineWidget({ url: CALENDLY_URL + (id ? '?utm_content=' + encodeURIComponent(id.slice(0, 8)) : ''), parentElement: cal }); document.getElementById('manual').hidden = false; };
+        document.head.appendChild(s);
+      });
+      // Calendly posts a browser message when a booking is made (to be verified on the free plan).
+      addEventListener('message', (e) => {
+        if (e.origin === 'https://calendly.com' && e.data && e.data.event === 'calendly.event_scheduled') booked();
+      });
+    });
+  </script>
+</body>
+</html>
