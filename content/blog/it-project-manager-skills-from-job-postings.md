@@ -3,12 +3,14 @@ title: "IT Project Manager Skills: 10 Essentials, Including AI"
 description: "Explore 10 IT project manager skills, from communication and budgets to English, AI tools and AI agents, with a practical checklist to assess your own skills."
 date: 2026-11-09
 slug: it-project-manager-skills-from-job-postings
+key: it-project-manager-skills-from-job-postings
+cta: consult
 summary: "A practical checklist of 10 IT project manager skills: eight areas drawn from job postings, plus English and hands-on implementation of AI tools, AI agents and workflows."
 tags: project management, project manager skills, IT careers, job requirements, AI in project management, AI agents
 source: t.me/outstanding_pm/1045 (20 May 2025)
 ---
 
-Your PM CV looks great. Let's see what survives a real project.
+Your CV says "AI-driven". Your last project says "copy-paste into ChatGPT".
 
 My analysis of IT project manager job postings produced eight groups of skills.
 This updated checklist adds English and practical work with AI tools and AI agents.

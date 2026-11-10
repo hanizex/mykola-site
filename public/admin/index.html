@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Order — owner</title>
+  <title>Order – owner</title>
   <meta name="robots" content="noindex,nofollow">
   <meta name="referrer" content="no-referrer">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
@@ -22,11 +22,11 @@
     const h = new URLSearchParams(location.hash.slice(1));
     const id = h.get('o') || '', k = h.get('k') || '';
     const box = document.getElementById('box'), ok = document.getElementById('ok');
-    const t = (s) => s ? new Date(s * 1000).toISOString().replace('T', ' ').slice(0, 16) + ' UTC' : '—';
+    const t = (s) => s ? new Date(s * 1000).toISOString().replace('T', ' ').slice(0, 16) + ' UTC' : '–';
     const call = (a) => fetch('/api/admin', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ a, id, k }) }).then((r) => r.json());
     function show(o) {
       box.replaceChildren();
-      const rows = [['Reference', o.id], ['Method', o.method || '—'], ['Transaction ID', o.tx_id || '—'], ['Source', o.src_type || '—'],
+      const rows = [['Reference', o.id], ['Method', o.method || '–'], ['Transaction ID', o.tx_id || '–'], ['Source', o.src_type || '–'],
         ['Payment claimed', t(o.paid_claimed_ts)], ['Meeting booked', t(o.booked_ts)], ['Confirmed', t(o.confirmed_ts)]];
       for (const [a, b] of rows) { const p = document.createElement('p'); p.style.margin = '4px 0'; const s = document.createElement('strong'); s.textContent = a + ': '; p.append(s, document.createTextNode(b)); box.append(p); }
       ok.hidden = !!o.confirmed_ts; ok.disabled = false;

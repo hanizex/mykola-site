@@ -3,13 +3,15 @@ title: "8 Job Interview Mistakes and How to Avoid Them"
 description: "Avoid eight common job interview mistakes, from poor preparation to vague answers and hidden AI help. Practical tips for IT and project manager interviews."
 date: 2026-11-09
 slug: 8-mistakes-candidates-make-in-job-interviews
+key: 8-mistakes-candidates-make-in-job-interviews
+cta: consult
 summary: "Eight job interview mistakes to avoid: arriving late without communicating, skipping technical checks, ignoring company research, answering the wrong question, bluffing, badmouthing, over-apologising and letting nerves derail your answers. Each section explains what to do instead."
 author: Mykola Kalakutskyi
 tags: job interview, interview preparation, IT careers, project manager interview, hiring, soft skills
 source: t.me/outstanding_pm/336 (10 June 2024)
 ---
 
-You want a better salary. Let's see what you're selling.
+You can lose an offer before you answer a single question.
 
 I'm often asked how to prepare for job interviews.
 Here are eight mistakes I see most often, and what to do instead.

@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Оберіть час – Микола Калакуцький</title>
+  
+  <meta name="robots" content="noindex">
+  
+  
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+  <header class="site"><div class="wrap"><a class="brand" href="/uk/">Микола Калакуцький</a><nav><span class="muted">Крок 2 з 3 · Бронювання</span></nav></div></header>
+  <main class="wrap">
+    <h1 style="font-size:2rem">Оберіть час</h1>
+    <p class="lead">Оберіть слот для вашої годинної консультації. Я побачу вашу оплату й прийму запрошення.</p>
+
+    <div class="panel">
+      <ol class="steps">
+        <li>Відкрийте календар і оберіть слот.</li>
+        <li>У формі напишіть деталі та контекст вашого кейсу й вставте свій код: <code id="ref" class="refcode">–</code></li>
+        <li>Поверніться сюди й натисніть &quot;Час заброньовано&quot;.</li>
+      </ol>
+      <p><a class="btn" id="open" href="https://calendly.com/hanizex/1-hour-meeting" target="_blank" rel="noopener noreferrer" data-ev="book_open">Відкрити календар</a></p>
+      <p class="note">Календар відкриється на Calendly в новій вкладці. Calendly збирає ваше ім'я, email і повідомлення за власною політикою конфіденційності.</p>
+      <div id="after" hidden style="margin-top:18px;padding-top:18px;border-top:1px solid var(--line)">
+        <p style="margin:0 0 10px"><strong>Забронювали? Дайте мені знати:</strong></p>
+        <button class="btn" id="booked" type="button">Час заброньовано</button>
+      </div>
+    </div>
+    <p class="note">Ваш код: <code class="refcode" id="ref2">–</code></p>
+  </main>
+  <footer class="site"><div class="wrap"><a href="/uk/privacy/">Конфіденційність</a></div></footer>
+  <script src="/assets/site.js" defer></script>
+  <script>
+    const CFG = {"cal":"https://calendly.com/hanizex/1-hour-meeting","done":"/uk/done/"};
+    addEventListener('DOMContentLoaded', () => {
+      const id = new URLSearchParams(location.search).get('o') || '';
+      const ref = id ? id.slice(0, 8) : '–';
+      document.getElementById('ref').textContent = ref; document.getElementById('ref2').textContent = ref;
+      const open = document.getElementById('open');
+      if (id) open.href = CFG.cal + '?utm_content=' + encodeURIComponent(ref);
+      const post = (body) => fetch('/api/order', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(body) }).catch(() => {});
+      let done = false;
+      open.addEventListener('click', () => { document.getElementById('after').hidden = false; });
+      document.getElementById('booked').addEventListener('click', async () => {
+        if (done) return; done = true;
+        await post({ a: 'booked', id });
+        location.href = CFG.done + (id ? '?o=' + encodeURIComponent(id) : '');
+      });
+    });
+  </script>
+</body>
+</html>

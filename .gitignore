@@ -9,3 +9,6 @@ public/sitemap.xml
 public/llms.txt
 content/drafts/*.md
 !content/drafts/README.md
+private/
+content/uk/drafts/*.md
+public/uk/blog/

@@ -1,7 +1,7 @@
 // POST /api/event — cookieless first-party analytics.
 // Stores one row per event. No raw IP is stored; `vid` is a daily-rotating hash.
 
-const ALLOWED = new Set(['page_view', 'scroll_50', 'cta_click', 'repo_click', 'book_open']);
+const ALLOWED = new Set(['page_view', 'scroll_50', 'cta_click', 'repo_click', 'book_open', 'channel_click', 'project_click']);
 const AI = ['chatgpt.com', 'chat.openai.com', 'perplexity.ai', 'gemini.google.com', 'copilot.microsoft.com', 'claude.ai', 'you.com', 'phind.com'];
 const SEARCH = ['google.', 'bing.com', 'duckduckgo.com', 'yahoo.', 'ecosia.org', 'search.brave.com', 'yandex.'];
 const SOCIAL = ['t.me', 'telegram.org', 'linkedin.com', 'lnkd.in', 'facebook.com', 'x.com', 'twitter.com', 'instagram.com', 'youtube.com'];

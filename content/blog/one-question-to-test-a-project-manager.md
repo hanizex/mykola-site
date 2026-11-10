@@ -3,6 +3,8 @@ title: One question to test how well a candidate really knows project management
 description: If you have time for only one interview question for a project manager, ask about their real role in every phase of the SDLC. Here is how to read the answer.
 date: 2026-11-09
 slug: one-question-to-test-a-project-manager
+key: one-question-to-test-a-project-manager
+cta: consult
 summary: Ask the candidate to describe their responsibilities and actual work in each phase of the software development life cycle, in 5 to 10 minutes. The number of phases they cover and how concrete they are tells you their level.
 tags: project management, hiring, interview questions, SDLC
 source: t.me/outstanding_pm/288 (17 May 2024)

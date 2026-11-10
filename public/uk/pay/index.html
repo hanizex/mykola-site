@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Оплата консультації – Микола Калакуцький</title>
+  
+  <meta name="robots" content="noindex">
+  
+  
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+  <header class="site"><div class="wrap"><a class="brand" href="/uk/">Микола Калакуцький</a><nav><span class="muted">Крок 1 з 3 · Оплата</span></nav></div></header>
+  <main class="wrap">
+    <h1 style="font-size:2rem">Оплата консультації</h1>
+    <p class="lead">€50 за одну годину онлайн. Оберіть, як вам зручно заплатити.</p>
+
+    <form id="f" class="panel" autocomplete="off">
+      <div class="choice" role="radiogroup" aria-label="Спосіб оплати">
+        <label><input type="radio" name="m" value="mono" required> Monobank <span class="note">(UAH, фіксований курс)</span></label>
+        <label><input type="radio" name="m" value="revolut"> Revolut <span class="note">(EUR)</span></label>
+      </div>
+
+      <div class="panel" id="details" hidden style="background:var(--accent-soft);margin:16px 0 0">
+        <p style="margin:0 0 10px" id="how"></p>
+        <a class="btn" id="paylink" href="#" target="_blank" rel="noopener noreferrer">Відкрити сторінку оплати</a>
+        <p class="note" style="margin:10px 0 0">Будь ласка, надішліть як <strong>особистий переказ</strong>. Коментар не потрібен – я звіряю ваш платіж за ID транзакції нижче.</p>
+      </div>
+
+      <p style="margin:18px 0 6px"><label for="tx"><strong>ID транзакції</strong> <span class="note">– з квитанції вашого банку після оплати</span></label></p>
+      <input id="tx" type="text" maxlength="64" placeholder="напр. ID з деталей переказу" required>
+      <p class="note" id="err" role="alert" hidden></p>
+
+      <p style="margin-top:18px"><button class="btn" type="submit" id="go">Оплату здійснено – далі: обрати час</button></p>
+      <p class="note">На наступному кроці ви оберете час. Потім я бачу вашу оплату й приймаю запрошення.</p>
+    </form>
+  </main>
+  <footer class="site"><div class="wrap"><a href="/uk/privacy/">Конфіденційність</a></div></footer>
+  <script src="/assets/site.js" defer></script>
+  <script>
+    const CFG = {"next":"/uk/book/","err":"Введіть ID транзакції точно так, як у квитанції (4–64 символи).","mono":{"url":"https://base.monobank.ua/8RDvxE1Tcf8mXg","how":"Сплатіть консультацію в гривнях за фіксованим курсом через Monobank."},"revolut":{"url":"https://revolut.me/hanizex","how":"Сплатіть €50 через Revolut."}};
+    addEventListener('DOMContentLoaded', async () => {
+      const f = document.getElementById('f'), err = document.getElementById('err'), go = document.getElementById('go');
+      const post = (body) => fetch('/api/order', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(body) }).then(r => r.json()).catch(() => ({}));
+      const box = document.getElementById('details');
+      f.querySelectorAll('input[name=m]').forEach((r) => r.addEventListener('change', () => {
+        const m = CFG[r.value]; if (!m) return;
+        document.getElementById('how').textContent = m.how;
+        document.getElementById('paylink').href = m.url;
+        box.hidden = false;
+      }));
+      let id = new URLSearchParams(location.search).get('o') || '';
+      if (!id) { const r = await post({ a: 'start', t: window.__touch || {} }); id = r.id || ''; }
+      f.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const tx = document.getElementById('tx').value.trim();
+        const m = f.m.value;
+        if (!/^[\w\-:./ ]{4,64}$/.test(tx)) { err.hidden = false; err.textContent = CFG.err; return; }
+        go.disabled = true;
+        await post({ a: 'paid', id, m, tx });
+        location.href = CFG.next + (id ? '?o=' + encodeURIComponent(id) : '');
+      });
+    });
+  </script>
+</body>
+</html>

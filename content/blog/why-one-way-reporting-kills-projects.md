@@ -3,6 +3,8 @@ title: Why one-way reporting kills projects, and what I tell my team instead
 description: When a manager reports to nobody and explains nothing, the team fills the gaps with guesses. A five-part protocol for open two-way communication with your team.
 date: 2026-11-09
 slug: why-one-way-reporting-kills-projects
+key: why-one-way-reporting-kills-projects
+cta: comment
 summary: One-way reporting turns status updates into a theatre of green statuses. A manager who shares priorities, reasons, constraints, test results and their own commitments keeps everyone looking at the same picture.
 tags: management, leadership, team communication, reporting
 source: t.me/outstanding_pm/1841 (19 May 2026)
@@ -10,7 +12,7 @@ source: t.me/outstanding_pm/1841 (19 May 2026)
 
 "I'm the manager, and I don't have to tell the team what I'm working on or explain my decisions."
 
-If you hear this sentence from yourself, congratulations: you are doing one-way control instead of management. One-way reporting creates a theatre of "green statuses" while the money goes into the bin.
+If you say this sentence out loud, congratulations: that's control, not management. One-way reporting creates a theatre of "green statuses" while the money goes into the bin.
 
 A team must see what is happening in the system it works in.
 

@@ -3,72 +3,279 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Mykola Kalakutskyi — Project &amp; Delivery Management</title>
-  <meta name="description" content="Mykola Kalakutskyi: project, product and delivery management. One-hour online consultations for founders, managers and people starting out.">
+  <title>Mykola Kalakutskyi – IT Project &amp; Delivery Management Consultant</title>
+  <meta name="description" content="IT project and delivery manager, consultant and mentor: 400+ consultation and mentorship sessions since 2023. When textbook answers and AI advice stop working, book a one-hour online consultation (€50).">
+  <meta name="author" content="Mykola Kalakutskyi">
   <link rel="canonical" href="https://mykola.pages.dev/">
+  <link rel="alternate" hreflang="en" href="https://mykola.pages.dev/">
+  <link rel="alternate" hreflang="uk" href="https://mykola.pages.dev/uk/">
+  <link rel="alternate" hreflang="x-default" href="https://mykola.pages.dev/">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-  <meta property="og:title" content="Mykola Kalakutskyi — Project &amp; Delivery Management">
-  <meta property="og:description" content="One-hour online management consultations, and a few projects I built.">
+  <link rel="alternate" type="application/rss+xml" title="Mykola Kalakutskyi – Blog" href="/blog/rss.xml">
+  <meta property="og:title" content="Mykola Kalakutskyi – IT Project &amp; Delivery Management Consultant">
+  <meta property="og:description" content="I help where your AI fails. One-hour online management consultations from someone with 400+ sessions behind them.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://mykola.pages.dev/">
+  <meta property="og:image" content="https://mykola.pages.dev/assets/mykola.jpg">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:locale:alternate" content="uk_UA">
+  <meta name="twitter:card" content="summary">
   <link rel="stylesheet" href="/assets/style.css">
   <script type="application/ld+json">
-  {"@context":"https://schema.org","@type":"Person","name":"Mykola Kalakutskyi","url":"https://mykola.pages.dev/","sameAs":["https://github.com/hanizex"],"knowsAbout":["Project management","Product management","Delivery management"]}
+  {"@context":"https://schema.org","@graph":[{"@type":"Person","@id":"https://mykola.pages.dev/#me","name":"Mykola Kalakutskyi","alternateName":"Микола Калакуцький","url":"https://mykola.pages.dev/","image":"https://mykola.pages.dev/assets/mykola.jpg","jobTitle":"IT project and delivery manager","description":"IT project and delivery manager, consultant, mentor and teacher with 12+ years in IT. Looks for the root cause before choosing tools. Has run 400+ consultation and mentorship sessions since June 2023.","sameAs":["https://github.com/hanizex","https://t.me/outstanding_pm","https://www.linkedin.com/in/hanizex/"],"knowsAbout":["Project management","Product management","Delivery management","Operational management","Startup management","Management consulting","AI in project management","Mentoring project managers"],"worksFor":[{"@type":"Organization","name":"Mimeon","url":"https://mimeon.art/"},{"@type":"Organization","name":"MyManager","url":"https://mymgr.app/"}],"affiliation":[{"@type":"Organization","name":"PM Coffee Time","url":"https://pmcoffeetime.online/"},{"@type":"Organization","name":"SkillsUp","url":"https://skillsup.ua/"}]},{"@type":"WebSite","@id":"https://mykola.pages.dev/#site","url":"https://mykola.pages.dev/","name":"Mykola Kalakutskyi","inLanguage":["en","uk"],"publisher":{"@id":"https://mykola.pages.dev/#me"}},{"@type":"Service","name":"One-hour online management consultation","serviceType":"Management consulting","provider":{"@id":"https://mykola.pages.dev/#me"},"areaServed":"Worldwide","inLanguage":"en","description":"A 60-minute online consultation on project, product, delivery or operational management, startup setup, C-level decisions, PM process audits and interview preparation.","offers":{"@type":"Offer","price":"50","priceCurrency":"EUR","url":"https://mykola.pages.dev/#consult"}}]}
   </script>
 </head>
-<body>
+<body class="landing">
   <header class="site">
     <div class="wrap">
       <a class="brand" href="/">Mykola Kalakutskyi</a>
-      <nav><a href="#work">Work</a><a href="/blog/">Blog</a><a href="#consult">Consultation</a></nav>
+      <nav><a href="#projects">Projects</a><a href="/blog/">Blog</a><a href="#consult">Consultation</a><a href="/uk/" hreflang="uk" lang="uk" title="Читати українською">UA</a></nav>
     </div>
   </header>
 
   <main class="wrap">
     <div class="hero">
-      <img class="photo" src="/assets/mykola.jpg" width="112" height="112" alt="Portrait of Mykola Kalakutskyi" fetchpriority="high">
-      <h1>Project, product and delivery management.</h1>
-      <p class="lead">I help teams and first-time managers turn a tangled situation into a clear next step. I also build small tools — a few are below.</p>
-      <p>
+      <div class="hero-top">
+        <img class="photo" src="/assets/mykola.jpg" width="128" height="128" alt="Portrait of Mykola Kalakutskyi" fetchpriority="high">
+        <div class="hero-head">
+          <p class="eyebrow">IT project and delivery manager · consultant · mentor</p>
+          <h1>I help where your AI fails</h1>
+        </div>
+      </div>
+      <p class="lead">AI gave you advice. Reality said no. When the textbook has run out of scenarios and the chatbot has run out of useful answers, I look for the real cause and give you the full list of actions that fit your situation.</p>
+      <p class="cta-row">
         <a class="btn" href="/pay/" data-ev="cta_click">Book a consultation · €50</a>
-        <a class="btn ghost" href="#work">See my work</a>
+        <a class="btn ghost" href="#projects">My projects</a>
       </p>
     </div>
 
-    <section id="work" class="reveal">
-      <h2>Selected work</h2>
-      <div class="cards">
-        <a class="card" href="https://github.com/hanizex/job-search-automation" data-ev="repo_click" rel="noopener">
-          <strong>job-search-automation</strong>
-          <span>Automation for running a structured, data-driven job search.</span>
-        </a>
-        <a class="card" href="https://github.com/hanizex/mimeon-onboarding-bot" data-ev="repo_click" rel="noopener">
-          <strong>mimeon-onboarding-bot</strong>
-          <span>A Telegram onboarding bot built on Google Apps Script.</span>
-        </a>
-        <a class="card" href="https://github.com/hanizex/pm-coffee-time-bot" data-ev="repo_click" rel="noopener">
-          <strong>pm-coffee-time-bot</strong>
-          <span>Bot flows and backend for the PM Coffee Time community.</span>
-        </a>
+    <section class="proofbar">
+      <div class="stats">
+        <div class="stat"><strong>400+</strong><span>consultations and mentorship sessions since June 2023</span></div>
+        <div class="stat"><strong>12+</strong><span>years in IT</span></div>
+        <div class="stat"><strong>18</strong><span>teams built from scratch</span></div>
+        <div class="stat"><a href="https://www.linkedin.com/in/hanizex/" data-ev="project_click" rel="noopener"><strong>~30</strong><span>recommendations on LinkedIn</span></a></div>
+      </div>
+      
+    </section>
+
+    <section id="bring" class="reveal">
+      <h2>Bring me one of these</h2>
+      <div class="dossier" role="region" aria-roledescription="carousel" aria-label="Case files: problems I solve" data-of="of" data-prev="Previous case" data-next="Next case">
+      <div class="folders" tabindex="0">
+        <article class="folder" aria-label="The developer who doesn't want to contribute">
+          <div class="tab">CASE MK-014</div>
+          <div class="cover">
+            <div class="hdr"><span class="seal">MK</span><div><b>CASE FILE</b><small>MANAGEMENT INTELLIGENCE UNIT</small></div></div>
+            <div class="chev" aria-hidden="true"></div>
+            <dl>
+              <div class="row"><dt>Title</dt><dd class="ttl">The developer who doesn't want to contribute</dd></div>
+              <div class="row"><dt>Objective</dt><dd>Find the real cause of the low contribution. Agree on results, not on hours.</dd></div>
+              <div class="row"><dt>Confidence</dt><dd class="conf"><span class="meter"><i style="width:96%"></i></span><b>96%</b></dd></div>
+              <div class="row"><dt>Case ID</dt><dd class="mono">MK-014</dd></div>
+            </dl>
+            <div class="stamp" aria-hidden="true">PERSONAL</div>
+            <div class="print" aria-hidden="true"></div>
+          </div>
+        </article>
+        <article class="folder" aria-label="Unmanageable, toxic and other shitty stakeholders">
+          <div class="tab">CASE MK-021</div>
+          <div class="cover">
+            <div class="hdr"><span class="seal">MK</span><div><b>CASE FILE</b><small>MANAGEMENT INTELLIGENCE UNIT</small></div></div>
+            <div class="chev" aria-hidden="true"></div>
+            <dl>
+              <div class="row"><dt>Title</dt><dd class="ttl">Unmanageable, toxic and other shitty stakeholders</dd></div>
+              <div class="row"><dt>Objective</dt><dd>Map the interests, set the boundaries, keep the project moving without losing your mind.</dd></div>
+              <div class="row"><dt>Confidence</dt><dd class="conf"><span class="meter"><i style="width:94%"></i></span><b>94%</b></dd></div>
+              <div class="row"><dt>Case ID</dt><dd class="mono">MK-021</dd></div>
+            </dl>
+            <div class="stamp" aria-hidden="true">CONFIDENTIAL</div>
+            <div class="print" aria-hidden="true"></div>
+          </div>
+        </article>
+        <article class="folder" aria-label="Perfect plans that never made it into real work">
+          <div class="tab">CASE MK-028</div>
+          <div class="cover">
+            <div class="hdr"><span class="seal">MK</span><div><b>CASE FILE</b><small>MANAGEMENT INTELLIGENCE UNIT</small></div></div>
+            <div class="chev" aria-hidden="true"></div>
+            <dl>
+              <div class="row"><dt>Title</dt><dd class="ttl">Perfect plans that never made it into real work</dd></div>
+              <div class="row"><dt>Objective</dt><dd>Turn the plan into commitments that people actually own.</dd></div>
+              <div class="row"><dt>Confidence</dt><dd class="conf"><span class="meter"><i style="width:95%"></i></span><b>95%</b></dd></div>
+              <div class="row"><dt>Case ID</dt><dd class="mono">MK-028</dd></div>
+            </dl>
+            <div class="stamp" aria-hidden="true">HANDLE WITH CARE</div>
+            <div class="print" aria-hidden="true"></div>
+          </div>
+        </article>
+        <article class="folder" aria-label="Any people management approach that looks like firefighting">
+          <div class="tab">CASE MK-035</div>
+          <div class="cover">
+            <div class="hdr"><span class="seal">MK</span><div><b>CASE FILE</b><small>MANAGEMENT INTELLIGENCE UNIT</small></div></div>
+            <div class="chev" aria-hidden="true"></div>
+            <dl>
+              <div class="row"><dt>Title</dt><dd class="ttl">Any people management approach that looks like firefighting</dd></div>
+              <div class="row"><dt>Objective</dt><dd>Replace heroics with a system that stops the fire from starting.</dd></div>
+              <div class="row"><dt>Confidence</dt><dd class="conf"><span class="meter"><i style="width:97%"></i></span><b>97%</b></dd></div>
+              <div class="row"><dt>Case ID</dt><dd class="mono">MK-035</dd></div>
+            </dl>
+            <div class="stamp" aria-hidden="true">SENSITIVE</div>
+            <div class="print" aria-hidden="true"></div>
+          </div>
+        </article>
+        <article class="folder" aria-label="Unclear priorities and goals, vague KPIs and OKRs, false expectations">
+          <div class="tab">CASE MK-042</div>
+          <div class="cover">
+            <div class="hdr"><span class="seal">MK</span><div><b>CASE FILE</b><small>MANAGEMENT INTELLIGENCE UNIT</small></div></div>
+            <div class="chev" aria-hidden="true"></div>
+            <dl>
+              <div class="row"><dt>Title</dt><dd class="ttl">Unclear priorities and goals, vague KPIs and OKRs, false expectations</dd></div>
+              <div class="row"><dt>Objective</dt><dd>One list of priorities, goals you can measure, expectations that match reality.</dd></div>
+              <div class="row"><dt>Confidence</dt><dd class="conf"><span class="meter"><i style="width:94%"></i></span><b>94%</b></dd></div>
+              <div class="row"><dt>Case ID</dt><dd class="mono">MK-042</dd></div>
+            </dl>
+            <div class="stamp" aria-hidden="true">DNA ON FILE</div>
+            <div class="print" aria-hidden="true"></div>
+          </div>
+        </article>
+        <article class="folder" aria-label="A PM process that needs an audit before it needs another PM">
+          <div class="tab">CASE MK-049</div>
+          <div class="cover">
+            <div class="hdr"><span class="seal">MK</span><div><b>CASE FILE</b><small>MANAGEMENT INTELLIGENCE UNIT</small></div></div>
+            <div class="chev" aria-hidden="true"></div>
+            <dl>
+              <div class="row"><dt>Title</dt><dd class="ttl">A PM process that needs an audit before it needs another PM</dd></div>
+              <div class="row"><dt>Objective</dt><dd>Find out what is actually broken before you hire or buy anything.</dd></div>
+              <div class="row"><dt>Confidence</dt><dd class="conf"><span class="meter"><i style="width:98%"></i></span><b>98%</b></dd></div>
+              <div class="row"><dt>Case ID</dt><dd class="mono">MK-049</dd></div>
+            </dl>
+            <div class="stamp" aria-hidden="true">EYES ONLY</div>
+            <div class="print" aria-hidden="true"></div>
+          </div>
+        </article>
+        <article class="folder" aria-label="A startup that doesn't want to grow, or dies before it's born">
+          <div class="tab">CASE MK-056</div>
+          <div class="cover">
+            <div class="hdr"><span class="seal">MK</span><div><b>CASE FILE</b><small>MANAGEMENT INTELLIGENCE UNIT</small></div></div>
+            <div class="chev" aria-hidden="true"></div>
+            <dl>
+              <div class="row"><dt>Title</dt><dd class="ttl">A startup that doesn't want to grow, or dies before it's born</dd></div>
+              <div class="row"><dt>Objective</dt><dd>Diagnose the stall: product, team, money or founder. Choose the next move.</dd></div>
+              <div class="row"><dt>Confidence</dt><dd class="conf"><span class="meter"><i style="width:95%"></i></span><b>95%</b></dd></div>
+              <div class="row"><dt>Case ID</dt><dd class="mono">MK-056</dd></div>
+            </dl>
+            <div class="stamp" aria-hidden="true">TOP PRIORITY</div>
+            <div class="print" aria-hidden="true"></div>
+          </div>
+        </article>
+        <article class="folder" aria-label="A PM technical interview you need to survive to get the offer">
+          <div class="tab">CASE MK-063</div>
+          <div class="cover">
+            <div class="hdr"><span class="seal">MK</span><div><b>CASE FILE</b><small>MANAGEMENT INTELLIGENCE UNIT</small></div></div>
+            <div class="chev" aria-hidden="true"></div>
+            <dl>
+              <div class="row"><dt>Title</dt><dd class="ttl">A PM technical interview you need to survive to get the offer</dd></div>
+              <div class="row"><dt>Objective</dt><dd>Prepare your answers and the stories behind them.</dd></div>
+              <div class="row"><dt>Confidence</dt><dd class="conf"><span class="meter"><i style="width:97%"></i></span><b>97%</b></dd></div>
+              <div class="row"><dt>Case ID</dt><dd class="mono">MK-063</dd></div>
+            </dl>
+            <div class="stamp" aria-hidden="true">CLASSIFIED</div>
+            <div class="print" aria-hidden="true"></div>
+          </div>
+        </article>
+        <article class="folder unidentified" aria-label="UNIDENTIFIED CASES">
+          <div class="tab">CASE MK-???</div>
+          <div class="cover">
+            <div class="hdr"><span class="seal">MK</span><div><b>CASE FILE</b><small>MANAGEMENT INTELLIGENCE UNIT</small></div></div>
+            <div class="chev" aria-hidden="true"></div>
+            <dl>
+              <div class="row"><dt>Title</dt><dd class="ttl">UNIDENTIFIED CASES</dd></div>
+              <div class="row"><dt>Objective</dt><dd>Not on the list? Bring it anyway! We will identify it together.</dd></div>
+              <div class="row"><dt>Confidence</dt><dd class="conf"><span class="meter"><i style="width:100%"></i></span><b>??</b></dd></div>
+              <div class="row"><dt>Case ID</dt><dd class="mono">MK-???</dd></div>
+            </dl>
+            <div class="stamp" aria-hidden="true">UNIDENTIFIED</div>
+            <div class="print" aria-hidden="true"></div>
+          </div>
+        </article>
+      </div>
+      <div class="dctl"><button type="button" class="dprev" aria-label="Previous case">‹</button><div class="dots"></div><button type="button" class="dnext" aria-label="Next case">›</button></div>
+      <p class="note dnote">Illustrative case files. Real cases stay confidential.</p>
+    </div>
+    </section>
+
+    <section id="why" class="reveal">
+      <h2>You don't buy a drill. You buy a hole in the wall.</h2>
+      <div class="cards three">
+        <div class="card static ic"><svg class="ico" viewBox="0 0 56 56" width="52" height="52" aria-hidden="true" focusable="false"><defs><clipPath id="ic14zrqjl0"><rect width="56" height="56" rx="14"/></clipPath></defs><g clip-path="url(#ic14zrqjl0)"><rect width="56" height="56" fill="#f1e6e6"/><circle class="p" style="--dx:4.6;--dy:4.7;--r:-51deg;--s:0.86;--i:0" cx="34.2" cy="34.3" r="17.6" fill="#3d6b5a" opacity=".82"/><circle class="p" style="--dx:-4.3;--dy:-2.6;--r:-29deg;--s:1.11;--i:1" cx="21.3" cy="24.0" r="21.2" fill="#c97b63" opacity=".82"/><circle class="p" style="--dx:3.9;--dy:4.3;--r:-61deg;--s:1.13;--i:2" cx="29.0" cy="28.1" r="11.0" fill="#7a9bb5" opacity=".82"/></g></svg><div class="ct"><strong>Use my experience for your needs</strong><span>No tour of theory. You get what has already worked, applied to your situation.</span></div></div>
+        <div class="card static ic"><svg class="ico" viewBox="0 0 56 56" width="52" height="52" aria-hidden="true" focusable="false"><defs><clipPath id="ic1ebb45n1"><rect width="56" height="56" rx="14"/></clipPath></defs><g clip-path="url(#ic1ebb45n1)"><rect width="56" height="56" fill="#f3ebdd"/><path class="p" style="--dx:-5.6;--dy:-5.6;--r:-28deg;--s:0.92;--i:0" d="M2 26A24 24 0 0 1 26 2V26Z" fill="#1f3d33"/><rect class="p" style="--dx:4.2;--dy:-4.2;--r:45deg;--s:1.00;--i:1" x="30" y="2" width="24" height="24" rx="4" fill="#8c7aa6"/><circle class="p" style="--dx:-4.6;--dy:4.6;--r:1deg;--s:0.90;--i:2" cx="14" cy="42" r="12" fill="#c97b63"/><path class="p" style="--dx:4.1;--dy:2.9;--r:-25deg;--s:1.00;--i:3" d="M30 42a12 12 0 0 1 24 0Z" fill="#8c7aa6"/></g></svg><div class="ct"><strong>Your pain is understood</strong><span>E-commerce, fintech, edtech, iGaming, product and outsourcing teams: I have seen how it hurts in each of them.</span></div></div>
+        <div class="card static ic"><svg class="ico" viewBox="0 0 56 56" width="52" height="52" aria-hidden="true" focusable="false"><defs><clipPath id="ic1cb1bsb2"><rect width="56" height="56" rx="14"/></clipPath></defs><g clip-path="url(#ic1cb1bsb2)"><rect width="56" height="56" fill="#f3ebdd"/><path class="p" style="--dx:-4.8;--dy:-6.2;--r:8deg;--s:0.96;--i:0" d="M2 14a12 12 0 0 1 24 0Z" fill="#c97b63"/><path class="p" style="--dx:6.8;--dy:-3.8;--r:50deg;--s:1.22;--i:1" d="M30 26A24 24 0 0 1 54 2V26Z" fill="#3d6b5a"/><path class="p" style="--dx:-6.1;--dy:4.4;--r:58deg;--s:1.11;--i:2" d="M2 42a12 12 0 0 1 24 0Z" fill="#c97b63"/><path class="p" style="--dx:6.8;--dy:4.8;--r:28deg;--s:1.06;--i:3" d="M30 42a12 12 0 0 1 24 0Z" fill="#8c7aa6"/></g></svg><div class="ct"><strong>You stay in sync with your tech people</strong><span>I started as a developer, so I speak your engineers' language.</span></div></div>
+        <div class="card static ic"><svg class="ico" viewBox="0 0 56 56" width="52" height="52" aria-hidden="true" focusable="false"><defs><clipPath id="ic1srrxk63"><rect width="56" height="56" rx="14"/></clipPath></defs><g clip-path="url(#ic1srrxk63)"><rect width="56" height="56" fill="#f1e6e6"/><rect class="p" style="--dx:-6.8;--dy:4.7;--r:-33deg;--s:1.18;--i:0" x="6" y="31.0" width="8" height="19.0" rx="4" fill="#6f9c8a"/><rect class="p" style="--dx:-7.9;--dy:2.6;--r:-17deg;--s:1.27;--i:1" x="17" y="10.6" width="8" height="39.4" rx="4" fill="#7a9bb5"/><rect class="p" style="--dx:1.4;--dy:4.9;--r:1deg;--s:1.23;--i:2" x="28" y="34.5" width="8" height="15.5" rx="4" fill="#3d6b5a"/><rect class="p" style="--dx:5.3;--dy:1.3;--r:0deg;--s:0.96;--i:3" x="39" y="13.4" width="8" height="36.6" rx="4" fill="#3d6b5a"/></g></svg><div class="ct"><strong>The path is safe</strong><span>Building a team from scratch is a road I have walked more than a dozen times.</span></div></div>
+        <div class="card static ic"><svg class="ico" viewBox="0 0 56 56" width="52" height="52" aria-hidden="true" focusable="false"><defs><clipPath id="ic1e1bbt44"><rect width="56" height="56" rx="14"/></clipPath></defs><g clip-path="url(#ic1e1bbt44)"><rect width="56" height="56" fill="#e8eef3"/><circle class="p" style="--dx:-2.3;--dy:-4.8;--r:-13deg;--s:0.91;--i:0" cx="22.3" cy="16.1" r="14.0" fill="#1f3d33" opacity=".82"/><circle class="p" style="--dx:0.4;--dy:-5.0;--r:75deg;--s:0.94;--i:1" cx="29.0" cy="15.4" r="13.4" fill="#6f9c8a" opacity=".82"/><circle class="p" style="--dx:-4.0;--dy:4.3;--r:70deg;--s:1.04;--i:2" cx="20.8" cy="35.7" r="14.5" fill="#8c7aa6" opacity=".82"/></g></svg><div class="ct"><strong>Big numbers are not scary</strong><span>I have led a unit of up to 45 people. We will ride your scale with fun, not fear.</span></div></div>
+        <div class="card static ic"><svg class="ico" viewBox="0 0 56 56" width="52" height="52" aria-hidden="true" focusable="false"><defs><clipPath id="ic1psorlx5"><rect width="56" height="56" rx="14"/></clipPath></defs><g clip-path="url(#ic1psorlx5)"><rect width="56" height="56" fill="#e8eef3"/><path class="p" style="--dx:0.0;--dy:-5.7;--r:69deg;--s:1.03;--i:0" d="M-2 14C12 6.372648285701871 20 21.62735171429813 30 14S46 6.372648285701871 58 14" fill="none" stroke="#7a9bb5" stroke-width="3.1" stroke-linecap="round"/><path class="p" style="--dx:6.3;--dy:-6.4;--r:-19deg;--s:1.08;--i:1" d="M-2 28C12 22.439776556566358 20 33.56022344343364 30 28S46 22.439776556566358 58 28" fill="none" stroke="#1f3d33" stroke-width="3.7" stroke-linecap="round"/><path class="p" style="--dx:0.0;--dy:6.4;--r:8deg;--s:0.94;--i:2" d="M-2 42C12 35.01545627601445 20 48.98454372398555 30 42S46 35.01545627601445 58 42" fill="none" stroke="#c97b63" stroke-width="3.5" stroke-linecap="round"/></g></svg><div class="ct"><strong>Relax and follow</strong><span>This is not my first rodeo. You may be surprised how easily things can get solved.</span></div></div>
+      </div>
+    </section>
+
+    <section id="proof" class="reveal">
+      <h2>What people say</h2>
+      <p class="note">Excerpts from recommendations on my LinkedIn profile.</p>
+      <div class="quotes">
+        <figure class="quote"><blockquote>Within the first few minutes of our meeting, I received so many insights that I couldn't have even anticipated. The amount of experience and knowledge that Mykola was able to share with me in just one hour is impossible to describe in this brief recommendation.</blockquote><figcaption><strong>Kateryna Kolosova</strong><span>Strategic HRBP</span></figcaption></figure>
+        <figure class="quote"><blockquote>During an in-depth consultation we dug into nuances that could have been the root cause of the failures, which I had not even thought about. Mykola suggested ways out of the situation and showed me the direction to work in to deepen my theoretical and practical knowledge.</blockquote><figcaption><strong>Arina Lysenko</strong><span>Junior Project Manager</span><em>Translated from Ukrainian</em></figcaption></figure>
+        <figure class="quote"><blockquote>Their insightful guidance during our career consultation session significantly contributed to shaping my professional trajectory, offering valuable insights on skill development.</blockquote><figcaption><strong>Pavlo Fedorenko</strong><span>Sales &amp; Business Development Manager</span></figcaption></figure>
+        <figure class="quote"><blockquote>Your mentorship has reinforced my belief that switching to Project Management was [the] correct choice and I do see endless opportunities for personal growth in this field.</blockquote><figcaption><strong>Yuliia Machuliak</strong><span>Project Manager</span></figcaption></figure>
+        <figure class="quote"><blockquote>Mykola has a genuine desire to nurture talent, and his ability to inspire and motivate is exceptional. Mykola's passion for mentorship, coupled with deep expertise, make[s] him invaluable for cultivating top talent.</blockquote><figcaption><strong>Daria Sedihi-Volchenko</strong><span>PMP, PgMP, PRINCE2 · Business Development Manager</span></figcaption></figure>
+        <figure class="quote"><blockquote>With a sense of humor like his, any difficulties and obstacles are perceived with optimism and confidence that everything can be solved.</blockquote><figcaption><strong>Alexandra Kostyukevich</strong><span>UX/UI Designer</span></figcaption></figure>
+        <figure class="quote"><blockquote>He consistently delivered complex mobile projects on time, combining strong technical expertise with great leadership. Mykola excelled at managing both teams and stakeholders relationships, always staying calm under pressure and focused on solutions.</blockquote><figcaption><strong>Sergey Shevchenko</strong><span>Delivery Manager</span></figcaption></figure>
+        <figure class="quote"><blockquote>What I value especially is how naturally professionalism and personality come together here. The way he supports PMs, shares experience, invites strong speakers, and creates space where people genuinely want to return and keep learning. [...] Lucky is the one who has a mentor like this!</blockquote><figcaption><strong>Olena Stepura</strong><span>Founder @ PM Level Next · PMI Chapter Leader</span></figcaption></figure>
+      </div>
+      <p class="note" style="margin-top:14px"><a href="https://www.linkedin.com/in/hanizex/" data-ev="project_click" rel="noopener">Read the recommendations on LinkedIn →</a></p>
+    </section>
+
+    <section id="projects" class="reveal">
+      <h2>My projects and activities</h2>
+      <h3 class="sub">Community and teaching</h3>
+      <div class="cards three">
+        <a class="card ic" href="https://pmcoffeetime.online/" data-ev="project_click" rel="noopener"><img class="logo" src="/assets/logos/pm-coffee-time.jpg" alt="" width="52" height="52" loading="lazy"><div class="ct"><strong>PM Coffee Time</strong><span class="role">Founder and host</span><span>Online meetups for PMs: 60+ meetings since October 2023, 30–50 people each.</span><span class="gh">Visit the site →</span></div></a>
+        <a class="card ic" href="https://t.me/outstanding_pm" data-ev="channel_click" rel="noopener"><img class="logo" src="/assets/logos/outstanding-pm.jpg" alt="" width="52" height="52" loading="lazy"><div class="ct"><strong>Outstanding PM</strong><span class="role">Author</span><span>My Telegram channel about management: practical notes, cases and discussions. 900+ subscribers, writing since January 2024.</span><span class="gh">Open the channel →</span></div></a>
+        <a class="card ic" href="https://skillsup.ua/about/our-team/mykola-kalakutsky/" data-ev="project_click" rel="noopener"><img class="logo" src="/assets/logos/skillsup.png" alt="" width="52" height="52" loading="lazy"><div class="ct"><strong>SkillsUp</strong><span class="role">Teacher</span><span>I teach several practical courses.</span><span class="gh">My SkillsUp profile →</span></div></a>
+        <div class="card static ic"><img class="logo" src="/assets/logos/team-challenge.png" alt="" width="52" height="52" loading="lazy"><div class="ct"><strong>Team Challenge</strong><span class="role">PM Mentor</span><span>Free mentorship for PMs in a community of 4,400+ members.</span></div></div>
+        <a class="card ic" href="https://www.linkedin.com/in/hanizex/" data-ev="project_click" rel="noopener"><img class="logo" src="/assets/logos/linkedin.svg" alt="" width="52" height="52" loading="lazy"><div class="ct"><strong>LinkedIn</strong><span class="role">Author</span><span>Posts about project management and about 30 recommendations.</span><span class="gh">Open LinkedIn →</span></div></a>
+        <div class="card static ic"><img class="logo" src="/assets/logos/english-speaking-club.jpg" alt="" width="52" height="52" loading="lazy"><div class="ct"><strong>English Speaking Club</strong><span class="role">Host</span><span>A conversation club for A2–B2 levels that I run for friends. Ongoing.</span></div></div>
+      </div>
+      <h3 class="sub">Companies and startups</h3>
+      <div class="cards three">
+        <a class="card ic" href="https://mimeon.art/" data-ev="project_click" rel="noopener"><img class="logo" src="/assets/logos/mimeon.png" alt="" width="52" height="52" loading="lazy"><div class="ct"><strong>Mimeon</strong><span class="role">CEO and Founder</span><span>A mobile app: an endless gallery of images with no text, where the feed is filtered and sorted by your own behavior and activity.</span><span class="gh">Visit mimeon.art →</span></div></a>
+        <a class="card ic" href="https://mymgr.app/" data-ev="project_click" rel="noopener"><img class="logo" src="/assets/logos/mymanager.png" alt="" width="52" height="52" loading="lazy"><div class="ct"><strong>MyManager</strong><span class="role">CEO</span><span>An AI career manager: collects jobs daily, scores them against your CV and tracks your applications.</span><span class="gh">Visit mymgr.app →</span></div></a>
+        <a class="card ic" href="https://cyberfieldnet-tech.webflow.io/" data-ev="project_click" rel="noopener"><img class="logo" src="/assets/logos/cyberfield.png" alt="" width="52" height="52" loading="lazy"><div class="ct"><strong>CyberField Net</strong><span class="role">COO</span><span>Online cybersecurity education: a practical course with mentoring.</span><span class="gh">Course page →</span></div></a>
+      </div>
+      <h3 class="sub">Code I wrote and shared</h3>
+      <div class="cards three">
+        <a class="card ic" href="https://github.com/hanizex/job-search-automation" data-ev="repo_click" rel="noopener"><svg class="ico" viewBox="0 0 56 56" width="52" height="52" aria-hidden="true" focusable="false"><defs><clipPath id="icks92c76"><rect width="56" height="56" rx="14"/></clipPath></defs><g clip-path="url(#icks92c76)"><rect width="56" height="56" fill="#f3ebdd"/><path class="p" style="--dx:-4.5;--dy:-4.5;--r:14deg;--s:0.98;--i:0" d="M2 26A24 24 0 0 1 26 2V26Z" fill="#c9a46c"/><circle class="p" style="--dx:5.3;--dy:-5.3;--r:49deg;--s:1.31;--i:1" cx="42" cy="14" r="12" fill="#8c7aa6"/><path class="p" style="--dx:-3.6;--dy:6.5;--r:71deg;--s:1.29;--i:2" d="M2 54A24 24 0 0 1 26 30V54Z" fill="#8c7aa6"/><rect class="p" style="--dx:5.7;--dy:5.7;--r:-12deg;--s:1.11;--i:3" x="30" y="30" width="24" height="24" rx="4" fill="#8c7aa6"/></g></svg><div class="ct"><strong>Job Search Automation</strong><span>A daily pipeline for a structured job search: polls 9 ATS types and job boards, filters and dedupes ads, reads employer replies, tracks funding signals.</span><span class="gh">Open on GitHub →</span></div></a>
+        <a class="card ic" href="https://github.com/hanizex/mimeon-onboarding-bot" data-ev="repo_click" rel="noopener"><svg class="ico" viewBox="0 0 56 56" width="52" height="52" aria-hidden="true" focusable="false"><defs><clipPath id="icnpm2h47"><rect width="56" height="56" rx="14"/></clipPath></defs><g clip-path="url(#icnpm2h47)"><rect width="56" height="56" fill="#f1e6e6"/><path class="p" style="--dx:-5.2;--dy:-6.7;--r:-20deg;--s:0.82;--i:0" d="M2 14a12 12 0 0 1 24 0Z" fill="#1f3d33"/><circle class="p" style="--dx:3.7;--dy:-3.7;--r:8deg;--s:0.79;--i:1" cx="42" cy="14" r="12" fill="#1f3d33"/><path class="p" style="--dx:-5.9;--dy:4.2;--r:-74deg;--s:0.96;--i:2" d="M2 42a12 12 0 0 1 24 0Z" fill="#8c7aa6"/><path class="p" style="--dx:5.5;--dy:5.5;--r:73deg;--s:0.80;--i:3" d="M30 54A24 24 0 0 1 54 30V54Z" fill="#1f3d33"/></g></svg><div class="ct"><strong>Mimeon Onboarding Bot</strong><span>A Telegram bot that runs the Mimeon app alpha end to end: onboarding, support tickets, a Mom Test survey, rewards, funnel analytics. Google Apps Script + Sheets.</span><span class="gh">Open on GitHub →</span></div></a>
+        <a class="card ic" href="https://github.com/hanizex/pm-coffee-time-bot" data-ev="repo_click" rel="noopener"><svg class="ico" viewBox="0 0 56 56" width="52" height="52" aria-hidden="true" focusable="false"><defs><clipPath id="ictf6p768"><rect width="56" height="56" rx="14"/></clipPath></defs><g clip-path="url(#ictf6p768)"><rect width="56" height="56" fill="#f1e6e6"/><rect class="p" style="--dx:-7.9;--dy:0.6;--r:14deg;--s:0.84;--i:0" x="6" y="8.6" width="8" height="41.4" rx="4" fill="#1f3d33"/><rect class="p" style="--dx:-6.1;--dy:3.9;--r:-73deg;--s:1.06;--i:1" x="17" y="15.0" width="8" height="35.0" rx="4" fill="#c9a46c"/><rect class="p" style="--dx:2.5;--dy:4.8;--r:16deg;--s:1.32;--i:2" x="28" y="21.6" width="8" height="28.4" rx="4" fill="#1f3d33"/><rect class="p" style="--dx:6.4;--dy:3.2;--r:-65deg;--s:1.31;--i:3" x="39" y="20.7" width="8" height="29.3" rx="4" fill="#c9a46c"/></g></svg><div class="ct"><strong>PM Coffee Time Bot</strong><span>A Telegram bot for PM Coffee Time meetups: registration, calendar invites, reminders, materials, feedback. SendPulse flows + Google Apps Script.</span><span class="gh">Open on GitHub →</span></div></a>
       </div>
     </section>
 
     <section id="consult" class="reveal">
       <h2>One-hour consultation</h2>
       <p class="price">€50 <span class="muted" style="font-size:1rem;font-weight:400">· 60 minutes · online</span></p>
-      <p>Bring a question about project, product, delivery or operational management, a startup setup, or a decision at C-level. Beginners welcome.</p>
+      <p>My experience lets me see your pain points, and their roots, more clearly than you do.</p>
+      <p class="steps-title"><strong>3 easy steps to getting the solutions:</strong></p>
       <ol class="steps">
-        <li><strong>Pay</strong> — choose Monobank or Revolut and tell me the transaction ID.</li>
-        <li><strong>Book</strong> — pick a time that suits you right away.</li>
-        <li><strong>I confirm both</strong> — and you get the meeting invite.</li>
+        <li><strong>Buy my consultation.</strong> One meeting is enough in most cases.</li>
+        <li><strong>Book a meeting.</strong> I believe you'll find a convenient time slot here.</li>
+        <li><strong>Provide me with the details and context</strong> so I can prepare in advance.</li>
       </ol>
+      <p class="note">Then I see your payment and accept the invite.</p>
       <a class="btn" href="/pay/" data-ev="cta_click">Book a consultation</a>
     </section>
   </main>
 
   <footer class="site">
-    <div class="wrap">© <span id="y">2026</span> Mykola Kalakutskyi · <a href="/blog/">Blog</a> · <a href="/privacy/">Privacy</a> · <a href="https://github.com/hanizex" rel="noopener">GitHub</a></div>
+    <div class="wrap">© <span id="y">2026</span> Mykola Kalakutskyi · <a href="/blog/">Blog</a> · <a href="/uk/" hreflang="uk" lang="uk">Українською</a> · <a href="/privacy/">Privacy</a> · <a href="https://t.me/outstanding_pm" rel="noopener">Telegram</a> · <a href="https://www.linkedin.com/in/hanizex/" rel="noopener">LinkedIn</a> · <a href="https://github.com/hanizex" rel="noopener">GitHub</a></div>
   </footer>
   <script src="/assets/site.js" defer></script>
+  <script src="/assets/dossier.js" defer></script>
 </body>
 </html>

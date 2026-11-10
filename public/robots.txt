@@ -3,6 +3,9 @@ Allow: /
 Disallow: /pay/
 Disallow: /book/
 Disallow: /done/
+Disallow: /uk/pay/
+Disallow: /uk/book/
+Disallow: /uk/done/
 Disallow: /api/
 Disallow: /admin/
 
