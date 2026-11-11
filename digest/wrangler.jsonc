@@ -1,0 +1,14 @@
+{
+  // Weekly digest cron Worker (free). Deploy ONLY from this folder:  cd digest && npx wrangler deploy
+  // (never run `wrangler deploy` in the repo root: that folder belongs to the Pages project.)
+  "name": "mykola-digest",
+  "main": "src/index.js",
+  "compatibility_date": "2026-11-04",
+  "workers_dev": false,
+  "preview_urls": false,
+  // Saturday 09:00 Sofia = 06:00 UTC in summer (UTC+3) or 07:00 UTC in winter (UTC+2); the code picks the right one.
+  "triggers": { "crons": ["0 6 * * SAT", "0 7 * * SAT"] },
+  "d1_databases": [
+    { "binding": "DB", "database_name": "mykola-site", "database_id": "f7cdd98d-3d4c-4c66-adec-91b4d152193e" }
+  ]
+}
