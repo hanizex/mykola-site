@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Запит на консультацію – Микола Калакуцький</title>
+  
+  <meta name="robots" content="noindex">
+  
+  
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+  <header class="site"><div class="wrap"><a class="brand" href="/uk/">Микола Калакуцький</a></div></header>
+  <main class="wrap">
+    <h1 style="font-size:2rem">Запит на консультацію</h1>
+    <p class="lead">Одна година, онлайн, €50. Коротко опишіть свою ситуацію. Я відповім особисто з посиланням на оплату та вільними слотами. Наперед нічого платити не потрібно.</p>
+    <form id="rq" class="panel" autocomplete="on" novalidate>
+      <p style="margin:0 0 6px"><label for="n"><strong>Ваше ім'я</strong></label></p>
+      <input id="n" type="text" maxlength="80" autocomplete="name" required>
+      <p style="margin:16px 0 6px"><label for="l"><strong>Профіль у LinkedIn</strong></label></p>
+      <input id="l" type="text" inputmode="url" maxlength="200" placeholder="https://www.linkedin.com/in/your-name" required>
+      <p style="margin:16px 0 6px"><label for="m"><strong>Кілька слів про проблему</strong></label></p>
+      <textarea id="m" rows="5" maxlength="1000" placeholder="Що відбувається, що ви вже пробували, який результат потрібен." required></textarea>
+      <div style="position:absolute;left:-9999px" aria-hidden="true"><label>Website <input id="hp" type="text" tabindex="-1" autocomplete="off"></label></div>
+      <p class="note" id="err" role="alert" hidden></p>
+      <p style="margin-top:18px"><button class="btn" type="submit" id="go">Надіслати запит</button></p>
+      <p class="note">Ці дані потрібні лише для відповіді вам. Див. <a href="/uk/privacy/">конфіденційність</a> та <a href="/uk/terms/">умови</a>.</p>
+    </form>
+    <div id="ok" class="panel" hidden><h2>Дякую</h2><p>Я отримав ваш запит і напишу вам особисто. Якщо відповіді не буде, напишіть на hanizex@gmail.com.</p></div>
+  </main>
+  <footer class="site"><div class="wrap"><a href="/uk/privacy/">Конфіденційність</a> · <a href="/uk/terms/">Умови</a></div></footer>
+  <script src="/assets/site.js" defer></script>
+  <script>
+    const CFG = {"lang":"uk","errName":"Будь ласка, вкажіть ім'я.","errLi":"Будь ласка, вставте посилання на ваш профіль у LinkedIn.","errMsg":"Опишіть проблему кількома словами (щонайменше 10 символів).","errSend":"Не вдалося надіслати запит. Спробуйте ще раз або напишіть на hanizex@gmail.com.","send":"Надіслати запит","sending":"Надсилаю..."};
+    addEventListener('DOMContentLoaded', () => {
+      const f = document.getElementById('rq'), err = document.getElementById('err'), go = document.getElementById('go'), t0 = Date.now();
+      const show = (m) => { err.hidden = false; err.textContent = m; };
+      f.addEventListener('submit', async (e) => {
+        e.preventDefault(); err.hidden = true;
+        const name = f.n.value.trim(), li = f.l.value.trim(), msg = f.m.value.trim();
+        if (name.length < 2) return show(CFG.errName);
+        if (!/linkedin\.com\/\S{2,}/i.test(li)) return show(CFG.errLi);
+        if (msg.length < 10) return show(CFG.errMsg);
+        go.disabled = true; go.textContent = CFG.sending;
+        let ok = false;
+        try {
+          const r = await fetch('/api/request', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ name, li, msg, hp: f.hp.value, ms: Date.now() - t0, l: CFG.lang, t: window.__touch || {} }) });
+          ok = r.ok && (await r.json()).ok === true;
+        } catch (x) { ok = false; }
+        if (ok) { f.hidden = true; document.getElementById('ok').hidden = false; if (window.__send) window.__send('request_sent'); scrollTo(0, 0); }
+        else { go.disabled = false; go.textContent = CFG.send; show(CFG.errSend); }
+      });
+    });
+  </script>
+</body>
+</html>

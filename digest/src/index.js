@@ -27,6 +27,10 @@ export async function buildReport(db, nowMs) {
   const visits = (bySrc.results || []).reduce((a, r) => a + r.n, 0);
 
   const daily = async (where, ...b) => one(db, `SELECT COALESCE(SUM(c),0) FROM (SELECT day, COUNT(DISTINCT vid) c FROM events WHERE ${where} AND day>=? AND day<? GROUP BY day)`, ...b, from, today);
+  const intro = await daily("name='intro_click'");
+  const reqSent = await daily("name='request_sent'");
+  const chStart = await daily("name='challenge_start'");
+  const chDone = await daily("name='challenge_done'");
   const cta = await daily("name='cta_click'");
   const payPage = await daily("name='page_view' AND path IN ('/pay/','/uk/pay/')");
   const bookOpen = await daily("name='book_open'");
@@ -48,7 +52,10 @@ export async function buildReport(db, nowMs) {
     `<i>By source:</i> ${esc(src)}`,
     '',
     '<b>Funnel</b>',
-    `Consultation button clicks: ${cta}`,
+    `Free intro button clicks: ${intro}`,
+    `Consultation request button clicks: ${cta}`,
+    `Consultation requests sent: ${reqSent}`,
+    `Challenge AI: started ${chStart}, finished ${chDone}`,
     `Pay page opened: ${payPage}`,
     `Orders started: ${started}`,
     `Payments claimed: ${paid}`,

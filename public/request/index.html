@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Request a consultation – Mykola Kalakutskyi</title>
+  
+  <meta name="robots" content="noindex">
+  
+  
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/assets/style.css">
+</head>
+<body>
+  <header class="site"><div class="wrap"><a class="brand" href="/">Mykola Kalakutskyi</a></div></header>
+  <main class="wrap">
+    <h1 style="font-size:2rem">Request a consultation</h1>
+    <p class="lead">One hour, online, €50. Tell me briefly about your situation. I will reply personally with a payment link and available time slots. Nothing is paid in advance.</p>
+    <form id="rq" class="panel" autocomplete="on" novalidate>
+      <p style="margin:0 0 6px"><label for="n"><strong>Your name</strong></label></p>
+      <input id="n" type="text" maxlength="80" autocomplete="name" required>
+      <p style="margin:16px 0 6px"><label for="l"><strong>LinkedIn profile</strong></label></p>
+      <input id="l" type="text" inputmode="url" maxlength="200" placeholder="https://www.linkedin.com/in/your-name" required>
+      <p style="margin:16px 0 6px"><label for="m"><strong>A few words about the problem</strong></label></p>
+      <textarea id="m" rows="5" maxlength="1000" placeholder="What is happening, what you have already tried, what result you need." required></textarea>
+      <div style="position:absolute;left:-9999px" aria-hidden="true"><label>Website <input id="hp" type="text" tabindex="-1" autocomplete="off"></label></div>
+      <p class="note" id="err" role="alert" hidden></p>
+      <p style="margin-top:18px"><button class="btn" type="submit" id="go">Send request</button></p>
+      <p class="note">I use these details only to reply to you. See the <a href="/privacy/">privacy page</a> and the <a href="/terms/">terms</a>.</p>
+    </form>
+    <div id="ok" class="panel" hidden><h2>Thank you</h2><p>I got your request and will write to you personally. If you do not hear from me, write to hanizex@gmail.com.</p></div>
+  </main>
+  <footer class="site"><div class="wrap"><a href="/privacy/">Privacy</a> · <a href="/terms/">Terms</a></div></footer>
+  <script src="/assets/site.js" defer></script>
+  <script>
+    const CFG = {"lang":"en","errName":"Please enter your name.","errLi":"Please paste a link to your LinkedIn profile.","errMsg":"Please describe the problem in a few words (at least 10 characters).","errSend":"Could not send the request. Please try again, or write to hanizex@gmail.com.","send":"Send request","sending":"Sending..."};
+    addEventListener('DOMContentLoaded', () => {
+      const f = document.getElementById('rq'), err = document.getElementById('err'), go = document.getElementById('go'), t0 = Date.now();
+      const show = (m) => { err.hidden = false; err.textContent = m; };
+      f.addEventListener('submit', async (e) => {
+        e.preventDefault(); err.hidden = true;
+        const name = f.n.value.trim(), li = f.l.value.trim(), msg = f.m.value.trim();
+        if (name.length < 2) return show(CFG.errName);
+        if (!/linkedin\.com\/\S{2,}/i.test(li)) return show(CFG.errLi);
+        if (msg.length < 10) return show(CFG.errMsg);
+        go.disabled = true; go.textContent = CFG.sending;
+        let ok = false;
+        try {
+          const r = await fetch('/api/request', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ name, li, msg, hp: f.hp.value, ms: Date.now() - t0, l: CFG.lang, t: window.__touch || {} }) });
+          ok = r.ok && (await r.json()).ok === true;
+        } catch (x) { ok = false; }
+        if (ok) { f.hidden = true; document.getElementById('ok').hidden = false; if (window.__send) window.__send('request_sent'); scrollTo(0, 0); }
+        else { go.disabled = false; go.textContent = CFG.send; show(CFG.errSend); }
+      });
+    });
+  </script>
+</body>
+</html>

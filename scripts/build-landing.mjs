@@ -21,6 +21,7 @@ const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replac
 const BG = ['#eaf1ee', '#f3ebdd', '#e8eef3', '#f1e6e6'];
 const FG = ['#3d6b5a', '#6f9c8a', '#c9a46c', '#c97b63', '#7a9bb5', '#8c7aa6', '#1f3d33'];
 const seedFrom = (str) => { let h = 2166136261; for (const ch of str) { h ^= ch.charCodeAt(0); h = Math.imul(h, 16777619); } return h >>> 0; };
+import { introLink } from './config.mjs';
 const mulberry32 = (a) => () => { a |= 0; a = (a + 0x6D2B79F5) | 0; let t = Math.imul(a ^ (a >>> 15), 1 | a); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; };
 let iconCount = 0;
 function icon(text) {
@@ -65,15 +66,15 @@ function icon(text) {
 // ---------------------------------------------------------------- content
 const EN = {
   lang: 'en', locale: 'en_US', altLocale: 'uk_UA', path: '/', otherPath: '/uk/', otherLabel: 'UA', otherTitle: 'Читати українською', otherHreflang: 'uk',
-  blogPath: '/blog/', payPath: '/pay/', privacyPath: '/privacy/', name: 'Mykola Kalakutskyi', alt: 'Микола Калакуцький',
+  blogPath: '/blog/', payPath: '/pay/', requestPath: '/request/', challengePath: '/challenge/', privacyPath: '/privacy/', termsPath: '/terms/', name: 'Mykola Kalakutskyi', alt: 'Микола Калакуцький',
   title: 'Mykola Kalakutskyi – IT Project & Delivery Management Consultant',
-  description: 'IT project and delivery manager, consultant and mentor: 400+ consultation and mentorship sessions since 2023. When textbook answers and AI advice stop working, book a one-hour online consultation (€50).',
+  description: 'IT project and delivery manager, consultant and mentor: 400+ consultation and mentorship sessions since 2023. When textbook answers and AI advice stop working, book a free intro call or request a one-hour online consultation.',
   ogDesc: 'I help where your AI fails. One-hour online management consultations from someone with 400+ sessions behind them.',
-  nav: { cv: 'CV', projects: 'Projects', blog: 'Blog', consult: 'Consultation' }, cvPath: '/cv/', photoAlt: 'Portrait of Mykola Kalakutskyi',
+  nav: { cv: 'CV', projects: 'Projects', blog: 'Blog', consult: 'Consultation', challenge: 'Challenge AI' }, cvPath: '/cv/', photoAlt: 'Portrait of Mykola Kalakutskyi',
   eyebrow: 'IT project and delivery manager · consultant · mentor',
   h1: 'I help where your AI fails', h1class: '',
   lead: 'AI gave you advice. Reality said no. When the textbook has run out of scenarios and the chatbot has run out of useful answers, I look for the real cause and give you the full list of actions that fit your situation.',
-  book: 'Book a consultation · €50', projectsBtn: 'My projects',
+  book: 'Book a free intro call', projectsBtn: 'My projects',
   stats: [
     { n: '400+', t: 'consultations and mentorship sessions since June 2023' },
     { n: '12+', t: 'years in IT' },
@@ -119,12 +120,14 @@ const EN = {
   confident: 'My experience lets me see your pain points, and their roots, more clearly than you do.',
   stepsTitle: '3 easy steps to getting the solutions:',
   steps: [
-    ['Buy my consultation.', 'One meeting is enough in most cases.'],
-    ['Book a meeting.', 'I believe you\'ll find a convenient time slot here.'],
-    ['Provide me with the details and context', 'so I can prepare in advance.'],
+    ['Send a request.', 'Your name, LinkedIn profile and a few words about the problem.'],
+    ['I reply personally', 'with a payment link and available time slots. One meeting is enough in most cases.'],
+    ['Pay, pick a time and send me the context', 'so I can prepare in advance.'],
   ],
-  stepsAfter: 'Then I see your payment and accept the invite.', bookShort: 'Book a consultation',
-  footer: { blog: 'Blog', other: 'Українською', privacy: 'Privacy' },
+  stepsAfter: 'Nothing is paid in advance.', bookShort: 'Request a consultation',
+  directQ: 'Not sure yet?', directLink: 'Book a free intro call',
+  challenge: { title: 'Challenge AI', text: 'Can AI solve your problem, or do you need a human view? Six questions, about 90 seconds, free.', btn: 'Take the quiz' },
+  footer: { blog: 'Blog', other: 'Українською', privacy: 'Privacy', terms: 'Terms' },
   service: { name: 'One-hour online management consultation', type: 'Management consulting', desc: 'A 60-minute online consultation on project, product, delivery or operational management, startup setup, C-level decisions, PM process audits and interview preparation.' },
   personDesc: 'IT project and delivery manager, consultant, mentor and teacher with 12+ years in IT. Looks for the root cause before choosing tools. Has run 400+ consultation and mentorship sessions since June 2023.',
   jobTitle: 'IT project and delivery manager',
@@ -133,15 +136,15 @@ const EN = {
 
 const UK = {
   lang: 'uk', locale: 'uk_UA', altLocale: 'en_US', path: '/uk/', otherPath: '/', otherLabel: 'EN', otherTitle: 'Read in English', otherHreflang: 'en',
-  blogPath: '/uk/blog/', payPath: '/uk/pay/', privacyPath: '/uk/privacy/', name: 'Микола Калакуцький', alt: 'Mykola Kalakutskyi',
+  blogPath: '/uk/blog/', payPath: '/uk/pay/', requestPath: '/uk/request/', challengePath: '/uk/challenge/', privacyPath: '/uk/privacy/', termsPath: '/uk/terms/', name: 'Микола Калакуцький', alt: 'Mykola Kalakutskyi',
   title: 'Микола Калакуцький – консультант з IT-проєктного та delivery-менеджменту',
-  description: 'IT-проєктний і delivery-менеджер, консультант і ментор: понад 400 консультацій і менторських сесій від 2023 року. Коли підручник і ШІ не допомагають, забронюйте годинну онлайн-консультацію (€50).',
+  description: 'IT-проєктний і delivery-менеджер, консультант і ментор: понад 400 консультацій і менторських сесій від 2023 року. Коли підручник і ШІ не допомагають, запишіться на безкоштовне знайомство або надішліть запит на годинну онлайн-консультацію.',
   ogDesc: 'Я вирішую ті проблеми, які ШІ не може. Годинні онлайн-консультації від людини з понад 400 сесіями за плечима.',
-  nav: { cv: 'Резюме', projects: 'Проєкти', blog: 'Блог', consult: 'Консультація' }, cvPath: '/uk/cv/', photoAlt: 'Портрет Миколи Калакуцького',
+  nav: { cv: 'Резюме', projects: 'Проєкти', blog: 'Блог', consult: 'Консультація', challenge: 'Challenge AI' }, cvPath: '/uk/cv/', photoAlt: 'Портрет Миколи Калакуцького',
   eyebrow: 'IT-проєктний і delivery-менеджер · консультант · ментор',
   h1: 'Я вирішую ті проблеми, які ШІ не може', h1class: 'long',
   lead: 'ШІ дав вам пораду. Реальність сказала ні. Коли підручник вичерпав сценарії, а чатбот - корисні відповіді, я шукаю справжню причину й даю повний перелік дій, які підходять до вашої ситуації.',
-  book: 'Забронювати консультацію · €50', projectsBtn: 'Мої проєкти',
+  book: 'Записатися на безкоштовне знайомство', projectsBtn: 'Мої проєкти',
   stats: [
     { n: '400+', t: 'консультацій і менторських сесій від червня 2023' },
     { n: '12+', t: 'років в IT' },
@@ -187,13 +190,15 @@ const UK = {
   confident: 'Мій досвід дозволяє бачити ваші болі та їхні корені чіткіше, ніж бачите їх ви.',
   stepsTitle: '3 прості кроки до рішення:',
   steps: [
-    ['Купіть мою консультацію.', 'У більшості випадків достатньо однієї зустрічі.'],
-    ['Забронюйте зустріч.', 'Думаю, ви знайдете тут зручний час.'],
-    ['Надайте деталі та контекст,', 'щоб я міг підготуватися заздалегідь.'],
+    ['Надішліть запит.', 'Ваше ім\'я, посилання на LinkedIn і кілька слів про проблему.'],
+    ['Я відповім особисто', 'з посиланням на оплату та вільними слотами. У більшості випадків достатньо однієї зустрічі.'],
+    ['Сплатіть, оберіть час і надайте контекст,', 'щоб я міг підготуватися заздалегідь.'],
   ],
-  stepsAfter: 'Далі я бачу вашу оплату й приймаю запрошення.', bookShort: 'Забронювати консультацію',
+  stepsAfter: 'Наперед нічого платити не потрібно.', bookShort: 'Надіслати запит на консультацію',
+  directQ: 'Ще не впевнені?', directLink: 'Запишіться на безкоштовне знайомство',
+  challenge: { title: 'Challenge AI', text: 'Чи впорається ШІ з вашою проблемою, чи потрібен погляд людини? Шість запитань, близько 90 секунд, безкоштовно.', btn: 'Пройти тест' },
   note: 'Сторінки оплати й бронювання поки англійською.',
-  footer: { blog: 'Блог', other: 'English', privacy: 'Конфіденційність' },
+  footer: { blog: 'Блог', other: 'English', privacy: 'Конфіденційність', terms: 'Умови' },
   service: { name: 'Консультація з менеджменту на одну годину', type: 'Консультування з менеджменту', desc: '60-хвилинна онлайн-консультація з проєктного, продуктового, delivery чи операційного менеджменту, запуску стартапу, рішень рівня C-level, аудиту PM-процесів і підготовки до співбесіди.' },
   personDesc: 'IT-проєктний і delivery-менеджер, консультант, ментор і викладач із 12+ роками в IT. Шукає першопричину, перш ніж обирати інструменти. Від червня 2023 року провів понад 400 консультацій і менторських сесій.',
   jobTitle: 'IT-проєктний і delivery-менеджер',
@@ -291,7 +296,7 @@ function page(L) {
   <header class="site">
     <div class="wrap">
       <a class="brand" href="${L.path}">${esc(L.name)}</a>
-      <nav><a href="${L.cvPath}">${L.nav.cv}</a><a href="#projects">${L.nav.projects}</a><a href="${L.blogPath}">${L.nav.blog}</a><a href="#consult">${L.nav.consult}</a><a href="${L.otherPath}" hreflang="${L.otherHreflang}" lang="${L.otherHreflang}" title="${L.otherTitle}">${L.otherLabel}</a></nav>
+      <nav><a href="${L.cvPath}">${L.nav.cv}</a><a href="#projects">${L.nav.projects}</a><a href="${L.blogPath}">${L.nav.blog}</a><a href="${L.challengePath}">${L.nav.challenge}</a><a href="#consult">${L.nav.consult}</a><a href="${L.otherPath}" hreflang="${L.otherHreflang}" lang="${L.otherHreflang}" title="${L.otherTitle}">${L.otherLabel}</a></nav>
     </div>
   </header>
 
@@ -306,7 +311,7 @@ function page(L) {
       </div>
       <p class="lead">${esc(L.lead)}</p>
       <p class="cta-row">
-        <a class="btn" href="${L.payPath}" data-ev="cta_click">${esc(L.book)}</a>
+        <a class="btn" href="${introLink('hero')}" target="_blank" rel="noopener noreferrer" data-ev="intro_click">${esc(L.book)}</a>
         <a class="btn ghost" href="#projects">${esc(L.projectsBtn)}</a>
       </p>
     </div>
@@ -351,6 +356,12 @@ function page(L) {
       </div>
     </section>
 
+    <section id="challenge" class="reveal">
+      <h2>${esc(L.challenge.title)}</h2>
+      <p>${esc(L.challenge.text)}</p>
+      <a class="btn" href="${L.challengePath}" data-ev="challenge_click">${esc(L.challenge.btn)}</a>
+    </section>
+
     <section id="consult" class="reveal">
       <h2>${esc(L.consultTitle)}</h2>
       <p class="price">${L.price} <span class="muted" style="font-size:1rem;font-weight:400">${esc(L.priceNote)}</span></p>
@@ -360,12 +371,13 @@ function page(L) {
         ${L.steps.map((s) => `<li><strong>${esc(s[0])}</strong> ${esc(s[1])}</li>`).join('\n        ')}
       </ol>
       <p class="note">${esc(L.stepsAfter)}</p>
-      <a class="btn" href="${L.payPath}" data-ev="cta_click">${esc(L.bookShort)}</a>
+      <a class="btn" href="${L.requestPath}" data-ev="cta_click">${esc(L.bookShort)}</a>
+      <p class="note" style="margin-top:14px">${esc(L.directQ)} <a href="${introLink('consult')}" target="_blank" rel="noopener noreferrer" data-ev="intro_click">${esc(L.directLink)}</a></p>
     </section>
   </main>
 
   <footer class="site">
-    <div class="wrap">© <span id="y">2026</span> ${esc(L.name)} · <a href="${L.cvPath}">${L.nav.cv}</a> · <a href="${L.blogPath}">${L.footer.blog}</a> · <a href="${L.otherPath}" hreflang="${L.otherHreflang}" lang="${L.otherHreflang}">${L.footer.other}</a> · <a href="${L.privacyPath}">${L.footer.privacy}</a> · <a href="${CHANNEL}" rel="noopener">Telegram</a> · <a href="${LINKEDIN}" rel="noopener">LinkedIn</a> · <a href="${GITHUB}" rel="noopener">GitHub</a></div>
+    <div class="wrap">© <span id="y">2026</span> ${esc(L.name)} · <a href="${L.cvPath}">${L.nav.cv}</a> · <a href="${L.blogPath}">${L.footer.blog}</a> · <a href="${L.otherPath}" hreflang="${L.otherHreflang}" lang="${L.otherHreflang}">${L.footer.other}</a> · <a href="${L.privacyPath}">${L.footer.privacy}</a> · <a href="${L.termsPath}">${L.footer.terms}</a> · <a href="${CHANNEL}" rel="noopener">Telegram</a> · <a href="${LINKEDIN}" rel="noopener">LinkedIn</a> · <a href="${GITHUB}" rel="noopener">GitHub</a></div>
   </footer>
   <script src="/assets/site.js" defer></script>
   <script src="/assets/dossier.js" defer></script>

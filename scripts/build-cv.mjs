@@ -250,7 +250,7 @@ const ROLES = [
 const L = {
   en: {
     lang: 'en', locale: 'en_US', altLocale: 'uk_UA', path: '/cv/', otherPath: '/uk/cv/', otherLabel: 'UA', otherTitle: 'Читати українською', otherHreflang: 'uk',
-    home: '/', blog: '/blog/', pay: '/pay/', privacy: '/privacy/', privacyLabel: 'Privacy', name: 'Mykola Kalakutskyi', alt: 'Микола Калакуцький',
+    home: '/', blog: '/blog/', pay: '/pay/', privacy: '/privacy/', privacyLabel: 'Privacy', terms: '/terms/', termsLabel: 'Terms', name: 'Mykola Kalakutskyi', alt: 'Микола Калакуцький',
     nav: { cv: 'CV', projects: 'Projects', blog: 'Blog', consult: 'Consultation' }, pdf: '/assets/cv/Mykola_Kalakutskyi_CV_EN.pdf',
     title: 'Mykola Kalakutskyi – CV: Project, Delivery & Program Manager',
     description: 'CV of Mykola Kalakutskyi, project, delivery and program manager: 12+ years in IT delivery, 18 teams built from scratch, a department of up to 45, 400+ mentoring sessions. iGaming, EdTech, outsourcing, AI-assisted delivery.',
@@ -288,7 +288,7 @@ const L = {
   },
   uk: {
     lang: 'uk', locale: 'uk_UA', altLocale: 'en_US', path: '/uk/cv/', otherPath: '/cv/', otherLabel: 'EN', otherTitle: 'Read in English', otherHreflang: 'en',
-    home: '/uk/', blog: '/uk/blog/', pay: '/uk/pay/', privacy: '/uk/privacy/', privacyLabel: 'Конфіденційність', name: 'Микола Калакуцький', alt: 'Mykola Kalakutskyi',
+    home: '/uk/', blog: '/uk/blog/', pay: '/uk/pay/', privacy: '/uk/privacy/', privacyLabel: 'Конфіденційність', terms: '/uk/terms/', termsLabel: 'Умови', name: 'Микола Калакуцький', alt: 'Mykola Kalakutskyi',
     nav: { cv: 'Резюме', projects: 'Проєкти', blog: 'Блог', consult: 'Консультація' }, pdf: '/assets/cv/Mykola_Kalakutskyi_CV_UA.pdf',
     title: 'Микола Калакуцький – резюме: проєктний, delivery- і програмний менеджер',
     description: 'Резюме Миколи Калакуцького, проєктного, delivery- і програмного менеджера: 12+ років в IT-delivery, 18 команд створено з нуля, підрозділ до 45 людей, 400+ менторських сесій. iGaming, EdTech, аутсорсинг, delivery з ШІ.',
@@ -462,7 +462,7 @@ function page(c) {
   </main>
 
   <footer class="site noprint">
-    <div class="wrap">© <span id="y">2026</span> ${esc(c.name)} · <a href="${c.blog}">${c.footerBlog}</a> · <a href="${c.otherPath}" hreflang="${c.otherHreflang}" lang="${c.otherHreflang}">${c.footerOther}</a> · <a href="${c.privacy}">${c.privacyLabel}</a> · <a href="${LINKEDIN}" rel="noopener">LinkedIn</a> · <a href="${CHANNEL}" rel="noopener">Telegram</a></div>
+    <div class="wrap">© <span id="y">2026</span> ${esc(c.name)} · <a href="${c.blog}">${c.footerBlog}</a> · <a href="${c.otherPath}" hreflang="${c.otherHreflang}" lang="${c.otherHreflang}">${c.footerOther}</a> · <a href="${c.privacy}">${c.privacyLabel}</a> · <a href="${c.terms}">${c.termsLabel}</a> · <a href="${LINKEDIN}" rel="noopener">LinkedIn</a> · <a href="${CHANNEL}" rel="noopener">Telegram</a></div>
   </footer>
   <script src="/assets/site.js" defer></script>
   <script src="/assets/cv.js" defer></script>

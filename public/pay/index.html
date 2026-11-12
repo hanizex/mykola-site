@@ -26,7 +26,7 @@
       <div class="panel" id="details" hidden style="background:var(--accent-soft);margin:16px 0 0">
         <p style="margin:0 0 10px" id="how"></p>
         <a class="btn" id="paylink" href="#" target="_blank" rel="noopener noreferrer">Open payment page</a>
-        <p class="note" style="margin:10px 0 0">Please send it as a <strong>personal transfer</strong>. A comment is not needed – I match your payment by the transaction ID below.</p>
+        <p class="note" id="personal" style="margin:10px 0 0">Please send it as a <strong>personal transfer</strong>. A comment is not needed – I match your payment by the transaction ID below.</p>
       </div>
 
       <p style="margin:18px 0 6px"><label for="tx"><strong>Transaction ID</strong> <span class="note">– from your bank's receipt after you pay</span></label></p>
@@ -34,13 +34,14 @@
       <p class="note" id="err" role="alert" hidden></p>
 
       <p style="margin-top:18px"><button class="btn" type="submit" id="go">I've paid – next: pick a time</button></p>
+      <p class="note">By paying you accept the <a href="/terms/" target="_blank" rel="noopener">terms of service</a>.</p>
       <p class="note">On the next step you'll book a time. Then I see your payment and accept the invite.</p>
     </form>
   </main>
-  <footer class="site"><div class="wrap"><a href="/privacy/">Privacy</a></div></footer>
+  <footer class="site"><div class="wrap"><a href="/privacy/">Privacy</a> · <a href="/terms/">Terms</a></div></footer>
   <script src="/assets/site.js" defer></script>
   <script>
-    const CFG = {"next":"/book/","err":"Please enter the transaction ID exactly as shown on your receipt (4–64 characters).","mono":{"url":"https://base.monobank.ua/8RDvxE1Tcf8mXg","how":"Pay the consultation in hryvnia at a fixed rate through Monobank."},"revolut":{"url":"https://revolut.me/hanizex","how":"Pay €50 through Revolut."}};
+    const CFG = {"next":"/book/","err":"Please enter the transaction ID exactly as shown on your receipt (4–64 characters).","mono":{"url":"https://base.monobank.ua/8RDvxE1Tcf8mXg","how":"Pay the consultation in hryvnia at a fixed rate through Monobank."},"revolut":{"url":"https://checkout.revolut.com/pay/35c04074-9012-4a76-81c5-244414d5ae91","how":"Pay €50 through Revolut."}};
     addEventListener('DOMContentLoaded', async () => {
       const f = document.getElementById('f'), err = document.getElementById('err'), go = document.getElementById('go');
       const post = (body) => fetch('/api/order', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(body) }).then(r => r.json()).catch(() => ({}));
@@ -49,6 +50,7 @@
         const m = CFG[r.value]; if (!m) return;
         document.getElementById('how').textContent = m.how;
         document.getElementById('paylink').href = m.url;
+        document.getElementById('personal').hidden = r.value !== 'mono';
         box.hidden = false;
       }));
       let id = new URLSearchParams(location.search).get('o') || '';

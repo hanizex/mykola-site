@@ -1,0 +1,75 @@
+{
+  "version": 1,
+  "intro": {
+    "en": {"title": "Challenge AI", "lead": "Can AI help you handle this, or do you need a human view? Six quick questions to choose your next step.", "start": "Check my situation"},
+    "uk": {"title": "Challenge AI", "lead": "Чи вистачить ШІ для вашої задачі? Шість коротких запитань, щоб обрати наступний крок.", "start": "Перевірити мою ситуацію"}
+  },
+  "questions": [
+    {"id": "q1", "text": {"en": "What would help most now?", "uk": "Що зараз допомогло б найбільше?"}, "options": [
+      {"id": "a", "label": {"en": "A draft, template, or interview practice", "uk": "Чернетка, шаблон або тренування співбесіди"}, "human": 0, "signal": {"en": "you need a draft, template, or interview practice", "uk": "вам потрібні чернетка, шаблон або тренування співбесіди"}},
+      {"id": "b", "label": {"en": "A workable plan or clearer priorities", "uk": "Реалістичний план або чіткі пріоритети"}, "human": 0, "signal": {"en": "you need a workable plan or clearer priorities", "uk": "вам потрібні реалістичний план або чіткі пріоритети"}},
+      {"id": "c", "label": {"en": "Help with a difficult people situation", "uk": "Допомога у складній ситуації з людьми"}, "human": 0, "signal": {"en": "you need help with a difficult people situation", "uk": "вам потрібна допомога у складній ситуації з людьми"}},
+      {"id": "d", "label": {"en": "A review of my team or startup", "uk": "Оцінка того, як працює команда чи стартап"}, "human": 0, "signal": {"en": "you want to review how your team or startup works", "uk": "ви хочете оцінити, як працює команда чи стартап"}}
+    ]},
+    {"id": "q2", "text": {"en": "How are other people involved?", "uk": "Наскільки результат залежить від інших людей?"}, "options": [
+      {"id": "a", "label": {"en": "I can handle this myself", "uk": "Можу впоратися самостійно"}, "human": 0, "signal": {"en": "you can handle the task yourself", "uk": "ви можете впоратися із задачею самостійно"}},
+      {"id": "b", "label": {"en": "I need their input or review", "uk": "Потрібна їхня інформація або перевірка"}, "human": 1, "signal": {"en": "you need someone else's input or review", "uk": "вам потрібна інформація або перевірка від інших людей"}},
+      {"id": "c", "label": {"en": "People with different priorities need to agree", "uk": "Треба узгодити різні пріоритети"}, "human": 2, "signal": {"en": "people with different priorities need to agree", "uk": "людям із різними пріоритетами потрібно домовитися"}},
+      {"id": "d", "label": {"en": "A conflict is blocking the work", "uk": "Конфлікт блокує роботу"}, "human": 3, "signal": {"en": "a conflict is blocking the work", "uk": "конфлікт блокує роботу"}}
+    ]},
+    {"id": "q3", "text": {"en": "How clear are the facts?", "uk": "Наскільки вам зрозумілі обставини?"}, "options": [
+      {"id": "a", "label": {"en": "I have the relevant facts", "uk": "Маю потрібні факти"}, "human": 0, "signal": {"en": "you have the relevant facts", "uk": "у вас є потрібні факти"}},
+      {"id": "b", "label": {"en": "A few facts need checking", "uk": "Деякі факти треба перевірити"}, "human": 1, "signal": {"en": "some facts still need checking", "uk": "деякі факти ще треба перевірити"}},
+      {"id": "c", "label": {"en": "People give conflicting accounts or leave things unsaid", "uk": "Люди кажуть різне або замовчують важливе"}, "human": 3, "signal": {"en": "accounts conflict or important context stays unspoken", "uk": "люди кажуть різне або замовчують важливі обставини"}},
+      {"id": "d", "label": {"en": "I cannot tell what information is missing", "uk": "Не знаю, якої інформації бракує"}, "human": 2, "signal": {"en": "you are unsure which information is missing", "uk": "ви не знаєте, якої інформації бракує"}}
+    ]},
+    {"id": "q4", "text": {"en": "What if you follow bad advice?", "uk": "Що може статися через хибну пораду?"}, "options": [
+      {"id": "a", "label": {"en": "I redo a draft or practice attempt", "uk": "Перероблю чернетку або повторю тренування"}, "human": 0, "signal": {"en": "a mistake would only mean redoing a draft or practice", "uk": "помилка означатиме лише переробку чернетки або повторення тренування"}},
+      {"id": "b", "label": {"en": "A small, easily fixed delay or cost", "uk": "Невелика затримка чи витрата, яку легко виправити"}, "human": 1, "signal": {"en": "the likely consequences are small and easy to put right", "uk": "можливі наслідки незначні, їх легко виправити"}},
+      {"id": "c", "label": {"en": "A team deadline or working relationship suffers", "uk": "Постраждає дедлайн команди або робочі стосунки"}, "human": 2, "signal": {"en": "a team deadline or working relationship could suffer", "uk": "можуть постраждати дедлайн команди або робочі стосунки"}},
+      {"id": "d", "label": {"en": "Someone could lose a job or significant money", "uk": "Хтось може втратити роботу або значні гроші"}, "human": 3, "signal": {"en": "someone could lose a job or significant money", "uk": "хтось може втратити роботу або значні гроші"}}
+    ]},
+    {"id": "q5", "text": {"en": "Who can decide and follow through?", "uk": "Хто вирішує і відповідає за результат?"}, "options": [
+      {"id": "a", "label": {"en": "I can decide, act, and check results", "uk": "Можу вирішити, діяти й перевірити результат"}, "human": 0, "signal": {"en": "you can act and check the outcome yourself", "uk": "ви можете діяти й перевірити результат самостійно"}},
+      {"id": "b", "label": {"en": "I can act after routine approval", "uk": "Можу діяти після погодження"}, "human": 1, "signal": {"en": "your next step needs someone else's approval", "uk": "ваш наступний крок потребує погодження іншої людини"}},
+      {"id": "c", "label": {"en": "Someone else decides and owns the outcome", "uk": "Хтось інший вирішує й відповідає за результат"}, "human": 2, "signal": {"en": "another person must decide and take responsibility", "uk": "інша людина має ухвалити рішення й узяти відповідальність"}},
+      {"id": "d", "label": {"en": "It is unclear who decides or takes responsibility", "uk": "Незрозуміло, хто має вирішувати й відповідати"}, "human": 3, "signal": {"en": "it is unclear who can decide and take responsibility", "uk": "незрозуміло, хто може ухвалити рішення й узяти відповідальність"}}
+    ]},
+    {"id": "q6", "text": {"en": "What happened when you asked AI?", "uk": "Що було після звернення до ШІ?"}, "options": [
+      {"id": "a", "label": {"en": "I have not asked it yet", "uk": "Поки без ШІ"}, "human": 0, "signal": {"en": "you have not tried AI for this yet", "uk": "ви ще не пробували ШІ для цієї задачі"}},
+      {"id": "b", "label": {"en": "It helped; I need a next step", "uk": "Допомогло, тепер потрібен наступний крок"}, "human": 0, "signal": {"en": "AI has already helped you make progress", "uk": "ШІ вже допоміг вам просунутися"}},
+      {"id": "c", "label": {"en": "The advice was too vague to use", "uk": "Порада була надто загальною, щоб її застосувати"}, "human": 1, "signal": {"en": "the AI advice was too vague to use", "uk": "порада ШІ була надто загальною для застосування"}},
+      {"id": "d", "label": {"en": "I tried its advice; the problem stayed or returned", "uk": "Після застосування поради проблема залишилася або повернулася"}, "human": 3, "signal": {"en": "the problem persisted or returned after you tried AI advice", "uk": "після застосування поради ШІ проблема залишилася або повернулася"}}
+    ]}
+  ],
+  "bands": [
+    {"id": "ai", "min": 0, "max": 2,
+     "title": {"en": "Use AI", "uk": "Скористайтеся ШІ"},
+     "analysis": {"en": "AI looks like a reasonable tool for your next step. Use it to draft or explore options, then verify the output yourself.", "uk": "Схоже, для наступного кроку вам вистачить ШІ. Підготуйте з ним чернетку або розгляньте варіанти, а результат перевірте самостійно."},
+     "steps": {"en": ["Copy the prompt below and add a short description of your situation.", "Answer the chatbot's questions and ask for a draft, practice exercise, or small test.", "Check the facts, assumptions, and result before using the output."],
+               "uk": ["Скопіюйте промпт нижче й коротко опишіть свою ситуацію.", "Дайте відповіді на запитання чатбота й попросіть чернетку, тренувальну вправу або невеликий тест.", "Перевірте факти, припущення й результат, перш ніж його використовувати."]},
+     "cta": "none"},
+    {"id": "mixed", "min": 3, "max": 7,
+     "title": {"en": "AI first, then a human check", "uk": "Спочатку ШІ, потім перевірка з людиною"},
+     "analysis": {"en": "Your answers suggest that context, consequences, or other people's decisions need a human check. Use AI to prepare options, then review them with someone who knows the situation.", "uk": "За вашими відповідями, тут є обставини чи наслідки, які варто перевірити з людиною. Підготуйте варіанти з ШІ та обговоріть їх із тим, хто знає ситуацію."},
+     "steps": {"en": ["Use the prompt below to separate facts, assumptions, and unanswered questions.", "Review the options with a colleague, decision-maker, or relevant specialist before acting.", "For an outside view, book a free intro call with Mykola."],
+               "uk": ["Скористайтеся промптом нижче, щоб відокремити факти, припущення та відкриті запитання.", "Перед діями обговоріть варіанти з колегою, тим, хто ухвалює рішення, або відповідним фахівцем.", "Якщо потрібен погляд збоку, запишіться на безкоштовне знайомство з Миколою."]},
+     "cta": "intro"},
+    {"id": "human", "min": 8, "max": 15,
+     "title": {"en": "Better call Mykola", "uk": "Краще поговорити з Миколою"},
+     "analysis": {"en": "Your answers suggest that progress depends on resolving uncertainty or getting people to make decisions. A conversation with Mykola can help identify what is blocking progress and a practical next step.", "uk": "За вашими відповідями, для руху вперед потрібно прояснити обставини або допомогти людям ухвалити рішення. Розмова з Миколою може допомогти визначити, що блокує роботу і з чого почати."},
+     "steps": {"en": ["Write down the outcome you need, two concrete examples, and what you have already tried.", "Book a free intro call with Mykola to check whether he is the right person for this problem.", "Turn the conversation into a short list of next steps and name who owns each one."],
+               "uk": ["Запишіть бажаний результат, два конкретні приклади й те, що вже пробували.", "Запишіться на безкоштовне знайомство з Миколою, щоб з'ясувати, чи може він допомогти саме з цією проблемою.", "Перетворіть розмову на короткий перелік наступних кроків і визначте, хто за кожен відповідає."]},
+     "cta": "intro"}
+  ],
+  "overrides": [
+    {"if": {"q2": "d"}, "minBand": "human", "note": "A conflict is already blocking work, so a live discussion is warranted even when the other answers score low."},
+    {"if": {"q4": "c"}, "minBand": "mixed", "note": "Advice that could harm a team deadline or working relationship needs a human check even when the total is low."}
+  ],
+  "aiPrompt": {
+    "en": "Act as a practical IT project and delivery management adviser who can also help with interview preparation. My quiz answers: what would help most: {{q1}}; other people: {{q2}}; facts: {{q3}}; consequences of bad advice: {{q4}}; decisions and responsibility: {{q5}}; previous AI use: {{q6}}. My question: What is the smallest useful next step, and what needs a human check? Ask me up to three clarifying questions first and wait for my answers. Establish the actual problem, desired outcome, and constraints. Then give two realistic options, explain their trade-offs, and recommend one small, reversible next step with a way to check the result. If I need writing, provide a draft. For interview practice, ask one practice question at a time. Separate facts from assumptions. Do not invent people's motives or missing context. Identify who should review or approve action, especially where jobs, money, or working relationships are at risk.",
+    "uk": "Дій як практичний консультант з управління ІТ-проєктами й командами, який також допомагає готуватися до співбесід. Мої відповіді в тесті: що допомогло б найбільше: {{q1}}; інші люди: {{q2}}; обставини: {{q3}}; наслідки хибної поради: {{q4}}; рішення та відповідальність: {{q5}}; попередній досвід із ШІ: {{q6}}. Моє запитання: Який найменший корисний крок я можу зробити далі та що має перевірити людина? Спочатку постав до трьох уточнювальних запитань і дочекайся моїх відповідей. З'ясуй конкретну проблему, бажаний результат та обмеження. Потім запропонуй два реалістичні варіанти, поясни їхні переваги й недоліки та порадь один невеликий крок, який можна скасувати, із критерієм перевірки результату. Якщо мені потрібен текст, підготуй чернетку. Для тренувальної співбесіди став по одному запитанню. Відокремлюй факти від припущень. Не вигадуй чужих мотивів або відсутніх обставин. Укажи, хто має перевірити чи погодити дію, особливо якщо під загрозою робота, гроші або робочі стосунки."
+  },
+  "share": {"en": "My Challenge AI result: {{verdict}}.", "uk": "Мій результат у Challenge AI: {{verdict}}."},
+  "disclaimer": {"en": "This quiz gives a quick indication, not a diagnosis, and does not store or send your answers.", "uk": "Це лише швидкий орієнтир, а не діагноз; тест не зберігає й не передає ваші відповіді."}
+}
