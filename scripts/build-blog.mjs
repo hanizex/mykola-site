@@ -130,7 +130,7 @@ const head = ({ lang, title, description, path, type = 'website', extra = '', no
 function header(lang, switchHref) {
   const t = T[lang];
   const sw = switchHref ? `<a href="${switchHref}" hreflang="${t.other.label === 'UA' ? 'uk' : 'en'}" lang="${t.other.label === 'UA' ? 'uk' : 'en'}" title="${t.other.title}">${t.other.label}</a>` : '';
-  return `<header class="site"><div class="wrap"><a class="brand" href="${lang === 'uk' ? '/uk/' : '/'}">${t.name}</a><nav><a href="${t.base}">${t.blog}</a><a href="${lang === 'uk' ? '/uk/' : '/'}#consult">${t.consult}</a>${sw}</nav></div></header>`;
+  return `<header class="site"><div class="wrap"><a class="brand" href="${lang === 'uk' ? '/uk/' : '/'}">${t.name}</a><nav><a href="${lang === 'uk' ? '/uk/cv/' : '/cv/'}">${lang === 'uk' ? 'Резюме' : 'CV'}</a><a href="${t.base}">${t.blog}</a><a href="${lang === 'uk' ? '/uk/' : '/'}#consult">${t.consult}</a>${sw}</nav></div></header>`;
 }
 const footer = (lang) => `<footer class="site"><div class="wrap">© ${new Date().getFullYear()} ${T[lang].name} · <a href="${T[lang].base}">${T[lang].blog}</a> · <a href="${CHANNEL}" rel="noopener">Telegram</a> · <a href="${T[lang].privacy}">${T[lang].privacyLabel}</a> · <a href="${T[lang].base}rss.xml">RSS</a></div></footer>
   <script src="/assets/site.js" defer></script>`;
@@ -221,8 +221,9 @@ const pubAll = posts.filter((p) => !p.draft);
 function sitemap() {
   const x = (loc, lastmod, alts) => `  <url><loc>${loc}</loc>${lastmod ? `<lastmod>${lastmod}</lastmod>` : ''}${(alts || []).map((a) => `<xhtml:link rel="alternate" hreflang="${a.l}" href="${a.h}"/>`).join('')}</url>`;
   const homeAlts = existsSync(join(PUBLIC, 'uk', 'index.html')) ? [{ l: 'en', h: `${SITE}/` }, { l: 'uk', h: `${SITE}/uk/` }, { l: 'x-default', h: `${SITE}/` }] : [];
+  const cvAlts = [{ l: 'en', h: `${SITE}/cv/` }, { l: 'uk', h: `${SITE}/uk/cv/` }, { l: 'x-default', h: `${SITE}/cv/` }];
   const privAlts = existsSync(join(PUBLIC, 'uk', 'privacy', 'index.html')) ? [{ l: 'en', h: `${SITE}/privacy/` }, { l: 'uk', h: `${SITE}/uk/privacy/` }, { l: 'x-default', h: `${SITE}/privacy/` }] : [];
-  const rows = [x(`${SITE}/`, '', homeAlts), ...(homeAlts.length ? [x(`${SITE}/uk/`, '', homeAlts)] : []), x(`${SITE}/privacy/`, '', privAlts), ...(existsSync(join(PUBLIC, 'uk', 'privacy', 'index.html')) ? [x(`${SITE}/uk/privacy/`, '', privAlts)] : [])];
+  const rows = [x(`${SITE}/`, '', homeAlts), ...(homeAlts.length ? [x(`${SITE}/uk/`, '', homeAlts)] : []), ...(existsSync(join(PUBLIC, 'uk', 'cv', 'index.html')) ? [x(`${SITE}/cv/`, '2026-11-11', cvAlts), x(`${SITE}/uk/cv/`, '2026-11-11', cvAlts)] : []), x(`${SITE}/privacy/`, '', privAlts), ...(existsSync(join(PUBLIC, 'uk', 'privacy', 'index.html')) ? [x(`${SITE}/uk/privacy/`, '', privAlts)] : [])];
   const enIdx = published('en'), ukIdx = published('uk');
   const idxAlts = enIdx.length && ukIdx.length ? [{ l: 'en', h: `${SITE}/blog/` }, { l: 'uk', h: `${SITE}/uk/blog/` }, { l: 'x-default', h: `${SITE}/blog/` }] : [];
   if (enIdx.length) rows.push(x(`${SITE}/blog/`, enIdx[0].updated, idxAlts));
@@ -240,9 +241,10 @@ const llms = () => `# ${NAME}
 > IT project and delivery manager, consultant and mentor. One-hour online consultations (€50) and a practical management blog by the author himself. Telegram channel: ${CHANNEL}
 
 ## Pages
+- [CV](${SITE}/cv/): full career history, results with dates and money figures, skills, ventures; PDF: ${SITE}/assets/cv/Mykola_Kalakutskyi_CV_EN.pdf
 - [Home and consultation](${SITE}/): who I am, projects and activities, 400+ consultation and mentorship sessions, how to book
 ${pubAll.filter((p) => p.lang === 'en').map((p) => `- [${p.title}](${SITE}${p.path}): ${p.description}`).join('\n')}
-${published('uk').length ? `\n## Ukrainian (Українською)\n${published('uk').map((p) => `- [${p.title}](${SITE}${p.path}): ${p.description}`).join('\n')}\n` : ''}`;
+${published('uk').length ? `\n## Ukrainian (Українською)\n- [Резюме](${SITE}/uk/cv/): повна історія кар'єри, результати з датами й сумами, навички, власні проєкти; PDF: ${SITE}/assets/cv/Mykola_Kalakutskyi_CV_UA.pdf\n${published('uk').map((p) => `- [${p.title}](${SITE}${p.path}): ${p.description}`).join('\n')}\n` : ''}`;
 
 rmSync(join(PUBLIC, 'blog'), { recursive: true, force: true });
 rmSync(join(PUBLIC, 'uk', 'blog'), { recursive: true, force: true }); // keep the hand-written /uk/ landing

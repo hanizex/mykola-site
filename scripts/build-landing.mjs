@@ -69,7 +69,7 @@ const EN = {
   title: 'Mykola Kalakutskyi – IT Project & Delivery Management Consultant',
   description: 'IT project and delivery manager, consultant and mentor: 400+ consultation and mentorship sessions since 2023. When textbook answers and AI advice stop working, book a one-hour online consultation (€50).',
   ogDesc: 'I help where your AI fails. One-hour online management consultations from someone with 400+ sessions behind them.',
-  nav: { projects: 'Projects', blog: 'Blog', consult: 'Consultation' }, photoAlt: 'Portrait of Mykola Kalakutskyi',
+  nav: { cv: 'CV', projects: 'Projects', blog: 'Blog', consult: 'Consultation' }, cvPath: '/cv/', photoAlt: 'Portrait of Mykola Kalakutskyi',
   eyebrow: 'IT project and delivery manager · consultant · mentor',
   h1: 'I help where your AI fails', h1class: '',
   lead: 'AI gave you advice. Reality said no. When the textbook has run out of scenarios and the chatbot has run out of useful answers, I look for the real cause and give you the full list of actions that fit your situation.',
@@ -137,7 +137,7 @@ const UK = {
   title: 'Микола Калакуцький – консультант з IT-проєктного та delivery-менеджменту',
   description: 'IT-проєктний і delivery-менеджер, консультант і ментор: понад 400 консультацій і менторських сесій від 2023 року. Коли підручник і ШІ не допомагають, забронюйте годинну онлайн-консультацію (€50).',
   ogDesc: 'Я вирішую ті проблеми, які ШІ не може. Годинні онлайн-консультації від людини з понад 400 сесіями за плечима.',
-  nav: { projects: 'Проєкти', blog: 'Блог', consult: 'Консультація' }, photoAlt: 'Портрет Миколи Калакуцького',
+  nav: { cv: 'Резюме', projects: 'Проєкти', blog: 'Блог', consult: 'Консультація' }, cvPath: '/uk/cv/', photoAlt: 'Портрет Миколи Калакуцького',
   eyebrow: 'IT-проєктний і delivery-менеджер · консультант · ментор',
   h1: 'Я вирішую ті проблеми, які ШІ не може', h1class: 'long',
   lead: 'ШІ дав вам пораду. Реальність сказала ні. Коли підручник вичерпав сценарії, а чатбот - корисні відповіді, я шукаю справжню причину й даю повний перелік дій, які підходять до вашої ситуації.',
@@ -291,7 +291,7 @@ function page(L) {
   <header class="site">
     <div class="wrap">
       <a class="brand" href="${L.path}">${esc(L.name)}</a>
-      <nav><a href="#projects">${L.nav.projects}</a><a href="${L.blogPath}">${L.nav.blog}</a><a href="#consult">${L.nav.consult}</a><a href="${L.otherPath}" hreflang="${L.otherHreflang}" lang="${L.otherHreflang}" title="${L.otherTitle}">${L.otherLabel}</a></nav>
+      <nav><a href="${L.cvPath}">${L.nav.cv}</a><a href="#projects">${L.nav.projects}</a><a href="${L.blogPath}">${L.nav.blog}</a><a href="#consult">${L.nav.consult}</a><a href="${L.otherPath}" hreflang="${L.otherHreflang}" lang="${L.otherHreflang}" title="${L.otherTitle}">${L.otherLabel}</a></nav>
     </div>
   </header>
 
@@ -365,7 +365,7 @@ function page(L) {
   </main>
 
   <footer class="site">
-    <div class="wrap">© <span id="y">2026</span> ${esc(L.name)} · <a href="${L.blogPath}">${L.footer.blog}</a> · <a href="${L.otherPath}" hreflang="${L.otherHreflang}" lang="${L.otherHreflang}">${L.footer.other}</a> · <a href="${L.privacyPath}">${L.footer.privacy}</a> · <a href="${CHANNEL}" rel="noopener">Telegram</a> · <a href="${LINKEDIN}" rel="noopener">LinkedIn</a> · <a href="${GITHUB}" rel="noopener">GitHub</a></div>
+    <div class="wrap">© <span id="y">2026</span> ${esc(L.name)} · <a href="${L.cvPath}">${L.nav.cv}</a> · <a href="${L.blogPath}">${L.footer.blog}</a> · <a href="${L.otherPath}" hreflang="${L.otherHreflang}" lang="${L.otherHreflang}">${L.footer.other}</a> · <a href="${L.privacyPath}">${L.footer.privacy}</a> · <a href="${CHANNEL}" rel="noopener">Telegram</a> · <a href="${LINKEDIN}" rel="noopener">LinkedIn</a> · <a href="${GITHUB}" rel="noopener">GitHub</a></div>
   </footer>
   <script src="/assets/site.js" defer></script>
   <script src="/assets/dossier.js" defer></script>
