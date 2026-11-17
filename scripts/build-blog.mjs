@@ -152,14 +152,15 @@ function body(p) {
   return p.html.startsWith('<p>') ? p.html.replace('</p>', '</p>\n' + box) : box + p.html;
 }
 
+const isoDay = (d) => (d && !String(d).includes('T') ? `${d}T00:00:00Z` : d);
+
 function postPage(p) {
   const t = T[p.lang], other = twin(p);
   const ld = [{
     '@context': 'https://schema.org', '@type': 'BlogPosting', headline: p.title, description: p.description,
-    datePublished: p.date, dateModified: p.updated, mainEntityOfPage: `${SITE}${p.path}`, url: `${SITE}${p.path}`,
+    image: `${SITE}${ogPath(p.path)}`, datePublished: isoDay(p.date), dateModified: isoDay(p.updated || p.date), mainEntityOfPage: `${SITE}${p.path}`, url: `${SITE}${p.path}`,
     author: authorFor(p.lang), publisher: authorFor(p.lang), inLanguage: p.lang, isPartOf: { '@type': 'Blog', name: `${t.name} – ${t.blog}`, url: `${SITE}${t.base}` },
     ...(p.tags.length ? { keywords: p.tags.join(', ') } : {}),
-    ...(other ? { workTranslation: { '@type': 'BlogPosting', url: SITE + other.path, inLanguage: other.lang } } : {}),
   }, {
     '@context': 'https://schema.org', '@type': 'BreadcrumbList', itemListElement: [
       { '@type': 'ListItem', position: 1, name: t.name, item: `${SITE}/` },
@@ -193,7 +194,7 @@ function indexPage(lang) {
   const sw = hasLang(otherLang) ? T[otherLang].base : '';
   const cards = list.map((p) => `<a class="card" href="${p.path}"><strong>${esc(p.title)}${p.draft ? ' (draft)' : ''}</strong><span>${esc(p.description)}</span><span class="note" style="display:block;margin-top:6px">${fmt(p.date, lang)} · ${p.minutes} ${t.min}</span></a>`).join('\n        ');
   const ld = { '@context': 'https://schema.org', '@type': 'Blog', name: `${t.name} – ${t.blog}`, url: `${SITE}${t.base}`, inLanguage: lang, author: authorFor(lang),
-    blogPost: list.filter((p) => !p.draft).map((p) => ({ '@type': 'BlogPosting', headline: p.title, url: SITE + p.path, datePublished: p.date })) };
+    blogPost: list.filter((p) => !p.draft).map((p) => ({ '@type': 'BlogPosting', headline: p.title, url: SITE + p.path, datePublished: isoDay(p.date) })) };
   const alts = sw ? [{ l: 'en', h: `${SITE}/blog/` }, { l: 'uk', h: `${SITE}/uk/blog/` }, { l: 'x-default', h: `${SITE}/blog/` }] : [];
   return `${head({ lang, title: t.idxTitle, description: t.idxDesc, path: t.base, noindex: list.every((p) => p.draft), alts, extra: jsonLd(ld) })}
 <body>

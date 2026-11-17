@@ -340,7 +340,7 @@ function page(c) {
     alumniOf: { '@type': 'CollegeOrUniversity', name: 'Kyiv Polytechnic Institute' },
     homeLocation: { '@type': 'Place', address: { '@type': 'PostalAddress', addressLocality: 'Sofia', addressCountry: 'BG' } },
   };
-  const ld = { '@context': 'https://schema.org', '@type': 'ProfilePage', dateModified: MODIFIED, inLanguage: lang, url: home, name: c.title, mainEntity: person };
+  const ld = { '@context': 'https://schema.org', '@type': 'ProfilePage', dateModified: `${MODIFIED}T00:00:00Z`, inLanguage: lang, url: home, name: c.title, mainEntity: person };
   const ev = (n) => `data-ev="${n}"`;
   const chips = SKILLS.map((g) => `<div class="chipgroup"><h3 class="sub">${esc(g.g[lang])}</h3><div class="chips">${g.items.map((it) => `<button type="button" class="chip" data-skill="${it[0]}" aria-pressed="false">${esc(skillLabel(it, lang))}</button>`).join('')}</div></div>`).join('\n        ');
   const roles = ROLES.map((r, i) => `<details class="job"${r.open ? ' open' : ''} id="role-${i + 1}" data-skills="${r.skills}">
