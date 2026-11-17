@@ -10,7 +10,7 @@
 import { readFileSync, writeFileSync, mkdirSync, readdirSync, rmSync, existsSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { introLink } from './config.mjs';
+import { introLink, ogPath } from './config.mjs';
 import { marked } from 'marked';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
@@ -122,8 +122,10 @@ const head = ({ lang, title, description, path, type = 'website', extra = '', no
   <meta property="og:type" content="${type}">
   <meta property="og:url" content="${SITE}${path}">
   <meta property="og:locale" content="${T[lang].locale}">
-  <meta property="og:image" content="${PHOTO}">
-  <meta name="twitter:card" content="summary">
+  <meta property="og:image" content="${SITE}${ogPath(path)}">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
   <link rel="stylesheet" href="/assets/style.css">
   ${extra}
 </head>`;

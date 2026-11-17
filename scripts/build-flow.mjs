@@ -16,19 +16,21 @@ const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replac
 const REQ = {
   en: {
     title: 'Request a consultation', h1: 'Request a consultation',
-    lead: 'One hour, online, €50. Tell me briefly about your situation. I will reply personally with a payment link and available time slots. Nothing is paid in advance.',
-    name: 'Your name', li: 'LinkedIn profile', liPh: 'https://www.linkedin.com/in/your-name', msg: 'A few words about the problem', msgPh: 'What is happening, what you have already tried, what result you need.',
+    lead: 'One hour, online, €50. Tell me briefly about your situation. I will reply personally within 1 to 2 working days with a payment link and available time slots. Nothing is paid in advance.',
+    name: 'Your name', contact: 'Email or Telegram', contactPh: 'you@example.com or @username', li: 'LinkedIn profile', liOpt: '(optional if you gave an email or Telegram)', liPh: 'https://www.linkedin.com/in/your-name', msg: 'A few words about the problem', msgPh: 'What is happening, what you have already tried, what result you need.',
+    next: 'What happens next', nextList: ['I read your request and reply personally within 1 to 2 working days.', 'I send a payment link and a few time slots, or ask a clarifying question, or suggest a free intro call if we are not a fit yet.', 'You pay, pick a time and send any context. Then we meet online.'],
     send: 'Send request', sending: 'Sending...', note: 'I use these details only to reply to you. See the <a href="/privacy/">privacy page</a> and the <a href="/terms/">terms</a>.',
-    thanksH: 'Thank you', thanks: 'I got your request and will write to you personally. If you do not hear from me, write to ' + EMAIL + '.',
-    errName: 'Please enter your name.', errLi: 'Please paste a link to your LinkedIn profile.', errMsg: 'Please describe the problem in a few words (at least 10 characters).', errSend: 'Could not send the request. Please try again, or write to ' + EMAIL + '.',
+    thanksH: 'Thank you', thanks: 'I got your request and will write to you personally within 1 to 2 working days. If you do not hear from me, write to ' + EMAIL + '.',
+    errName: 'Please enter your name.', errContact: 'Please enter an email or a Telegram @username, or a LinkedIn profile link.', errLi: 'Please paste a link to your LinkedIn profile.', errMsg: 'Please describe the problem in a few words (at least 10 characters).', errSend: 'Could not send the request. Please try again, or write to ' + EMAIL + '.',
   },
   uk: {
     title: 'Запит на консультацію', h1: 'Запит на консультацію',
-    lead: 'Одна година, онлайн, €50. Коротко опишіть свою ситуацію. Я відповім особисто з посиланням на оплату та вільними слотами. Наперед нічого платити не потрібно.',
-    name: 'Ваше ім\'я', li: 'Профіль у LinkedIn', liPh: 'https://www.linkedin.com/in/your-name', msg: 'Кілька слів про проблему', msgPh: 'Що відбувається, що ви вже пробували, який результат потрібен.',
+    lead: 'Одна година, онлайн, €50. Коротко опишіть свою ситуацію. Я відповім особисто протягом 1-2 робочих днів з посиланням на оплату та вільними слотами. Наперед нічого платити не потрібно.',
+    name: 'Ваше ім\'я', contact: 'Email або Telegram', contactPh: 'you@example.com або @username', li: 'Профіль у LinkedIn', liOpt: '(необов\'язково, якщо вказали email або Telegram)', liPh: 'https://www.linkedin.com/in/your-name', msg: 'Кілька слів про проблему', msgPh: 'Що відбувається, що ви вже пробували, який результат потрібен.',
+    next: 'Що буде далі', nextList: ['Я читаю ваш запит і відповідаю особисто протягом 1-2 робочих днів.', 'Надсилаю посилання на оплату та кілька слотів, або уточнююче запитання, або пропоную безкоштовне знайомство, якщо ми ще не підходимо одне одному.', 'Ви сплачуєте, обираєте час і надсилаєте контекст. Потім зустрічаємося онлайн.'],
     send: 'Надіслати запит', sending: 'Надсилаю...', note: 'Ці дані потрібні лише для відповіді вам. Див. <a href="/uk/privacy/">конфіденційність</a> та <a href="/uk/terms/">умови</a>.',
-    thanksH: 'Дякую', thanks: 'Я отримав ваш запит і напишу вам особисто. Якщо відповіді не буде, напишіть на ' + EMAIL + '.',
-    errName: 'Будь ласка, вкажіть ім\'я.', errLi: 'Будь ласка, вставте посилання на ваш профіль у LinkedIn.', errMsg: 'Опишіть проблему кількома словами (щонайменше 10 символів).', errSend: 'Не вдалося надіслати запит. Спробуйте ще раз або напишіть на ' + EMAIL + '.',
+    thanksH: 'Дякую', thanks: 'Я отримав ваш запит і напишу вам особисто протягом 1-2 робочих днів. Якщо відповіді не буде, напишіть на ' + EMAIL + '.',
+    errName: 'Будь ласка, вкажіть ім\'я.', errContact: 'Вкажіть email або Telegram @username, або посилання на профіль у LinkedIn.', errLi: 'Будь ласка, вставте посилання на ваш профіль у LinkedIn.', errMsg: 'Опишіть проблему кількома словами (щонайменше 10 символів).', errSend: 'Не вдалося надіслати запит. Спробуйте ще раз або напишіть на ' + EMAIL + '.',
   },
 };
 
@@ -92,8 +94,8 @@ const L = {
       title: 'Privacy', desc: 'What this site collects and why.', h1: 'Privacy',
       sections: [
         ['Visiting the site', 'This site sets no cookies. It counts visits with simple first-party events (page viewed, button clicked, scrolled halfway). To count unique visitors per day without tracking anyone across days, the server mixes your IP address and browser details with a secret that changes daily and keeps only a short irreversible code. Your IP address is not stored. If your browser sends Do Not Track or Global Privacy Control, no events are sent.'],
-        ['Requests, intro calls and the quiz', 'If you request a consultation, the form sends your name, LinkedIn link and message to me as a Telegram notification so I can reply. I keep it for up to 12 months, then delete it. Booking a free intro call opens Calendly in a new tab: Calendly collects your name, email and message under its own privacy policy and may set its own cookies there. Payments happen on Monobank or Revolut pages; I never see your card details. The Challenge AI quiz runs in your browser: your answers are not sent or stored, only the fact that a quiz was started or finished is counted like other page events.'],
-        ['How long and who to ask', `Requests and order records are kept for up to 12 months, then deleted. To ask about or delete your data, contact me at <a href="mailto:${EMAIL}">${EMAIL}</a>.`],
+        ['Requests, intro calls and the quiz', 'If you request a consultation, the form sends your name, your email or Telegram username, your LinkedIn link (if you give one) and your message to me as a Telegram notification so I can reply. I keep it for up to 12 months, then delete it. Booking a free intro call opens Calendly in a new tab: Calendly collects your name, email and message under its own privacy policy and may set its own cookies there. Payments happen on Monobank or Revolut pages; I never see your card details. The Challenge AI quiz runs in your browser: your answers are not sent or stored, only the fact that a quiz was started or finished is counted like other page events.'],
+        ['How long and who to ask', `Requests are kept for up to 12 months, then deleted. To ask about or delete your data, contact me at <a href="mailto:${EMAIL}">${EMAIL}</a>.`],
       ],
     },
   },
@@ -121,8 +123,8 @@ const L = {
       title: 'Конфіденційність', desc: 'Які дані збирає цей сайт і навіщо.', h1: 'Конфіденційність',
       sections: [
         ['Відвідування сайту', 'Цей сайт не встановлює cookies. Він рахує візити простими подіями (сторінку переглянуто, кнопку натиснуто, прокручено до половини). Щоб рахувати унікальних відвідувачів за день без стеження за людьми між днями, сервер змішує вашу IP-адресу та дані браузера із секретом, який змінюється щодня, і зберігає лише короткий незворотний код. Вашу IP-адресу не зберігаємо. Якщо ваш браузер надсилає Do Not Track або Global Privacy Control, жодні події не надсилаються.'],
-        ['Запити, знайомство й тест', 'Якщо ви надсилаєте запит на консультацію, форма передає мені ваше ім\'я, посилання на LinkedIn і повідомлення як сповіщення в Telegram, щоб я міг відповісти. Я зберігаю це до 12 місяців, потім видаляю. Запис на безкоштовне знайомство відкриває Calendly в новій вкладці: Calendly збирає ваше ім\'я, email і повідомлення за власною політикою конфіденційності та може встановлювати там свої cookies. Оплата відбувається на сторінках Monobank або Revolut; я ніколи не бачу даних вашої картки. Тест Challenge AI працює у вашому браузері: відповіді не надсилаються й не зберігаються, лише факт початку чи завершення тесту рахується, як інші події сторінок.'],
-        ['Як довго зберігаю і до кого звертатися', `Запити та записи замовлень зберігаються до 12 місяців, потім видаляються. Щоб запитати про свої дані або видалити їх, напишіть мені: <a href="mailto:${EMAIL}">${EMAIL}</a>.`],
+        ['Запити, знайомство й тест', 'Якщо ви надсилаєте запит на консультацію, форма передає мені ваше ім\'я, email або Telegram-нік, посилання на LinkedIn (якщо ви його вказали) і повідомлення як сповіщення в Telegram, щоб я міг відповісти. Я зберігаю це до 12 місяців, потім видаляю. Запис на безкоштовне знайомство відкриває Calendly в новій вкладці: Calendly збирає ваше ім\'я, email і повідомлення за власною політикою конфіденційності та може встановлювати там свої cookies. Оплата відбувається на сторінках Monobank або Revolut; я ніколи не бачу даних вашої картки. Тест Challenge AI працює у вашому браузері: відповіді не надсилаються й не зберігаються, лише факт початку чи завершення тесту рахується, як інші події сторінок.'],
+        ['Як довго зберігаю і до кого звертатися', `Запити зберігаються до 12 місяців, потім видаляються. Щоб запитати про свої дані або видалити їх, напишіть мені: <a href="mailto:${EMAIL}">${EMAIL}</a>.`],
       ],
     },
   },
@@ -288,8 +290,10 @@ const requestPage = (c) => { const r = REQ[c.lang]; return shell(c, {
     <form id="rq" class="panel" autocomplete="on" novalidate>
       <p style="margin:0 0 6px"><label for="n"><strong>${esc(r.name)}</strong></label></p>
       <input id="n" type="text" maxlength="80" autocomplete="name" required>
-      <p style="margin:16px 0 6px"><label for="l"><strong>${esc(r.li)}</strong></label></p>
-      <input id="l" type="text" inputmode="url" maxlength="200" placeholder="${esc(r.liPh)}" required>
+      <p style="margin:16px 0 6px"><label for="c"><strong>${esc(r.contact)}</strong></label></p>
+      <input id="c" type="text" maxlength="120" autocomplete="email" placeholder="${esc(r.contactPh)}">
+      <p style="margin:16px 0 6px"><label for="l"><strong>${esc(r.li)}</strong> <span class="muted">${esc(r.liOpt)}</span></label></p>
+      <input id="l" type="text" inputmode="url" maxlength="200" placeholder="${esc(r.liPh)}">
       <p style="margin:16px 0 6px"><label for="m"><strong>${esc(r.msg)}</strong></label></p>
       <textarea id="m" rows="5" maxlength="1000" placeholder="${esc(r.msgPh)}" required></textarea>
       <div style="position:absolute;left:-9999px" aria-hidden="true"><label>Website <input id="hp" type="text" tabindex="-1" autocomplete="off"></label></div>
@@ -297,25 +301,31 @@ const requestPage = (c) => { const r = REQ[c.lang]; return shell(c, {
       <p style="margin-top:18px"><button class="btn" type="submit" id="go">${esc(r.send)}</button></p>
       <p class="note">${r.note}</p>
     </form>
+    <div class="panel" id="nx" style="margin-top:18px"><h2 style="font-size:1.1rem">${esc(r.next)}</h2><ol class="steps">${r.nextList.map((x) => `<li>${esc(x)}</li>`).join('')}</ol></div>
     <div id="ok" class="panel" hidden><h2>${esc(r.thanksH)}</h2><p>${esc(r.thanks)}</p></div>`,
   script: `  <script>
-    const CFG = ${JSON.stringify({ lang: c.lang, errName: r.errName, errLi: r.errLi, errMsg: r.errMsg, errSend: r.errSend, send: r.send, sending: r.sending })};
+    const CFG = ${JSON.stringify({ lang: c.lang, errName: r.errName, errContact: r.errContact, errLi: r.errLi, errMsg: r.errMsg, errSend: r.errSend, send: r.send, sending: r.sending })};
     addEventListener('DOMContentLoaded', () => {
       const f = document.getElementById('rq'), err = document.getElementById('err'), go = document.getElementById('go'), t0 = Date.now();
       const show = (m) => { err.hidden = false; err.textContent = m; };
       f.addEventListener('submit', async (e) => {
         e.preventDefault(); err.hidden = true;
         const name = f.n.value.trim(), li = f.l.value.trim(), msg = f.m.value.trim();
+        const contact = f.c.value.trim().replace(/\\s+/g, '');
+        const mailOk = /^[^\\s@]+@[^\\s@]+\\.[^\\s@]{2,}$/.test(contact), tgOk = /^(@|(https?:\\/\\/)?t\\.me\\/)[A-Za-z0-9_]{4,32}$/i.test(contact);
+        const liOk = /linkedin\\.com\\/\\S{2,}/i.test(li);
         if (name.length < 2) return show(CFG.errName);
-        if (!/linkedin\\.com\\/\\S{2,}/i.test(li)) return show(CFG.errLi);
+        if (contact && !mailOk && !tgOk) return show(CFG.errContact);
+        if (li && !liOk) return show(CFG.errLi);
+        if (!mailOk && !tgOk && !liOk) return show(CFG.errContact);
         if (msg.length < 10) return show(CFG.errMsg);
         go.disabled = true; go.textContent = CFG.sending;
         let ok = false;
         try {
-          const r = await fetch('/api/request', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ name, li, msg, hp: f.hp.value, ms: Date.now() - t0, l: CFG.lang, t: window.__touch || {} }) });
+          const r = await fetch('/api/request', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ name, li, contact, msg, hp: f.hp.value, ms: Date.now() - t0, l: CFG.lang, t: window.__touch || {} }) });
           ok = r.ok && (await r.json()).ok === true;
         } catch (x) { ok = false; }
-        if (ok) { f.hidden = true; document.getElementById('ok').hidden = false; if (window.__send) window.__send('request_sent'); scrollTo(0, 0); }
+        if (ok) { f.hidden = true; document.getElementById('nx').hidden = true; document.getElementById('ok').hidden = false; if (window.__send) window.__send('request_sent'); scrollTo(0, 0); }
         else { go.disabled = false; go.textContent = CFG.send; show(CFG.errSend); }
       });
     });
@@ -324,7 +334,7 @@ const requestPage = (c) => { const r = REQ[c.lang]; return shell(c, {
 
 for (const k of ['en', 'uk']) {
   const c = L[k];
-  for (const [dir, html] of [['pay', payPage(c)], ['book', bookPage(c)], ['done', donePage(c)], ['privacy', privacyPage(c)], ['terms', termsPage(c)], ['request', requestPage(c)]]) {
+  for (const [dir, html] of [['privacy', privacyPage(c)], ['terms', termsPage(c)], ['request', requestPage(c)]]) {
     const d = join(ROOT, 'public', c.pre.replace(/^\//, ''), dir);
     mkdirSync(d, { recursive: true });
     writeFileSync(join(d, 'index.html'), html);

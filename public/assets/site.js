@@ -18,6 +18,16 @@
   if (navigator.doNotTrack === '1' || navigator.globalPrivacyControl) return;
 
   const q = new URLSearchParams(location.search);
+
+  // Owner exclusion: open any page once with ?me=1 to stop counting this browser (?me=0 turns counting back on).
+  let owner = false;
+  try {
+    if (q.get('me') === '1') localStorage.setItem('owner', '1');
+    if (q.get('me') === '0') localStorage.removeItem('owner');
+    owner = localStorage.getItem('owner') === '1';
+  } catch (e) { /* ignore */ }
+  if (owner) { window.__send = () => {}; window.__touch = { s: 'owner' }; return; }
+
   const store = {
     get(k) { try { return sessionStorage.getItem(k); } catch (e) { return null; } },
     set(k, v) { try { sessionStorage.setItem(k, v); } catch (e) { /* ignore */ } },
@@ -30,7 +40,7 @@
     let ref = '';
     try { ref = document.referrer ? new URL(document.referrer).hostname : ''; } catch (e) { /* ignore */ }
     if (ref === location.hostname) ref = '';
-    touch = { r: ref, s: q.get('utm_source') || '', m: q.get('utm_medium') || '', c: q.get('utm_campaign') || '', lp: location.pathname };
+    touch = { r: ref, s: q.get('utm_source') || q.get('src') || '', m: q.get('utm_medium') || '', c: q.get('utm_campaign') || '', lp: location.pathname };
     store.set('ft', JSON.stringify(touch));
   }
   window.__touch = touch; // used by pay/book pages when creating an order

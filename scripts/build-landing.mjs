@@ -21,7 +21,7 @@ const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replac
 const BG = ['#eaf1ee', '#f3ebdd', '#e8eef3', '#f1e6e6'];
 const FG = ['#3d6b5a', '#6f9c8a', '#c9a46c', '#c97b63', '#7a9bb5', '#8c7aa6', '#1f3d33'];
 const seedFrom = (str) => { let h = 2166136261; for (const ch of str) { h ^= ch.charCodeAt(0); h = Math.imul(h, 16777619); } return h >>> 0; };
-import { introLink } from './config.mjs';
+import { introLink, ogPath } from './config.mjs';
 const mulberry32 = (a) => () => { a |= 0; a = (a + 0x6D2B79F5) | 0; let t = Math.imul(a ^ (a >>> 15), 1 | a); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; };
 let iconCount = 0;
 function icon(text) {
@@ -126,6 +126,28 @@ const EN = {
   ],
   stepsAfter: 'Nothing is paid in advance.', bookShort: 'Request a consultation',
   directQ: 'Not sure yet?', directLink: 'Book a free intro call',
+  c3: {
+    forH: 'Who it is for', forList: ['Project managers, team leads and founders stuck on a concrete problem: people, priorities, process, a stalled project.', 'Job seekers preparing for a PM interview or a career move: your answers, your stories, your CV.'],
+    notFor: 'Not a fit: free general advice, ready-made templates, or someone to do the work for you.',
+    leaveH: 'What you leave with', leaveList: ['The real cause of the problem, named clearly.', 'The full list of actions that fit your situation, in order of priority.', 'A short written summary of next steps within 24 hours after the call.'],
+    hourH: 'How the hour goes', hourList: ['You describe the situation (10 min).', 'We look for the root cause and the options (30 min).', 'We turn it into a plan with owners and dates (20 min).'],
+    proof: 'Behind the hour: 160+ client projects delivered, $400K saved in one year (22% lower operating costs), $1.2M+ extra outsourcing revenue.',
+    sampleSum: 'See an example of the written summary',
+    sample: { title: 'The developer who doesn\'t want to contribute', parts: [
+      ['Most likely root cause', 'Unclear expectations and no visible link between his work and the team goal. Check three signals: ownership, workload, motivation.'],
+      ['This week', '1. A 1:1 where you ask, not accuse. 2. One measurable result for the next two weeks, agreed together. 3. Remove one blocker that you control.'],
+      ['This month', 'Weekly checkpoint on that result. Shared definition of done. A decision point: keep, change the role or part ways.'],
+      ['Stop doing', 'Daily reminders. Comparing him with others. Fixing his tasks silently.'],
+      ['You will know it works when', 'The agreed result is delivered twice in a row without a reminder.'],
+    ], note: 'Illustrative example. Real summaries are confidential.' },
+    faqH: 'Questions', faq: [
+      ['Is it confidential?', 'Yes. I do not share what you tell me.'],
+      ['In which language?', 'English or Ukrainian, your choice.'],
+      ['What should I prepare?', 'A few lines about the situation, what you have already tried and the result you need. Documents are optional.'],
+      ['What if I am not sure it is for me?', 'Book a free intro call first. We talk, and you decide.'],
+      ['Can I cancel or reschedule?', 'Yes, free of charge up to 24 hours before the start. Details are in the terms.'],
+    ],
+  },
   challenge: { title: 'Challenge AI', text: 'Can AI solve your problem, or do you need a human view? Six questions, about 90 seconds, free.', btn: 'Take the quiz' },
   footer: { blog: 'Blog', other: 'Українською', privacy: 'Privacy', terms: 'Terms' },
   service: { name: 'One-hour online management consultation', type: 'Management consulting', desc: 'A 60-minute online consultation on project, product, delivery or operational management, startup setup, C-level decisions, PM process audits and interview preparation.' },
@@ -196,6 +218,28 @@ const UK = {
   ],
   stepsAfter: 'Наперед нічого платити не потрібно.', bookShort: 'Надіслати запит на консультацію',
   directQ: 'Ще не впевнені?', directLink: 'Запишіться на безкоштовне знайомство',
+  c3: {
+    forH: 'Для кого', forList: ['Проєктним менеджерам, тімлідам і засновникам, які застрягли на конкретній проблемі: люди, пріоритети, процеси, проєкт, що завис.', 'Тим, хто готується до співбесіди на PM або змінює кар\'єру: ваші відповіді, ваші історії, ваше резюме.'],
+    notFor: 'Не підійде: безкоштовні загальні поради, готові шаблони або виконання роботи за вас.',
+    leaveH: 'Що ви отримаєте', leaveList: ['Справжню причину проблеми, названу чітко.', 'Повний список дій, що підходять саме вашій ситуації, за пріоритетами.', 'Короткий письмовий підсумок наступних кроків протягом 24 годин після розмови.'],
+    hourH: 'Як проходить година', hourList: ['Ви описуєте ситуацію (10 хв).', 'Шукаємо першопричину та варіанти (30 хв).', 'Перетворюємо це на план з відповідальними й датами (20 хв).'],
+    proof: 'За цією годиною: 160+ клієнтських проєктів, $400K економії за рік (на 22% менші операційні витрати), $1.2M+ додаткового доходу в аутсорсингу.',
+    sampleSum: 'Приклад письмового підсумку',
+    sample: { title: 'Розробник, який не хоче вкладатися', parts: [
+      ['Найімовірніша першопричина', 'Нечіткі очікування й невидимий зв\'язок між його роботою та метою команди. Перевірте три сигнали: відповідальність, навантаження, мотивація.'],
+      ['Цього тижня', '1. Розмова 1:1, де ви запитуєте, а не звинувачуєте. 2. Один вимірюваний результат на два тижні, узгоджений разом. 3. Приберіть один блокер, який у вашій владі.'],
+      ['Цього місяця', 'Щотижневий чекпоінт по цьому результату. Спільне визначення готовності. Точка рішення: залишити, змінити роль або розійтися.'],
+      ['Припиніть', 'Щоденні нагадування. Порівняння з іншими. Мовчки доробляти його задачі.'],
+      ['Ви зрозумієте, що працює, коли', 'Узгоджений результат здається двічі поспіль без нагадування.'],
+    ], note: 'Ілюстративний приклад. Справжні підсумки конфіденційні.' },
+    faqH: 'Запитання', faq: [
+      ['Це конфіденційно?', 'Так. Я не розповідаю нікому те, що ви мені кажете.'],
+      ['Якою мовою?', 'Англійською або українською, на ваш вибір.'],
+      ['До чого готуватися?', 'Кілька рядків про ситуацію, що ви вже пробували і який результат потрібен. Документи за бажанням.'],
+      ['А якщо я не впевнений, що це для мене?', 'Спершу запишіться на безкоштовне знайомство. Поговоримо, і ви вирішите.'],
+      ['Чи можна скасувати або перенести?', 'Так, безкоштовно за 24 години до початку. Деталі в умовах.'],
+    ],
+  },
   challenge: { title: 'Challenge AI', text: 'Чи впорається ШІ з вашою проблемою, чи потрібен погляд людини? Шість запитань, близько 90 секунд, безкоштовно.', btn: 'Пройти тест' },
   note: 'Сторінки оплати й бронювання поки англійською.',
   footer: { blog: 'Блог', other: 'English', privacy: 'Конфіденційність', terms: 'Умови' },
@@ -264,7 +308,8 @@ function page(L) {
   const graph = { '@context': 'https://schema.org', '@graph': [person,
     { '@type': 'WebSite', '@id': `${SITE}/#site`, url: `${SITE}/`, name: 'Mykola Kalakutskyi', inLanguage: ['en', 'uk'], publisher: { '@id': `${SITE}/#me` } },
     { '@type': 'Service', name: L.service.name, serviceType: L.service.type, provider: { '@id': `${SITE}/#me` }, areaServed: 'Worldwide', inLanguage: L.lang, description: L.service.desc,
-      offers: { '@type': 'Offer', price: '50', priceCurrency: 'EUR', url: `${home}#consult` } }] };
+      offers: { '@type': 'Offer', price: '50', priceCurrency: 'EUR', url: `${home}#consult` } },
+    { '@type': 'FAQPage', inLanguage: L.lang, mainEntity: L.c3.faq.map((x) => ({ '@type': 'Question', name: x[0], acceptedAnswer: { '@type': 'Answer', text: x[1] } })) }] };
   return `<!doctype html>
 <html lang="${L.lang}">
 <head>
@@ -283,10 +328,12 @@ function page(L) {
   <meta property="og:description" content="${esc(L.ogDesc)}">
   <meta property="og:type" content="website">
   <meta property="og:url" content="${home}">
-  <meta property="og:image" content="${PHOTO}">
+  <meta property="og:image" content="${SITE}${ogPath(L.path)}">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
   <meta property="og:locale" content="${L.locale}">
   <meta property="og:locale:alternate" content="${L.altLocale}">
-  <meta name="twitter:card" content="summary">
+  <meta name="twitter:card" content="summary_large_image">
   <link rel="stylesheet" href="/assets/style.css">
   <script type="application/ld+json">
   ${JSON.stringify(graph).replace(/</g, '\\u003c')}
@@ -366,6 +413,12 @@ function page(L) {
       <h2>${esc(L.consultTitle)}</h2>
       <p class="price">${L.price} <span class="muted" style="font-size:1rem;font-weight:400">${esc(L.priceNote)}</span></p>
       <p>${esc(L.confident)}</p>
+      <div class="cgrid">
+        <div class="panel"><h3 class="sub">${esc(L.c3.forH)}</h3><ul class="tick">${L.c3.forList.map((x) => `<li>${esc(x)}</li>`).join('')}</ul><p class="note">${esc(L.c3.notFor)}</p></div>
+        <div class="panel"><h3 class="sub">${esc(L.c3.leaveH)}</h3><ul class="tick">${L.c3.leaveList.map((x) => `<li>${esc(x)}</li>`).join('')}</ul>
+          <h3 class="sub" style="margin-top:18px">${esc(L.c3.hourH)}</h3><ol class="plain">${L.c3.hourList.map((x) => `<li>${esc(x)}</li>`).join('')}</ol></div>
+      </div>
+      <p class="note">${esc(L.c3.proof)}</p>
       <p class="steps-title"><strong>${esc(L.stepsTitle)}</strong></p>
       <ol class="steps">
         ${L.steps.map((s) => `<li><strong>${esc(s[0])}</strong> ${esc(s[1])}</li>`).join('\n        ')}
@@ -373,6 +426,11 @@ function page(L) {
       <p class="note">${esc(L.stepsAfter)}</p>
       <a class="btn" href="${L.requestPath}" data-ev="cta_click">${esc(L.bookShort)}</a>
       <p class="note" style="margin-top:14px">${esc(L.directQ)} <a href="${introLink('consult')}" target="_blank" rel="noopener noreferrer" data-ev="intro_click">${esc(L.directLink)}</a></p>
+      <details class="qz-more" style="margin-top:22px"><summary>${esc(L.c3.sampleSum)}</summary>
+        <div class="panel sample"><p><strong>${esc(L.c3.sample.title)}</strong></p>${L.c3.sample.parts.map((x) => `<p><em>${esc(x[0])}.</em> ${esc(x[1])}</p>`).join('')}<p class="note">${esc(L.c3.sample.note)}</p></div>
+      </details>
+      <h3 class="sub" style="margin-top:26px">${esc(L.c3.faqH)}</h3>
+      <div class="faq">${L.c3.faq.map((x) => `<details><summary>${esc(x[0])}</summary><p>${esc(x[1])}</p></details>`).join('')}</div>
     </section>
   </main>
 

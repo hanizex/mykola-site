@@ -15,15 +15,28 @@ export async function onRequestPost({ request, env }) {
 
   const name = clip(b.name, 80).replace(/\s+/g, ' ');
   let li = clip(b.li, 200);
+  let contact = clip(b.contact, 120).replace(/\s+/g, '');
   const msg = clip(b.msg, 1000);
   if (li && !/^https?:\/\//i.test(li)) li = 'https://' + li;
-  if (name.length < 2 || msg.length < 10 || !/^https?:\/\/([\w-]+\.)?linkedin\.com\/\S{2,}$/i.test(li)) return json({ error: 'invalid' }, 400);
+  // Contact: an email or a Telegram @username / t.me link. LinkedIn: optional when a contact is given.
+  const isMail = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(contact);
+  const tg = contact.match(/^(?:@|(?:https?:\/\/)?t\.me\/)([A-Za-z0-9_]{4,32})$/i);
+  if (tg) contact = '@' + tg[1];
+  const contactOk = isMail || !!tg;
+  const liOk = /^https?:\/\/([\w-]+\.)?linkedin\.com\/\S{2,}$/i.test(li);
+  if (contact && !contactOk) return json({ error: 'invalid' }, 400);
+  if (li && !liOk) return json({ error: 'invalid' }, 400);
+  if (!contactOk && !liOk) return json({ error: 'invalid' }, 400);
+  if (name.length < 2 || msg.length < 10) return json({ error: 'invalid' }, 400);
   if (!env.TELEGRAM_BOT_TOKEN || !env.TELEGRAM_CHAT_ID) return json({ error: 'unavailable' }, 503);
 
   const lang = b.l === 'uk' ? 'UA' : 'EN';
   const t = b.t && typeof b.t === 'object' ? b.t : {};
   const src = [clip(t.r, 60), clip(t.s, 40)].filter(Boolean).join(' / ') || 'direct';
-  const text = `📝 <b>Consultation request</b> (${lang})\nName: ${esc(name)}\nLinkedIn: ${esc(li)}\n\n${esc(msg)}\n\n<i>Source: ${esc(src)}. Reply with a payment link and time slots.</i>`;
+  const lines = [`📝 <b>Consultation request</b> (${lang})`, `Name: ${esc(name)}`];
+  if (contact) lines.push(`Contact: ${esc(contact)}${tg ? ` (https://t.me/${tg[1]})` : ''}`);
+  if (li) lines.push(`LinkedIn: ${esc(li)}`);
+  const text = `${lines.join('\n')}\n\n${esc(msg)}\n\n<i>Source: ${esc(src)}. Reply within 1-2 working days: payment link + time slots (or a question / the free intro call).</i>`;
 
   try {
     const res = await fetch(`https://api.telegram.org/bot${env.TELEGRAM_BOT_TOKEN}/sendMessage`, {

@@ -5,7 +5,7 @@
 import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { introLink } from './config.mjs';
+import { introLink, ogPath } from './config.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const SITE = 'https://mykola.pages.dev';
@@ -69,7 +69,10 @@ function page(k) {
   <meta property="og:description" content="${esc(u.desc)}">
   <meta property="og:type" content="website">
   <meta property="og:url" content="${cfg.url}">
-  <meta name="twitter:card" content="summary">
+  <meta property="og:image" content="${SITE}${ogPath(cfg.url.replace(SITE, ''))}">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="/assets/style.css">
   <script type="application/ld+json">${JSON.stringify(ld).replace(/</g, '\\u003c')}</script>

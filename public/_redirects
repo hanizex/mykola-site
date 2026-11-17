@@ -1,0 +1,13 @@
+# Old paid flow retired: all of it now leads to the request form.
+/pay /request/ 301
+/pay/ /request/ 301
+/book /request/ 301
+/book/ /request/ 301
+/done /request/ 301
+/done/ /request/ 301
+/uk/pay /uk/request/ 301
+/uk/pay/ /uk/request/ 301
+/uk/book /uk/request/ 301
+/uk/book/ /uk/request/ 301
+/uk/done /uk/request/ 301
+/uk/done/ /uk/request/ 301

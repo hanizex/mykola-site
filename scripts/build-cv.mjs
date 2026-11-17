@@ -4,6 +4,7 @@
 // Edit the content below, then run `npm run build`. The downloadable PDFs are generated ONCE (npm run cv:pdf) and committed.
 
 import { writeFileSync, mkdirSync } from 'node:fs';
+import { ogPath } from './config.mjs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -368,10 +369,12 @@ function page(c) {
   <meta property="og:description" content="${esc(c.description)}">
   <meta property="og:type" content="profile">
   <meta property="og:url" content="${home}">
-  <meta property="og:image" content="${PHOTO}">
+  <meta property="og:image" content="${SITE}${ogPath(c.home + 'cv/')}">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
   <meta property="og:locale" content="${c.locale}">
   <meta property="og:locale:alternate" content="${c.altLocale}">
-  <meta name="twitter:card" content="summary">
+  <meta name="twitter:card" content="summary_large_image">
   <link rel="stylesheet" href="/assets/style.css">
   <script type="application/ld+json">${JSON.stringify(ld).replace(/</g, '\\u003c')}</script>
 </head>

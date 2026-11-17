@@ -32,12 +32,6 @@ export async function buildReport(db, nowMs) {
   const chStart = await daily("name='challenge_start'");
   const chDone = await daily("name='challenge_done'");
   const cta = await daily("name='cta_click'");
-  const payPage = await daily("name='page_view' AND path IN ('/pay/','/uk/pay/')");
-  const bookOpen = await daily("name='book_open'");
-  const started = await one(db, 'SELECT COUNT(*) FROM orders WHERE created_ts>=? AND created_ts<?', t0, t1);
-  const paid = await one(db, 'SELECT COUNT(*) FROM orders WHERE paid_claimed_ts>=? AND paid_claimed_ts<?', t0, t1);
-  const booked = await one(db, 'SELECT COUNT(*) FROM orders WHERE booked_ts>=? AND booked_ts<?', t0, t1);
-  const confirmed = await one(db, 'SELECT COUNT(*) FROM orders WHERE confirmed_ts>=? AND confirmed_ts<?', t0, t1);
 
   const top = await db.prepare(
     `SELECT path, SUM(c) n FROM (SELECT day, path, COUNT(DISTINCT vid) c FROM events WHERE name='page_view' AND day>=? AND day<? AND path NOT LIKE '/api/%' GROUP BY day, path) GROUP BY path ORDER BY n DESC LIMIT 6`
@@ -56,12 +50,6 @@ export async function buildReport(db, nowMs) {
     `Consultation request button clicks: ${cta}`,
     `Consultation requests sent: ${reqSent}`,
     `Challenge AI: started ${chStart}, finished ${chDone}`,
-    `Pay page opened: ${payPage}`,
-    `Orders started: ${started}`,
-    `Payments claimed: ${paid}`,
-    `Calendar opened: ${bookOpen}`,
-    `Booked: ${booked}`,
-    `Confirmed by you: ${confirmed}`,
     '',
     '<b>Top pages</b>',
     pages,

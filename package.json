@@ -6,7 +6,9 @@
     "build": "node scripts/build-landing.mjs && node scripts/build-flow.mjs && node scripts/build-cv.mjs && node scripts/build-challenge.mjs && node scripts/build-blog.mjs",
     "cv:pdf": "node scripts/make-cv-pdf.mjs",
     "preview": "node scripts/build-landing.mjs && node scripts/build-flow.mjs && node scripts/build-cv.mjs && node scripts/build-blog.mjs --drafts && npx wrangler pages dev --port 8788",
-    "deploy": "node scripts/build-landing.mjs && node scripts/build-flow.mjs && node scripts/build-cv.mjs && node scripts/build-challenge.mjs && node scripts/build-blog.mjs && npx wrangler pages deploy public --project-name mykola --branch main"
+    "deploy": "node scripts/build-landing.mjs && node scripts/build-flow.mjs && node scripts/build-cv.mjs && node scripts/build-challenge.mjs && node scripts/build-blog.mjs && npx wrangler pages deploy public --project-name mykola --branch main",
+    "og": "node scripts/make-og.mjs",
+    "indexnow": "node scripts/indexnow.mjs"
   },
   "dependencies": {
     "marked": "^15.0.0"
