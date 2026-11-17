@@ -31,11 +31,13 @@ const FIXED = {
   '/cv/': { kicker: 'CV · open to EU-remote roles', title: 'Mykola Kalakutskyi', sub: 'Project, Delivery & Program Manager. 12+ years in IT, 18 teams built from scratch.' },
   '/uk/cv/': { kicker: 'Резюме', title: 'Микола Калакуцький', sub: 'Project, Delivery & Program Manager. 12+ років в IT, 18 команд з нуля.' },
   '/challenge/': { kicker: 'Challenge AI · free quiz', title: 'Can AI solve your problem?', sub: 'Six questions, about 90 seconds. Use AI, or call a human.' },
+  '/pm-interview-prep/': { kicker: 'PM interview prep', title: 'Find the weak spots before the interviewer does', sub: 'Mock interview, CV and story review, written next steps. One hour, EUR 50.' },
+  '/uk/pm-interview-prep/': { kicker: 'Підготовка до співбесіди на PM', title: 'Знайдіть слабкі місця раніше, ніж інтерв\'юер', sub: 'Пробна співбесіда, розбір резюме й історії, письмові наступні кроки. Година, EUR 50.' },
   '/uk/challenge/': { kicker: 'Challenge AI · безкоштовний тест', title: 'Чи впорається ШІ з вашою проблемою?', sub: 'Шість запитань, близько 90 секунд. Скористатися ШІ чи звернутися до людини.' },
 };
 
 async function pages() {
-  const list = [['/', 'index.html'], ['/uk/', 'uk/index.html'], ['/cv/', 'cv/index.html'], ['/uk/cv/', 'uk/cv/index.html'], ['/challenge/', 'challenge/index.html'], ['/uk/challenge/', 'uk/challenge/index.html'], ['/blog/', 'blog/index.html'], ['/uk/blog/', 'uk/blog/index.html']];
+  const list = [['/', 'index.html'], ['/uk/', 'uk/index.html'], ['/cv/', 'cv/index.html'], ['/uk/cv/', 'uk/cv/index.html'], ['/challenge/', 'challenge/index.html'], ['/uk/challenge/', 'uk/challenge/index.html'], ['/pm-interview-prep/', 'pm-interview-prep/index.html'], ['/uk/pm-interview-prep/', 'uk/pm-interview-prep/index.html'], ['/blog/', 'blog/index.html'], ['/uk/blog/', 'uk/blog/index.html']];
   for (const base of ['blog', 'uk/blog']) {
     for (const d of await readdir(join(PUB, base), { withFileTypes: true })) {
       if (d.isDirectory() && existsSync(join(PUB, base, d.name, 'index.html'))) list.push([`/${base}/${d.name}/`, `${base}/${d.name}/index.html`]);

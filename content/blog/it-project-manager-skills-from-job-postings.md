@@ -5,6 +5,7 @@ date: 2026-11-09
 slug: it-project-manager-skills-from-job-postings
 key: it-project-manager-skills-from-job-postings
 cta: consult
+lane: prep
 summary: "A practical checklist of 10 IT project manager skills: eight areas drawn from job postings, plus English and hands-on implementation of AI tools, AI agents and workflows."
 tags: project management, project manager skills, IT careers, job requirements, AI in project management, AI agents
 source: t.me/outstanding_pm/1045 (20 May 2025)

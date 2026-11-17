@@ -25,6 +25,7 @@
       <input id="l" type="text" inputmode="url" maxlength="200" placeholder="https://www.linkedin.com/in/your-name">
       <p style="margin:16px 0 6px"><label for="m"><strong>Кілька слів про проблему</strong></label></p>
       <textarea id="m" rows="5" maxlength="1000" placeholder="Що відбувається, що ви вже пробували, який результат потрібен." required></textarea>
+      <p class="note" id="pf" hidden>Заповнено з вашого результату в тесті. Редагуйте що завгодно. Нічого не надсилається, доки ви не натиснете «Надіслати».</p>
       <div style="position:absolute;left:-9999px" aria-hidden="true"><label>Website <input id="hp" type="text" tabindex="-1" autocomplete="off"></label></div>
       <p class="note" id="err" role="alert" hidden></p>
       <p style="margin-top:18px"><button class="btn" type="submit" id="go">Надіслати запит</button></p>
@@ -40,6 +41,7 @@
     addEventListener('DOMContentLoaded', () => {
       const f = document.getElementById('rq'), err = document.getElementById('err'), go = document.getElementById('go'), t0 = Date.now();
       const show = (m) => { err.hidden = false; err.textContent = m; };
+      try { const q = sessionStorage.getItem('qz_result'); if (q && !f.m.value) { f.m.value = q.slice(0, 1000); document.getElementById('pf').hidden = false; } } catch (x) { /* ignore */ }
       f.addEventListener('submit', async (e) => {
         e.preventDefault(); err.hidden = true;
         const name = f.n.value.trim(), li = f.l.value.trim(), msg = f.m.value.trim();
@@ -57,7 +59,7 @@
           const r = await fetch('/api/request', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ name, li, contact, msg, hp: f.hp.value, ms: Date.now() - t0, l: CFG.lang, t: window.__touch || {} }) });
           ok = r.ok && (await r.json()).ok === true;
         } catch (x) { ok = false; }
-        if (ok) { f.hidden = true; document.getElementById('nx').hidden = true; document.getElementById('ok').hidden = false; if (window.__send) window.__send('request_sent'); scrollTo(0, 0); }
+        if (ok) { try { sessionStorage.removeItem('qz_result'); } catch (x) { /* ignore */ } f.hidden = true; document.getElementById('nx').hidden = true; document.getElementById('ok').hidden = false; if (window.__send) window.__send('request_sent'); scrollTo(0, 0); }
         else { go.disabled = false; go.textContent = CFG.send; show(CFG.errSend); }
       });
     });

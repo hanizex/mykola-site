@@ -5,6 +5,7 @@ date: 2026-11-09
 slug: 8-mistakes-candidates-make-in-job-interviews
 key: 8-mistakes-candidates-make-in-job-interviews
 cta: consult
+lane: prep
 summary: "Eight job interview mistakes to avoid: arriving late without communicating, skipping technical checks, ignoring company research, answering the wrong question, bluffing, badmouthing, over-apologising and letting nerves derail your answers. Each section explains what to do instead."
 author: Mykola Kalakutskyi
 tags: job interview, interview preparation, IT careers, project manager interview, hiring, soft skills

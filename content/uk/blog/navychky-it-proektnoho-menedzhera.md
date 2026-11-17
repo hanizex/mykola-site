@@ -5,6 +5,7 @@ date: 2026-11-09
 slug: navychky-it-proektnoho-menedzhera
 key: it-project-manager-skills-from-job-postings
 cta: consult
+lane: prep
 summary: Чекліст із 10 навичок IT-проєктного менеджера: вісім груп із аналізу вакансій, плюс англійська та впровадження ШІ-інструментів, агентів і робочих процесів.
 tags: проєктний менеджмент, навички проєктного менеджера, IT-кар'єра, вимоги до вакансій, ШІ в проєктному менеджменті, ШІ-агенти
 source: t.me/outstanding_pm/1045 (20 May 2025), edited English draft

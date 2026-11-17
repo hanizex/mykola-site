@@ -5,7 +5,7 @@
 import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { introLink, ogPath } from './config.mjs';
+import { introLink, ogPath, CHANNEL } from './config.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const SITE = 'https://mykola.pages.dev';
@@ -28,6 +28,9 @@ const UI = {
     progress: 'Question {n} of {t}', back: 'Back', why: 'Why this verdict', steps: 'Next steps', promptTitle: 'Prompt for your chatbot', promptHint: 'Copy it into the AI tool you use. Add one or two lines about your situation.',
     copy: 'Copy prompt', copied: 'Copied', shareCopy: 'Copy result text', again: 'Take the quiz again', intro: 'Book a free intro call', tried: 'Tried it and still stuck?', triedLink: 'Book a free intro call',
     noscript: 'This quiz needs JavaScript. You can still book a free intro call or read the blog.', tryAi: 'Prefer to try AI first? Open the prompt',
+    send: 'Send my result to Mykola', sendHint: 'Opens the request form with your result filled in. Nothing is sent until you press Send there.',
+    follow: 'Not ready for a call? I share short management notes in my Telegram channel.', followLink: 'Outstanding PM on Telegram',
+    prefill: 'My Challenge AI result: {verdict}.\nWhat pointed that way: {signals}.\nWhat I need help with: ', reqPath: '/request/',
   },
   uk: {
     lang: 'uk', pre: '/uk', home: '/uk/', other: '/challenge/', otherLabel: 'EN', otherHl: 'en', otherTitle: 'Read in English', name: 'Микола Калакуцький',
@@ -37,6 +40,9 @@ const UI = {
     progress: 'Запитання {n} з {t}', back: 'Назад', why: 'Чому такий висновок', steps: 'Наступні кроки', promptTitle: 'Промпт для вашого чатбота', promptHint: 'Скопіюйте його в ШІ-інструмент, яким користуєтеся. Додайте один-два рядки про свою ситуацію.',
     copy: 'Копіювати промпт', copied: 'Скопійовано', shareCopy: 'Копіювати текст результату', again: 'Пройти тест ще раз', intro: 'Записатися на безкоштовне знайомство', tried: 'Спробували, а проблема лишилась?', triedLink: 'Запишіться на безкоштовне знайомство',
     noscript: 'Для тесту потрібен JavaScript. Ви все одно можете записатися на безкоштовне знайомство або почитати блог.', tryAi: 'Хочете спершу спробувати ШІ? Відкрити промпт',
+    send: 'Надіслати результат Миколі', sendHint: 'Відкриє форму запиту з вашим результатом. Нічого не надсилається, доки ви самі не натиснете «Надіслати» у формі.',
+    follow: 'Ще не час для розмови? Короткі нотатки про менеджмент я публікую в Telegram-каналі.', followLink: 'Outstanding PM у Telegram',
+    prefill: 'Мій результат у Challenge AI: {verdict}.\nНа що це вказує: {signals}.\nЗ чим мені потрібна допомога: ', reqPath: '/uk/request/',
   },
 };
 
@@ -44,7 +50,8 @@ function page(k) {
   const u = UI[k];
   const pick = (o) => o[k];
   const cfg = {
-    ui: { progress: u.progress, back: u.back, why: u.why, steps: u.steps, promptTitle: u.promptTitle, promptHint: u.promptHint, copy: u.copy, copied: u.copied, shareCopy: u.shareCopy, again: u.again, intro: u.intro, tried: u.tried, triedLink: u.triedLink, tryAi: u.tryAi },
+    ui: { progress: u.progress, back: u.back, why: u.why, steps: u.steps, promptTitle: u.promptTitle, promptHint: u.promptHint, copy: u.copy, copied: u.copied, shareCopy: u.shareCopy, again: u.again, intro: u.intro, tried: u.tried, triedLink: u.triedLink, tryAi: u.tryAi, send: u.send, sendHint: u.sendHint, follow: u.follow, followLink: u.followLink, prefill: u.prefill },
+    reqUrl: u.reqPath, channel: CHANNEL,
     url: `${SITE}${u.pre}/challenge/`,
     questions: Q.questions.map((q) => ({ id: q.id, text: pick(q.text), options: q.options.map((o) => ({ id: o.id, label: pick(o.label), human: o.human, signal: pick(o.signal) })) })),
     bands: Q.bands.map((b) => ({ id: b.id, min: b.min, max: b.max, title: pick(b.title), analysis: pick(b.analysis), steps: b.steps[k], cta: b.cta, introUrl: introLink('challenge-' + b.id) })),

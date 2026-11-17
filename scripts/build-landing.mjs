@@ -126,6 +126,7 @@ const EN = {
   ],
   stepsAfter: 'Nothing is paid in advance.', bookShort: 'Request a consultation',
   directQ: 'Not sure yet?', directLink: 'Book a free intro call',
+  prepQ: 'Preparing for a PM interview?', prepLink: 'Mock interview and CV review', prepPath: '/pm-interview-prep/',
   c3: {
     forH: 'Who it is for', forList: ['Project managers, team leads and founders stuck on a concrete problem: people, priorities, process, a stalled project.', 'Job seekers preparing for a PM interview or a career move: your answers, your stories, your CV.'],
     notFor: 'Not a fit: free general advice, ready-made templates, or someone to do the work for you.',
@@ -218,6 +219,7 @@ const UK = {
   ],
   stepsAfter: 'Наперед нічого платити не потрібно.', bookShort: 'Надіслати запит на консультацію',
   directQ: 'Ще не впевнені?', directLink: 'Запишіться на безкоштовне знайомство',
+  prepQ: 'Готуєтесь до співбесіди на PM?', prepLink: 'Пробна співбесіда й розбір резюме', prepPath: '/uk/pm-interview-prep/',
   c3: {
     forH: 'Для кого', forList: ['Проєктним менеджерам, тімлідам і засновникам, які застрягли на конкретній проблемі: люди, пріоритети, процеси, проєкт, що завис.', 'Тим, хто готується до співбесіди на PM або змінює кар\'єру: ваші відповіді, ваші історії, ваше резюме.'],
     notFor: 'Не підійде: безкоштовні загальні поради, готові шаблони або виконання роботи за вас.',
@@ -426,6 +428,7 @@ function page(L) {
       <p class="note">${esc(L.stepsAfter)}</p>
       <a class="btn" href="${L.requestPath}" data-ev="cta_click">${esc(L.bookShort)}</a>
       <p class="note" style="margin-top:14px">${esc(L.directQ)} <a href="${introLink('consult')}" target="_blank" rel="noopener noreferrer" data-ev="intro_click">${esc(L.directLink)}</a></p>
+      <p class="note">${esc(L.prepQ)} <a href="${L.prepPath}" data-ev="cta_click">${esc(L.prepLink)}</a></p>
       <details class="qz-more" style="margin-top:22px"><summary>${esc(L.c3.sampleSum)}</summary>
         <div class="panel sample"><p><strong>${esc(L.c3.sample.title)}</strong></p>${L.c3.sample.parts.map((x) => `<p><em>${esc(x[0])}.</em> ${esc(x[1])}</p>`).join('')}<p class="note">${esc(L.c3.sample.note)}</p></div>
       </details>

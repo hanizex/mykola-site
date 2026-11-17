@@ -67,8 +67,15 @@
       `<h3 class="sub">${esc(C.ui.why)}</h3><ul class="qz-why">${v.signals.map((s) => `<li>${esc(s)}</li>`).join('')}</ul>` +
       `<h3 class="sub">${esc(C.ui.steps)}</h3><ol class="steps">${b.steps.map((s) => `<li>${esc(s)}</li>`).join('')}</ol>` +
       (b.cta === 'intro' ? `<p><a class="btn" href="${esc(b.introUrl)}" target="_blank" rel="noopener noreferrer" data-ev="intro_click">${esc(C.ui.intro)}</a></p>` : `<p class="note">${esc(C.ui.tried)} <a href="${esc(b.introUrl)}" target="_blank" rel="noopener noreferrer" data-ev="intro_click">${esc(C.ui.triedLink)}</a></p>`) +
+      (b.cta === 'intro' ? `<p><a class="btn ghost" id="qz-send" href="${esc(C.reqUrl)}" data-ev="cta_click" style="margin-left:0">${esc(C.ui.send)}</a></p><p class="note">${esc(C.ui.sendHint)}</p>` : '') +
+      `<p class="note qz-follow">${esc(C.ui.follow)} <a href="${esc(C.channel)}" target="_blank" rel="noopener" data-ev="channel_click">${esc(C.ui.followLink)}</a></p>` +
       (b.id === 'human' ? `<details class="qz-more"><summary>${esc(C.ui.tryAi)}</summary>${promptBlock}</details>` : promptBlock) +
       `<p style="margin-top:22px"><button type="button" class="btn ghost" id="qz-share" style="margin-left:0">${esc(C.ui.shareCopy)}</button> <button type="button" class="linkbtn" id="qz-again">${esc(C.ui.again)}</button></p>`;
+    const sendBtn = $('qz-send');
+    if (sendBtn) sendBtn.addEventListener('click', () => {
+      const text = C.ui.prefill.replace('{verdict}', b.title).replace('{signals}', v.signals.map((x) => x.replace(/[.;]+$/, '')).join('; '));
+      try { sessionStorage.setItem('qz_result', text); } catch (e) { /* ignore */ }
+    });
     $('qz-copy').addEventListener('click', (e) => copy(prompt, e.currentTarget, C.ui.copied));
     $('qz-share').addEventListener('click', (e) => copy(C.share.replace('{{verdict}}', b.title) + ' ' + C.url, e.currentTarget, C.ui.copied));
     $('qz-again').addEventListener('click', () => { answers = []; idx = 0; rBox.hidden = true; intro.hidden = false; scrollTo(0, 0); });

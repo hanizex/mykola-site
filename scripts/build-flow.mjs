@@ -21,6 +21,7 @@ const REQ = {
     next: 'What happens next', nextList: ['I read your request and reply personally within 1 to 2 working days.', 'I send a payment link and a few time slots, or ask a clarifying question, or suggest a free intro call if we are not a fit yet.', 'You pay, pick a time and send any context. Then we meet online.'],
     send: 'Send request', sending: 'Sending...', note: 'I use these details only to reply to you. See the <a href="/privacy/">privacy page</a> and the <a href="/terms/">terms</a>.',
     thanksH: 'Thank you', thanks: 'I got your request and will write to you personally within 1 to 2 working days. If you do not hear from me, write to ' + EMAIL + '.',
+    prefillNote: 'Filled in from your quiz result. Edit anything you like. Nothing is sent until you press Send.',
     errName: 'Please enter your name.', errContact: 'Please enter an email or a Telegram @username, or a LinkedIn profile link.', errLi: 'Please paste a link to your LinkedIn profile.', errMsg: 'Please describe the problem in a few words (at least 10 characters).', errSend: 'Could not send the request. Please try again, or write to ' + EMAIL + '.',
   },
   uk: {
@@ -30,6 +31,7 @@ const REQ = {
     next: 'Що буде далі', nextList: ['Я читаю ваш запит і відповідаю особисто протягом 1-2 робочих днів.', 'Надсилаю посилання на оплату та кілька слотів, або уточнююче запитання, або пропоную безкоштовне знайомство, якщо ми ще не підходимо одне одному.', 'Ви сплачуєте, обираєте час і надсилаєте контекст. Потім зустрічаємося онлайн.'],
     send: 'Надіслати запит', sending: 'Надсилаю...', note: 'Ці дані потрібні лише для відповіді вам. Див. <a href="/uk/privacy/">конфіденційність</a> та <a href="/uk/terms/">умови</a>.',
     thanksH: 'Дякую', thanks: 'Я отримав ваш запит і напишу вам особисто протягом 1-2 робочих днів. Якщо відповіді не буде, напишіть на ' + EMAIL + '.',
+    prefillNote: 'Заповнено з вашого результату в тесті. Редагуйте що завгодно. Нічого не надсилається, доки ви не натиснете «Надіслати».',
     errName: 'Будь ласка, вкажіть ім\'я.', errContact: 'Вкажіть email або Telegram @username, або посилання на профіль у LinkedIn.', errLi: 'Будь ласка, вставте посилання на ваш профіль у LinkedIn.', errMsg: 'Опишіть проблему кількома словами (щонайменше 10 символів).', errSend: 'Не вдалося надіслати запит. Спробуйте ще раз або напишіть на ' + EMAIL + '.',
   },
 };
@@ -296,6 +298,7 @@ const requestPage = (c) => { const r = REQ[c.lang]; return shell(c, {
       <input id="l" type="text" inputmode="url" maxlength="200" placeholder="${esc(r.liPh)}">
       <p style="margin:16px 0 6px"><label for="m"><strong>${esc(r.msg)}</strong></label></p>
       <textarea id="m" rows="5" maxlength="1000" placeholder="${esc(r.msgPh)}" required></textarea>
+      <p class="note" id="pf" hidden>${esc(r.prefillNote)}</p>
       <div style="position:absolute;left:-9999px" aria-hidden="true"><label>Website <input id="hp" type="text" tabindex="-1" autocomplete="off"></label></div>
       <p class="note" id="err" role="alert" hidden></p>
       <p style="margin-top:18px"><button class="btn" type="submit" id="go">${esc(r.send)}</button></p>
@@ -308,6 +311,7 @@ const requestPage = (c) => { const r = REQ[c.lang]; return shell(c, {
     addEventListener('DOMContentLoaded', () => {
       const f = document.getElementById('rq'), err = document.getElementById('err'), go = document.getElementById('go'), t0 = Date.now();
       const show = (m) => { err.hidden = false; err.textContent = m; };
+      try { const q = sessionStorage.getItem('qz_result'); if (q && !f.m.value) { f.m.value = q.slice(0, 1000); document.getElementById('pf').hidden = false; } } catch (x) { /* ignore */ }
       f.addEventListener('submit', async (e) => {
         e.preventDefault(); err.hidden = true;
         const name = f.n.value.trim(), li = f.l.value.trim(), msg = f.m.value.trim();
@@ -325,7 +329,7 @@ const requestPage = (c) => { const r = REQ[c.lang]; return shell(c, {
           const r = await fetch('/api/request', { method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify({ name, li, contact, msg, hp: f.hp.value, ms: Date.now() - t0, l: CFG.lang, t: window.__touch || {} }) });
           ok = r.ok && (await r.json()).ok === true;
         } catch (x) { ok = false; }
-        if (ok) { f.hidden = true; document.getElementById('nx').hidden = true; document.getElementById('ok').hidden = false; if (window.__send) window.__send('request_sent'); scrollTo(0, 0); }
+        if (ok) { try { sessionStorage.removeItem('qz_result'); } catch (x) { /* ignore */ } f.hidden = true; document.getElementById('nx').hidden = true; document.getElementById('ok').hidden = false; if (window.__send) window.__send('request_sent'); scrollTo(0, 0); }
         else { go.disabled = false; go.textContent = CFG.send; show(CFG.errSend); }
       });
     });

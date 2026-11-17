@@ -10,7 +10,7 @@
 import { readFileSync, writeFileSync, mkdirSync, readdirSync, rmSync, existsSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { introLink, ogPath } from './config.mjs';
+import { introLink, ogPath, PREP } from './config.mjs';
 import { marked } from 'marked';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
@@ -28,6 +28,7 @@ const T = {
     code: 'en', name: NAME, pay: '/pay/', privacy: '/privacy/', terms: '/terms/', termsLabel: 'Terms', locale: 'en_US', dateLocale: 'en-GB', base: '/blog/', wpm: 200,
     blog: 'Blog', consult: 'Consultation', min: 'min read', short: 'In short:', topics: 'Topics', privacyLabel: 'Privacy', draft: 'DRAFT: not published.',
     cta: { consult: 'Discuss your case in a free intro call', comment: 'Argue with me in the Telegram channel' },
+    follow: 'Not ready for a call? I share short management notes in my Telegram channel:', followLink: 'Outstanding PM', lane: 'Preparing for a PM interview?', laneLink: 'Mock interview and CV review, one hour',
     idxTitle: `Blog – ${NAME}`, idxH1: 'Blog',
     idxDesc: 'Practical, sharp notes on project, product, delivery and operational management, for managers, founders and people starting out.',
     idxLead: 'Practical notes on project, product, delivery and operational management.',
@@ -37,6 +38,7 @@ const T = {
     code: 'uk', name: NAME_UK, pay: '/uk/pay/', privacy: '/uk/privacy/', terms: '/uk/terms/', termsLabel: 'Умови', locale: 'uk_UA', dateLocale: 'uk-UA', base: '/uk/blog/', wpm: 170,
     blog: 'Блог', consult: 'Консультація', min: 'хв читання', short: 'Коротко:', topics: 'Теми', privacyLabel: 'Конфіденційність', draft: 'ЧЕРНЕТКА: не опубліковано.',
     cta: { consult: 'Обговорити мій кейс на безкоштовному знайомстві', comment: 'Посперечатися в Telegram-каналі' },
+    follow: 'Ще не час для розмови? Короткі нотатки про менеджмент я публікую в Telegram-каналі:', followLink: 'Outstanding PM', lane: 'Готуєтесь до співбесіди на PM?', laneLink: 'Пробна співбесіда й розбір резюме, одна година',
     idxTitle: `Блог – ${NAME_UK}`, idxH1: 'Блог',
     idxDesc: 'Практичні й різкі нотатки про проєктний, продуктовий, delivery та операційний менеджмент: для менеджерів, засновників і тих, хто тільки починає.',
     idxLead: 'Практичні нотатки про проєктний, продуктовий, delivery та операційний менеджмент.',
@@ -64,11 +66,12 @@ function parse(file, lang, draft) {
   for (const k of ['title', 'description', 'date', 'slug', 'key']) if (!meta[k]) throw new Error(`${file}: front matter needs "${k}"`);
   if (!/^[a-z0-9-]+$/.test(meta.slug)) throw new Error(`${file}: slug must be lowercase letters, digits, hyphens`);
   if (!/^\d{4}-\d{2}-\d{2}$/.test(meta.date)) throw new Error(`${file}: date must be YYYY-MM-DD`);
+  const lane = meta.lane === 'prep' ? 'prep' : '';
   const cta = meta.cta || 'consult';
   if (!['consult', 'comment', 'none'].includes(cta)) throw new Error(`${file}: cta must be consult, comment or none`);
   const words = m[2].trim().split(/\s+/).length;
   return {
-    ...meta, lang, draft, cta,
+    ...meta, lang, draft, cta, lane,
     tags: (meta.tags || '').split(',').map((t) => t.trim()).filter(Boolean),
     updated: meta.updated || meta.date,
     minutes: Math.max(1, Math.round(words / T[lang].wpm)),
@@ -145,6 +148,14 @@ function ctaBlock(p) {
   return '';
 }
 
+// A5: one follow-the-channel line per post; the Lane A link only on posts tagged `lane: prep`.
+function followBlock(p) {
+  const t = T[p.lang];
+  const lane = p.lane ? `<p class="note"><strong>${t.lane}</strong> <a href="${PREP[p.lang]}" data-ev="cta_click">${t.laneLink} →</a></p>` : '';
+  if (p.cta === 'comment') return lane; // that post already ends with a channel button
+  return `${lane}<p class="note follow">${t.follow} <a href="${CHANNEL}" target="_blank" rel="noopener" data-ev="channel_click">${t.followLink}</a></p>`;
+}
+
 function body(p) {
   // The summary box goes right AFTER the hook (the first paragraph), never before it.
   const t = T[p.lang];
@@ -181,6 +192,7 @@ function postPage(p) {
       ${p.tags.length ? `<p class="note">${t.topics}: ${p.tags.map(esc).join(' · ')}</p>` : ''}
     </article>
     ${ctaBlock(p)}
+    ${followBlock(p)}
   </main>
   ${footer(p.lang)}
 </body>
@@ -230,6 +242,10 @@ function sitemap() {
   const termsAlts = [{ l: 'en', h: `${SITE}/terms/` }, { l: 'uk', h: `${SITE}/uk/terms/` }, { l: 'x-default', h: `${SITE}/terms/` }];
   const privAlts = existsSync(join(PUBLIC, 'uk', 'privacy', 'index.html')) ? [{ l: 'en', h: `${SITE}/privacy/` }, { l: 'uk', h: `${SITE}/uk/privacy/` }, { l: 'x-default', h: `${SITE}/privacy/` }] : [];
   const rows = [x(`${SITE}/`, '', homeAlts), ...(homeAlts.length ? [x(`${SITE}/uk/`, '', homeAlts)] : []), ...(existsSync(join(PUBLIC, 'uk', 'cv', 'index.html')) ? [x(`${SITE}/cv/`, '2026-11-11', cvAlts), x(`${SITE}/uk/cv/`, '2026-11-11', cvAlts)] : []), x(`${SITE}/privacy/`, '', privAlts), ...(existsSync(join(PUBLIC, 'uk', 'privacy', 'index.html')) ? [x(`${SITE}/uk/privacy/`, '', privAlts)] : []), ...(existsSync(join(PUBLIC, 'uk', 'challenge', 'index.html')) ? [x(`${SITE}/challenge/`, '2026-11-12', chAlts), x(`${SITE}/uk/challenge/`, '2026-11-12', chAlts)] : []), ...(existsSync(join(PUBLIC, 'uk', 'terms', 'index.html')) ? [x(`${SITE}/terms/`, '2026-11-12', termsAlts), x(`${SITE}/uk/terms/`, '2026-11-12', termsAlts)] : [])];
+  if (existsSync(join(PUBLIC, 'pm-interview-prep', 'index.html')) && existsSync(join(PUBLIC, 'uk', 'pm-interview-prep', 'index.html'))) {
+    const prepAlts = [{ l: 'en', h: `${SITE}/pm-interview-prep/` }, { l: 'uk', h: `${SITE}/uk/pm-interview-prep/` }, { l: 'x-default', h: `${SITE}/pm-interview-prep/` }];
+    rows.push(x(`${SITE}/pm-interview-prep/`, '', prepAlts), x(`${SITE}/uk/pm-interview-prep/`, '', prepAlts));
+  }
   const enIdx = published('en'), ukIdx = published('uk');
   const idxAlts = enIdx.length && ukIdx.length ? [{ l: 'en', h: `${SITE}/blog/` }, { l: 'uk', h: `${SITE}/uk/blog/` }, { l: 'x-default', h: `${SITE}/blog/` }] : [];
   if (enIdx.length) rows.push(x(`${SITE}/blog/`, enIdx[0].updated, idxAlts));
@@ -249,6 +265,7 @@ const llms = () => `# ${NAME}
 ## Pages
 - [CV](${SITE}/cv/): full career history, results with dates and money figures, skills, ventures; PDF: ${SITE}/assets/cv/Mykola_Kalakutskyi_CV_EN.pdf
 - [Home and consultation](${SITE}/): who I am, projects and activities, 400+ consultation and mentorship sessions, how to book a free intro call or request a consultation
+- [PM interview prep](${SITE}/pm-interview-prep/): one-hour online mock interview and CV/story review for project managers, EUR 50, request form
 - [Challenge AI](${SITE}/challenge/): free 6-question quiz that tells whether AI is enough for a work problem or a human view is needed; runs in the browser
 ${pubAll.filter((p) => p.lang === 'en').map((p) => `- [${p.title}](${SITE}${p.path}): ${p.description}`).join('\n')}
 ${published('uk').length ? `\n## Ukrainian (Українською)\n- [Challenge AI](${SITE}/uk/challenge/): безкоштовний тест із 6 запитань: чи вистачить ШІ для робочої проблеми, чи потрібен погляд людини; працює в браузері\n- [Резюме](${SITE}/uk/cv/): повна історія кар'єри, результати з датами й сумами, навички, власні проєкти; PDF: ${SITE}/assets/cv/Mykola_Kalakutskyi_CV_UA.pdf\n${published('uk').map((p) => `- [${p.title}](${SITE}${p.path}): ${p.description}`).join('\n')}\n` : ''}`;
