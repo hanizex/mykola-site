@@ -399,7 +399,7 @@ function page(L) {
     <section id="examples" class="reveal">
       <h2>${esc(EXUI[L.lang].blockH)}</h2>
       <p>${esc(EXUI[L.lang].blockLead)}</p>
-      ${cardsHtml(L.lang, { kinds: ['consultation', 'interview'], limit: 4 })}
+      ${cardsHtml(L.lang, { kinds: ['consultation', 'problem', 'interview', 'review'], limit: 4 })}
     </section>
 
     <section id="consult" class="reveal">

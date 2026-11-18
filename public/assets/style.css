@@ -413,3 +413,10 @@ header.site nav a { white-space: nowrap; }
 .example .tag { display: inline-block; font-size: .8rem; color: var(--muted, #6b7570); margin-left: 8px; font-weight: 400; }
 .exindex { columns: 1; margin: 8px 0 20px; padding-left: 1.2em; }
 @media (min-width: 720px) { .exindex { columns: 2; column-gap: 28px; } }
+.exhow { margin: 8px 0 8px; padding-left: 1.2em; }
+.exhow li { margin: 0 0 6px; }
+.example .body { line-height: 1.65; max-width: 68ch; }
+.example .body blockquote { margin: 14px 0; padding: 4px 0 4px 16px; border-left: 3px solid var(--accent, #2f6f5e); color: inherit; }
+.example .body blockquote p { margin: 0; }
+.example .body p > strong:only-child { display: block; margin-top: 18px; }
+.example .body hr { border: 0; border-top: 1px dashed var(--line, #e5e7e2); margin: 18px 0; }
