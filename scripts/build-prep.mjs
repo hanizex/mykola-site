@@ -5,6 +5,7 @@ import { writeFileSync, mkdirSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { introLink, ogPath, CHANNEL } from './config.mjs';
+import { examplesHtml } from './examples.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const SITE = 'https://mykola.pages.dev';
@@ -23,7 +24,7 @@ const L = {
     forH: 'Who it is for', forList: ['Project and delivery managers who keep getting interviews but not offers.', 'Juniors and career switchers aiming at a first PM role.', 'New managers who want to be sure their story holds up.'],
     notFor: 'Not for: a guaranteed offer, a ready-made script to memorise, or someone to write your CV for you.',
     hourH: 'How the hour goes', hourList: ['10 minutes: the role you are aiming at and your story so far.', '30 minutes: a mock interview with real PM questions, including questions about decisions, conflicts and what you actually did on each project phase.', '20 minutes: honest feedback and what to rework first.'],
-    leaveH: 'What you leave with', leaveList: ['A list of the answers that are weakest, and why.', 'A clearer way to tell the story of your last project.', 'A short written summary of next steps within 24 hours after the call.'],
+    leaveH: 'What you leave with', leaveList: ['A list of the answers that are weakest, and why.', 'A clearer way to tell the story of your last project.', 'Detailed written feedback on 8 points within 1 working week after the mock interview.'],
     prepH: 'Before the call', prep: 'Send your CV and the job description you are aiming at, if you have them. If not, a few lines about the role are enough.',
     readH: 'Read first', read: [['8 job interview mistakes and how to avoid them', '/blog/8-mistakes-candidates-make-in-job-interviews/'], ['IT project manager skills: 10 essentials, including AI', '/blog/it-project-manager-skills-from-job-postings/']],
     quizText: 'Not sure you need a person? Take the free six-question quiz first.', quizBtn: 'Take the quiz',
@@ -44,7 +45,7 @@ const L = {
     forH: 'Кому підійде', forList: ['Проєктним і delivery менеджерам, яких запрошують на співбесіди, але оффера немає.', 'Джуніорам і тим, хто переходить у PM з іншої ролі.', 'Новим менеджерам, які хочуть переконатися, що їхня історія витримує питання.'],
     notFor: 'Не підійде, якщо потрібні: гарантований оффер, готовий скрипт для заучування або людина, яка напише резюме за вас.',
     hourH: 'Як проходить година', hourList: ['10 хвилин: роль, на яку ви цілитеся, і ваша історія.', '30 хвилин: пробна співбесіда з реальними питаннями для PM, зокрема про рішення, конфлікти й те, що ви насправді робили на кожній фазі проєкту.', '20 хвилин: чесний фідбек і що переробити першим.'],
-    leaveH: 'З чим ви підете', leaveList: ['Список найслабших відповідей і чому вони слабкі.', 'Чіткіший спосіб розповідати про свій останній проєкт.', 'Короткий письмовий підсумок наступних кроків протягом 24 годин після розмови.'],
+    leaveH: 'З чим ви підете', leaveList: ['Список найслабших відповідей і чому вони слабкі.', 'Чіткіший спосіб розповідати про свій останній проєкт.', 'Детальний письмовий відгук за 8 пунктами протягом 1 робочого тижня після пробної співбесіди.'],
     prepH: 'Перед розмовою', prep: 'Надішліть резюме й опис вакансії, на яку цілитеся, якщо вони є. Якщо немає, достатньо кількох рядків про роль.',
     readH: 'Спершу почитайте', read: [['8 помилок на співбесіді, які коштують вам оффера', '/uk/blog/8-pomylok-na-spivbesidi/'], ['Навички IT-проєктного менеджера: 10 головних, включно зі ШІ', '/uk/blog/navychky-it-proektnoho-menedzhera/']],
     quizText: 'Не впевнені, що потрібна людина? Спершу пройдіть безкоштовний тест із шести запитань.', quizBtn: 'Пройти тест',
@@ -103,6 +104,7 @@ function page(k) {
     </div>
     <div class="panel" style="margin-top:18px"><h2 class="sub" style="font-size:1.1rem">${esc(c.hourH)}</h2><ol class="plain">${c.hourList.map((x) => `<li>${esc(x)}</li>`).join('')}</ol>
       <h2 class="sub" style="font-size:1.1rem;margin-top:18px">${esc(c.prepH)}</h2><p>${esc(c.prep)}</p></div>
+    ${examplesHtml(k, 'interview')}
     <h2 class="sub" style="font-size:1.1rem;margin-top:26px">${esc(c.readH)}</h2>
     <ul class="tick">${c.read.map((r) => `<li><a href="${r[1]}">${esc(r[0])}</a></li>`).join('')}</ul>
     <p class="note">${esc(c.quizText)} <a href="${c.quizPath}" data-ev="challenge_click">${esc(c.quizBtn)}</a></p>
