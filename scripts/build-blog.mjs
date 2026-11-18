@@ -246,6 +246,10 @@ function sitemap() {
     const prepAlts = [{ l: 'en', h: `${SITE}/pm-interview-prep/` }, { l: 'uk', h: `${SITE}/uk/pm-interview-prep/` }, { l: 'x-default', h: `${SITE}/pm-interview-prep/` }];
     rows.push(x(`${SITE}/pm-interview-prep/`, '', prepAlts), x(`${SITE}/uk/pm-interview-prep/`, '', prepAlts));
   }
+  if (existsSync(join(PUBLIC, 'examples', 'index.html')) && existsSync(join(PUBLIC, 'uk', 'examples', 'index.html'))) {
+    const exAlts = [{ l: 'en', h: `${SITE}/examples/` }, { l: 'uk', h: `${SITE}/uk/examples/` }, { l: 'x-default', h: `${SITE}/examples/` }];
+    rows.push(x(`${SITE}/examples/`, '', exAlts), x(`${SITE}/uk/examples/`, '', exAlts));
+  }
   const enIdx = published('en'), ukIdx = published('uk');
   const idxAlts = enIdx.length && ukIdx.length ? [{ l: 'en', h: `${SITE}/blog/` }, { l: 'uk', h: `${SITE}/uk/blog/` }, { l: 'x-default', h: `${SITE}/blog/` }] : [];
   if (enIdx.length) rows.push(x(`${SITE}/blog/`, enIdx[0].updated, idxAlts));
@@ -266,6 +270,7 @@ const llms = () => `# ${NAME}
 - [CV](${SITE}/cv/): full career history, results with dates and money figures, skills, ventures; PDF: ${SITE}/assets/cv/Mykola_Kalakutskyi_CV_EN.pdf
 - [Home and consultation](${SITE}/): who I am, projects and activities, 400+ consultation and mentorship sessions, how to book a free intro call or request a consultation
 - [PM interview prep](${SITE}/pm-interview-prep/): one-hour online mock interview and CV/story review for project managers, EUR 50, request form
+- [Examples of feedback](${SITE}/examples/): full anonymised written feedback from real sessions (mock interview feedback on 8 points, planning consultation review)
 - [Challenge AI](${SITE}/challenge/): free 6-question quiz that tells whether AI is enough for a work problem or a human view is needed; runs in the browser
 ${pubAll.filter((p) => p.lang === 'en').map((p) => `- [${p.title}](${SITE}${p.path}): ${p.description}`).join('\n')}
 ${published('uk').length ? `\n## Ukrainian (Українською)\n- [Challenge AI](${SITE}/uk/challenge/): безкоштовний тест із 6 запитань: чи вистачить ШІ для робочої проблеми, чи потрібен погляд людини; працює в браузері\n- [Резюме](${SITE}/uk/cv/): повна історія кар'єри, результати з датами й сумами, навички, власні проєкти; PDF: ${SITE}/assets/cv/Mykola_Kalakutskyi_CV_UA.pdf\n${published('uk').map((p) => `- [${p.title}](${SITE}${p.path}): ${p.description}`).join('\n')}\n` : ''}`;

@@ -33,11 +33,13 @@ const FIXED = {
   '/challenge/': { kicker: 'Challenge AI · free quiz', title: 'Can AI solve your problem?', sub: 'Six questions, about 90 seconds. Use AI, or call a human.' },
   '/pm-interview-prep/': { kicker: 'PM interview prep', title: 'Find the weak spots before the interviewer does', sub: 'Mock interview, CV and story review, written next steps. One hour, EUR 50.' },
   '/uk/pm-interview-prep/': { kicker: 'Підготовка до співбесіди на PM', title: 'Знайдіть слабкі місця раніше, ніж інтерв\'юер', sub: 'Пробна співбесіда, розбір резюме й історії, письмові наступні кроки. Година, EUR 50.' },
+  '/examples/': { kicker: 'Examples of feedback', title: 'Real feedback, in full', sub: 'Mock interview feedback on 8 points and a consultation review. Anonymised.' },
+  '/uk/examples/': { kicker: 'Приклади відгуків', title: 'Реальні відгуки, повністю', sub: 'Відгук після пробної співбесіди за 8 пунктами й розбір після консультації. Знеособлені.' },
   '/uk/challenge/': { kicker: 'Challenge AI · безкоштовний тест', title: 'Чи впорається ШІ з вашою проблемою?', sub: 'Шість запитань, близько 90 секунд. Скористатися ШІ чи звернутися до людини.' },
 };
 
 async function pages() {
-  const list = [['/', 'index.html'], ['/uk/', 'uk/index.html'], ['/cv/', 'cv/index.html'], ['/uk/cv/', 'uk/cv/index.html'], ['/challenge/', 'challenge/index.html'], ['/uk/challenge/', 'uk/challenge/index.html'], ['/pm-interview-prep/', 'pm-interview-prep/index.html'], ['/uk/pm-interview-prep/', 'uk/pm-interview-prep/index.html'], ['/blog/', 'blog/index.html'], ['/uk/blog/', 'uk/blog/index.html']];
+  const list = [['/', 'index.html'], ['/uk/', 'uk/index.html'], ['/cv/', 'cv/index.html'], ['/uk/cv/', 'uk/cv/index.html'], ['/challenge/', 'challenge/index.html'], ['/uk/challenge/', 'uk/challenge/index.html'], ['/examples/', 'examples/index.html'], ['/uk/examples/', 'uk/examples/index.html'], ['/pm-interview-prep/', 'pm-interview-prep/index.html'], ['/uk/pm-interview-prep/', 'uk/pm-interview-prep/index.html'], ['/blog/', 'blog/index.html'], ['/uk/blog/', 'uk/blog/index.html']];
   for (const base of ['blog', 'uk/blog']) {
     for (const d of await readdir(join(PUB, base), { withFileTypes: true })) {
       if (d.isDirectory() && existsSync(join(PUB, base, d.name, 'index.html'))) list.push([`/${base}/${d.name}/`, `${base}/${d.name}/index.html`]);

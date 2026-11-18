@@ -21,7 +21,7 @@ const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replac
 const BG = ['#eaf1ee', '#f3ebdd', '#e8eef3', '#f1e6e6'];
 const FG = ['#3d6b5a', '#6f9c8a', '#c9a46c', '#c97b63', '#7a9bb5', '#8c7aa6', '#1f3d33'];
 const seedFrom = (str) => { let h = 2166136261; for (const ch of str) { h ^= ch.charCodeAt(0); h = Math.imul(h, 16777619); } return h >>> 0; };
-import { examplesHtml } from './examples.mjs';
+import { cardsHtml, UI as EXUI } from './examples.mjs';
 import { introLink, ogPath } from './config.mjs';
 const mulberry32 = (a) => () => { a |= 0; a = (a + 0x6D2B79F5) | 0; let t = Math.imul(a ^ (a >>> 15), 1 | a); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; };
 let iconCount = 0;
@@ -396,6 +396,12 @@ function page(L) {
       <a class="btn" href="${L.challengePath}" data-ev="challenge_click">${esc(L.challenge.btn)}</a>
     </section>
 
+    <section id="examples" class="reveal">
+      <h2>${esc(EXUI[L.lang].blockH)}</h2>
+      <p>${esc(EXUI[L.lang].blockLead)}</p>
+      ${cardsHtml(L.lang, { kinds: ['consultation', 'interview'], limit: 4 })}
+    </section>
+
     <section id="consult" class="reveal">
       <h2>${esc(L.consultTitle)}</h2>
       <p class="price">${L.price} <span class="muted" style="font-size:1rem;font-weight:400">${esc(L.priceNote)}</span></p>
@@ -414,7 +420,6 @@ function page(L) {
       <a class="btn" href="${L.requestPath}" data-ev="cta_click">${esc(L.bookShort)}</a>
       <p class="note" style="margin-top:14px">${esc(L.directQ)} <a href="${introLink('consult')}" target="_blank" rel="noopener noreferrer" data-ev="intro_click">${esc(L.directLink)}</a></p>
       <p class="note">${esc(L.prepQ)} <a href="${L.prepPath}" data-ev="cta_click">${esc(L.prepLink)}</a></p>
-      ${examplesHtml(L.lang, 'both')}
       <h3 class="sub" style="margin-top:26px">${esc(L.c3.faqH)}</h3>
       <div class="faq">${L.c3.faq.map((x) => `<details><summary>${esc(x[0])}</summary><p>${esc(x[1])}</p></details>`).join('')}</div>
     </section>

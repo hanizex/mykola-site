@@ -5,7 +5,7 @@ import { writeFileSync, mkdirSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { introLink, ogPath, CHANNEL } from './config.mjs';
-import { examplesHtml } from './examples.mjs';
+import { cardsHtml, UI as EXUI } from './examples.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const SITE = 'https://mykola.pages.dev';
@@ -104,7 +104,9 @@ function page(k) {
     </div>
     <div class="panel" style="margin-top:18px"><h2 class="sub" style="font-size:1.1rem">${esc(c.hourH)}</h2><ol class="plain">${c.hourList.map((x) => `<li>${esc(x)}</li>`).join('')}</ol>
       <h2 class="sub" style="font-size:1.1rem;margin-top:18px">${esc(c.prepH)}</h2><p>${esc(c.prep)}</p></div>
-    ${examplesHtml(k, 'interview')}
+    <h2 class="sub" style="font-size:1.1rem;margin-top:26px">${esc(EXUI[k].blockH)}</h2>
+    <p>${esc(EXUI[k].blockLead)}</p>
+    ${cardsHtml(k, { kinds: ['interview'], limit: 4 })}
     <h2 class="sub" style="font-size:1.1rem;margin-top:26px">${esc(c.readH)}</h2>
     <ul class="tick">${c.read.map((r) => `<li><a href="${r[1]}">${esc(r[0])}</a></li>`).join('')}</ul>
     <p class="note">${esc(c.quizText)} <a href="${c.quizPath}" data-ev="challenge_click">${esc(c.quizBtn)}</a></p>
