@@ -21,7 +21,7 @@ const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replac
 const BG = ['#eaf1ee', '#f3ebdd', '#e8eef3', '#f1e6e6'];
 const FG = ['#3d6b5a', '#6f9c8a', '#c9a46c', '#c97b63', '#7a9bb5', '#8c7aa6', '#1f3d33'];
 const seedFrom = (str) => { let h = 2166136261; for (const ch of str) { h ^= ch.charCodeAt(0); h = Math.imul(h, 16777619); } return h >>> 0; };
-import { cardsHtml, UI as EXUI } from './examples.mjs';
+import { cardsHtml, loadExamples, pointsLabel, pathFor as exPath, UI as EXUI } from './examples.mjs';
 import { introLink, ogPath } from './config.mjs';
 const mulberry32 = (a) => () => { a |= 0; a = (a + 0x6D2B79F5) | 0; let t = Math.imul(a ^ (a >>> 15), 1 | a); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; };
 let iconCount = 0;
@@ -83,9 +83,8 @@ const EN = {
     { n: '~30', t: 'recommendations on LinkedIn', href: LINKEDIN },
   ],
   statsNote: '',
-  bringTitle: 'Bring me one of these',
-  bring: ["The developer who doesn't want to contribute", "Unmanageable, toxic and other shitty stakeholders", "Perfect plans that never made it into real work", "Any people management approach that looks like firefighting", "Unclear priorities and goals, vague KPIs and OKRs, false expectations", "A PM process that needs an audit before it needs another PM", "A startup that doesn't want to grow, or dies before it's born", "A PM technical interview you need to survive to get the offer"],
-  dossier: {"title": "Bring me one of these", "note": "Illustrative case files. Real cases stay confidential.", "kicker": "CASE FILE", "unit": "MANAGEMENT INTELLIGENCE UNIT", "seal": "MK", "fTitle": "Title", "fObjective": "Objective", "fConfidence": "Confidence", "fId": "Case ID", "tab": "CASE", "aria": "Case files: problems I solve", "prev": "Previous case", "next": "Next case", "of": "of", "objectives": ["Find the real cause of the low contribution. Agree on results, not on hours.", "Map the interests, set the boundaries, keep the project moving without losing your mind.", "Turn the plan into commitments that people actually own.", "Replace heroics with a system that stops the fire from starting.", "One list of priorities, goals you can measure, expectations that match reality.", "Find out what is actually broken before you hire or buy anything.", "Diagnose the stall: product, team, money or founder. Choose the next move.", "Prepare your answers and the stories behind them."], "conf": [96, 94, 95, 97, 94, 98, 95, 97], "stamps": ["PERSONAL", "CONFIDENTIAL", "HANDLE WITH CARE", "SENSITIVE", "DNA ON FILE", "EYES ONLY", "TOP PRIORITY", "CLASSIFIED"], "last": {"title": "UNIDENTIFIED CASES", "objective": "Not on the list? Bring it anyway! We will identify it together.", "stamp": "UNIDENTIFIED"}},
+  bringTitle: 'Bring me something like this',
+  dossier: {"title": "Bring me something like this", "note": "Real situations from my own written feedback and advice, anonymised. Open one to read the full text.", "kicker": "CASE FILE", "unit": "MANAGEMENT INTELLIGENCE UNIT", "seal": "MK", "fTitle": "Title", "fObjective": "About", "fSource": "Source", "fRead": "Full text", "readLink": "Read the full text", "stampBy": {"consultation": "CONSULTATION", "problem": "ADVICE", "interview": "MOCK INTERVIEW", "review": "ADVICE", "career": "ADVICE"}, "tab": "CASE", "aria": "Case files: problems I solve", "prev": "Previous case", "next": "Next case", "of": "of", "last": {"title": "YOUR CASE", "objective": "Not like any of these? Bring it anyway! We will work out what it is together.", "stamp": "NEW", "source": "You", "read": "Request a consultation"}},
   bringNote: "Not on the list? Bring it anyway!",
   whyTitle: "You don't buy a drill. You buy a hole in the wall.",
   benefits: [["Use my experience for your needs", "No tour of theory. You get what has already worked, applied to your situation."], ["Your pain is understood", "E-commerce, fintech, edtech, iGaming, product and outsourcing teams: I have seen how it hurts in each of them."], ["You stay in sync with your tech people", "I started as a developer, so I speak your engineers' language."], ["The path is safe", "Building a team from scratch is a road I have walked more than a dozen times."], ["Big numbers are not scary", "I have led a unit of up to 45 people. We will ride your scale with fun, not fear."], ["Relax and follow", "This is not my first rodeo. You may be surprised how easily things can get solved."]],
@@ -168,9 +167,8 @@ const UK = {
     { n: '~30', t: 'рекомендацій у LinkedIn', href: LINKEDIN },
   ],
   statsNote: '',
-  bringTitle: 'Принесіть мені одне з цього',
-  bring: ["Розробник, який не хоче вкладатися в результат", "Некеровані, токсичні та інші паскудні стейкхолдери", "Ідеальні плани, які так і не дійшли до справжньої роботи", "Будь-який підхід до управління людьми, що скидається на гасіння пожеж", "Нечіткі пріоритети й цілі, розмиті KPI та OKR, хибні очікування", "PM-процес, якому потрібен аудит раніше, ніж ще один PM", "Стартап, який не хоче рости, або помирає ще до народження", "Технічна співбесіда на PM, яку треба пережити, щоб отримати оффер"],
-  dossier: {"title": "Принесіть мені одне з цього", "note": "Ілюстративні справи. Реальні кейси лишаються конфіденційними.", "kicker": "СПРАВА", "unit": "ВІДДІЛ УПРАВЛІНСЬКИХ РІШЕНЬ", "seal": "МК", "fTitle": "Назва", "fObjective": "Мета", "fConfidence": "Впевненість", "fId": "№ справи", "tab": "СПРАВА", "aria": "Справи: проблеми, які я розв'язую", "prev": "Попередня справа", "next": "Наступна справа", "of": "з", "objectives": ["Знайти справжню причину низького внеску. Домовитися про результати, а не про години.", "Розкласти інтереси, поставити межі й не втратити ні проєкт, ні нерви.", "Перетворити план на зобов'язання, які люди справді беруть на себе.", "Замінити героїзм системою, яка не дає пожежі спалахнути.", "Один список пріоритетів, вимірювані цілі й очікування, що збігаються з реальністю.", "З'ясувати, що саме зламано, перш ніж когось наймати чи щось купувати.", "Поставити діагноз зупинці: продукт, команда, гроші чи засновник. Обрати наступний хід.", "Підготувати відповіді та історії, які за ними стоять."], "conf": [96, 94, 95, 97, 94, 98, 95, 97], "stamps": ["ОСОБИСТЕ", "КОНФІДЕНЦІЙНО", "З ОБЕРЕЖНІСТЮ", "ЧУТЛИВО", "ДНК У СПРАВІ", "ЛИШЕ ДЛЯ ОЧЕЙ", "ПРІОРИТЕТ", "ЗАСЕКРЕЧЕНО"], "last": {"title": "НЕВИЗНАЧЕНІ СПРАВИ", "objective": "Немає у списку? Принесіть усе одно! Визначимо, що це, разом.", "stamp": "НЕВИЗНАЧЕНО"}},
+  bringTitle: 'Принесіть мені щось подібне',
+  dossier: {"title": "Принесіть мені щось подібне", "note": "Реальні ситуації з моїх письмових відгуків і порад, знеособлені. Відкрийте будь-яку, щоб прочитати повний текст.", "kicker": "СПРАВА", "unit": "ВІДДІЛ УПРАВЛІНСЬКИХ РІШЕНЬ", "seal": "МК", "fTitle": "Назва", "fObjective": "Про що", "fSource": "Джерело", "fRead": "Повний текст", "readLink": "Читати повністю", "stampBy": {"consultation": "КОНСУЛЬТАЦІЯ", "problem": "ПОРАДА", "interview": "СПІВБЕСІДА", "review": "ПОРАДА", "career": "ПОРАДА"}, "tab": "СПРАВА", "aria": "Справи: проблеми, які я розв'язую", "prev": "Попередня справа", "next": "Наступна справа", "of": "з", "last": {"title": "ВАША СПРАВА", "objective": "Не схоже ні на що з цього? Принесіть усе одно! Розберемося, що це, разом.", "stamp": "НОВА", "source": "Ви", "read": "Запросити консультацію"}},
   bringNote: "Немає у списку? Принесіть усе одно!",
   whyTitle: "Ви купуєте не дриль. Ви купуєте дірку в стіні.",
   benefits: [["Використайте мій досвід для своїх потреб", "Жодної екскурсії в теорію. Ви отримуєте те, що вже працювало, застосоване до вашої ситуації."], ["Ваш біль зрозумілий", "E-commerce, fintech, edtech, iGaming, продуктові й аутсорсингові команди: я бачив, як болить у кожній із них."], ["Ви говоритимете з технарями однією мовою", "Я почав як розробник, тож розумію мову ваших інженерів."], ["Шлях безпечний", "Створення команди з нуля - дорога, якою я пройшов понад десяток разів."], ["Великі цифри не лякають", "Я керував підрозділом до 45 людей. Ваш масштаб ми проїдемо із задоволенням, а не зі страхом."], ["Я в цьому не вперше", "Розслабтеся й слідуйте за мною. Ви можете здивуватися, наскільки легко розв'язується складне."]],
@@ -237,19 +235,20 @@ const UK = {
 };
 
 
-// ---------------------------------------------------------------- "case files" slider
+// ---------------------------------------------------------------- "case files" slider (real texts from content/examples)
+const SLIDER = ['advice-client-delays-approval', 'advice-change-that-failed', 'consultation-planning', 'advice-budget-pm-responsibility', 'advice-post-review', 'mock-delivery-role', 'advice-impostor-and-team-feedback', 'advice-job-applications'];
 function folderHtml(L, i, f) {
   const D = L.dossier;
   return `<article class="folder${f.last ? ' unidentified' : ''}" aria-label="${esc(f.title)}">
-          <div class="tab">${esc(D.tab)} ${esc(f.id)}</div>
+          <div class="tab">${esc(D.tab)} ${String(i + 1).padStart(2, '0')}</div>
           <div class="cover">
             <div class="hdr"><span class="seal">${esc(D.seal)}</span><div><b>${esc(D.kicker)}</b><small>${esc(D.unit)}</small></div></div>
             <div class="chev" aria-hidden="true"></div>
             <dl>
               <div class="row"><dt>${esc(D.fTitle)}</dt><dd class="ttl">${esc(f.title)}</dd></div>
               <div class="row"><dt>${esc(D.fObjective)}</dt><dd>${esc(f.objective)}</dd></div>
-              <div class="row"><dt>${esc(D.fConfidence)}</dt><dd class="conf"><span class="meter"><i style="width:${f.conf == null ? 100 : f.conf}%"></i></span><b>${f.conf == null ? '??' : f.conf + '%'}</b></dd></div>
-              <div class="row"><dt>${esc(D.fId)}</dt><dd class="mono">${esc(f.id)}</dd></div>
+              <div class="row"><dt>${esc(D.fSource)}</dt><dd>${esc(f.source)}</dd></div>
+              <div class="row"><dt>${esc(D.fRead)}</dt><dd class="lnk"><a href="${f.href}" data-ev="cta_click">${esc(f.read)} →</a></dd></div>
             </dl>
             <div class="stamp" aria-hidden="true">${esc(f.stamp)}</div>
             <div class="print" aria-hidden="true"></div>
@@ -258,8 +257,14 @@ function folderHtml(L, i, f) {
 }
 function dossierHtml(L) {
   const D = L.dossier;
-  const files = L.bring.map((t, i) => ({ title: t, objective: D.objectives[i], conf: D.conf[i], id: `MK-${String(14 + i * 7).padStart(3, '0')}`, stamp: D.stamps[i] }));
-  files.push({ title: D.last.title, objective: D.last.objective, conf: null, id: 'MK-???', stamp: D.last.stamp, last: true });
+  const all = loadExamples();
+  const files = SLIDER.map((slug) => {
+    const e = all.find((x) => x.slug === slug);
+    if (!e) throw new Error(`slider: unknown example ${slug}`);
+    const v = e[L.lang] || e.uk;
+    return { title: v.title, objective: pointsLabel(L.lang, e), source: EXUI[L.lang].kind[e.kind], href: `${exPath(L.lang)}#${slug}`, read: D.readLink, stamp: D.stampBy[e.kind] };
+  });
+  files.push({ title: D.last.title, objective: D.last.objective, source: D.last.source, href: L.requestPath, read: D.last.read, stamp: D.last.stamp, last: true });
   return `<div class="dossier" role="region" aria-roledescription="carousel" aria-label="${esc(D.aria)}" data-of="${esc(D.of)}" data-prev="${esc(D.prev)}" data-next="${esc(D.next)}">
       <div class="folders" tabindex="0">
         ${files.map((f, i) => folderHtml(L, i, f)).join('\n        ')}

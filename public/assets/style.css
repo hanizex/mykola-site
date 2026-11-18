@@ -420,3 +420,5 @@ header.site nav a { white-space: nowrap; }
 .example .body blockquote p { margin: 0; }
 .example .body p > strong:only-child { display: block; margin-top: 18px; }
 .example .body hr { border: 0; border-top: 1px dashed var(--line, #e5e7e2); margin: 18px 0; }
+.folder dd.lnk a { color: inherit; font-weight: 800; letter-spacing: .04em; text-decoration: underline; text-underline-offset: 3px; }
+.folder dd.lnk a:hover, .folder dd.lnk a:focus-visible { color: #8a3a2a; }
