@@ -83,7 +83,12 @@ const EN = {
     { n: '~30', t: 'recommendations on LinkedIn', href: LINKEDIN },
   ],
   statsNote: '',
-  bringTitle: 'Bring me something like this',
+  facts: { title: 'Numbers behind the advice', lead: 'These are numbers about my own work, not results promised to clients.', groups: [
+    { kicker: 'Interviews, both sides of the table', items: [['320', 'screening interviews passed'], ['70+', 'technical interviews passed'], ['130+', 'technical interviews I conducted'], ['20+', 'personal mock interviews']] },
+    { kicker: 'Skin in the game', items: [['20+', 'startups launched'], ['15+', 'startups failed before any profit'], ['$64k', 'lost on inaccurate business decisions'], ['$17k', 'spent on self-education in the last 10 years']] },
+    { kicker: 'Reach and scope', items: [['30,000', 'followers on LinkedIn'], ['400+', 'publications about project management'], ['8', 'top Ukrainian tech portals cited me'], ['$30B GGR', 'projects I managed'], ['45', 'people in the largest team I led'], ['4', 'languages I can speak: English, Ukrainian, Russian, Greek (B1). 1800 days in a row on Duolingo']] },
+  ] },
+    bringTitle: 'Bring me something like this',
   dossier: {"title": "Bring me something like this", "note": "Real situations from my own written feedback and advice, anonymised. Open one to read the full text.", "kicker": "CASE FILE", "unit": "MANAGEMENT INTELLIGENCE UNIT", "seal": "MK", "fTitle": "Title", "fObjective": "About", "fSource": "Source", "fRead": "Full text", "readLink": "Read the full text", "stampBy": {"consultation": "CONSULTATION", "problem": "ADVICE", "interview": "MOCK INTERVIEW", "review": "ADVICE", "career": "ADVICE"}, "tab": "CASE", "aria": "Case files: problems I solve", "prev": "Previous case", "next": "Next case", "of": "of", "last": {"title": "YOUR CASE", "objective": "Not like any of these? Bring it anyway! We will work out what it is together.", "stamp": "NEW", "source": "You", "read": "Request a consultation"}},
   bringNote: "Not on the list? Bring it anyway!",
   whyTitle: "You don't buy a drill. You buy a hole in the wall.",
@@ -167,7 +172,12 @@ const UK = {
     { n: '~30', t: 'рекомендацій у LinkedIn', href: LINKEDIN },
   ],
   statsNote: '',
-  bringTitle: 'Принесіть мені щось подібне',
+  facts: { title: 'Цифри за порадами', lead: 'Це цифри про мою власну роботу, а не результати, обіцяні клієнтам.', groups: [
+    { kicker: 'Співбесіди з обох боків столу', items: [['320', 'пройдених скринінг-інтерв\'ю'], ['70+', 'пройдених технічних співбесід'], ['130+', 'технічних співбесід, які я провів'], ['20+', 'особистих тренувальних співбесід']] },
+    { kicker: 'Власна шкура в грі', items: [['20+', 'запущених стартапів'], ['15+', 'стартапів, що не дійшли до прибутку'], ['$64k', 'втрачено через неточні бізнес-рішення'], ['$17k', 'витрачено на самоосвіту за останні 10 років']] },
+    { kicker: 'Охоплення і масштаб', items: [['30 000', 'підписників у LinkedIn'], ['400+', 'публікацій про управління проєктами'], ['8', 'топових українських tech-порталів цитували мене'], ['$30B GGR', 'проєкти, якими я керував'], ['45', 'людей у найбільшій команді, яку я вів'], ['4', 'мови, якими я можу говорити: англійська, українська, російська, грецька (B1). 1800 днів поспіль у Duolingo']] },
+  ] },
+    bringTitle: 'Принесіть мені щось подібне',
   dossier: {"title": "Принесіть мені щось подібне", "note": "Реальні ситуації з моїх письмових відгуків і порад, знеособлені. Відкрийте будь-яку, щоб прочитати повний текст.", "kicker": "СПРАВА", "unit": "ВІДДІЛ УПРАВЛІНСЬКИХ РІШЕНЬ", "seal": "МК", "fTitle": "Назва", "fObjective": "Про що", "fSource": "Джерело", "fRead": "Повний текст", "readLink": "Читати повністю", "stampBy": {"consultation": "КОНСУЛЬТАЦІЯ", "problem": "ПОРАДА", "interview": "СПІВБЕСІДА", "review": "ПОРАДА", "career": "ПОРАДА"}, "tab": "СПРАВА", "aria": "Справи: проблеми, які я розв'язую", "prev": "Попередня справа", "next": "Наступна справа", "of": "з", "last": {"title": "ВАША СПРАВА", "objective": "Не схоже ні на що з цього? Принесіть усе одно! Розберемося, що це, разом.", "stamp": "НОВА", "source": "Ви", "read": "Запросити консультацію"}},
   bringNote: "Немає у списку? Принесіть усе одно!",
   whyTitle: "Ви купуєте не дриль. Ви купуєте дірку в стіні.",
@@ -256,22 +266,19 @@ function folderHtml(L, i, f) {
         </article>`;
 }
 function dossierHtml(L) {
-  const D = L.dossier;
-  const all = loadExamples();
-  const files = SLIDER.map((slug) => {
+  const D = L.dossier, X = EXUI[L.lang], all = loadExamples();
+  const cards = SLIDER.map((slug) => {
     const e = all.find((x) => x.slug === slug);
     if (!e) throw new Error(`slider: unknown example ${slug}`);
     const v = e[L.lang] || e.uk;
-    return { title: v.title, objective: pointsLabel(L.lang, e), source: EXUI[L.lang].kind[e.kind], href: `${exPath(L.lang)}#${slug}`, read: D.readLink, stamp: D.stampBy[e.kind] };
+    return `<a class="vcard" href="${exPath(L.lang)}#${slug}" data-ev="cta_click"><span class="vtag">${esc(D.stampBy[e.kind])}</span><strong>${esc(v.title)}</strong><span class="vtxt">${esc(pointsLabel(L.lang, e))}</span><span class="vsrc">${esc(X.kind[e.kind])}</span><span class="vgo">${esc(D.readLink)} →</span></a>`;
   });
-  files.push({ title: D.last.title, objective: D.last.objective, source: D.last.source, href: L.requestPath, read: D.last.read, stamp: D.last.stamp, last: true });
-  return `<div class="dossier" role="region" aria-roledescription="carousel" aria-label="${esc(D.aria)}" data-of="${esc(D.of)}" data-prev="${esc(D.prev)}" data-next="${esc(D.next)}">
-      <div class="folders" tabindex="0">
-        ${files.map((f, i) => folderHtml(L, i, f)).join('\n        ')}
+  cards.push(`<a class="vcard open" href="${L.requestPath}" data-ev="cta_click"><span class="vtag">${esc(D.last.stamp)}</span><strong>${esc(D.last.title)}</strong><span class="vtxt">${esc(D.last.objective)}</span><span class="vgo">${esc(D.last.read)} →</span></a>`);
+  return `<p class="lead" style="max-width:48em">${esc(X.blockLead)}</p>
+      <div class="vault">
+        ${cards.join('\n        ')}
       </div>
-      <div class="dctl"><button type="button" class="dprev" aria-label="${esc(D.prev)}">‹</button><div class="dots"></div><button type="button" class="dnext" aria-label="${esc(D.next)}">›</button></div>
-      <p class="note dnote">${esc(D.note)}</p>
-    </div>`;
+      <p class="note"><a href="${exPath(L.lang)}" data-ev="cta_click">${esc(X.all(all.length))} →</a> · ${esc(X.note)}</p>`;
 }
 
 // ---------------------------------------------------------------- templates
@@ -362,6 +369,12 @@ function page(L) {
       ${L.statsNote ? `<p class="note">${esc(L.statsNote)}</p>` : ''}
     </section>
 
+    <section id="facts" class="reveal">
+      <h2>${esc(L.facts.title)}</h2>
+      <p class="note">${esc(L.facts.lead)}</p>
+      ${L.facts.groups.map((g) => `<div class="fgroup"><p class="eyebrow">${esc(g.kicker)}</p><div class="fgrid">${g.items.map((i) => `<div class="fact"><strong>${esc(i[0])}</strong><span>${esc(i[1])}</span></div>`).join('')}</div></div>`).join('\n      ')}
+    </section>
+
     <section id="bring" class="reveal">
       <h2>${esc(L.dossier.title)}</h2>
       ${dossierHtml(L)}
@@ -401,12 +414,6 @@ function page(L) {
       <a class="btn" href="${L.challengePath}" data-ev="challenge_click">${esc(L.challenge.btn)}</a>
     </section>
 
-    <section id="examples" class="reveal">
-      <h2>${esc(EXUI[L.lang].blockH)}</h2>
-      <p>${esc(EXUI[L.lang].blockLead)}</p>
-      ${cardsHtml(L.lang, { kinds: ['consultation', 'problem', 'interview', 'review'], limit: 4 })}
-    </section>
-
     <section id="consult" class="reveal">
       <h2>${esc(L.consultTitle)}</h2>
       <p class="price">${L.price} <span class="muted" style="font-size:1rem;font-weight:400">${esc(L.priceNote)}</span></p>
@@ -434,7 +441,6 @@ function page(L) {
     <div class="wrap">© <span id="y">2026</span> ${esc(L.name)} · <a href="${L.cvPath}">${L.nav.cv}</a> · <a href="${L.blogPath}">${L.footer.blog}</a> · <a href="${L.otherPath}" hreflang="${L.otherHreflang}" lang="${L.otherHreflang}">${L.footer.other}</a> · <a href="${L.privacyPath}">${L.footer.privacy}</a> · <a href="${L.termsPath}">${L.footer.terms}</a> · <a href="${CHANNEL}" rel="noopener">Telegram</a> · <a href="${LINKEDIN}" rel="noopener">LinkedIn</a> · <a href="${GITHUB}" rel="noopener">GitHub</a></div>
   </footer>
   <script src="/assets/site.js" defer></script>
-  <script src="/assets/dossier.js" defer></script>
 </body>
 </html>
 `;
