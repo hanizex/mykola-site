@@ -251,7 +251,7 @@ function sitemap() {
     rows.push(x(`${SITE}/examples/`, '', exAlts), x(`${SITE}/uk/examples/`, '', exAlts));
   }
   if (existsSync(join(PUBLIC, 'tools', 'index.html')) && existsSync(join(PUBLIC, 'uk', 'tools', 'index.html'))) {
-    for (const t of ['/tools/', '/tools/job-search-engine/', '/tools/job-search-engine/setup/', '/tools/job-search-engine/demo/']) {
+    for (const t of ['/tools/', '/tools/job-search-engine/', '/tools/job-search-engine/setup/', '/tools/job-search-engine/demo/', '/tools/job-search-engine/tracker/']) {
       const al = [{ l: 'en', h: `${SITE}${t}` }, { l: 'uk', h: `${SITE}/uk${t}` }, { l: 'x-default', h: `${SITE}${t}` }];
       rows.push(x(`${SITE}${t}`, '', al), x(`${SITE}/uk${t}`, '', al));
     }
@@ -278,10 +278,10 @@ const llms = () => `# ${NAME}
 - [PM interview prep](${SITE}/pm-interview-prep/): one-hour online mock interview and CV/story review for project managers, EUR 50, request form
 - [Examples of feedback](${SITE}/examples/): full anonymised written feedback from real sessions and advice messages (mock interview feedback, consultation review, project problems, resume and post reviews, job search)
 - [Tools](${SITE}/tools/): small tools built for my own work and shared
-- [Job Search Engine (JSE)](${SITE}/tools/job-search-engine/): how I run a job search like a delivery project: daily collection from company career systems, filters, ad screening, deduplication, a CV method with an ATS gate and a tracker; public code and a live demo with invented data ([setup guide](${SITE}/tools/job-search-engine/setup/), [demo](${SITE}/tools/job-search-engine/demo/))
+- [Job Search Engine (JSE)](${SITE}/tools/job-search-engine/): how I run a job search like a delivery project: daily collection from company career systems, filters, ad screening, deduplication, a CV method with an ATS gate and a tracker; code free for personal use and a live demo with invented data ([setup guide](${SITE}/tools/job-search-engine/setup/), [demo](${SITE}/tools/job-search-engine/demo/))
 - [Challenge AI](${SITE}/challenge/): free 6-question quiz that tells whether AI is enough for a work problem or a human view is needed; runs in the browser
 ${pubAll.filter((p) => p.lang === 'en').map((p) => `- [${p.title}](${SITE}${p.path}): ${p.description}`).join('\n')}
-${published('uk').length ? `\n## Ukrainian (Українською)\n- [Інструменти](${SITE}/uk/tools/): невеликі інструменти, зроблені для власної роботи\n- [Job Search Engine (JSE)](${SITE}/uk/tools/job-search-engine/): як я веду пошук роботи як проєкт доставки; відкритий код і живе демо з вигаданими даними\n- [Challenge AI](${SITE}/uk/challenge/): безкоштовний тест із 6 запитань: чи вистачить ШІ для робочої проблеми, чи потрібен погляд людини; працює в браузері\n- [Резюме](${SITE}/uk/cv/): повна історія кар'єри, результати з датами й сумами, навички, власні проєкти; PDF: ${SITE}/assets/cv/Mykola_Kalakutskyi_CV_UA.pdf\n${published('uk').map((p) => `- [${p.title}](${SITE}${p.path}): ${p.description}`).join('\n')}\n` : ''}`;
+${published('uk').length ? `\n## Ukrainian (Українською)\n- [Інструменти](${SITE}/uk/tools/): невеликі інструменти, зроблені для власної роботи\n- [Job Search Engine (JSE)](${SITE}/uk/tools/job-search-engine/): як я веду пошук роботи як проєкт доставки; код для особистого використання і живе демо з вигаданими даними\n- [Challenge AI](${SITE}/uk/challenge/): безкоштовний тест із 6 запитань: чи вистачить ШІ для робочої проблеми, чи потрібен погляд людини; працює в браузері\n- [Резюме](${SITE}/uk/cv/): повна історія кар'єри, результати з датами й сумами, навички, власні проєкти; PDF: ${SITE}/assets/cv/Mykola_Kalakutskyi_CV_UA.pdf\n${published('uk').map((p) => `- [${p.title}](${SITE}${p.path}): ${p.description}`).join('\n')}\n` : ''}`;
 
 rmSync(join(PUBLIC, 'blog'), { recursive: true, force: true });
 rmSync(join(PUBLIC, 'uk', 'blog'), { recursive: true, force: true }); // keep the hand-written /uk/ landing

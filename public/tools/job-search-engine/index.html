@@ -4,14 +4,14 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Job Search Engine (JSE): an automated job-search pipeline with a tracker</title>
-  <meta name="description" content="How I run my job search like a delivery project: daily collection from company career systems, filters, ad screening, deduplication, a CV method with an ATS gate and a tracker. Diagrams, public code and a live demo with invented data.">
+  <meta name="description" content="How I run my job search like a delivery project: daily collection from company career systems, filters, ad screening, deduplication, a CV method with an ATS gate and a tracker. Diagrams, code free for personal use and a live demo with invented data.">
   <meta name="robots" content="index, follow, max-image-preview:large">
   <link rel="canonical" href="https://mykola.pages.dev/tools/job-search-engine/">
   <link rel="alternate" hreflang="en" href="https://mykola.pages.dev/tools/job-search-engine/">
   <link rel="alternate" hreflang="uk" href="https://mykola.pages.dev/uk/tools/job-search-engine/">
   <link rel="alternate" hreflang="x-default" href="https://mykola.pages.dev/tools/job-search-engine/">
   <meta property="og:title" content="Job Search Engine (JSE): an automated job-search pipeline with a tracker">
-  <meta property="og:description" content="How I run my job search like a delivery project: daily collection from company career systems, filters, ad screening, deduplication, a CV method with an ATS gate and a tracker. Diagrams, public code and a live demo with invented data.">
+  <meta property="og:description" content="How I run my job search like a delivery project: daily collection from company career systems, filters, ad screening, deduplication, a CV method with an ATS gate and a tracker. Diagrams, code free for personal use and a live demo with invented data.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://mykola.pages.dev/tools/job-search-engine/">
   <meta property="og:locale" content="en_US">
@@ -62,21 +62,21 @@
     <h2 class="sub" id="split">What stays with each person, and what is shared</h2>
     <div class="jse-split">
       <div class="jse-col"><h3>Stays with each person</h3><ul><li>Fact Bank: your real facts and evidence</li><li>Master CV per role family</li><li>Your company list and rules</li><li>Job history, statuses and employer replies</li><li>Email access for the digest and replies</li><li>The CVs and letters you generate</li></ul></div>
-      <div class="jse-col open"><h3>Shared in the open</h3><ul><li>Fetchers for ten ATS types</li><li>Filters, priorities and the ad-screening engine</li><li>Deduplication and the daily digest</li><li>Tests that run offline</li><li>The tracker and its data model</li><li>The CV method and message formats</li></ul></div>
+      <div class="jse-col open"><h3>Shared, free for personal use</h3><ul><li>Fetchers for ten ATS types</li><li>Filters, priorities and the ad-screening engine</li><li>Deduplication and the daily digest</li><li>Tests that run offline</li><li>The tracker and its data model</li><li>The CV method and message formats</li></ul></div>
     </div>
 
     <h2 class="sub" id="build">Build your own</h2>
     <p>Use the demo to see the tracker, then follow the step-by-step setup guide: it covers the Fact Bank, the Master CV, your preferences and your first run.</p>
-    <ol class="jse-build"><li>Open the demo and click through the cards, statuses and messages.</li><li>Read the public repository. Its CUSTOMIZE guide lists every setting to replace.</li><li>Write your own rules: job titles, locations, blockers. Start small.</li><li>Build your own Fact Bank. Facts only, each with evidence.</li><li>Run the pipeline with the dry-run flag first. Nothing is written or sent.</li><li>Keep the tracker next to it and move every job through the statuses.</li></ol>
-    <p><a class="btn" href="/tools/job-search-engine/setup/" data-ev="cta_click">Open the setup guide</a></p>
+    <ol class="jse-build"><li>Open the demo and click through the cards, statuses and messages.</li><li>Download the engine and run the offline demo with an example profile.</li><li>Create a project in your AI chat and add the assistant pack. It interviews you and writes your profile, Fact Bank and Master CV.</li><li>Run the engine with your profile and load its results into your own tracker, which lives in your browser.</li><li>For each job press Copy for AI, paste it into your project and apply the answer.</li><li>Apply on the employer's site, then write to 1-2 people at the company.</li></ol>
+    <p><a class="btn" href="/tools/job-search-engine/setup/" data-ev="cta_click">Open the setup guide</a> <a class="btn ghost" href="/tools/job-search-engine/tracker/" data-ev="cta_click">Open your tracker</a> <a class="btn ghost" href="https://github.com/hanizex/job-search-automation/tree/main/assistant" target="_blank" rel="noopener" data-ev="cta_click">Assistant pack on GitHub</a></p>
     <p class="note"><a href="https://github.com/hanizex/job-search-automation" target="_blank" rel="noopener" data-ev="cta_click">Code on GitHub →</a></p>
 
     <h2 class="sub" id="state">Where it stands</h2>
-    <div class="jse-state"><div class="jse-st s0"><span class="vtag">Available now</span><p>Public code (the collection and screening half) on GitHub. This page. The interactive demo.</p></div><div class="jse-st s1"><span class="vtag">In preparation</span><p>A starter kit: prompts for Claude, ChatGPT and Gemini that need no code, a technical kit with sample data, and a tracker that keeps your data in your browser.</p></div><div class="jse-st s2"><span class="vtag">Under consideration</span><p>A hosted version, and a direct connection between your AI chat and the tracker (MCP). Nothing is promised and nothing is for sale yet.</p></div></div>
-    <p>To hear when the starter kit is ready, follow the Telegram channel. <a href="https://t.me/outstanding_pm" rel="noopener" data-ev="cta_click">Telegram channel →</a></p>
+    <div class="jse-state"><div class="jse-st s0"><span class="vtag">Available now</span><p>The engine on GitHub, free for personal and noncommercial use, with an offline demo and example profiles. An assistant pack for Claude, ChatGPT and Gemini that needs no code. A free tracker that keeps your data in your browser. This guide, the demo and the diagrams.</p></div><div class="jse-st s1"><span class="vtag">Next</span><p>More job boards, when an efficient universal scan exists. Real screenshots of the finished flow in the setup guide.</p></div><div class="jse-st s2"><span class="vtag">Under consideration</span><p>A hosted version, and a direct connection between your AI chat and the tracker (MCP). Nothing is promised and nothing is for sale yet.</p></div></div>
+    <p>To hear about new boards and the hosted version, follow the Telegram channel. <a href="https://t.me/outstanding_pm" rel="noopener" data-ev="cta_click">Telegram channel →</a></p>
 
     <h2 class="sub" id="notes">Good to know</h2>
-    <ul><li>Job ads belong to the employers. JSE reads public pages and endpoints at a low rate and does not bypass any protection.</li><li>This is a personal project, not a product and not a promise of results. Nothing here guarantees an interview or an offer.</li></ul>
+    <ul><li>Job ads belong to the employers. JSE reads public pages and endpoints at a low rate and does not bypass any protection.</li><li>This is a personal project, not a product and not a promise of results. Nothing here guarantees an interview or an offer.</li><li>The code is free for personal and noncommercial use (PolyForm Noncommercial 1.0.0), including running your own job search. Commercial use needs a licence from me.</li></ul>
 
     <section class="jse-cta">
       <h2>Want help setting up your own search?</h2>

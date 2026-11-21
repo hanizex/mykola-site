@@ -7,7 +7,8 @@
   if (adEl) { renderAd(adEl); return; }
   const root = document.getElementById('jse-app');
   if (!root) return;
-  const KEY = 'jse-demo-v1';
+  const LIVE = root.dataset.mode === 'live';   // the real local tracker: no sample data, nothing invented
+  const KEY = LIVE ? 'jse-tracker-v1' : 'jse-demo-v1';
 
   const TXT = {
     en: {
@@ -18,7 +19,7 @@
       status: 'Status', liCheck: 'I found 1-2 people and wrote to them',
       statuses: { todo: 'Not applied', ready: 'CV ready: apply', applied: 'Applied', talk: 'Talk with recruiter', screening: 'Screening', interview: 'Interview', offer: 'Offer', rejected: 'Rejected', closed: 'Vacancy closed', skip: 'Not a fit' },
       prio: { 1: 'P1: home city or fully remote', 2: 'P2: relocation in Europe', 3: 'P3: needs a visa' },
-      verdict: { ok: 'Ad screened: no blockers', ask: 'Ad screened: check by hand', wall: 'Ad screened: blocker found' },
+      verdict: { ok: 'Ad screened: no blockers', ask: 'Ad screened: check by hand', wall: 'Ad screened: blocker found', nojd: 'No description loaded' },
       ats: 'ATS match', fresh: (n) => (n === 0 ? 'Fresh: today' : n === 1 ? 'Fresh: yesterday' : 'Fresh: 2 days'),
       older: (n) => `Found ${n} days ago`,
       liDay: (n) => `LinkedIn: day ${n + 1} of 3`, liLate: (n) => `LinkedIn: ${n} days after applying`, liDone: 'LinkedIn done',
@@ -28,7 +29,8 @@
       empty: { todo: 'Everything is applied. New jobs appear after the next scan.', li: 'Everyone is written to. Good work.', active: 'Nothing here yet.', all: 'Nothing here yet.' },
       add: 'Add a job by hand', addCo: 'Company', addRole: 'Role', addBtn: 'Add', added: (c) => `Added: ${c}`,
       exp: 'Export JSON', imp: 'Import JSON', reset: 'Reset demo', resetAsk: 'Reset the demo to the original sample data? Your changes will be lost.',
-      impOk: (a, s) => `Imported: ${a}. Skipped (already there or invalid): ${s}.`, impBad: 'This file is not a list of jobs.',
+      impOk: (a, s, e) => `Imported: ${a}. Description added to existing cards: ${e || 0}. Skipped (already there or invalid): ${s}.`,
+      emptyLive: 'Nothing here yet. Run the engine, then load out/import_latest.json with Import.', applyH: 'Apply AI result', applyHelp: 'Paste the answer of your assistant. The tracker reads its card-update block and fills the card.', applyBtn: 'Apply', applyNone: 'No card-update block found in the pasted text.', applyNoCard: 'No card with this id. Copy the card again with Copy for AI.', applyDone: (n, f) => `Updated: ${n} (${f}).`, resetLive: 'Delete ALL data of this tracker in this browser? Export first if you need a copy.', impBad: 'This file is not a list of jobs.',
       impHelp: 'Import accepts a JSON list like the one the real tool writes (company, role, status, priority...). Duplicates are skipped.',
       saved: 'Saved in this browser',
       limit: (n) => `You have ${n} cards in "Not applied". Process them first: apply, or mark them "Not a fit". New jobs will appear only after that.`, sim: 'Simulate a full list (20 cards)', simDone: 'Added invented cards so that 20 are waiting. Reset the demo to remove them.',
@@ -43,7 +45,7 @@
       status: 'Статус', liCheck: 'Знайшов 1-2 людей і написав їм',
       statuses: { todo: 'Не подано', ready: 'Резюме готове: подати', applied: 'Подано', talk: 'Розмова з рекрутером', screening: 'Скринінг', interview: 'Співбесіда', offer: 'Оффер', rejected: 'Відмова', closed: 'Вакансія закрита', skip: 'Не підходить' },
       prio: { 1: 'P1: домашнє місто або повністю віддалено', 2: 'P2: релокація в Європі', 3: 'P3: потрібна віза' },
-      verdict: { ok: 'Оголошення перевірено: блокерів немає', ask: 'Оголошення перевірено: перевір вручну', wall: 'Оголошення перевірено: є блокер' },
+      verdict: { ok: 'Оголошення перевірено: блокерів немає', ask: 'Оголошення перевірено: перевір вручну', wall: 'Оголошення перевірено: є блокер', nojd: 'Опис не завантажено' },
       ats: 'Збіг з ATS', fresh: (n) => (n === 0 ? 'Свіжа: сьогодні' : n === 1 ? 'Свіжа: вчора' : 'Свіжа: 2 дні'),
       older: (n) => `Знайдено ${n} дн. тому`,
       liDay: (n) => `LinkedIn: день ${n + 1} з 3`, liLate: (n) => `LinkedIn: ${n} дн. після подачі`, liDone: 'LinkedIn зроблено',
@@ -53,7 +55,8 @@
       empty: { todo: 'Усе подано. Нові вакансії з\'являться після наступного сканування.', li: 'Усім написано. Добра робота.', active: 'Тут поки порожньо.', all: 'Тут поки порожньо.' },
       add: 'Додати вакансію вручну', addCo: 'Компанія', addRole: 'Роль', addBtn: 'Додати', added: (c) => `Додано: ${c}`,
       exp: 'Експорт JSON', imp: 'Імпорт JSON', reset: 'Скинути демо', resetAsk: 'Скинути демо до початкових даних? Ваші зміни буде втрачено.',
-      impOk: (a, s) => `Імпортовано: ${a}. Пропущено (вже є або некоректні): ${s}.`, impBad: 'Це не список вакансій.',
+      impOk: (a, s, e) => `Імпортовано: ${a}. Опис дописано в наявні картки: ${e || 0}. Пропущено (вже є або некоректні): ${s}.`,
+      emptyLive: 'Тут поки порожньо. Запустіть рушій і завантажте out/import_latest.json кнопкою імпорту.', applyH: 'Застосувати відповідь ШІ', applyHelp: 'Вставте відповідь вашого асистента. Трекер прочитає блок card-update і заповнить картку.', applyBtn: 'Застосувати', applyNone: 'У вставленому тексті немає блоку card-update.', applyNoCard: 'Немає картки з таким id. Скопіюйте картку знову кнопкою "Скопіювати для ШІ".', applyDone: (n, f) => `Оновлено: ${n} (${f}).`, resetLive: 'Видалити ВСІ дані цього трекера в цьому браузері? Спершу зробіть експорт, якщо потрібна копія.', impBad: 'Це не список вакансій.',
       impHelp: 'Імпорт приймає JSON-список у форматі, який пише справжній інструмент (company, role, status, priority...). Дублікати пропускаються.',
       saved: 'Збережено в цьому браузері',
       limit: (n) => `У вас ${n} карток у статусі "Не подано". Спершу опрацюйте їх: подайтеся або позначте "Не підходить". Нові вакансії з'являться лише після цього.`, sim: 'Імітувати повний список (20 карток)', simDone: 'Додано вигадані картки, щоб очікувало 20. Скиньте демо, щоб їх прибрати.',
@@ -66,7 +69,7 @@
   const TODO = new Set(['todo', 'ready']);
   const ACTIVE = new Set(['applied', 'talk', 'screening', 'interview', 'offer']);
   const CHIP = { todo: 'hot', ready: 'ok', applied: 'acc', talk: 'warn', screening: 'warn', interview: 'warn', offer: 'ok', rejected: '', closed: '', skip: '' };
-  const VCHIP = { ok: 'ok', ask: 'warn', wall: 'hot' };
+  const VCHIP = { ok: 'ok', ask: 'warn', wall: 'hot', nojd: '' };
 
   const DAY = 86400000;
   const iso = (d) => d.toISOString().slice(0, 10);
@@ -100,7 +103,7 @@
   };
   function load() {
     try { const raw = store.get(); if (raw) { const a = JSON.parse(raw); if (Array.isArray(a)) return a; } } catch (e) { /* use seed */ }
-    return seed();
+    return LIVE ? [] : seed();
   }
   const persist = () => store.set(JSON.stringify(jobs));
   jobs = load();
@@ -110,8 +113,8 @@
   function aiPrompt(j) {
     const v = j.verdict && TXT.verdict[j.verdict] ? TXT.verdict[j.verdict] : '-';
     const jd = j.jd || (L === 'uk' ? 'Опису в картці немає. Відкрий посилання, скопіюй текст оголошення й встав його тут.' : 'The card has no description. Open the link, copy the ad text and paste it here.');
-    if (L === 'uk') return `Підготуй пакет для цієї вакансії за моїм методом JSE. Спочатку перевір блокери й постав уточнювальні питання. Після мого підтвердження збери резюме, супровідний лист і повідомлення, а потім онови картку в трекері (id картки: ${j.id}).\n\nКомпанія: ${j.company}\nРоль: ${j.role}\nФормат / локація: ${TXT.mode[j.mode] || j.mode || 'не вказано'}\nПріоритет: P${j.priority || '?'}\nАвтоматична перевірка оголошення: ${v}\n\nПовний опис вакансії:\n${jd}`;
-    return `Prepare a package for this job with my JSE method. First check blockers and ask clarifying questions. After I confirm, build the CV, the cover message and the LinkedIn messages, then update the card in the tracker (card id: ${j.id}).\n\nCompany: ${j.company}\nRole: ${j.role}\nWork mode: ${TXT.mode[j.mode] || j.mode || 'not stated'}\nPriority: P${j.priority || '?'}\nAutomatic ad screening: ${v}\n\nFull job description:\n${jd}`;
+    if (L === 'uk') return `Підготуй пакет для цієї вакансії за моїм методом JSE. Спочатку перевір блокери й постав уточнювальні питання. Після мого підтвердження збери резюме, супровідний лист і повідомлення, а потім заверши блоком card-update (id картки: ${j.id}).\n\nКомпанія: ${j.company}\nРоль: ${j.role}\nФормат / локація: ${TXT.mode[j.mode] || j.mode || 'не вказано'}\nПріоритет: P${j.priority || '?'}\nАвтоматична перевірка оголошення: ${v}\n\nПовний опис вакансії:\n${jd}`;
+    return `Prepare a package for this job with my JSE method. First check blockers and ask clarifying questions. After I confirm, build the CV, the cover message and the LinkedIn messages, then end with the card-update block (card id: ${j.id}).\n\nCompany: ${j.company}\nRole: ${j.role}\nWork mode: ${TXT.mode[j.mode] || j.mode || 'not stated'}\nPriority: P${j.priority || '?'}\nAutomatic ad screening: ${v}\n\nFull job description:\n${jd}`;
   }
   const adBase = (L === 'uk' ? '/uk' : '') + '/tools/job-search-engine/demo/ad/';
   const adUrl = (j) => `${adBase}?c=${encodeURIComponent(j.company)}&r=${encodeURIComponent(j.role)}`;
@@ -120,7 +123,7 @@
   const needsLi = (j) => j.status === 'applied' && !j.li_done && (j.priority || 9) < 4;
 
   function render() {
-    const vis = jobs.filter((j) => showP3 || (j.priority || 9) < 3);
+    const vis = jobs.filter((j) => LIVE || showP3 || (j.priority || 9) < 3);
     const c = { todo: 0, fresh: 0, li: 0, active: 0, interview: 0 };
     vis.forEach((j) => {
       if (TODO.has(j.status)) { c.todo++; if (daysSince(j.added) <= 2) c.fresh++; }
@@ -137,15 +140,17 @@
     rows.sort((a, b) => (a.status === 'ready' ? 0 : 1) - (b.status === 'ready' ? 0 : 1) || (a.priority || 9) - (b.priority || 9) || String(b.added).localeCompare(String(a.added)));
 
     const totalTodo = jobs.filter((j) => j.status === 'todo').length;
-    const limitBanner = totalTodo >= 20 ? `<div class="jse-limit" role="status"><b>!</b><span>${esc(TXT.limit(totalTodo))}</span></div>` : '';
+    const limitBanner = !LIVE && totalTodo >= 20 ? `<div class="jse-limit" role="status"><b>!</b><span>${esc(TXT.limit(totalTodo))}</span></div>` : '';
     const keepQ = document.activeElement && document.activeElement.id === 'jse-q';
-    const list = rows.length ? rows.map(card).join('') : `<div class="jse-empty">${esc(TXT.empty[tab])}</div>`;
+    const list = rows.length ? rows.map(card).join('') : `<div class="jse-empty">${esc(LIVE && !jobs.length ? TXT.emptyLive : TXT.empty[tab])}</div>`;
+    const applyPanel = LIVE ? `<details class="jse-add jse-ai"><summary>${esc(TXT.applyH)}</summary><p class="note jse-help">${esc(TXT.applyHelp)}</p><textarea id="jse-ai-in" rows="6" aria-label="${esc(TXT.applyH)}"></textarea><p><button type="button" class="btn" data-act="apply">${esc(TXT.applyBtn)}</button></p></details>` : '';
     root.innerHTML = `${limitBanner}<div class="jse-stats">${stats}</div>
       <div class="jse-tabs" role="tablist">${tabs}</div>
       <div class="jse-tools"><input id="jse-q" type="search" placeholder="${esc(TXT.search)}" aria-label="${esc(TXT.search)}" value="${esc(query)}">
-        <label class="jse-check"><input type="checkbox" id="jse-p3" ${showP3 ? 'checked' : ''}> ${esc(TXT.showP3)}</label></div>
+        ${LIVE ? '' : `<label class="jse-check"><input type="checkbox" id="jse-p3" ${showP3 ? 'checked' : ''}> ${esc(TXT.showP3)}</label>`}</div>
       <div class="jse-list${tab === 'all' ? ' compact' : ''}">${list}</div>
-      <div class="jse-bar"><button class="btn ghost" data-act="export">${esc(TXT.exp)}</button><label class="btn ghost" for="jse-file">${esc(TXT.imp)}</label><input id="jse-file" type="file" accept=".json,application/json" hidden><button class="btn ghost" data-act="sim">${esc(TXT.sim)}</button><button class="btn ghost" data-act="reset">${esc(TXT.reset)}</button></div>
+      ${applyPanel}
+      <div class="jse-bar"><button class="btn ghost" data-act="export">${esc(TXT.exp)}</button><label class="btn ghost" for="jse-file">${esc(TXT.imp)}</label><input id="jse-file" type="file" accept=".json,application/json" hidden>${LIVE ? '' : `<button class="btn ghost" data-act="sim">${esc(TXT.sim)}</button>`}<button class="btn ghost" data-act="reset">${esc(TXT.reset)}</button></div>
       <p class="note jse-help" id="jse-flash" role="status" aria-live="polite">${esc(flash || TXT.impHelp)}</p>
       <p class="note jse-help">${esc(TXT.saved)}.</p>`;
     if (keepQ) { const q = $('#jse-q'); q.focus(); q.setSelectionRange(q.value.length, q.value.length); }
@@ -171,7 +176,7 @@
       if (j.note) body += `<p class="note">${esc(j.note)}</p>`;
       if (tab === 'li') body += `<p class="jse-next"><b>${esc(TXT.next)}:</b> ${esc(TXT.liStep)}</p>`;
       else if (j.next) body += `<p class="jse-next"><b>${esc(TXT.next)}:</b> ${esc(j.next)}</p>`;
-      body += `<div class="jse-links"><button type="button" class="btn${TODO.has(j.status) ? ' jse-copyai' : ' ghost'}" data-copyai>${esc(TXT.copyAi)}</button><a class="btn ghost" href="${esc(adUrl(j))}" target="_blank" rel="noopener">${esc(TXT.jobAd)}</a><a class="btn ghost" href="${esc(liLink(j.company, 'F'))}" target="_blank" rel="noopener">${esc(TXT.li1)}</a><a class="btn ghost" href="${esc(liSearch(`"${j.company}" AND (recruiter OR "talent acquisition")`))}" target="_blank" rel="noopener">${esc(TXT.liRec)}</a><a class="btn ghost" href="${esc(liSearch(`"${j.company}" AND (CEO OR founder OR "head of" OR director)`))}" target="_blank" rel="noopener">${esc(TXT.liHead)}</a></div>`;
+      body += `<div class="jse-links"><button type="button" class="btn${TODO.has(j.status) ? ' jse-copyai' : ' ghost'}" data-copyai>${esc(TXT.copyAi)}</button>${LIVE ? (/^https?:\/\//i.test(j.url || '') ? `<a class="btn ghost" href="${esc(j.url)}" target="_blank" rel="noopener noreferrer">${esc(TXT.jobAd)}</a>` : '') : `<a class="btn ghost" href="${esc(adUrl(j))}" target="_blank" rel="noopener">${esc(TXT.jobAd)}</a>`}<a class="btn ghost" href="${esc(liLink(j.company, 'F'))}" target="_blank" rel="noopener">${esc(TXT.li1)}</a><a class="btn ghost" href="${esc(liSearch(`"${j.company}" AND (recruiter OR "talent acquisition")`))}" target="_blank" rel="noopener">${esc(TXT.liRec)}</a><a class="btn ghost" href="${esc(liSearch(`"${j.company}" AND (CEO OR founder OR "head of" OR director)`))}" target="_blank" rel="noopener">${esc(TXT.liHead)}</a></div>`;
       body += j.jd ? `<details class="jse-jd"><summary>${esc(TXT.jdSum(j.jd.length))}</summary><pre>${esc(j.jd)}</pre></details>` : `<p class="note">${esc(TXT.noJd)}</p>`;
       if (j.cover) body += `<div class="jse-msg"><b>${esc(TXT.cover)}</b><textarea readonly aria-label="${esc(TXT.cover)}">${esc(j.cover)}</textarea><div class="jse-row"><span class="jse-count${j.cover.length > 1000 ? ' over' : ''}">${esc(TXT.chars(j.cover.length, 1000))}</span><button class="btn ghost" data-copy>${esc(TXT.copy)}</button></div></div>`;
       if (j.msg) body += `<div class="jse-msg"><b>${esc(TXT.msg)}</b><textarea readonly aria-label="${esc(TXT.msg)}">${esc(j.msg)}</textarea><div class="jse-row"><span class="jse-count${j.msg.length > 500 ? ' over' : ''}">${esc(TXT.chars(j.msg.length, 500))}</span><button class="btn ghost" data-copy>${esc(TXT.copy)}</button></div></div>`;
@@ -210,7 +215,7 @@
     if (act && act.dataset.act === 'export') {
       const blob = new Blob([JSON.stringify(jobs, null, 2)], { type: 'application/json' });
       const a = document.createElement('a');
-      a.href = URL.createObjectURL(blob); a.download = 'jse-demo-jobs.json'; document.body.appendChild(a); a.click(); a.remove();
+      a.href = URL.createObjectURL(blob); a.download = LIVE ? 'jse-tracker-jobs.json' : 'jse-demo-jobs.json'; document.body.appendChild(a); a.click(); a.remove();
       setTimeout(() => URL.revokeObjectURL(a.href), 1000);
       return;
     }
@@ -220,8 +225,29 @@
       while (n < 20) { jobs.push({ id: 'sim' + Date.now().toString(36) + k, company: 'Sample Company ' + k, role: roles[k % roles.length], status: 'todo', priority: 2, mode: 'remote', verdict: 'ok', ats: 0, added: iso(new Date()), pay: '', note: '', next: '', cover: '', msg: '', applied: '', li_done: false, jd: adBody('Sample Company ' + k, roles[k % roles.length]) }); n++; k++; }
       persist(); tab = 'todo'; flash = TXT.simDone; render(); return;
     }
+    if (act && act.dataset.act === 'apply') {
+      const raw = ($('#jse-ai-in') || {}).value || '';
+      const fenced = raw.match(/```card-update\s*([\s\S]*?)```/i);
+      let obj = null;
+      try { obj = JSON.parse(fenced ? fenced[1] : raw); } catch (_) {
+        const braces = raw.match(/\{[\s\S]*\}/);
+        if (braces) { try { obj = JSON.parse(braces[0]); } catch (__) { /* not JSON */ } }
+      }
+      if (!obj || typeof obj !== 'object' || typeof obj.id !== 'string') { flash = TXT.applyNone; render(); return; }
+      const j = byId(obj.id);
+      if (!j) { flash = TXT.applyNoCard; render(); return; }
+      const wasActive = ACTIVE.has(j.status), fields = [], sx = (v, n) => (typeof v === 'string' ? v.slice(0, n) : null);
+      if (STATUSES.includes(obj.status)) { j.status = obj.status; if (obj.status === 'applied' && !j.applied) j.applied = iso(new Date()); fields.push('status'); }
+      if (obj.ats !== null && obj.ats !== '' && obj.ats !== undefined && Number.isFinite(Number(obj.ats))) { j.ats = Math.max(0, Math.min(100, Math.round(Number(obj.ats)))); fields.push('ATS'); }
+      const cover = sx(obj.cover, 1500);
+      if (cover !== null && !(wasActive && j.cover)) { j.cover = cover; fields.push('cover'); }   // the cover of an applied card is never overwritten
+      const msg = sx(obj.msg, 700); if (msg !== null) { j.msg = msg; fields.push('msg'); }
+      const note = sx(obj.note, 600); if (note !== null) { j.note = note; fields.push('note'); }
+      const next = sx(obj.next, 300); if (next !== null) { j.next = next; fields.push('next'); }
+      persist(); flash = TXT.applyDone(`${j.company}, ${j.role}`, fields.join(', ') || '-'); render(); return;
+    }
     if (act && act.dataset.act === 'reset') {
-      if (window.confirm(TXT.resetAsk)) { store.del(); jobs = seed(); tab = 'todo'; query = ''; showP3 = false; flash = ''; render(); }
+      if (window.confirm(LIVE ? TXT.resetLive : TXT.resetAsk)) { store.del(); jobs = LIVE ? [] : seed(); tab = 'todo'; query = ''; showP3 = false; flash = ''; render(); }
     }
   });
 
@@ -244,18 +270,29 @@
       let items;
       try { items = JSON.parse(await f.text()); if (!Array.isArray(items)) throw new Error('x'); } catch (_) { flash = TXT.impBad; render(); return; }
       const key = (c, r) => (String(c).toLowerCase().trim() + '|' + String(r).toLowerCase().trim());
-      const have = new Set(jobs.map((j) => key(j.company, j.role)));
-      let a = 0, sk = 0;
-      for (const it of items.slice(0, 200)) {
-        const co = typeof it?.company === 'string' ? it.company.trim().slice(0, 80) : '', ro = typeof it?.role === 'string' ? it.role.trim().slice(0, 80) : '';
-        if (!co || !ro || have.has(key(co, ro))) { sk++; continue; }
+      const urlKey = (u) => String(u || '').split('#')[0].split('?')[0].replace(/\/+$/, '').toLowerCase();
+      const byUrl = new Map(jobs.filter((j) => j.url).map((j) => [urlKey(j.url), j]));
+      const byPair = new Map(jobs.map((j) => [key(j.company, j.role), j]));
+      const sx = (v, n) => (typeof v === 'string' ? v.slice(0, n) : '');
+      const VERDICTS = ['ok', 'ask', 'wall', 'nojd'];
+      let a = 0, sk = 0, en = 0;
+      for (const it of items.slice(0, 500)) {
+        const co = sx(it && it.company, 80).trim(), ro = sx(it && it.role, 80).trim();
+        if (!co || !ro) { sk++; continue; }
+        const uk = urlKey(it.url), ex = (uk && byUrl.get(uk)) || byPair.get(key(co, ro));
+        if (ex) {
+          if (!ex.jd && typeof it.jd === 'string' && it.jd) { ex.jd = it.jd.slice(0, 20000); if (VERDICTS.includes(it.jd_verdict)) ex.verdict = it.jd_verdict; if (it.jd_why) ex.jd_why = sx(it.jd_why, 600); en++; } else sk++;
+          continue;
+        }
         const st = STATUSES.includes(it.status) ? it.status : 'todo';
         const pr = [1, 2, 3].includes(Number(it.priority)) ? Number(it.priority) : 2;
-        const sx = (v, n) => (typeof v === 'string' ? v.slice(0, n) : '');
-        jobs.push({ id: 'i' + Date.now().toString(36) + a, company: co, role: ro, status: st, priority: pr, mode: sx(it.mode || it.location, 60), verdict: '', ats: 0, added: iso(new Date()), pay: sx(it.pay, 60), note: sx(it.note, 400), next: '', cover: sx(it.cover, 1200), msg: sx(it.msg, 700), applied: '', li_done: false });
-        have.add(key(co, ro)); a++;
+        const verdict = VERDICTS.includes(it.jd_verdict) ? it.jd_verdict : '';
+        const why = sx(it.jd_why, 600);
+        const found = /^\d{4}-\d{2}-\d{2}$/.test(it.found || '') ? it.found : iso(new Date());
+        const job = { id: 'i' + Date.now().toString(36) + a, company: co, role: ro, status: st, priority: pr, mode: sx(it.mode || it.location, 80), verdict, ats: 0, added: found, pay: sx(it.pay, 60), note: sx(it.note, 400) || (verdict === 'ask' || verdict === 'wall' ? why : ''), next: '', cover: sx(it.cover, 1500), msg: sx(it.msg, 700), applied: '', li_done: false, url: /^https?:\/\//i.test(it.url || '') ? sx(it.url, 500) : '', jd: sx(it.jd, 20000), jd_why: why, source: sx(it.board, 60), posted: sx(it.posted, 30) };
+        jobs.push(job); byPair.set(key(co, ro), job); if (job.url) byUrl.set(uk, job); a++;
       }
-      persist(); flash = TXT.impOk(a, sk); render();
+      persist(); flash = TXT.impOk(a, sk, en); render();
     }
   });
 

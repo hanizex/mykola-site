@@ -23,7 +23,7 @@ const C = {
       ],
     },
     jse: {
-      title: 'Job Search Engine (JSE): an automated job-search pipeline with a tracker', desc: 'How I run my job search like a delivery project: daily collection from company career systems, filters, ad screening, deduplication, a CV method with an ATS gate and a tracker. Diagrams, public code and a live demo with invented data.',
+      title: 'Job Search Engine (JSE): an automated job-search pipeline with a tracker', desc: 'How I run my job search like a delivery project: daily collection from company career systems, filters, ad screening, deduplication, a CV method with an ATS gate and a tracker. Diagrams, code free for personal use and a live demo with invented data.',
       crumb: 'Job Search Engine',
       h1: 'Job Search Engine (JSE)', lead: 'A job search run like a delivery project: automate the repetitive parts, keep a human for the decisions, and measure whether each source is worth keeping.',
       demoBtn: 'Try the demo', guideBtn: 'Setup guide', codeBtn: 'Code on GitHub',
@@ -62,33 +62,43 @@ const C = {
         ['A human decides', 'The tool proposes. You choose which jobs to apply to.'],
       ],
       splitH: 'What stays with each person, and what is shared',
-      mine: 'Stays with each person', shared: 'Shared in the open',
+      mine: 'Stays with each person', shared: 'Shared, free for personal use',
       mineList: ['Fact Bank: your real facts and evidence', 'Master CV per role family', 'Your company list and rules', 'Job history, statuses and employer replies', 'Email access for the digest and replies', 'The CVs and letters you generate'],
       sharedList: ['Fetchers for ten ATS types', 'Filters, priorities and the ad-screening engine', 'Deduplication and the daily digest', 'Tests that run offline', 'The tracker and its data model', 'The CV method and message formats'],
       buildH: 'Build your own',
-      buildLead: 'Use the demo to see the tracker, then follow the step-by-step setup guide: it covers the Fact Bank, the Master CV, your preferences and your first run.', guideLink: 'Open the setup guide',
+      buildLead: 'Use the demo to see the tracker, then follow the step-by-step setup guide: it covers the Fact Bank, the Master CV, your preferences and your first run.', guideLink: 'Open the setup guide', trackerLink: 'Open your tracker', packLink: 'Assistant pack on GitHub',
       build: [
         'Open the demo and click through the cards, statuses and messages.',
-        'Read the public repository. Its CUSTOMIZE guide lists every setting to replace.',
-        'Write your own rules: job titles, locations, blockers. Start small.',
-        'Build your own Fact Bank. Facts only, each with evidence.',
-        'Run the pipeline with the dry-run flag first. Nothing is written or sent.',
-        'Keep the tracker next to it and move every job through the statuses.',
+        'Download the engine and run the offline demo with an example profile.',
+        'Create a project in your AI chat and add the assistant pack. It interviews you and writes your profile, Fact Bank and Master CV.',
+        'Run the engine with your profile and load its results into your own tracker, which lives in your browser.',
+        'For each job press Copy for AI, paste it into your project and apply the answer.',
+        'Apply on the employer\'s site, then write to 1-2 people at the company.',
       ],
       stateH: 'Where it stands',
       state: [
-        ['Available now', 'Public code (the collection and screening half) on GitHub. This page. The interactive demo.'],
-        ['In preparation', 'A starter kit: prompts for Claude, ChatGPT and Gemini that need no code, a technical kit with sample data, and a tracker that keeps your data in your browser.'],
+        ['Available now', 'The engine on GitHub, free for personal and noncommercial use, with an offline demo and example profiles. An assistant pack for Claude, ChatGPT and Gemini that needs no code. A free tracker that keeps your data in your browser. This guide, the demo and the diagrams.'],
+        ['Next', 'More job boards, when an efficient universal scan exists. Real screenshots of the finished flow in the setup guide.'],
         ['Under consideration', 'A hosted version, and a direct connection between your AI chat and the tracker (MCP). Nothing is promised and nothing is for sale yet.'],
       ],
-      stateFollow: 'To hear when the starter kit is ready, follow the Telegram channel.',
+      stateFollow: 'To hear about new boards and the hosted version, follow the Telegram channel.',
       notesH: 'Good to know',
       notes: [
         'Job ads belong to the employers. JSE reads public pages and endpoints at a low rate and does not bypass any protection.',
         'This is a personal project, not a product and not a promise of results. Nothing here guarantees an interview or an offer.',
+        'The code is free for personal and noncommercial use (PolyForm Noncommercial 1.0.0), including running your own job search. Commercial use needs a licence from me.',
       ],
       ctaH: 'Want help setting up your own search?', ctaText: 'I run one-hour consultations and mock interviews. We can build your Fact Bank, your rules and your routine together.',
       ctaBtn: 'Request a consultation', ctaIntro: 'Or book a free 20-minute intro call', tg: 'Telegram channel',
+    },
+    tracker: {
+      title: 'Your job tracker, kept in your browser', desc: 'A free tracker for the Job Search Engine. Load the jobs your engine found, copy them to your AI assistant and apply its answers. Everything stays in your browser.',
+      crumb: 'Tracker', h1: 'Your job tracker',
+      lead: 'Load the jobs the engine found, work through them and keep every status in one place. Your data stays in this browser. Nothing is sent to me or to any server.',
+      notice: 'Back up with Export. Clearing your browser data deletes this tracker.',
+      stepsH: 'How to use it',
+      steps: ['Run the engine and load out/import_latest.json with Import. Each card brings the full job description and the screening verdict.', 'Press Copy for AI on a job and paste it into your assistant project.', 'Paste the assistant\'s answer into Apply AI result. The tracker reads its card-update block and fills the card.', 'Apply on the employer\'s site, set the status, and write to 1-2 people on LinkedIn within 3 days.'],
+      guide: 'Setup guide', demo: 'Try the demo first', code: 'Engine code on GitHub',
     },
     demo: {
       title: 'Job Search Engine demo: an interactive tracker with invented data', desc: 'Try the Job Search Engine tracker in your browser. All jobs are invented. Your changes stay on your device and nothing is sent to a server.',
@@ -113,7 +123,7 @@ const C = {
       ],
     },
     jse: {
-      title: 'Job Search Engine (JSE): автоматизований конвеєр пошуку роботи з трекером', desc: 'Як я веду пошук роботи як проєкт доставки: щоденний збір з кар\'єрних систем компаній, фільтри, перевірка оголошень, дедуплікація, метод підготовки резюме з ATS-бар\'єром і трекер. Схеми, відкритий код і живе демо з вигаданими даними.',
+      title: 'Job Search Engine (JSE): автоматизований конвеєр пошуку роботи з трекером', desc: 'Як я веду пошук роботи як проєкт доставки: щоденний збір з кар\'єрних систем компаній, фільтри, перевірка оголошень, дедуплікація, метод підготовки резюме з ATS-бар\'єром і трекер. Схеми, код для особистого використання і живе демо з вигаданими даними.',
       crumb: 'Job Search Engine',
       h1: 'Job Search Engine (JSE)', lead: 'Пошук роботи, організований як проєкт доставки: автоматизуємо рутину, залишаємо людині рішення і міряємо, чи варте джерело того, щоб його лишати.',
       demoBtn: 'Спробувати демо', guideBtn: 'Посібник з налаштування', codeBtn: 'Код на GitHub',
@@ -152,33 +162,43 @@ const C = {
         ['Рішення за людиною', 'Інструмент пропонує. Ви обираєте, куди подаватися.'],
       ],
       splitH: 'Що лишається в кожного, а що спільне',
-      mine: 'Лишається в кожного', shared: 'Відкрито для всіх',
+      mine: 'Лишається в кожного', shared: 'Доступне, безкоштовно для особистого використання',
       mineList: ['Fact Bank: ваші реальні факти й докази', 'Базове резюме для кожної групи ролей', 'Ваш список компаній і правила', 'Історія вакансій, статуси й відповіді роботодавців', 'Доступ до пошти для дайджесту й відповідей', 'Резюме та листи, які ви створюєте'],
       sharedList: ['Збирачі для десяти типів ATS', 'Фільтри, пріоритети й рушій перевірки оголошень', 'Дедуплікація і щоденний дайджест', 'Тести, що працюють офлайн', 'Трекер і його модель даних', 'Метод підготовки резюме й формати повідомлень'],
       buildH: 'Зберіть власний',
-      buildLead: 'Подивіться трекер у демо, а тоді йдіть за покроковим посібником з налаштування: Fact Bank, базове резюме, вподобання і перший запуск.', guideLink: 'Відкрити посібник з налаштування',
+      buildLead: 'Подивіться трекер у демо, а тоді йдіть за покроковим посібником з налаштування: Fact Bank, базове резюме, вподобання і перший запуск.', guideLink: 'Відкрити посібник з налаштування', trackerLink: 'Відкрити ваш трекер', packLink: 'Пакет для асистента на GitHub',
       build: [
         'Відкрийте демо й пройдіться картками, статусами та повідомленнями.',
-        'Прочитайте публічний репозиторій. Гайд CUSTOMIZE перелічує кожне налаштування, яке треба замінити.',
-        'Напишіть власні правила: назви ролей, локації, блокери. Починайте з малого.',
-        'Складіть власний Fact Bank. Лише факти, кожен із доказом.',
-        'Спершу запустіть конвеєр із прапорцем dry-run. Нічого не записується й не надсилається.',
-        'Тримайте трекер поруч і проводьте кожну вакансію через статуси.',
+        'Завантажте рушій і запустіть офлайн-демо з прикладом профілю.',
+        'Створіть проєкт у вашому чаті зі ШІ й додайте пакет для асистента. Він інтерв\'юює вас і пише ваш профіль, Fact Bank та базове резюме.',
+        'Запустіть рушій зі своїм профілем і завантажте його результати у власний трекер, що живе у вашому браузері.',
+        'Для кожної вакансії натисніть "Скопіювати для ШІ", вставте її у ваш проєкт і застосуйте відповідь.',
+        'Подайтеся на сайті роботодавця, а потім напишіть 1-2 людям у компанії.',
       ],
       stateH: 'Де це зараз',
       state: [
-        ['Є зараз', 'Відкритий код (частина збору й перевірки) на GitHub. Ця сторінка. Інтерактивне демо.'],
-        ['Готується', 'Стартовий набір: промпти для Claude, ChatGPT і Gemini без коду, технічний набір із прикладами даних і трекер, який зберігає ваші дані у вашому браузері.'],
+        ['Є зараз', 'Рушій на GitHub, безкоштовний для особистого й некомерційного використання, з офлайн-демо та прикладами профілів. Пакет для асистента Claude, ChatGPT і Gemini без коду. Безкоштовний трекер, що зберігає ваші дані у вашому браузері. Цей посібник, демо та схеми.'],
+        ['Далі', 'Більше сайтів із вакансіями, коли з\'явиться ефективне універсальне сканування. Справжні скриншоти готового флоу в посібнику.'],
         ['Розглядається', 'Хостингова версія і пряме підключення вашого чату зі ШІ до трекера (MCP). Нічого не обіцяно, і нічого ще не продається.'],
       ],
-      stateFollow: 'Щоб дізнатися, коли стартовий набір буде готовий, підпишіться на Telegram-канал.',
+      stateFollow: 'Щоб дізнатися про нові сайти й хостингову версію, підпишіться на Telegram-канал.',
       notesH: 'Варто знати',
       notes: [
         'Оголошення належать роботодавцям. JSE читає публічні сторінки й адреси повільно й не обходить жодного захисту.',
         'Це особистий проєкт, а не продукт і не обіцянка результату. Ніщо тут не гарантує співбесіду чи оффер.',
+        'Код безкоштовний для особистого й некомерційного використання (PolyForm Noncommercial 1.0.0), зокрема для власного пошуку роботи. Для комерційного використання потрібна ліцензія від мене.',
       ],
       ctaH: 'Хочете допомогу з налаштуванням власного пошуку?', ctaText: 'Я проводжу консультації на годину й пробні співбесіди. Можемо разом зібрати ваш Fact Bank, правила й рутину.',
       ctaBtn: 'Запросити консультацію', ctaIntro: 'Або запишіться на безкоштовне знайомство на 20 хвилин', tg: 'Telegram-канал',
+    },
+    tracker: {
+      title: 'Ваш трекер вакансій у вашому браузері', desc: 'Безкоштовний трекер для Job Search Engine. Завантажте вакансії, які знайшов рушій, скопіюйте їх у вашого ШІ-асистента й застосуйте його відповіді. Усе лишається у вашому браузері.',
+      crumb: 'Трекер', h1: 'Ваш трекер вакансій',
+      lead: 'Завантажте вакансії, які знайшов рушій, опрацьовуйте їх і тримайте кожен статус в одному місці. Ваші дані лишаються в цьому браузері. Нічого не надсилається ні мені, ні на жоден сервер.',
+      notice: 'Робіть резервні копії кнопкою експорту. Очищення даних браузера видаляє цей трекер.',
+      stepsH: 'Як користуватися',
+      steps: ['Запустіть рушій і завантажте out/import_latest.json кнопкою імпорту. Кожна картка приносить повний опис вакансії та вердикт перевірки.', 'Натисніть "Скопіювати для ШІ" на вакансії й вставте її у проєкт вашого асистента.', 'Вставте відповідь асистента в "Застосувати відповідь ШІ". Трекер прочитає блок card-update і заповнить картку.', 'Подайтеся на сайті роботодавця, змініть статус і протягом 3 днів напишіть 1-2 людям у LinkedIn.'],
+      guide: 'Посібник з налаштування', demo: 'Спершу спробувати демо', code: 'Код рушія на GitHub',
     },
     demo: {
       title: 'Демо Job Search Engine: інтерактивний трекер з вигаданими даними', desc: 'Спробуйте трекер Job Search Engine у браузері. Усі вакансії вигадані. Ваші зміни лишаються на вашому пристрої, нічого не надсилається на сервер.',
@@ -257,7 +277,7 @@ function jse(k) {
     <h2 class="sub" id="build">${esc(c.buildH)}</h2>
     <p>${esc(c.buildLead)}</p>
     <ol class="jse-build">${c.build.map((x) => `<li>${esc(x)}</li>`).join('')}</ol>
-    <p><a class="btn" href="${base}setup/" data-ev="cta_click">${esc(c.guideLink)}</a></p>
+    <p><a class="btn" href="${base}setup/" data-ev="cta_click">${esc(c.guideLink)}</a> <a class="btn ghost" href="${base}tracker/" data-ev="cta_click">${esc(c.trackerLink)}</a> <a class="btn ghost" href="${REPO}/tree/main/assistant" target="_blank" rel="noopener" data-ev="cta_click">${esc(c.packLink)}</a></p>
     <p class="note"><a href="${REPO}" target="_blank" rel="noopener" data-ev="cta_click">${esc(c.codeBtn)} →</a></p>
 
     <h2 class="sub" id="state">${esc(c.stateH)}</h2>
@@ -311,6 +331,19 @@ function ad(k) {
   return shell(k, { path, otherPath: pth(k === 'en' ? 'uk' : 'en', '/tools/job-search-engine/demo/ad/'), title: c.title, desc: c.desc, crumbs: [{ name: p.tools, item: `${SITE}${pth(k, '/tools/')}` }, { name: C[k].jse.crumb, item: `${SITE}${base}` }, { name: C[k].demo.crumb, item: `${SITE}${base}demo/` }, { name: c.h1, item: `${SITE}${path}` }], body, script: '/assets/jse-demo.js', robots: 'noindex, follow' });
 }
 
+function tracker(k) {
+  const c = C[k].tracker, j = C[k].jse, p = P[k], base = pth(k, '/tools/job-search-engine/'), path = `${base}tracker/`;
+  const body = `<nav class="jse-crumb" aria-label="Breadcrumb"><a href="${p.toolsPath}">${esc(p.tools)}</a> / <a href="${base}">${esc(j.crumb)}</a> / ${esc(c.crumb)}</nav>
+    <h1 style="font-size:2rem">${esc(c.h1)}</h1>
+    <p class="lead">${esc(c.lead)}</p>
+    <p class="jse-notice" role="note">${esc(c.notice)}</p>
+    <div id="jse-app" class="jse-app" data-mode="live"><noscript><p>${esc(C[k].demo.noscript)}</p></noscript></div>
+    <section class="jse-co"><h2 class="sub">${esc(c.stepsH)}</h2><ol class="jse-fsteps">${c.steps.map((x) => `<li>${esc(x)}</li>`).join('')}</ol></section>
+    <p style="margin-top:22px"><a class="btn" href="${base}setup/" data-ev="cta_click">${esc(c.guide)}</a> <a class="btn ghost" href="${base}demo/" data-ev="cta_click">${esc(c.demo)}</a> <a class="btn ghost" href="${REPO}" target="_blank" rel="noopener" data-ev="cta_click">${esc(c.code)}</a></p>`;
+  return shell(k, { path, otherPath: pth(k === 'en' ? 'uk' : 'en', '/tools/job-search-engine/tracker/'), title: c.title, desc: c.desc,
+    crumbs: [{ name: p.tools, item: `${SITE}${pth(k, '/tools/')}` }, { name: j.crumb, item: `${SITE}${base}` }, { name: c.crumb, item: `${SITE}${path}` }], body, script: '/assets/jse-demo.js' });
+}
+
 function write(rel, html) { const f = join(ROOT, 'public', rel, 'index.html'); mkdirSync(dirname(f), { recursive: true }); writeFileSync(f, html); }
 for (const k of ['en', 'uk']) {
   const pre = k === 'uk' ? 'uk/' : '';
@@ -318,5 +351,6 @@ for (const k of ['en', 'uk']) {
   write(`${pre}tools/job-search-engine`, jse(k));
   write(`${pre}tools/job-search-engine/demo`, demo(k));
   write(`${pre}tools/job-search-engine/demo/ad`, ad(k));
+  write(`${pre}tools/job-search-engine/tracker`, tracker(k));
 }
 console.log('tools: hub + job-search-engine + demo written (en + uk)');
