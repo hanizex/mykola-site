@@ -35,11 +35,19 @@ const FIXED = {
   '/uk/pm-interview-prep/': { kicker: 'Підготовка до співбесіди на PM', title: 'Знайдіть слабкі місця раніше, ніж інтерв\'юер', sub: 'Пробна співбесіда, розбір резюме й історії, письмові наступні кроки. Година, EUR 50.' },
   '/examples/': { kicker: 'Examples of feedback', title: 'Real feedback, in full', sub: 'Feedback after mock interviews and consultations, plus advice messages. Anonymised.' },
   '/uk/examples/': { kicker: 'Приклади відгуків', title: 'Реальні відгуки, повністю', sub: 'Відгуки після співбесід і консультацій та поради в чаті. Знеособлені.' },
+  '/tools/': { kicker: 'Tools', title: 'Tools I built for my own work', sub: 'Job Search Engine and Challenge AI. Free to try.' },
+  '/uk/tools/': { kicker: 'Інструменти', title: 'Інструменти для власної роботи', sub: 'Job Search Engine і Challenge AI. Безкоштовно спробувати.' },
+  '/tools/job-search-engine/': { kicker: 'Job Search Engine (JSE)', title: 'A job search run like a delivery project', sub: 'Daily collection, ad screening, a CV method with an ATS gate and a tracker. Live demo.' },
+  '/uk/tools/job-search-engine/': { kicker: 'Job Search Engine (JSE)', title: 'Пошук роботи як проєкт доставки', sub: 'Щоденний збір, перевірка оголошень, метод резюме з ATS-бар\'єром і трекер. Живе демо.' },
+  '/tools/job-search-engine/setup/': { kicker: 'JSE setup guide', title: 'From zero to your first screened job', sub: 'Fact Bank, Master CV, preferences, first run. Interactive screens and diagrams.' },
+  '/uk/tools/job-search-engine/setup/': { kicker: 'Посібник JSE', title: 'Від нуля до першої перевіреної вакансії', sub: 'Fact Bank, базове резюме, вподобання, перший запуск. Інтерактивні екрани та схеми.' },
+  '/tools/job-search-engine/demo/': { kicker: 'JSE demo', title: 'Try the job tracker', sub: 'Invented data. Your changes stay in your browser.' },
+  '/uk/tools/job-search-engine/demo/': { kicker: 'Демо JSE', title: 'Спробуйте трекер вакансій', sub: 'Вигадані дані. Ваші зміни лишаються у вашому браузері.' },
   '/uk/challenge/': { kicker: 'Challenge AI · безкоштовний тест', title: 'Чи впорається ШІ з вашою проблемою?', sub: 'Шість запитань, близько 90 секунд. Скористатися ШІ чи звернутися до людини.' },
 };
 
 async function pages() {
-  const list = [['/', 'index.html'], ['/uk/', 'uk/index.html'], ['/cv/', 'cv/index.html'], ['/uk/cv/', 'uk/cv/index.html'], ['/challenge/', 'challenge/index.html'], ['/uk/challenge/', 'uk/challenge/index.html'], ['/examples/', 'examples/index.html'], ['/uk/examples/', 'uk/examples/index.html'], ['/pm-interview-prep/', 'pm-interview-prep/index.html'], ['/uk/pm-interview-prep/', 'uk/pm-interview-prep/index.html'], ['/blog/', 'blog/index.html'], ['/uk/blog/', 'uk/blog/index.html']];
+  const list = [['/', 'index.html'], ['/uk/', 'uk/index.html'], ['/cv/', 'cv/index.html'], ['/uk/cv/', 'uk/cv/index.html'], ['/challenge/', 'challenge/index.html'], ['/uk/challenge/', 'uk/challenge/index.html'], ['/examples/', 'examples/index.html'], ['/uk/examples/', 'uk/examples/index.html'], ['/pm-interview-prep/', 'pm-interview-prep/index.html'], ['/uk/pm-interview-prep/', 'uk/pm-interview-prep/index.html'], ['/blog/', 'blog/index.html'], ['/uk/blog/', 'uk/blog/index.html'], ['/tools/', 'tools/index.html'], ['/uk/tools/', 'uk/tools/index.html'], ['/tools/job-search-engine/', 'tools/job-search-engine/index.html'], ['/uk/tools/job-search-engine/', 'uk/tools/job-search-engine/index.html'], ['/tools/job-search-engine/setup/', 'tools/job-search-engine/setup/index.html'], ['/uk/tools/job-search-engine/setup/', 'uk/tools/job-search-engine/setup/index.html'], ['/tools/job-search-engine/demo/', 'tools/job-search-engine/demo/index.html'], ['/uk/tools/job-search-engine/demo/', 'uk/tools/job-search-engine/demo/index.html']];
   for (const base of ['blog', 'uk/blog']) {
     for (const d of await readdir(join(PUB, base), { withFileTypes: true })) {
       if (d.isDirectory() && existsSync(join(PUB, base, d.name, 'index.html'))) list.push([`/${base}/${d.name}/`, `${base}/${d.name}/index.html`]);

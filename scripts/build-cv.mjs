@@ -4,7 +4,7 @@
 // Edit the content below, then run `npm run build`. The downloadable PDFs are generated ONCE (npm run cv:pdf) and committed.
 
 import { writeFileSync, mkdirSync } from 'node:fs';
-import { ogPath } from './config.mjs';
+import { ogPath, toolsLink } from './config.mjs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -382,7 +382,7 @@ function page(c) {
   <header class="site">
     <div class="wrap">
       <a class="brand" href="${c.home}">${esc(c.name)}</a>
-      <nav><a href="${c.path}" aria-current="page">${c.nav.cv}</a><a href="${c.home}#projects">${c.nav.projects}</a><a href="${c.blog}">${c.nav.blog}</a><a href="${c.home}#consult">${c.nav.consult}</a><a href="${c.otherPath}" hreflang="${c.otherHreflang}" lang="${c.otherHreflang}" title="${c.otherTitle}">${c.otherLabel}</a></nav>
+      <nav><a href="${c.path}" aria-current="page">${c.nav.cv}</a><a href="${c.home}#projects">${c.nav.projects}</a><a href="${c.blog}">${c.nav.blog}</a>${toolsLink(c.home)}<a href="${c.home}#consult">${c.nav.consult}</a><a href="${c.otherPath}" hreflang="${c.otherHreflang}" lang="${c.otherHreflang}" title="${c.otherTitle}">${c.otherLabel}</a></nav>
     </div>
   </header>
 

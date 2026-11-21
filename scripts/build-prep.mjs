@@ -4,7 +4,7 @@
 import { writeFileSync, mkdirSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { introLink, ogPath, CHANNEL } from './config.mjs';
+import { introLink, ogPath, CHANNEL, toolsLink } from './config.mjs';
 import { cardsHtml, UI as EXUI } from './examples.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
@@ -92,7 +92,7 @@ function page(k) {
   ${ld.map((o) => `<script type="application/ld+json">${JSON.stringify(o).replace(/</g, '\\u003c')}</script>`).join('\n  ')}
 </head>
 <body>
-  <header class="site"><div class="wrap"><a class="brand" href="${c.home}">${esc(c.name)}</a><nav><a href="${c.cvPath}">${c.cv}</a><a href="${c.blogPath}">${c.blog}</a><a href="${c.other}" hreflang="${c.otherHl}" lang="${c.otherHl}" title="${c.otherTitle}">${c.otherLabel}</a></nav></div></header>
+  <header class="site"><div class="wrap"><a class="brand" href="${c.home}">${esc(c.name)}</a><nav><a href="${c.cvPath}">${c.cv}</a><a href="${c.blogPath}">${c.blog}</a>${toolsLink(c.home)}<a href="${c.other}" hreflang="${c.otherHl}" lang="${c.otherHl}" title="${c.otherTitle}">${c.otherLabel}</a></nav></div></header>
   <main class="wrap">
     <h1 style="font-size:2rem">${esc(c.h1)}</h1>
     <p class="lead">${esc(c.lead)}</p>

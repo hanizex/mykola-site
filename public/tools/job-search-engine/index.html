@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Job Search Engine (JSE): an automated job-search pipeline with a tracker</title>
+  <meta name="description" content="How I run my job search like a delivery project: daily collection from company career systems, filters, ad screening, deduplication, a CV method with an ATS gate and a tracker. Diagrams, public code and a live demo with invented data.">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <link rel="canonical" href="https://mykola.pages.dev/tools/job-search-engine/">
+  <link rel="alternate" hreflang="en" href="https://mykola.pages.dev/tools/job-search-engine/">
+  <link rel="alternate" hreflang="uk" href="https://mykola.pages.dev/uk/tools/job-search-engine/">
+  <link rel="alternate" hreflang="x-default" href="https://mykola.pages.dev/tools/job-search-engine/">
+  <meta property="og:title" content="Job Search Engine (JSE): an automated job-search pipeline with a tracker">
+  <meta property="og:description" content="How I run my job search like a delivery project: daily collection from company career systems, filters, ad screening, deduplication, a CV method with an ATS gate and a tracker. Diagrams, public code and a live demo with invented data.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://mykola.pages.dev/tools/job-search-engine/">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:image" content="https://mykola.pages.dev/assets/og/tools-job-search-engine.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/assets/style.css">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Mykola Kalakutskyi","item":"https://mykola.pages.dev/"},{"@type":"ListItem","position":2,"name":"Tools","item":"https://mykola.pages.dev/tools/"},{"@type":"ListItem","position":3,"name":"Job Search Engine","item":"https://mykola.pages.dev/tools/job-search-engine/"}]}</script>
+</head>
+<body>
+  <header class="site"><div class="wrap"><a class="brand" href="/">Mykola Kalakutskyi</a><nav><a href="/cv/">CV</a><a href="/blog/">Blog</a><a href="/tools/" aria-current="page">Tools</a><a href="/uk/tools/job-search-engine/" hreflang="uk" lang="uk" title="Читати українською">UA</a></nav></div></header>
+  <main class="wrap jse">
+    <nav class="jse-crumb" aria-label="Breadcrumb"><a href="/tools/">Tools</a> / Job Search Engine</nav>
+    <h1 style="font-size:2.2rem">Job Search Engine (JSE)</h1>
+    <p class="lead">A job search run like a delivery project: automate the repetitive parts, keep a human for the decisions, and measure whether each source is worth keeping.</p>
+    <p class="jse-herobtns"><a class="btn jse-demo-btn" href="/tools/job-search-engine/demo/" data-ev="cta_click">Try the demo →</a> <a class="btn ghost" href="/tools/job-search-engine/setup/" data-ev="cta_click">Setup guide</a></p>
+    <p class="note">JSE is my own tool. It is tuned to my search, and the demo uses invented data. The method works for any role and market: change the rules and the company list.</p>
+
+    <h2 class="sub" id="what">What it does</h2>
+    <p>Two parts. The first runs by itself every morning. The second is a short routine you do with an AI assistant for each job you decide to apply to.</p>
+    <div class="jse-flow" role="group" aria-label="What it does">
+      <section class="jse-lane"><h3>Every morning, by itself</h3><ol class="jse-steps" start="1"><li><b>Collect</b><span>Reads open positions from company career systems (public endpoints of ten ATS types) and a few job boards.</span></li><li><b>Filter</b><span>Keeps titles that fit and gives every job a location priority, P1 to P3.</span></li><li><b>Screen the ad</b><span>Reads the ad text for hidden blockers: residency, required languages, mandatory certificates. Verdict: wall, ask or ok.</span></li><li><b>De-duplicate</b><span>Matches by link, job id, and company plus similar role, against your tracker.</span></li><li><b>Report</b><span>Writes a digest and emails only what you have not seen. Reads employer replies from the inbox, read-only.</span></li></ol></section>
+      <div class="jse-handoff" aria-hidden="false"><span>↓</span> You read the digest and pick the jobs. This is the human step.</div>
+      <section class="jse-lane human"><h3>For each job you pick, with an AI assistant</h3><ol class="jse-steps" start="6"><li><b>Evidence map</b><span>Each requirement in the ad is matched to a real fact from your Fact Bank. The ad shows what the employer wants, never what you did.</span></li><li><b>ATS gate</b><span>The keyword match must reach your target (mine is 81%). If real facts cannot reach it, the process stops and names the gaps.</span></li><li><b>Build</b><span>A tailored CV, a cover message of up to 1000 characters and LinkedIn messages of up to 500.</span></li><li><b>Apply and reach out</b><span>After applying, write to 1-2 people at the company within 3 days.</span></li><li><b>Track</b><span>The tracker moves the card through statuses and shows what to do next.</span></li></ol></section>
+    </div>
+
+    <h2 class="sub" id="gate">The CV chain and the gate</h2>
+    <p>The gate is what keeps the tool honest. A keyword is never added without a fact behind it.</p>
+    <div class="jse-gate" role="group" aria-label="The CV chain and the gate">
+      <div class="jse-in"><span class="jse-box">Job ad</span><span class="jse-box">Fact Bank (facts only)</span><span class="jse-box">Master CV</span></div>
+      <div class="jse-arrow" aria-hidden="true">↓</div>
+      <div class="jse-box wide">Evidence map: requirement to fact</div>
+      <div class="jse-arrow" aria-hidden="true">↓</div>
+      <div class="jse-box wide gate">ATS gate: match at or above your target?</div>
+      <div class="jse-arrow" aria-hidden="true">↓</div>
+      <div class="jse-out"><span class="jse-box pass">Yes: build CV, cover message and LinkedIn messages</span><span class="jse-box stop">No: stop, name the gaps, ask you</span></div>
+    </div>
+
+    <h2 class="sub" id="priority">Location priority</h2>
+    <p>Every kept job gets a priority from your own rules. These are mine as an example.</p>
+    <ul class="jse-prio"><li><b class="jse-pill">P1</b><span>Home city on-site or hybrid, or fully remote</span></li><li><b class="jse-pill">P2</b><span>Relocation within Europe</span></li><li><b class="jse-pill">P3</b><span>Needs a work visa. Hidden by default</span></li></ul>
+
+    <h2 class="sub" id="decisions">Design decisions</h2>
+    <div class="jse-cards"><div class="jse-pc"><b>APIs first</b><span>Where a company exposes a public jobs endpoint, I use it. Boards are read slowly, the same pages a person sees.</span></div><div class="jse-pc"><b>Rules, not AI, for screening</b><span>Filters and ad screening are plain rules. Every skip carries a reason, so a wrong skip is easy to find and fix.</span></div><div class="jse-pc"><b>AI only where it writes</b><span>Collecting, filtering, screening and deduplication cost nothing in AI. The assistant is used for the CV, the cover and the messages.</span></div><div class="jse-pc"><b>Read-only and safe</b><span>Email access never moves, deletes or marks messages. A failing source never stops the daily run. No credentials in code.</span></div><div class="jse-pc"><b>A human decides</b><span>The tool proposes. You choose which jobs to apply to.</span></div></div>
+
+    <h2 class="sub" id="split">What stays with each person, and what is shared</h2>
+    <div class="jse-split">
+      <div class="jse-col"><h3>Stays with each person</h3><ul><li>Fact Bank: your real facts and evidence</li><li>Master CV per role family</li><li>Your company list and rules</li><li>Job history, statuses and employer replies</li><li>Email access for the digest and replies</li><li>The CVs and letters you generate</li></ul></div>
+      <div class="jse-col open"><h3>Shared in the open</h3><ul><li>Fetchers for ten ATS types</li><li>Filters, priorities and the ad-screening engine</li><li>Deduplication and the daily digest</li><li>Tests that run offline</li><li>The tracker and its data model</li><li>The CV method and message formats</li></ul></div>
+    </div>
+
+    <h2 class="sub" id="build">Build your own</h2>
+    <p>Use the demo to see the tracker, then follow the step-by-step setup guide: it covers the Fact Bank, the Master CV, your preferences and your first run.</p>
+    <ol class="jse-build"><li>Open the demo and click through the cards, statuses and messages.</li><li>Read the public repository. Its CUSTOMIZE guide lists every setting to replace.</li><li>Write your own rules: job titles, locations, blockers. Start small.</li><li>Build your own Fact Bank. Facts only, each with evidence.</li><li>Run the pipeline with the dry-run flag first. Nothing is written or sent.</li><li>Keep the tracker next to it and move every job through the statuses.</li></ol>
+    <p><a class="btn" href="/tools/job-search-engine/setup/" data-ev="cta_click">Open the setup guide</a></p>
+    <p class="note"><a href="https://github.com/hanizex/job-search-automation" target="_blank" rel="noopener" data-ev="cta_click">Code on GitHub →</a></p>
+
+    <h2 class="sub" id="state">Where it stands</h2>
+    <div class="jse-state"><div class="jse-st s0"><span class="vtag">Available now</span><p>Public code (the collection and screening half) on GitHub. This page. The interactive demo.</p></div><div class="jse-st s1"><span class="vtag">In preparation</span><p>A starter kit: prompts for Claude, ChatGPT and Gemini that need no code, a technical kit with sample data, and a tracker that keeps your data in your browser.</p></div><div class="jse-st s2"><span class="vtag">Under consideration</span><p>A hosted version, and a direct connection between your AI chat and the tracker (MCP). Nothing is promised and nothing is for sale yet.</p></div></div>
+    <p>To hear when the starter kit is ready, follow the Telegram channel. <a href="https://t.me/outstanding_pm" rel="noopener" data-ev="cta_click">Telegram channel →</a></p>
+
+    <h2 class="sub" id="notes">Good to know</h2>
+    <ul><li>Job ads belong to the employers. JSE reads public pages and endpoints at a low rate and does not bypass any protection.</li><li>This is a personal project, not a product and not a promise of results. Nothing here guarantees an interview or an offer.</li></ul>
+
+    <section class="jse-cta">
+      <h2>Want help setting up your own search?</h2>
+      <p>I run one-hour consultations and mock interviews. We can build your Fact Bank, your rules and your routine together.</p>
+      <p><a class="btn" href="/request/" data-ev="cta_click">Request a consultation</a></p>
+      <p class="note"><a href="https://calendly.com/hanizex/free-intro?utm_source=mykola.pages.dev&utm_medium=site&utm_campaign=free-intro&utm_content=jse-en" target="_blank" rel="noopener noreferrer" data-ev="intro_click">Or book a free 20-minute intro call</a></p>
+    </section>
+  </main>
+  <footer class="site"><div class="wrap">© 2026 Mykola Kalakutskyi · <a href="/cv/">CV</a> · <a href="/blog/">Blog</a> · <a href="/tools/">Tools</a> · <a href="https://t.me/outstanding_pm" rel="noopener">Telegram</a> · <a href="/privacy/">Privacy</a> · <a href="/terms/">Terms</a> · <a href="/uk/tools/job-search-engine/" hreflang="uk" lang="uk">Українською</a></div></footer>
+  <script src="/assets/site.js" defer></script>
+</body>
+</html>

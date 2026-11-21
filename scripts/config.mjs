@@ -9,3 +9,6 @@ export const ogPath = (p) => `/assets/og/${(p.replace(/^\/|\/$/g, '').replace(/\
 // Telegram channel and the Lane A page (mock interview + CV/story review).
 export const CHANNEL = 'https://t.me/outstanding_pm';
 export const PREP = { en: '/pm-interview-prep/', uk: '/uk/pm-interview-prep/' };
+
+// Header menu link to the Tools section. Pass any path of the page language (anything under /uk is Ukrainian).
+export const toolsLink = (anyPath) => (String(anyPath).startsWith('/uk') ? '<a href="/uk/tools/">Інструменти</a>' : '<a href="/tools/">Tools</a>');

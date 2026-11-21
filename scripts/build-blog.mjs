@@ -10,7 +10,7 @@
 import { readFileSync, writeFileSync, mkdirSync, readdirSync, rmSync, existsSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { introLink, ogPath, PREP } from './config.mjs';
+import { introLink, ogPath, PREP, toolsLink } from './config.mjs';
 import { marked } from 'marked';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
@@ -136,7 +136,7 @@ const head = ({ lang, title, description, path, type = 'website', extra = '', no
 function header(lang, switchHref) {
   const t = T[lang];
   const sw = switchHref ? `<a href="${switchHref}" hreflang="${t.other.label === 'UA' ? 'uk' : 'en'}" lang="${t.other.label === 'UA' ? 'uk' : 'en'}" title="${t.other.title}">${t.other.label}</a>` : '';
-  return `<header class="site"><div class="wrap"><a class="brand" href="${lang === 'uk' ? '/uk/' : '/'}">${t.name}</a><nav><a href="${lang === 'uk' ? '/uk/cv/' : '/cv/'}">${lang === 'uk' ? 'Резюме' : 'CV'}</a><a href="${t.base}">${t.blog}</a><a href="${lang === 'uk' ? '/uk/' : '/'}#consult">${t.consult}</a>${sw}</nav></div></header>`;
+  return `<header class="site"><div class="wrap"><a class="brand" href="${lang === 'uk' ? '/uk/' : '/'}">${t.name}</a><nav><a href="${lang === 'uk' ? '/uk/cv/' : '/cv/'}">${lang === 'uk' ? 'Резюме' : 'CV'}</a><a href="${t.base}">${t.blog}</a>${toolsLink(lang === 'uk' ? '/uk/' : '/')}<a href="${lang === 'uk' ? '/uk/' : '/'}#consult">${t.consult}</a>${sw}</nav></div></header>`;
 }
 const footer = (lang) => `<footer class="site"><div class="wrap">© ${new Date().getFullYear()} ${T[lang].name} · <a href="${T[lang].base}">${T[lang].blog}</a> · <a href="${CHANNEL}" rel="noopener">Telegram</a> · <a href="${T[lang].privacy}">${T[lang].privacyLabel}</a> · <a href="${T[lang].terms}">${T[lang].termsLabel}</a> · <a href="${T[lang].base}rss.xml">RSS</a></div></footer>
   <script src="/assets/site.js" defer></script>`;
@@ -250,6 +250,12 @@ function sitemap() {
     const exAlts = [{ l: 'en', h: `${SITE}/examples/` }, { l: 'uk', h: `${SITE}/uk/examples/` }, { l: 'x-default', h: `${SITE}/examples/` }];
     rows.push(x(`${SITE}/examples/`, '', exAlts), x(`${SITE}/uk/examples/`, '', exAlts));
   }
+  if (existsSync(join(PUBLIC, 'tools', 'index.html')) && existsSync(join(PUBLIC, 'uk', 'tools', 'index.html'))) {
+    for (const t of ['/tools/', '/tools/job-search-engine/', '/tools/job-search-engine/setup/', '/tools/job-search-engine/demo/']) {
+      const al = [{ l: 'en', h: `${SITE}${t}` }, { l: 'uk', h: `${SITE}/uk${t}` }, { l: 'x-default', h: `${SITE}${t}` }];
+      rows.push(x(`${SITE}${t}`, '', al), x(`${SITE}/uk${t}`, '', al));
+    }
+  }
   const enIdx = published('en'), ukIdx = published('uk');
   const idxAlts = enIdx.length && ukIdx.length ? [{ l: 'en', h: `${SITE}/blog/` }, { l: 'uk', h: `${SITE}/uk/blog/` }, { l: 'x-default', h: `${SITE}/blog/` }] : [];
   if (enIdx.length) rows.push(x(`${SITE}/blog/`, enIdx[0].updated, idxAlts));
@@ -271,9 +277,11 @@ const llms = () => `# ${NAME}
 - [Home and consultation](${SITE}/): who I am, projects and activities, 400+ consultation and mentorship sessions, how to book a free intro call or request a consultation
 - [PM interview prep](${SITE}/pm-interview-prep/): one-hour online mock interview and CV/story review for project managers, EUR 50, request form
 - [Examples of feedback](${SITE}/examples/): full anonymised written feedback from real sessions and advice messages (mock interview feedback, consultation review, project problems, resume and post reviews, job search)
+- [Tools](${SITE}/tools/): small tools built for my own work and shared
+- [Job Search Engine (JSE)](${SITE}/tools/job-search-engine/): how I run a job search like a delivery project: daily collection from company career systems, filters, ad screening, deduplication, a CV method with an ATS gate and a tracker; public code and a live demo with invented data ([setup guide](${SITE}/tools/job-search-engine/setup/), [demo](${SITE}/tools/job-search-engine/demo/))
 - [Challenge AI](${SITE}/challenge/): free 6-question quiz that tells whether AI is enough for a work problem or a human view is needed; runs in the browser
 ${pubAll.filter((p) => p.lang === 'en').map((p) => `- [${p.title}](${SITE}${p.path}): ${p.description}`).join('\n')}
-${published('uk').length ? `\n## Ukrainian (Українською)\n- [Challenge AI](${SITE}/uk/challenge/): безкоштовний тест із 6 запитань: чи вистачить ШІ для робочої проблеми, чи потрібен погляд людини; працює в браузері\n- [Резюме](${SITE}/uk/cv/): повна історія кар'єри, результати з датами й сумами, навички, власні проєкти; PDF: ${SITE}/assets/cv/Mykola_Kalakutskyi_CV_UA.pdf\n${published('uk').map((p) => `- [${p.title}](${SITE}${p.path}): ${p.description}`).join('\n')}\n` : ''}`;
+${published('uk').length ? `\n## Ukrainian (Українською)\n- [Інструменти](${SITE}/uk/tools/): невеликі інструменти, зроблені для власної роботи\n- [Job Search Engine (JSE)](${SITE}/uk/tools/job-search-engine/): як я веду пошук роботи як проєкт доставки; відкритий код і живе демо з вигаданими даними\n- [Challenge AI](${SITE}/uk/challenge/): безкоштовний тест із 6 запитань: чи вистачить ШІ для робочої проблеми, чи потрібен погляд людини; працює в браузері\n- [Резюме](${SITE}/uk/cv/): повна історія кар'єри, результати з датами й сумами, навички, власні проєкти; PDF: ${SITE}/assets/cv/Mykola_Kalakutskyi_CV_UA.pdf\n${published('uk').map((p) => `- [${p.title}](${SITE}${p.path}): ${p.description}`).join('\n')}\n` : ''}`;
 
 rmSync(join(PUBLIC, 'blog'), { recursive: true, force: true });
 rmSync(join(PUBLIC, 'uk', 'blog'), { recursive: true, force: true }); // keep the hand-written /uk/ landing

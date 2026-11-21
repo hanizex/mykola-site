@@ -5,7 +5,7 @@
 import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { introLink, ogPath, CHANNEL } from './config.mjs';
+import { introLink, ogPath, CHANNEL, toolsLink } from './config.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const SITE = 'https://mykola.pages.dev';
@@ -85,7 +85,7 @@ function page(k) {
   <script type="application/ld+json">${JSON.stringify(ld).replace(/</g, '\\u003c')}</script>
 </head>
 <body>
-  <header class="site"><div class="wrap"><a class="brand" href="${u.home}">${esc(u.name)}</a><nav><a href="${u.cvPath}">${u.cv}</a><a href="${u.blogPath}">${u.blog}</a><a href="${u.other}" hreflang="${u.otherHl}" lang="${u.otherHl}" title="${u.otherTitle}">${u.otherLabel}</a></nav></div></header>
+  <header class="site"><div class="wrap"><a class="brand" href="${u.home}">${esc(u.name)}</a><nav><a href="${u.cvPath}">${u.cv}</a><a href="${u.blogPath}">${u.blog}</a>${toolsLink(u.home)}<a href="${u.other}" hreflang="${u.otherHl}" lang="${u.otherHl}" title="${u.otherTitle}">${u.otherLabel}</a></nav></div></header>
   <main class="wrap">
     <div id="qz" class="quiz" data-lang="${k}">
       <div id="qz-intro">

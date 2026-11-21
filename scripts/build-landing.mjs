@@ -22,7 +22,7 @@ const BG = ['#eaf1ee', '#f3ebdd', '#e8eef3', '#f1e6e6'];
 const FG = ['#3d6b5a', '#6f9c8a', '#c9a46c', '#c97b63', '#7a9bb5', '#8c7aa6', '#1f3d33'];
 const seedFrom = (str) => { let h = 2166136261; for (const ch of str) { h ^= ch.charCodeAt(0); h = Math.imul(h, 16777619); } return h >>> 0; };
 import { cardsHtml, loadExamples, pointsLabel, pathFor as exPath, UI as EXUI } from './examples.mjs';
-import { introLink, ogPath } from './config.mjs';
+import { introLink, ogPath, toolsLink } from './config.mjs';
 const mulberry32 = (a) => () => { a |= 0; a = (a + 0x6D2B79F5) | 0; let t = Math.imul(a ^ (a >>> 15), 1 | a); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; };
 let iconCount = 0;
 function icon(text) {
@@ -342,7 +342,7 @@ function page(L) {
   <header class="site">
     <div class="wrap">
       <a class="brand" href="${L.path}">${esc(L.name)}</a>
-      <nav><a href="${L.cvPath}">${L.nav.cv}</a><a href="#projects">${L.nav.projects}</a><a href="${L.blogPath}">${L.nav.blog}</a><a href="${L.challengePath}">${L.nav.challenge}</a><a href="#consult">${L.nav.consult}</a><a href="${L.otherPath}" hreflang="${L.otherHreflang}" lang="${L.otherHreflang}" title="${L.otherTitle}">${L.otherLabel}</a></nav>
+      <nav><a href="${L.cvPath}">${L.nav.cv}</a><a href="#projects">${L.nav.projects}</a><a href="${L.blogPath}">${L.nav.blog}</a><a href="${L.challengePath}">${L.nav.challenge}</a>${toolsLink(L.cvPath)}<a href="#consult">${L.nav.consult}</a><a href="${L.otherPath}" hreflang="${L.otherHreflang}" lang="${L.otherHreflang}" title="${L.otherTitle}">${L.otherLabel}</a></nav>
     </div>
   </header>
 

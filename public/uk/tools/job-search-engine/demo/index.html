@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Демо Job Search Engine: інтерактивний трекер з вигаданими даними</title>
+  <meta name="description" content="Спробуйте трекер Job Search Engine у браузері. Усі вакансії вигадані. Ваші зміни лишаються на вашому пристрої, нічого не надсилається на сервер.">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <link rel="canonical" href="https://mykola.pages.dev/uk/tools/job-search-engine/demo/">
+  <link rel="alternate" hreflang="en" href="https://mykola.pages.dev/tools/job-search-engine/demo/">
+  <link rel="alternate" hreflang="uk" href="https://mykola.pages.dev/uk/tools/job-search-engine/demo/">
+  <link rel="alternate" hreflang="x-default" href="https://mykola.pages.dev/tools/job-search-engine/demo/">
+  <meta property="og:title" content="Демо Job Search Engine: інтерактивний трекер з вигаданими даними">
+  <meta property="og:description" content="Спробуйте трекер Job Search Engine у браузері. Усі вакансії вигадані. Ваші зміни лишаються на вашому пристрої, нічого не надсилається на сервер.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://mykola.pages.dev/uk/tools/job-search-engine/demo/">
+  <meta property="og:locale" content="uk_UA">
+  <meta property="og:image" content="https://mykola.pages.dev/assets/og/uk-tools-job-search-engine-demo.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/assets/style.css">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Микола Калакуцький","item":"https://mykola.pages.dev/uk/"},{"@type":"ListItem","position":2,"name":"Інструменти","item":"https://mykola.pages.dev/uk/tools/"},{"@type":"ListItem","position":3,"name":"Job Search Engine","item":"https://mykola.pages.dev/uk/tools/job-search-engine/"},{"@type":"ListItem","position":4,"name":"Демо","item":"https://mykola.pages.dev/uk/tools/job-search-engine/demo/"}]}</script>
+</head>
+<body>
+  <header class="site"><div class="wrap"><a class="brand" href="/uk/">Микола Калакуцький</a><nav><a href="/uk/cv/">Резюме</a><a href="/uk/blog/">Блог</a><a href="/uk/tools/" aria-current="page">Інструменти</a><a href="/tools/job-search-engine/demo/" hreflang="en" lang="en" title="Read in English">EN</a></nav></div></header>
+  <main class="wrap jse">
+    <nav class="jse-crumb" aria-label="Breadcrumb"><a href="/uk/tools/">Інструменти</a> / <a href="/uk/tools/job-search-engine/">Job Search Engine</a> / Демо</nav>
+    <h1 style="font-size:2rem">Демо-трекер JSE</h1>
+    <p class="lead">Ось як працює трекер. Він робить три речі: веде вас до оголошення за прямим посиланням, тримає статус кожної вакансії й веде до потрібних людей у LinkedIn. Вакансії тут не додаються вручну. Вони приходять зі сканування, і кожна картка вже містить повний опис.</p>
+    <p class="jse-notice" role="note">Вигадані дані: компанії, ролі та людина &quot;Alex Example&quot; не існують. Посилання на вакансію відкриває вигадане зразкове оголошення, а пошук у LinkedIn покаже сторонні результати. У вашому справжньому трекері ці посилання відкривають реальну вакансію й реальних людей. Ваші зміни зберігаються лише в цьому браузері. Нічого не надсилається ні мені, ні на жоден сервер.</p>
+    <div id="jse-app" class="jse-app"><noscript><p>Для демо потрібен JavaScript.</p></noscript></div>
+    <section class="jse-co" aria-labelledby="h-flow"><h2 class="sub" id="h-flow">Як трекер і ваш чат зі ШІ працюють разом</h2><p>Трекер не пише резюме. Це робить ваш чат зі ШІ. Кожен робить те, що вміє.</p>
+      <div class="jse-lanes"><div class="jse-lane2"><b>Трекер</b><span>Тримає вакансії, які знайшло сканування, кожну з повним описом і вердиктом перевірки. Статуси, посилання, пошуки в LinkedIn і галочки.</span></div><div class="jse-lane2"><b>Ваш чат зі ШІ (Claude, ChatGPT або Gemini)</b><span>Перевіряє блокери, ставить питання й збирає адаптоване резюме, супровідний лист і повідомлення в LinkedIn з вашого Fact Bank і базового резюме.</span></div><div class="jse-lane2"><b>Інші сайти</b><span>Форма роботодавця і LinkedIn. Ви подаєтеся й надсилаєте повідомлення самі.</span></div></div>
+      <ol class="jse-fsteps"><li>Натисніть &quot;Скопіювати для ШІ&quot;. Повний опис уже в картці.</li><li>Вставте його у ваш чат зі ШІ.</li><li>Підтвердіть висновки або виправте їх.</li><li>Скопіюйте з чату резюме, супровідний лист і повідомлення в LinkedIn.</li><li>Подайтеся, змініть статус, напишіть 1-2 людям, поставте галочку.</li></ol>
+      <div class="jse-state2"><div class="jse-st2 now"><span class="vtag">Сьогодні</span><p>Ви переносите вакансію в чат, а результати назад копіюванням і вставкою. Два кліки й дві вставки на вакансію.</p></div><div class="jse-st2 plan"><span class="vtag">У планах, ще недоступно</span><p>Підключити ваш чат зі ШІ до трекера через MCP. Ви кажете &quot;бери найсвіжішу вакансію з трекера&quot;. ШІ читає картку, виконує роботу й сам оновлює картку. Без копіювання.</p></div></div>
+    </section>
+    <p style="margin-top:26px"><a class="btn" href="/uk/tools/job-search-engine/#build" data-ev="cta_click">Зберіть власний</a> <a class="btn ghost" href="/uk/tools/job-search-engine/">Назад на сторінку Job Search Engine</a></p>
+  </main>
+  <footer class="site"><div class="wrap">© 2026 Микола Калакуцький · <a href="/uk/cv/">Резюме</a> · <a href="/uk/blog/">Блог</a> · <a href="/uk/tools/">Інструменти</a> · <a href="https://t.me/outstanding_pm" rel="noopener">Telegram</a> · <a href="/uk/privacy/">Конфіденційність</a> · <a href="/uk/terms/">Умови</a> · <a href="/tools/job-search-engine/demo/" hreflang="en" lang="en">English</a></div></footer>
+  <script src="/assets/site.js" defer></script>
+  <script src="/assets/jse-demo.js" defer></script>
+</body>
+</html>
