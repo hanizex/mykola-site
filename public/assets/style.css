@@ -920,3 +920,19 @@ header.site nav a { white-space: nowrap; }
   .cc-box p { margin: 0 0 12px; }
   .cc-box .cc-b { flex-wrap: wrap; }
 }
+
+/* Hosted tracker guide (/tools/job-search-engine/hosted/) */
+.hp-steps { padding-left: 1.3em; } .hp-steps li { margin: 8px 0; }
+.hp-blocks { display: grid; gap: 10px; margin: 14px 0; }
+.hp-block { background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); padding: 0 16px; }
+.hp-block summary { cursor: pointer; display: flex; justify-content: space-between; gap: 12px; padding: 14px 0; font-weight: 600; }
+.hp-block summary em { font-style: normal; font-weight: 400; color: var(--muted); font-size: .85rem; white-space: nowrap; }
+.hp-actions { margin: 0 0 10px; }
+.hp-pre { white-space: pre-wrap; word-break: break-word; max-height: 360px; overflow: auto; margin: 0 0 16px; padding: 12px; border: 1px solid var(--line); border-radius: 10px; font: 12.5px/1.5 ui-monospace, Menlo, monospace; }
+
+.hp-accent { color: var(--accent); font-weight: 700; }
+.hp-shot { margin: 10px 0 4px; max-width: 260px; }
+.hp-shot img { display: block; width: 100%; height: auto; border: 1px solid var(--line); border-radius: 10px; }
+.hp-shot figcaption { font-size: .8rem; color: var(--muted); margin-top: 4px; }
+
+.hp-block > p { margin: 0 0 14px; color: var(--muted); }

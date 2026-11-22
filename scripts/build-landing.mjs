@@ -116,7 +116,7 @@ const EN = {
   ],
   codeTitle: 'Code I wrote and shared',
   code: [
-    { t: 'Job Search Automation', d: 'A daily pipeline for a structured job search: polls 9 ATS types and job boards, filters and dedupes ads, reads employer replies, tracks funding signals.', href: `${GITHUB}/job-search-automation` },
+    { t: 'Job Search Automation', d: 'A daily pipeline for a structured job search: polls 10 ATS types and job boards, filters and dedupes ads, reads employer replies. Also available as a free online tracker (test): see the Tools section.', href: `${GITHUB}/job-search-automation` },
     { t: 'Mimeon Onboarding Bot', d: 'A Telegram bot that runs the Mimeon app alpha end to end: onboarding, support tickets, a Mom Test survey, rewards, funnel analytics. Google Apps Script + Sheets.', href: `${GITHUB}/mimeon-onboarding-bot` },
     { t: 'PM Coffee Time Bot', d: 'A Telegram bot for PM Coffee Time meetups: registration, calendar invites, reminders, materials, feedback. SendPulse flows + Google Apps Script.', href: `${GITHUB}/pm-coffee-time-bot` },
   ],
@@ -205,7 +205,7 @@ const UK = {
   ],
   codeTitle: 'Код, який я написав і відкрив',
   code: [
-    { t: 'Job Search Automation', d: 'Щоденний конвеєр структурованого пошуку роботи: опитує 9 типів ATS і джоб-бордів, фільтрує та дедуплікує вакансії, читає відповіді роботодавців, відстежує сигнали про фінансування.', href: `${GITHUB}/job-search-automation` },
+    { t: 'Job Search Automation', d: 'Щоденний конвеєр структурованого пошуку роботи: опитує 10 типів ATS і джоб-бордів, фільтрує та дедуплікує вакансії, читає відповіді роботодавців. Також доступний як безкоштовний онлайн трекер (тест): дивіться розділ «Інструменти».', href: `${GITHUB}/job-search-automation` },
     { t: 'Mimeon Onboarding Bot', d: 'Telegram-бот, який веде альфа-тест застосунку Mimeon від початку до кінця: онбординг, тикети підтримки, опитування за Mom Test, винагороди, аналітика воронки. Google Apps Script + Sheets.', href: `${GITHUB}/mimeon-onboarding-bot` },
     { t: 'PM Coffee Time Bot', d: 'Telegram-бот для зустрічей PM Coffee Time: реєстрація, календарні запрошення, нагадування, матеріали, відгуки. SendPulse + Google Apps Script.', href: `${GITHUB}/pm-coffee-time-bot` },
   ],

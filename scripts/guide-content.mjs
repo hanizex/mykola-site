@@ -165,10 +165,10 @@ export function slides(k) {
       variants: true,
       mock: win(frameRun, `<div class="m-var on" data-var="pass"><p class="m-h">${esc(t('Acme Cloud: Delivery Manager', 'Acme Cloud: Delivery Manager'))}</p>
           <div data-hs="1"><table class="m-tbl"><tr><td>${esc(t('Release management', 'Управління релізами'))}</td><td>F12</td><td>${chip('✓', 'ok')}</td></tr><tr><td>${esc(t('Team of 8 or more', 'Команда від 8 осіб'))}</td><td>F07</td><td>${chip('✓', 'ok')}</td></tr><tr><td>${esc(t('Stakeholder reporting', 'Звітність для стейкхолдерів'))}</td><td>F21</td><td>${chip('✓', 'ok')}</td></tr></table></div>
-          <div class="m-gate pass" data-hs="2"><b>84%</b> ${esc(t('ATS match. Target 81%. Gate passed: building CV, cover and messages.', 'Збіг з ATS. Ціль 81%. Бар\'єр пройдено: збираю резюме, лист і повідомлення.'))}</div></div>
+          <div class="m-gate pass" data-hs="2"><b>84%</b> ${esc(t('ATS match. Optimal level reached. Gate passed: building CV, cover and messages.', 'Збіг з ATS. Оптимальний рівень досягнуто. Бар\'єр пройдено: збираю резюме, лист і повідомлення.'))}</div></div>
         <div class="m-var" data-var="stop"><p class="m-h">${esc(t('Bluefin Systems: Senior Project Manager', 'Bluefin Systems: Senior Project Manager'))}</p>
           <div data-hs="1"><table class="m-tbl"><tr><td>${esc(t('Release management', 'Управління релізами'))}</td><td>F12</td><td>${chip('✓', 'ok')}</td></tr><tr><td>${esc(t('SAP rollout experience', 'Досвід впровадження SAP'))}</td><td>${esc(t('no fact', 'немає факту'))}</td><td>${chip('gap', 'warn')}</td></tr><tr><td>${esc(t('Budget over 1M', 'Бюджет понад 1M'))}</td><td>${esc(t('no fact', 'немає факту'))}</td><td>${chip('gap', 'warn')}</td></tr></table></div>
-          <div class="m-gate stop" data-hs="2"><b>71%</b> ${esc(t('ATS match. Target 81%. Stopped. Two real gaps. Add a true fact, or skip this job. I will not add keywords you cannot back up.', 'Збіг з ATS. Ціль 81%. Зупинено. Дві реальні прогалини. Додайте правдивий факт або пропустіть вакансію. Я не додаватиму ключові слова, які ви не можете підтвердити.'))}</div></div>`),
+          <div class="m-gate stop" data-hs="2"><b>71%</b> ${esc(t('ATS match. Below the optimal level. Two real gaps. Add a true fact, or skip this job. I will not add keywords you cannot back up.', 'Збіг з ATS. Нижче оптимального рівня. Дві реальні прогалини. Додайте правдивий факт або пропустіть вакансію. Я не додаватиму ключові слова, які ви не можете підтвердити.'))}</div></div>`),
       legend: [t('Each requirement in the ad is matched to a fact. No fact means a gap, never an invention.', 'Кожна вимога з оголошення зіставляється з фактом. Немає факту означає прогалину, а не вигадку.'), t('The gate: the match must reach your target before anything is built. If not, the process stops and names the gaps.', 'Бар\'єр: збіг має досягти вашої цілі, перш ніж щось збиратиметься. Якщо ні, процес зупиняється й називає прогалини.')],
     },
     {
@@ -255,7 +255,7 @@ export function sequences(k) {
         { f: 1, t: 0, x: t('Tick the checkbox (1 click)', 'Поставити галочку (1 клік)'), c: t('Manual, 1 click. The reminder goes away.', 'Вручну, 1 клік. Нагадування зникає.') },
         { f: 3, t: 1, x: t('Replies and interview invites', 'Відповіді й запрошення'), c: t('Now you wait for replies and invitations to interviews.', 'Тепер чекаєте на відповіді й запрошення на співбесіди.') },
         { f: 1, t: 2, x: t('Feedback after each interview', 'Відгук після кожної співбесіди'), c: t('Tell the AI what was asked and how it went. New facts go to your Fact Bank.', 'Розкажіть ШІ, що питали і як минуло. Нові факти йдуть у ваш Fact Bank.') },
-        { f: 2, t: 0, x: t('Update the card', 'Оновити картку'), c: t('Today you copy the results into the card yourself. With the planned MCP connection the AI updates the card on its own.', 'Сьогодні ви самі переносите результати в картку. Із запланованим підключенням MCP ШІ оновлює картку сам.') },
+        { f: 2, t: 0, x: t('Update the card', 'Оновити картку'), c: t('Today you copy the results into the card yourself. With the MCP connection of the online tracker the AI updates the card on its own.', 'Без MCP ви самі переносите результати в картку. З MCP-підключенням онлайн трекера ШІ оновлює картку сам.') },
       ],
     },
     run: {
