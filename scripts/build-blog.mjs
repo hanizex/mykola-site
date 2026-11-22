@@ -251,7 +251,7 @@ function sitemap() {
     rows.push(x(`${SITE}/examples/`, '', exAlts), x(`${SITE}/uk/examples/`, '', exAlts));
   }
   if (existsSync(join(PUBLIC, 'tools', 'index.html')) && existsSync(join(PUBLIC, 'uk', 'tools', 'index.html'))) {
-    for (const t of ['/tools/', '/tools/job-search-engine/', '/tools/job-search-engine/setup/', '/tools/job-search-engine/hosted/', '/tools/job-search-engine/demo/', '/tools/job-search-engine/tracker/']) {
+    for (const t of ['/tools/', '/tools/job-search-engine/', '/tools/job-search-engine/setup/', '/tools/job-search-engine/hosted/', '/tools/job-search-engine/demo/']) {
       const al = [{ l: 'en', h: `${SITE}${t}` }, { l: 'uk', h: `${SITE}/uk${t}` }, { l: 'x-default', h: `${SITE}${t}` }];
       rows.push(x(`${SITE}${t}`, '', al), x(`${SITE}/uk${t}`, '', al));
     }

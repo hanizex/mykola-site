@@ -18,7 +18,7 @@ const C = {
       title: 'Tools I built for my own work and now share', desc: 'Small free tools from an IT project manager: the Job Search Engine (a job-search pipeline with a tracker and a live demo) and the Challenge AI quiz.',
       h1: 'Tools', lead: 'Small tools I built for my own work. I share the ones that can help other people.',
       cards: [
-        { tag: 'Free test', title: 'Job Search Engine (JSE)', text: 'A job search run like a delivery project. The online tracker finds jobs that fit your goals every morning and works together with your AI chat. Also here: the open engine, the method, diagrams and a demo.', go: 'Open JSE', href: '/tools/job-search-engine/' },
+        { tag: 'Free test', title: 'Job Search Engine (JSE)', text: 'A job search run like a delivery project. The online tracker finds jobs that fit your goals every morning and works together with your AI chat. Also here: the open engine, the method, diagrams and a demo.', go: 'Open the online tracker', href: '/tools/job-search-engine/hosted/' },
         { tag: 'Free quiz', title: 'Challenge AI', text: 'Six questions that tell you whether AI is enough for a work problem, or whether you need a human view. Runs in your browser.', go: 'Take the quiz', href: '/challenge/' },
       ],
     },
@@ -66,19 +66,19 @@ const C = {
       mineList: ['Fact Bank: your real facts and evidence', 'Master CV per role family', 'Your company list and rules', 'Job history, statuses and employer replies', 'Email access for the digest and replies', 'The CVs and letters you generate'],
       sharedList: ['Fetchers for ten ATS types', 'Filters, priorities and the ad-screening engine', 'Deduplication and the daily digest', 'Tests that run offline', 'The tracker and its data model', 'The CV method and message formats'],
       buildH: 'Build your own',
-      buildLead: 'Prefer to run it yourself? Use the demo to see the tracker, then follow the step-by-step setup guide: it covers the Fact Bank, the Master CV, your preferences and your first run.', hostedLink: 'Online tracker', guideLink: 'Open the setup guide', trackerLink: 'Open the browser tracker', packLink: 'Assistant pack on GitHub',
+      buildLead: 'Prefer to run it yourself? Use the demo to see the tracker, then follow the step-by-step setup guide: it covers the Fact Bank, the Master CV, your preferences and your first run.', hostedLink: 'Online tracker', guideLink: 'Open the setup guide', packLink: 'Assistant pack on GitHub',
       build: [
         'Open the demo and click through the cards, statuses and messages.',
         'Download the engine and run the offline demo with an example profile.',
         'Create a project in your AI chat and add the assistant pack. It interviews you and writes your profile, Fact Bank and Master CV.',
-        'Run the engine with your profile and load its results into your own tracker, which lives in your browser.',
-        'For each job press Copy for AI, paste it into your project and apply the answer.',
+        'Run the engine with your profile: every morning it writes a digest of the new jobs that fit you.',
+        'For each job you pick, paste the ad into your project and let the assistant build the package.',
         'Apply on the employer\'s site, then write to 1-2 people at the company.',
       ],
       stateH: 'Where it stands',
       state: [
         ['Free test access', 'The online tracker works today for a small group of testers, free of charge: a daily scan of DOU for your own search goals, a personal tracker page and a direct connection to Claude or ChatGPT (MCP). Other chats, such as Gemini, work with copy and paste. To join, write to me.'],
-        ['Available now', 'The engine on GitHub, free for personal and noncommercial use, with an offline demo and example profiles. An assistant pack for Claude, ChatGPT and Gemini that needs no code. A free browser tracker that keeps your data in your browser. The setup guide, the demo and the diagrams.'],
+        ['Available now', 'The engine on GitHub, free for personal and noncommercial use, with an offline demo and example profiles. An assistant pack for Claude, ChatGPT and Gemini that needs no code. The setup guide, the demo and the diagrams.'],
         ['Coming next', 'More job boards and company career sites, more room for jobs in the online tracker, real screenshots in the setup guide, and a public launch with self-service sign-up.'],
       ],
       stateFollow: 'To hear about new boards and the public launch, follow the Telegram channel.',
@@ -91,15 +91,6 @@ const C = {
       ],
       ctaH: 'Want help setting up your own search?', ctaText: 'I run one-hour consultations and mock interviews. We can build your Fact Bank, your rules and your routine together.',
       ctaBtn: 'Request a consultation', ctaIntro: 'Or book a free 20-minute intro call', tg: 'Telegram channel',
-    },
-    tracker: {
-      title: 'Your job tracker, kept in your browser', desc: 'A free tracker for the Job Search Engine. Load the jobs your engine found, copy them to your AI assistant and apply its answers. Everything stays in your browser.',
-      crumb: 'Browser tracker', h1: 'Your browser tracker', onlineNote: 'Prefer not to run the engine yourself? The online tracker collects fitting jobs for you every morning.', onlineLink: 'Open the online tracker',
-      lead: 'Load the jobs the engine found, work through them and keep every status in one place. Your data stays in this browser. Nothing is sent to me or to any server.',
-      notice: 'Back up with Export. Clearing your browser data deletes this tracker.',
-      stepsH: 'How to use it',
-      steps: ['Run the engine and load out/import_latest.json with Import. Each card brings the full job description and the screening verdict.', 'Press Copy for AI on a job and paste it into your assistant project.', 'Paste the assistant\'s answer into Apply AI result. The tracker reads its card-update block and fills the card.', 'Apply on the employer\'s site, set the status, and write to 1-2 people on LinkedIn within 3 days.'],
-      guide: 'Setup guide', demo: 'Try the demo first', code: 'Engine code on GitHub',
     },
     demo: {
       title: 'Job Search Engine demo: an interactive tracker with invented data', desc: 'Try the Job Search Engine tracker in your browser. All jobs are invented. Your changes stay on your device and nothing is sent to a server.',
@@ -119,7 +110,7 @@ const C = {
       title: 'Інструменти, які я зробив для власної роботи і тепер ділюся', desc: 'Невеликі безкоштовні інструменти від IT проєктного менеджера: Job Search Engine (конвеєр пошуку роботи з трекером і живим демо) та тест Challenge AI.',
       h1: 'Інструменти', lead: 'Невеликі інструменти, які я зробив для власної роботи. Ділюся тими, що можуть допомогти іншим.',
       cards: [
-        { tag: 'Безкоштовний тест', title: 'Job Search Engine (JSE)', text: 'Пошук роботи, організований як проєкт доставки. Онлайн трекер щоранку знаходить вакансії під ваші цілі й працює разом із вашим AI-чатом. Також тут: відкритий рушій, метод, схеми та демо.', go: 'Відкрити JSE', href: '/uk/tools/job-search-engine/' },
+        { tag: 'Безкоштовний тест', title: 'Job Search Engine (JSE)', text: 'Пошук роботи, організований як проєкт доставки. Онлайн трекер щоранку знаходить вакансії під ваші цілі й працює разом із вашим AI-чатом. Також тут: відкритий рушій, метод, схеми та демо.', go: 'Відкрити онлайн трекер', href: '/uk/tools/job-search-engine/hosted/' },
         { tag: 'Безкоштовний тест', title: 'Challenge AI', text: 'Шість запитань, які покажуть, чи вистачить ШІ для робочої проблеми, чи потрібен погляд людини. Працює у вашому браузері.', go: 'Пройти тест', href: '/uk/challenge/' },
       ],
     },
@@ -167,19 +158,19 @@ const C = {
       mineList: ['Fact Bank: ваші реальні факти й докази', 'Базове резюме для кожної групи ролей', 'Ваш список компаній і правила', 'Історія вакансій, статуси й відповіді роботодавців', 'Доступ до пошти для дайджесту й відповідей', 'Резюме та листи, які ви створюєте'],
       sharedList: ['Збирачі для десяти типів ATS', 'Фільтри, пріоритети й рушій перевірки оголошень', 'Дедуплікація і щоденний дайджест', 'Тести, що працюють офлайн', 'Трекер і його модель даних', 'Метод підготовки резюме й формати повідомлень'],
       buildH: 'Зберіть власний',
-      buildLead: 'Хочете запускати самі? Подивіться трекер у демо, а тоді йдіть за покроковим посібником з налаштування: Fact Bank, базове резюме, вподобання і перший запуск.', hostedLink: 'Онлайн трекер', guideLink: 'Відкрити посібник з налаштування', trackerLink: 'Відкрити браузерний трекер', packLink: 'Пакет для асистента на GitHub',
+      buildLead: 'Хочете запускати самі? Подивіться трекер у демо, а тоді йдіть за покроковим посібником з налаштування: Fact Bank, базове резюме, вподобання і перший запуск.', hostedLink: 'Онлайн трекер', guideLink: 'Відкрити посібник з налаштування', packLink: 'Пакет для асистента на GitHub',
       build: [
         'Відкрийте демо й пройдіться картками, статусами та повідомленнями.',
         'Завантажте рушій і запустіть офлайн-демо з прикладом профілю.',
         'Створіть проєкт у вашому чаті зі ШІ й додайте пакет для асистента. Він інтерв\'юює вас і пише ваш профіль, Fact Bank та базове резюме.',
-        'Запустіть рушій зі своїм профілем і завантажте його результати у власний трекер, що живе у вашому браузері.',
-        'Для кожної вакансії натисніть "Скопіювати для ШІ", вставте її у ваш проєкт і застосуйте відповідь.',
+        'Запустіть рушій зі своїм профілем: щоранку він пише дайджест нових вакансій, що вам підходять.',
+        'Для кожної обраної вакансії вставте оголошення у ваш проєкт і нехай асистент збере пакет.',
         'Подайтеся на сайті роботодавця, а потім напишіть 1-2 людям у компанії.',
       ],
       stateH: 'Де це зараз',
       state: [
         ['Безкоштовний тестовий доступ', 'Онлайн трекер сьогодні працює для невеликої групи тестувальників, безкоштовно: щоденне сканування DOU під ваші власні пошукові цілі, особиста сторінка трекера і пряме підключення до Claude чи ChatGPT (MCP). Інші чати, як-от Gemini, працюють копіюванням. Щоб долучитися, напишіть мені.'],
-        ['Є зараз', 'Рушій на GitHub, безкоштовний для особистого й некомерційного використання, з офлайн-демо та прикладами профілів. Пакет для асистента Claude, ChatGPT і Gemini без коду. Безкоштовний браузерний трекер, що зберігає ваші дані у вашому браузері. Посібник з налаштування, демо та схеми.'],
+        ['Є зараз', 'Рушій на GitHub, безкоштовний для особистого й некомерційного використання, з офлайн-демо та прикладами профілів. Пакет для асистента Claude, ChatGPT і Gemini без коду. Посібник з налаштування, демо та схеми.'],
         ['Далі', 'Більше сайтів із вакансіями та кар\'єрних сторінок компаній, більше місця для вакансій в онлайн трекері, справжні скриншоти в посібнику й публічний запуск із самостійною реєстрацією.'],
       ],
       stateFollow: 'Щоб дізнатися про нові сайти й публічний запуск, підпишіться на Telegram-канал.',
@@ -192,15 +183,6 @@ const C = {
       ],
       ctaH: 'Хочете допомогу з налаштуванням власного пошуку?', ctaText: 'Я проводжу консультації на годину й пробні співбесіди. Можемо разом зібрати ваш Fact Bank, правила й рутину.',
       ctaBtn: 'Запросити консультацію', ctaIntro: 'Або запишіться на безкоштовне знайомство на 20 хвилин', tg: 'Telegram-канал',
-    },
-    tracker: {
-      title: 'Ваш трекер вакансій у вашому браузері', desc: 'Безкоштовний трекер для Job Search Engine. Завантажте вакансії, які знайшов рушій, скопіюйте їх у вашого ШІ-асистента й застосуйте його відповіді. Усе лишається у вашому браузері.',
-      crumb: 'Браузерний трекер', h1: 'Ваш браузерний трекер', onlineNote: 'Не хочете запускати рушій самі? Онлайн трекер щоранку збирає для вас підхожі вакансії.', onlineLink: 'Відкрити онлайн трекер',
-      lead: 'Завантажте вакансії, які знайшов рушій, опрацьовуйте їх і тримайте кожен статус в одному місці. Ваші дані лишаються в цьому браузері. Нічого не надсилається ні мені, ні на жоден сервер.',
-      notice: 'Робіть резервні копії кнопкою експорту. Очищення даних браузера видаляє цей трекер.',
-      stepsH: 'Як користуватися',
-      steps: ['Запустіть рушій і завантажте out/import_latest.json кнопкою імпорту. Кожна картка приносить повний опис вакансії та вердикт перевірки.', 'Натисніть "Скопіювати для ШІ" на вакансії й вставте її у проєкт вашого асистента.', 'Вставте відповідь асистента в "Застосувати відповідь ШІ". Трекер прочитає блок card-update і заповнить картку.', 'Подайтеся на сайті роботодавця, змініть статус і протягом 3 днів напишіть 1-2 людям у LinkedIn.'],
-      guide: 'Посібник з налаштування', demo: 'Спершу спробувати демо', code: 'Код рушія на GitHub',
     },
     demo: {
       title: 'Демо Job Search Engine: інтерактивний трекер з вигаданими даними', desc: 'Спробуйте трекер Job Search Engine у браузері. Усі вакансії вигадані. Ваші зміни лишаються на вашому пристрої, нічого не надсилається на сервер.',
@@ -285,7 +267,7 @@ function jse(k) {
     <h2 class="sub" id="build">${esc(c.buildH)}</h2>
     <p>${esc(c.buildLead)}</p>
     <ol class="jse-build">${c.build.map((x) => `<li>${esc(x)}</li>`).join('')}</ol>
-    <p><a class="btn" href="${base}setup/" data-ev="cta_click">${esc(c.guideLink)}</a> <a class="btn ghost" href="${base}demo/" data-ev="cta_click">${esc(c.demoBtn)}</a> <a class="btn ghost" href="${base}tracker/" data-ev="cta_click">${esc(c.trackerLink)}</a> <a class="btn ghost" href="${base}hosted/" data-ev="cta_click">${esc(c.hostedLink)}</a> <a class="btn ghost" href="${REPO}/tree/main/assistant" target="_blank" rel="noopener" data-ev="cta_click">${esc(c.packLink)}</a></p>
+    <p><a class="btn" href="${base}setup/" data-ev="cta_click">${esc(c.guideLink)}</a> <a class="btn ghost" href="${base}demo/" data-ev="cta_click">${esc(c.demoBtn)}</a> <a class="btn ghost" href="${base}hosted/" data-ev="cta_click">${esc(c.hostedLink)}</a> <a class="btn ghost" href="${REPO}/tree/main/assistant" target="_blank" rel="noopener" data-ev="cta_click">${esc(c.packLink)}</a></p>
     <p class="note"><a href="${REPO}" target="_blank" rel="noopener" data-ev="cta_click">${esc(c.codeBtn)} →</a></p>
 
     <h2 class="sub" id="state">${esc(c.stateH)}</h2>
@@ -339,20 +321,6 @@ function ad(k) {
   return shell(k, { path, otherPath: pth(k === 'en' ? 'uk' : 'en', '/tools/job-search-engine/demo/ad/'), title: c.title, desc: c.desc, crumbs: [{ name: p.tools, item: `${SITE}${pth(k, '/tools/')}` }, { name: C[k].jse.crumb, item: `${SITE}${base}` }, { name: C[k].demo.crumb, item: `${SITE}${base}demo/` }, { name: c.h1, item: `${SITE}${path}` }], body, script: '/assets/jse-demo.js', robots: 'noindex, follow' });
 }
 
-function tracker(k) {
-  const c = C[k].tracker, j = C[k].jse, p = P[k], base = pth(k, '/tools/job-search-engine/'), path = `${base}tracker/`;
-  const body = `<nav class="jse-crumb" aria-label="Breadcrumb"><a href="${p.toolsPath}">${esc(p.tools)}</a> / <a href="${base}">${esc(j.crumb)}</a> / ${esc(c.crumb)}</nav>
-    <h1 style="font-size:2rem">${esc(c.h1)}</h1>
-    <p class="lead">${esc(c.lead)}</p>
-    <p class="jse-notice" role="note">${esc(c.notice)}</p>
-    <p class="note">${esc(c.onlineNote)} <a href="${base}hosted/" data-ev="cta_click">${esc(c.onlineLink)} →</a></p>
-    <div id="jse-app" class="jse-app" data-mode="live"><noscript><p>${esc(C[k].demo.noscript)}</p></noscript></div>
-    <section class="jse-co"><h2 class="sub">${esc(c.stepsH)}</h2><ol class="jse-fsteps">${c.steps.map((x) => `<li>${esc(x)}</li>`).join('')}</ol></section>
-    <p style="margin-top:22px"><a class="btn" href="${base}setup/" data-ev="cta_click">${esc(c.guide)}</a> <a class="btn ghost" href="${base}demo/" data-ev="cta_click">${esc(c.demo)}</a> <a class="btn ghost" href="${REPO}" target="_blank" rel="noopener" data-ev="cta_click">${esc(c.code)}</a></p>`;
-  return shell(k, { path, otherPath: pth(k === 'en' ? 'uk' : 'en', '/tools/job-search-engine/tracker/'), title: c.title, desc: c.desc,
-    crumbs: [{ name: p.tools, item: `${SITE}${pth(k, '/tools/')}` }, { name: j.crumb, item: `${SITE}${base}` }, { name: c.crumb, item: `${SITE}${path}` }], body, script: '/assets/jse-demo.js' });
-}
-
 function write(rel, html) { const f = join(ROOT, 'public', rel, 'index.html'); mkdirSync(dirname(f), { recursive: true }); writeFileSync(f, html); }
 for (const k of ['en', 'uk']) {
   const pre = k === 'uk' ? 'uk/' : '';
@@ -360,6 +328,5 @@ for (const k of ['en', 'uk']) {
   write(`${pre}tools/job-search-engine`, jse(k));
   write(`${pre}tools/job-search-engine/demo`, demo(k));
   write(`${pre}tools/job-search-engine/demo/ad`, ad(k));
-  write(`${pre}tools/job-search-engine/tracker`, tracker(k));
 }
 console.log('tools: hub + job-search-engine + demo written (en + uk)');

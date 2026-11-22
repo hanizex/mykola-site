@@ -11,3 +11,9 @@
 /uk/book/ /uk/request/ 301
 /uk/done /uk/request/ 301
 /uk/done/ /uk/request/ 301
+
+# The browser tracker page was retired: the online tracker replaces it.
+/tools/job-search-engine/tracker /tools/job-search-engine/hosted/ 301
+/tools/job-search-engine/tracker/ /tools/job-search-engine/hosted/ 301
+/uk/tools/job-search-engine/tracker /uk/tools/job-search-engine/hosted/ 301
+/uk/tools/job-search-engine/tracker/ /uk/tools/job-search-engine/hosted/ 301
