@@ -38,7 +38,9 @@
     document.head.appendChild(cfa);
   } catch (e) { /* analytics must never break the page */ }
 
-  // Google Analytics 4: loaded ONLY after the visitor accepts in the banner. Consent Mode starts as denied.
+  // Google Analytics 4. Visitors from the EU, the EEA, the UK and Switzerland are asked first (banner, Consent Mode starts
+  // as denied); everywhere else it loads without a question (/api/geo decides, the answer is kept for the browser session).
+  // Anyone can decline later with "Cookie settings" in the footer.
   // Do Not Track, Global Privacy Control and the owner's browser never reach this point (they return above).
   // The measurement ID is a public identifier, not a secret.
   const GA_ID = 'G-2V8P5MMY2K', CHOICE_KEY = 'ga-consent';
@@ -60,12 +62,12 @@
   }
   function dropGa() {
     gtag('consent', 'update', { analytics_storage: 'denied' });
+    const parts = location.hostname.split('.'), doms = [''];          // GA writes its cookie on a parent domain: clear every level
+    for (let i = 0; i < parts.length - 1; i++) { const d = parts.slice(i).join('.'); doms.push(d, '.' + d); }
     document.cookie.split(';').forEach((c) => {
       const n = c.split('=')[0].trim();
       if (!/^_ga/.test(n)) return;
-      const past = n + '=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/';
-      document.cookie = past;
-      document.cookie = past + '; domain=' + location.hostname;
+      doms.forEach((d) => { document.cookie = n + '=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/' + (d ? '; domain=' + d : ''); });
     });
   }
   const uk = (document.documentElement.lang || 'en').slice(0, 2) === 'uk';
@@ -91,7 +93,18 @@
     });
     document.body.appendChild(bar);
   }
-  if (choiceGet() === 'granted') loadGa(); else if (choiceGet() !== 'denied') showBar();
+  function needConsent() {
+    let cached = null;
+    try { cached = sessionStorage.getItem('geo-consent'); } catch (e) { /* ignore */ }
+    if (cached === '1' || cached === '0') return Promise.resolve(cached === '1');
+    return fetch('/api/geo', { credentials: 'omit' }).then((r) => r.json()).then((d) => {
+      try { sessionStorage.setItem('geo-consent', d.consent ? '1' : '0'); } catch (e) { /* ignore */ }
+      return !!d.consent;
+    }).catch(() => true);                                    // unknown: ask
+  }
+  const choice = choiceGet();
+  if (choice === 'granted') loadGa();
+  else if (choice !== 'denied') needConsent().then((ask) => { if (ask) showBar(); else loadGa(); });
   const foot = document.querySelector('footer.site .wrap');
   if (foot) {
     foot.appendChild(document.createTextNode(' · '));

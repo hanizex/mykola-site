@@ -13,12 +13,12 @@
   const set = (v) => { try { localStorage.setItem(KEY, v); } catch (e) { /* ignore */ } };
   const refused = navigator.doNotTrack === '1' || navigator.globalPrivacyControl;
   function dropCookies() {
+    const parts = location.hostname.split('.'), doms = [''];          // GA writes its cookie on a parent domain: clear every level
+    for (let i = 0; i < parts.length - 1; i++) { const d = parts.slice(i).join('.'); doms.push(d, '.' + d); }
     document.cookie.split(';').forEach((c) => {
       const n = c.split('=')[0].trim();
       if (!/^_ga/.test(n)) return;
-      const past = n + '=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/';
-      document.cookie = past;
-      document.cookie = past + '; domain=' + location.hostname;
+      doms.forEach((d) => { document.cookie = n + '=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/' + (d ? '; domain=' + d : ''); });
     });
   }
   function render() {
