@@ -1,12 +1,12 @@
 ---
 title: One question to test how well a candidate really knows project management
-description: If you have time for only one interview question for a project manager, ask about their real role in every phase of the SDLC. Here is how to read the answer.
+description: If you have time for only one interview question for a project manager, ask about their real role in every phase, from initiation to support. Here is how to read the answer.
 date: 2026-11-09
 slug: one-question-to-test-a-project-manager
 key: one-question-to-test-a-project-manager
 cta: consult
-summary: Ask the candidate to describe their responsibilities and actual work in each phase of the software development life cycle, in 5 to 10 minutes. The number of phases they cover and how concrete they are tells you their level.
-tags: project management, hiring, interview questions, SDLC
+summary: Ask the candidate to describe their responsibilities and actual work in each phase, from project initiation through the software development phases (SDLC) to closure and support, in 5 to 10 minutes. The number of areas they cover and how concrete they are tells you their level.
+tags: project management, hiring, interview questions, SDLC, project life cycle
 source: t.me/outstanding_pm/288 (17 May 2024)
 cover: question
 cover_alt: Large question mark inside a dotted circle with nine points
@@ -17,7 +17,7 @@ Want a PM salary? Tell me what you actually manage.
 
 If I could ask a PM candidate only one question, it would be this:
 
-"Walk me through your last project. What were you responsible for, and what did you actually do in each phase of the SDLC?"
+"Walk me through your last project. What were you responsible for, and what did you actually do in each phase, from initiation to support after the release?"
 
 Give them 5–10 minutes.
 
@@ -25,6 +25,7 @@ I'm listening for decisions, responsibilities, and results.
 A polished list of PM verbs won't take long to fall apart.
 
 These are the nine areas I want to explore.
+The classic SDLC has 6 or 7 phases, from requirements to maintenance. I add initiation and closure from the project life cycle, because a PM owns those too.
 
 → Initiation. Why did the project exist? Who needed it? What made it worth doing?
 → Planning. Scope, estimates, resources, risks, schedule, budget.
@@ -38,15 +39,15 @@ These are the nine areas I want to explore.
 
 ```diagram
 type: steps
-title: The nine SDLC areas I listen for
-- Initiation | why the project existed
+title: Nine areas: project and SDLC
+- Initiation | project phase: why it existed
 - Planning | scope, estimates, resources, risks, schedule, budget
 - Analysis | agreement on real needs
 - Design | decisions and approvals
 - Development | when reality eats the plan
 - Testing | quality checks and acceptance
 - Deployment | who must be ready for the release
-- Closure | acceptance and handover
+- Closure | project phase: acceptance and handover
 - Maintenance | support, stability, changes
 ```
 
@@ -82,7 +83,7 @@ right: A professional's answer
 lefticon: book
 righticon: star
 - A polished list of PM verbs | Decisions, responsibilities, results
-- Names all nine phases | Explains decisions and responsibilities
+- Names all nine areas | Explains decisions and responsibilities
 - "I coordinated development" | What was decided, with whom, what changed
 ```
 
