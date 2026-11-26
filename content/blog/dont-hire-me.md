@@ -24,15 +24,17 @@ Some need a secretary, a dispatcher, a corporate dummy or a human pinger: "Any u
 
 I'm not a fit for any of those roles.
 
-```diagram
-type: compare
+```visual
+type: versus
 title: Who they look for instead of a manager
 left: What some companies need
 right: What a manager does
+lefticon: x
+righticon: check
 - Secretary | Makes it clear who does what, when and why
-- Dispatcher | A partner, not a messenger between leadership and the team
-- Corporate dummy | Has the authority and drives agreed changes
-- Human pinger: "Any updates?" | Talks openly about problems, constraints and the real state of projects
+- Dispatcher | A partner, not a messenger
+- Corporate dummy | Has the authority, drives agreed changes
+- Human pinger: "Any updates?" | Talks openly about problems
 ```
 
 ## Don't hire me if you...
@@ -80,6 +82,15 @@ I work for results:
 - The business gets stronger.
 - Revenue and profitability go up.
 - Goals are reached faster and more easily.
+
+```visual
+type: hub
+title: What the business gets
+center: The result
+- A stronger business | shield
+- Revenue and profitability up | up
+- Goals reached faster | target
+```
 
 If that's what you expect from a Manager, we should meet and talk.
 

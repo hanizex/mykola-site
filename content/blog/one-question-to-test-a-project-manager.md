@@ -58,13 +58,12 @@ My rough read of the answer:
 
 ③ Professional. Covers 6–9 areas. Explains decisions and responsibilities clearly. Has examples ready when asked.
 
-```diagram
-type: bars
+```visual
+type: stairs
 title: How many of the 9 areas a candidate covers
-max: 9
-- Beginner | 2-4 | broad phrases, needs prompting
-- Intermediate | 3-5 | mostly concrete, with gaps
-- Professional | 6-9 | clear decisions, examples ready
+- Beginner | 2-4 areas, broad phrases, needs prompting
+- Intermediate | 3-5 areas, mostly concrete, with gaps
+- Professional | 6-9 areas, clear decisions, examples ready
 ```
 
 Different phase names? Fine.
@@ -74,6 +73,18 @@ And if someone names all nine but can't explain a single decision, we have a voc
 
 "I coordinated development" gives me very little.
 What did you decide? With whom? What changed because of it?
+
+```visual
+type: versus
+title: What I hear in the answer
+left: A vocabulary test
+right: A professional's answer
+lefticon: book
+righticon: star
+- A polished list of PM verbs | Decisions, responsibilities, results
+- Names all nine phases | Explains decisions and responsibilities
+- "I coordinated development" | What was decided, with whom, what changed
+```
 
 That's where the interview gets interesting.
 

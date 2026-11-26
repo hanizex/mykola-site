@@ -28,15 +28,15 @@ The most expensive mistake is confusing a "beautiful presentation" with a leader
 A beautiful story and polished slides are not the end value.
 The value is in the model of reality you create, one where it's clear:
 
-```diagram
-type: cards
-mark: check
+```visual
+type: hub
 title: The model of reality a story has to create
-- What should happen
-- Who owns it
-- What the risk is
-- What will count as failure
-- What has top priority
+center: Model of reality
+- What should happen | flag
+- Who owns it | user
+- What the risk is | warning
+- What counts as failure | x
+- Top priority | target
 ```
 
 Without that, your "mission" becomes set decoration and your team becomes the audience.
@@ -67,6 +67,15 @@ right: What you get
 ## A narrative is either a system or nonsense
 
 Either your narrative brings intention, [responsibility](/blog/project-manager-seniority-is-responsibility/) and effectiveness together into one system, or you're just voicing nonsense at great expense and wondering why "nobody got on board".
+
+```visual
+type: venn
+title: A narrative that works as a system
+center: One system
+- Intention | what we start and what we stop
+- Responsibility | decision, owner, deadline
+- Effectiveness | the process moves without your words
+```
 
 Which one phrase from your "corporate stories" most often hides the absence of real intentions?
 

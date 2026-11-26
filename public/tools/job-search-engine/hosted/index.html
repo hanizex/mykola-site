@@ -3,6 +3,9 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <meta name="theme-color" content="#0a0d12">
+  <meta name="text-scale" content="scale">
   <title>Set up the Job Search Engine online tracker</title>
   <meta name="description" content="How to use the online Job Search Engine tracker with Claude, ChatGPT, Gemini or any other AI chat: MCP connector steps and a manual copy-and-paste mode.">
   <meta name="robots" content="index, follow, max-image-preview:large">
@@ -22,21 +25,23 @@
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="/assets/style.css">
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Mykola Kalakutskyi","item":"https://mykola.pages.dev/"},{"@type":"ListItem","position":2,"name":"Tools","item":"https://mykola.pages.dev/tools/"},{"@type":"ListItem","position":3,"name":"Job Search Engine","item":"https://mykola.pages.dev/tools/job-search-engine/"},{"@type":"ListItem","position":4,"name":"Online tracker guide","item":"https://mykola.pages.dev/tools/job-search-engine/hosted/"}]}</script>
+  <script type="speculationrules">{"prefetch":[{"where":{"and":[{"href_matches":"/*"},{"not":{"href_matches":"/api/*"}}]},"eagerness":"moderate"}]}</script>
 </head>
 <body>
+  <a class="skip" href="#main">Skip to content</a>
   <header class="site"><div class="wrap"><a class="brand" href="/">Mykola Kalakutskyi</a><nav><a href="/cv/">CV</a><a href="/blog/">Blog</a><a href="/tools/" aria-current="page">Tools</a><a href="/uk/tools/job-search-engine/hosted/" hreflang="uk" lang="uk" title="Читати українською">UA</a></nav></div></header>
-  <main class="wrap jse">
+  <main id="main" class="wrap jse">
     <nav class="jse-crumb" aria-label="Breadcrumb"><a href="/tools/">Tools</a> / <a href="/tools/job-search-engine/">Job Search Engine</a> / Online tracker guide</nav>
     <h1 style="font-size:2.1rem">Set up the online tracker</h1>
     <p class="jse-notice" role="note"><strong class="hp-accent">Free access during the test period.</strong> To get a personal link, write to me (see the end of this page). Your link is your key: do not share it.</p>
     <p class="lead">The online tracker collects fitting jobs for you every morning and keeps their statuses. Your AI chat does the thinking: it sets your search goals, screens an ad against your own facts and writes your CV and messages. This page shows how to connect it.</p>
     <h2 class="sub" id="need">What you need</h2><ul><li>A personal tracker link from me (it looks like a web address that ends in a long secret).</li><li>An AI chat with projects or custom instructions: Claude, ChatGPT or Gemini (Gems) are fine. A free plan is enough.</li><li>Your CV, or several, plus a LinkedIn profile data export, to build the Fact Bank. The Fact Bank is then used to tailor CVs and cover letters. Your data is processed on your side, in your own chat. <strong class="hp-accent">No sensitive information is sent to the online tracker.</strong></li></ul>
-    <h2 class="sub" id="connector">Way A: Claude or ChatGPT <span class="hp-accent">(MCP connector, recommended)</span></h2><p>You work with the tracker and its jobs through your chat: you read the content, refine your goals and update cards. The tracker is the single universal dashboard and the source of statuses for every job (so the tracker really is a tracker 🙂).</p><ol class="hp-steps"><li>Open your tracker link in a browser. At the bottom of the page you see a connector address. Press &quot;Copy connector address&quot;.</li><li>Claude: open claude.ai/plugins/yours, press Add, then Add custom connector. Paste the address of the custom MCP (the link must end with &quot;/mcp&quot;). Choose any name you like and leave the OAuth settings alone. The free plan allows one custom connector.<figure class="hp-shot"><a href="/assets/jse/claude-add-connector.jpg" target="_blank" rel="noopener"><img src="/assets/jse/claude-add-connector.jpg" alt="Claude: the Add menu with &quot;Add custom connector&quot;" loading="lazy"></a><figcaption>Click to enlarge</figcaption></figure></li><li>ChatGPT (a free plan works too): open chatgpt.com/plugins, press Add, then Add custom MCP server. Paste the address of the custom MCP (the link must end with &quot;/mcp&quot;). Set authentication to &quot;No authentication&quot;. Description, name and icon: whatever you like.<figure class="hp-shot"><a href="/assets/jse/chatgpt-add-mcp.jpg" target="_blank" rel="noopener"><img src="/assets/jse/chatgpt-add-mcp.jpg" alt="ChatGPT: the dialog &quot;Add custom MCP server&quot; with the authentication list" loading="lazy"></a><figcaption>Click to enlarge</figcaption></figure></li><li>Start a new chat and write: &quot;Help me set up my job search with the online tracker via MCP.&quot; The chat loads the rules from the tracker, asks about your goals, proposes up to 3 search terms and asks you to confirm.</li><li>Next you will build the Fact Bank and prepare the Master CV. Your AI chat already has all the instructions: it knows what must be collected so that everything is enough for the work, it explains it all and helps you do it.</li><li>Then you can start taking the jobs from your tracker into work. I do it with the request &quot;Process the next job from the tracker&quot;.</li></ol><p class="note">The connector holds only search rules and job cards. Your name, CV and facts stay in your own chat project.</p>
+    <h2 class="sub" id="connector">Way A: Claude or ChatGPT <span class="hp-accent">(MCP connector, recommended)</span></h2><p>You work with the tracker and its jobs through your chat: you read the content, refine your goals and update cards. The tracker is the single universal dashboard and the source of statuses for every job (so the tracker really is a tracker 🙂).</p><ol class="hp-steps"><li>Open your tracker link in a browser. At the bottom of the page you see a connector address. Press &quot;Copy connector address&quot;.</li><li>Claude: open claude.ai/plugins/yours, press Add, then Add custom connector. Paste the address of the custom MCP (the link must end with &quot;/mcp&quot;). Choose any name you like and leave the OAuth settings alone. The free plan allows one custom connector.<figure class="hp-shot"><a href="/assets/jse/claude-add-connector.jpg" target="_blank" rel="noopener"><img src="/assets/jse/claude-add-connector.jpg" alt="Claude: the Add menu with &quot;Add custom connector&quot;" width="1400" height="417" loading="lazy" decoding="async"></a><figcaption>Click to enlarge</figcaption></figure></li><li>ChatGPT (a free plan works too): open chatgpt.com/plugins, press Add, then Add custom MCP server. Paste the address of the custom MCP (the link must end with &quot;/mcp&quot;). Set authentication to &quot;No authentication&quot;. Description, name and icon: whatever you like.<figure class="hp-shot"><a href="/assets/jse/chatgpt-add-mcp.jpg" target="_blank" rel="noopener"><img src="/assets/jse/chatgpt-add-mcp.jpg" alt="ChatGPT: the dialog &quot;Add custom MCP server&quot; with the authentication list" width="1400" height="847" loading="lazy" decoding="async"></a><figcaption>Click to enlarge</figcaption></figure></li><li>Start a new chat and write: &quot;Help me set up my job search with the online tracker via MCP.&quot; The chat loads the rules from the tracker, asks about your goals, proposes up to 3 search terms and asks you to confirm.</li><li>Next you will build the Fact Bank and prepare the Master CV. Your AI chat already has all the instructions: it knows what must be collected so that everything is enough for the work, it explains it all and helps you do it.</li><li>Then you can start taking the jobs from your tracker into work. I do it with the request &quot;Process the next job from the tracker&quot;.</li></ol><p class="note">The connector holds only search rules and job cards. Your name, CV and facts stay in your own chat project.</p>
     <h2 class="sub" id="manual">Way B: Gemini and other chats (manual mode)</h2><p>If you cannot set up an MCP, you have to copy and paste some information yourself. For convenience the tracker already has the buttons &quot;Copy for AI&quot; and &quot;Apply AI result&quot;. Search goals you set yourself, with the &quot;Search goals&quot; button in the tracker.</p><ol class="hp-steps"><li>Open your tracker and press &quot;Search goals&quot;. Fill in your job titles, up to 3 DOU search terms (and, if you like, up to 3 Djinni keywords), the country where you live, and your languages.</li><li>Create a project (Claude), a Gem (Gemini) or a custom GPT, and paste the &quot;Project instructions&quot; block below into its instructions.</li><li>Add the modules (blocks below) as knowledge files or paste them into the chat when asked. Add your CV as text.</li><li>Open a job card (Details and full ad) and press &quot;Copy for AI&quot;. Paste it into your chat and write: &quot;Tailor my CV to this job&quot;.</li><li>The chat works through the steps and, at the end, gives a block named card-update.</li><li>Copy that answer, scroll to &quot;Apply AI result&quot; in your tracker, paste it and press Check. You see what will change on the card. Press &quot;Save to the card&quot;.</li></ol><p class="note">The block never changes your cover message on a card you already work on, and it never sends anything anywhere. You always see the change before it is saved.</p>
     <h2 class="sub" id="pack">Prompt pack for your AI chat</h2><p>This is the same text the connector hands to Claude and ChatGPT. It is public: the source is on GitHub. Copy a block and paste it into your chat project. <a href="https://github.com/hanizex/job-search-automation/tree/main/assistant" rel="noopener">GitHub →</a></p>
     <div class="hp-blocks"><details class="hp-block"><summary><span>Project instructions (paste into the chat instructions)</span><em>10200 characters</em></summary>
-      <div class="hp-actions"><button type="button" class="btn ghost" data-copy-target="hp-0" data-done="Copied">Copy</button></div>
-      <pre id="hp-0" class="hp-pre"># Project instructions: Job Search Engine assistant
+      <div class="hp-actions"><button type="button" class="btn ghost" data-copy-target="hp-0" data-done="Copied" aria-label="Copy: Project instructions (paste into the chat instructions)">Copy</button></div>
+      <pre id="hp-0" class="hp-pre" lang="en" tabindex="0" aria-label="Project instructions (paste into the chat instructions)"># Project instructions: Job Search Engine assistant
 
 You are the personal job-search assistant of one person. You help them build and use files that they own: `profile.json`, `fact_bank.md`, `master_cv.md`, and `fact_inbox.md` for new facts. Reply in the language the person writes in. Use plain words and short sentences. Explain terms such as &quot;wall&quot; (a hard requirement you do not meet) the first time you use them.
 
@@ -89,8 +94,8 @@ Spaces count; a line break counts as one character. Count with a tool if you hav
 Say plainly what is ready, what is a gap, and what you did not do (nothing was submitted).
 </pre></details>
 <details class="hp-block"><summary><span>Module 1: job goals interview</span><em>12700 characters</em></summary>
-      <div class="hp-actions"><button type="button" class="btn ghost" data-copy-target="hp-1" data-done="Copied">Copy</button></div>
-      <pre id="hp-1" class="hp-pre"># Module 1: the search profile interview
+      <div class="hp-actions"><button type="button" class="btn ghost" data-copy-target="hp-1" data-done="Copied" aria-label="Copy: Module 1: job goals interview">Copy</button></div>
+      <pre id="hp-1" class="hp-pre" lang="en" tabindex="0" aria-label="Module 1: job goals interview"># Module 1: the search profile interview
 
 Goal: write `profile.json`, the one file the engine reads. The person never edits it by hand. You interview them, show the result in plain words, and write the file only after they confirm. A clear &quot;yes&quot;, &quot;ok&quot; or &quot;looks right&quot; is a confirmation; anything vaguer is not.
 
@@ -168,8 +173,8 @@ If the person lives in a country that is not in the list, ask for the nearest on
 The engine checks the file and answers in plain words, for example &quot;location.home_country: unknown country&quot;. Fix exactly what it names, show the change, and write the file again.
 </pre></details>
 <details class="hp-block"><summary><span>Module 2: Fact Bank</span><em>8743 characters</em></summary>
-      <div class="hp-actions"><button type="button" class="btn ghost" data-copy-target="hp-2" data-done="Copied">Copy</button></div>
-      <pre id="hp-2" class="hp-pre"># Module 2: the Fact Bank
+      <div class="hp-actions"><button type="button" class="btn ghost" data-copy-target="hp-2" data-done="Copied" aria-label="Copy: Module 2: Fact Bank">Copy</button></div>
+      <pre id="hp-2" class="hp-pre" lang="en" tabindex="0" aria-label="Module 2: Fact Bank"># Module 2: the Fact Bank
 
 Goal: one file, `fact_bank.md`, with everything true about the person that a CV or a message may use, each fact with its evidence. Only confirmed facts are used. The Bank keeps growing.
 
@@ -235,8 +240,8 @@ Employment history is there for every role; each result has a number or a clear,
 Compare the job titles in the Bank with `roles.titles` in `profile.json`. If the person's own titles or close variants are missing (&quot;Backend Developer&quot; while the list says &quot;backend engineer&quot;), offer to add them. When a new title contains an existing one, say it adds nothing and add only the shorter one. Insisting means asking again after being told; then add it. With the online tracker connected, change titles through the goals flow (`get_search_profile`, then `suggest_terms`, one yes, `update_search_profile`, `get_scan_status` once); otherwise write the updated `profile.json`. Report the result in the chat; the Bank has no section for it.
 </pre></details>
 <details class="hp-block"><summary><span>Module 3: Master CV</span><em>3679 characters</em></summary>
-      <div class="hp-actions"><button type="button" class="btn ghost" data-copy-target="hp-3" data-done="Copied">Copy</button></div>
-      <pre id="hp-3" class="hp-pre"># Module 3: the Master CV
+      <div class="hp-actions"><button type="button" class="btn ghost" data-copy-target="hp-3" data-done="Copied" aria-label="Copy: Module 3: Master CV">Copy</button></div>
+      <pre id="hp-3" class="hp-pre" lang="en" tabindex="0" aria-label="Module 3: Master CV"># Module 3: the Master CV
 
 Goal: one strong base CV, built from the confirmed Fact Bank, in a structure that works with applicant tracking systems (ATS). The person confirms the result. A Master CV fits almost any job ad without changes; adjusting it to the ad (module 4) raises the chances further. Tell the person both things.
 
@@ -273,8 +278,8 @@ Every line except the header matches a confirmed fact; competency keywords reuse
 Show the working version and the check results. Ask for changes. Save the Master CV when the person confirms. Then tell them it is ready for most jobs as it is, and that tailoring it to a specific ad still raises the chances.
 </pre></details>
 <details class="hp-block"><summary><span>Module 4: tailor to a job</span><em>12244 characters</em></summary>
-      <div class="hp-actions"><button type="button" class="btn ghost" data-copy-target="hp-4" data-done="Copied">Copy</button></div>
-      <pre id="hp-4" class="hp-pre"># Module 4: tailor a CV and messages to one job
+      <div class="hp-actions"><button type="button" class="btn ghost" data-copy-target="hp-4" data-done="Copied" aria-label="Copy: Module 4: tailor to a job">Copy</button></div>
+      <pre id="hp-4" class="hp-pre" lang="en" tabindex="0" aria-label="Module 4: tailor to a job"># Module 4: tailor a CV and messages to one job
 
 Input: a pasted job, usually a tracker card (id, company, role, location, link, screening verdict) plus the full job description. With the online tracker connected, `get_next_job` or `get_job` gives the card, the ad and the id; do not ask for a paste. If the description is missing, ask the person to open the source and paste the text; never guess requirements from the title. If the card says the status is already `applied`, stop and ask before building anything new.
 
@@ -324,8 +329,8 @@ Input: a pasted job, usually a tracker card (id, company, role, location, link, 
 When the person says they applied: with the online tracker, find the card (status `ready`, or the one you just worked on), call `update_job` with `status: &quot;applied&quot;` and a `next`; do not touch the cover. Then remind the person of the one step most people skip: within 3 days, write to 1 or 2 people at the company, using the drafted message.
 </pre></details>
 <details class="hp-block"><summary><span>Module 5: after an interview</span><em>2362 characters</em></summary>
-      <div class="hp-actions"><button type="button" class="btn ghost" data-copy-target="hp-5" data-done="Copied">Copy</button></div>
-      <pre id="hp-5" class="hp-pre"># Module 5: after an interview
+      <div class="hp-actions"><button type="button" class="btn ghost" data-copy-target="hp-5" data-done="Copied" aria-label="Copy: Module 5: after an interview">Copy</button></div>
+      <pre id="hp-5" class="hp-pre" lang="en" tabindex="0" aria-label="Module 5: after an interview"># Module 5: after an interview
 
 Goal: keep the tracking clear and let the Fact Bank learn from every conversation.
 
@@ -341,8 +346,8 @@ Then:
 5. **Patterns.** After several interviews, offer once to look for patterns in the questions asked and the gaps that came up, and what to add to the Fact Bank.
 </pre></details>
 <details class="hp-block"><summary><span>Template: Fact Bank</span><em>1475 characters</em></summary>
-      <div class="hp-actions"><button type="button" class="btn ghost" data-copy-target="hp-6" data-done="Copied">Copy</button></div>
-      <pre id="hp-6" class="hp-pre"># Fact Bank
+      <div class="hp-actions"><button type="button" class="btn ghost" data-copy-target="hp-6" data-done="Copied" aria-label="Copy: Template: Fact Bank">Copy</button></div>
+      <pre id="hp-6" class="hp-pre" lang="en" tabindex="0" aria-label="Template: Fact Bank"># Fact Bank
 
 Only confirmed facts are used. IDs never change. Dates are MM/YYYY – MM/YYYY; a current role ends with Present.
 
@@ -396,8 +401,8 @@ Source: &lt;where it comes from&gt;
 &lt;claims that still need a number, a date or a decision. Never written as facts.&gt;
 </pre></details>
 <details class="hp-block"><summary><span>Template: Fact Inbox</span><em>276 characters</em></summary>
-      <div class="hp-actions"><button type="button" class="btn ghost" data-copy-target="hp-7" data-done="Copied">Copy</button></div>
-      <pre id="hp-7" class="hp-pre"># Fact Inbox
+      <div class="hp-actions"><button type="button" class="btn ghost" data-copy-target="hp-7" data-done="Copied" aria-label="Copy: Template: Fact Inbox">Copy</button></div>
+      <pre id="hp-7" class="hp-pre" lang="en" tabindex="0" aria-label="Template: Fact Inbox"># Fact Inbox
 
 New facts not yet merged into the Fact Bank. They count as Bank facts right away. When the same fact appears twice, the newest line wins.
 
@@ -407,8 +412,8 @@ Role: &lt;title, employer, dates&gt;
 Source: &lt;chat on YYYY-MM-DD&gt;
 </pre></details>
 <details class="hp-block"><summary><span>Template: Master CV</span><em>673 characters</em></summary>
-      <div class="hp-actions"><button type="button" class="btn ghost" data-copy-target="hp-8" data-done="Copied">Copy</button></div>
-      <pre id="hp-8" class="hp-pre">&lt;Full name&gt; | &lt;Job title&gt;
+      <div class="hp-actions"><button type="button" class="btn ghost" data-copy-target="hp-8" data-done="Copied" aria-label="Copy: Template: Master CV">Copy</button></div>
+      <pre id="hp-8" class="hp-pre" lang="en" tabindex="0" aria-label="Template: Master CV">&lt;Full name&gt; | &lt;Job title&gt;
 &lt;City, Country&gt; | Open to remote | &lt;email&gt; | &lt;phone&gt; | &lt;LinkedIn&gt;
 
 PROFESSIONAL SUMMARY

@@ -35,13 +35,14 @@ It's important to be able to ask politely for respect and for your boundaries to
 
 ## How a team gets used to each other
 
-```diagram
-type: steps
+```visual
+type: flow
 title: From friction to acceptance
-- Friction | Some find it fun, others find it annoying
-- Asking | We politely talk about respect and boundaries
-- Adapting | Over time the friction disappears
-- Acceptance | Everyone can be themselves without tension or stress
+end: effect
+- Friction | some find it fun, others find it annoying | fire
+- Asking | we politely talk about respect and boundaries | chat
+- Adapting | over time the friction disappears | cycle
+- Acceptance | everyone can be themselves without tension or stress | heart
 ```
 
 What you end up with is a great feeling of freedom and acceptance: everyone can be themselves without creating tension or adding stress on video calls.
@@ -51,11 +52,14 @@ What you end up with is a great feeling of freedom and acceptance: everyone can 
 Of course, a team's internal calls are very different from the ones with clients and other stakeholders.
 There, corporate and business culture demands formality, strictness, politeness and order.
 
-```diagram
-type: compare
+```visual
+type: versus
 title: Our calls and their calls
 left: Internal team call
-right: Call with clients and stakeholders
+right: Call with clients
+lefticon: team
+righticon: stamp
+tone: neutral
 - You can be yourself | Formality
 - Freedom | Strictness
 - Acceptance | Politeness and order

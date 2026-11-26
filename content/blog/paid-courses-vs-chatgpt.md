@@ -19,17 +19,15 @@ Why go to a paid course when everyone already has ChatGPT?
 Explanations, examples and templates are easy to find now.
 Knowledge on its own has stopped being worth much.
 
-```diagram
-type: groups
+```visual
+type: balance
 title: What lost its value and what gained it
-# Easy to find
-- Explanations
-- Examples
-- Templates
-# Valuable
-- Knowing how to apply it
-- Knowing where to apply it
-- Knowing when to apply it
+left: Easy to find
+right: Valuable: knowing
+heavier: right
+- Explanations | How to apply it
+- Examples | Where to apply it
+- Templates | When to apply it
 ```
 
 ## The blind spot you can't see
@@ -65,6 +63,19 @@ AI won't push through your boundaries or break your resistance to everything new
 AI will hand you generic practices for a spherical company in a vacuum.
 
 And in complex, unique situations it will simply start hallucinating...
+
+```visual
+type: versus
+title: What AI gives and what a teacher gives
+left: AI
+right: A teacher
+lefticon: robot
+righticon: user
+- Won't tell you what you don't ask | Sees your blind spot
+- Won't break your resistance to new things | Pushes to break through resistance
+- Practices for a spherical company in a vacuum | Reviews your decisions
+- Hallucinates in complex situations | Explains at the right moment
+```
 
 ## If you're still stuck
 

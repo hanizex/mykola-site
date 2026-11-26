@@ -21,6 +21,18 @@ It's probably not the full list, but the main ones are here.
 
 ## 36 rejection reasons, grouped by theme
 
+```visual
+type: donut
+title: 36 reasons I was rejected for a job offer
+center: reasons
+- At the interview | 9
+- Who and where I am | 7
+- Skills and experience | 6
+- Money and terms | 5
+- Outside work | 5
+- How I look for a job | 4
+```
+
 ```diagram
 type: groups
 title: 36 reasons I was rejected for a job offer

@@ -25,14 +25,15 @@ I don't churn out hundreds of documents and force people to read them.
 
 I spend a lot of time observing, studying, thinking, analysing and planning. Then I do the thing that will have the expected positive effect for months or years.
 
-```diagram
-type: steps
+```visual
+type: flow
 title: What my work looks like
-- Observe and analyse | Study, think, plan
-- One simple action | The thing that will bring the result
-- A chain reaction | It spreads smoothly through the whole company: up, down and across
-- The effect | The expected positive effect for months or years
-- The system holds itself up | No overseer needed any more
+end: effect
+- Observe and analyse | study, think, plan | eye
+- One simple action | the thing that brings the result | idea
+- A chain reaction | up, down and across the company | cycle
+- Effect for months or years | the expected positive effect | up
+- The system holds itself up | no overseer needed any more | check
 ```
 
 It doesn't look like a revolution. Nobody loses the feeling of solid ground under their feet after it.
@@ -82,6 +83,17 @@ For example, if the goal is "cut Cycle Time by 20%", that also means keeping a c
 
 And if my approach costs the company YYY$, and YYY > XXX, those changes aren't worth making.
 Obviously))
+
+```visual
+type: balance
+title: A goal sets the budget for change
+left: YYY$
+right: XXX$
+heavier: left
+caption: YYY > XXX – those changes aren't worth making
+- The cost of my approach | Goal: Cycle Time -20%
+-  | The share of team costs kept
+```
 
 ```diagram
 type: quote

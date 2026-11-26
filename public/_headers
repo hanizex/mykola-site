@@ -1,0 +1,10 @@
+# Security and caching headers for static files (Cloudflare Pages). Pages already adds
+# Referrer-Policy: strict-origin-when-cross-origin and X-Content-Type-Options: nosniff.
+/*
+  X-Frame-Options: DENY
+  Permissions-Policy: camera=(), microphone=(), geolocation=(), payment=(), usb=()
+  Cross-Origin-Opener-Policy: same-origin
+
+# File names are not hashed, so keep the browser cache short and refresh in the background.
+/assets/*
+  Cache-Control: public, max-age=3600, stale-while-revalidate=604800

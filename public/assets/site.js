@@ -97,7 +97,7 @@
     let cached = null;
     try { cached = sessionStorage.getItem('geo-consent'); } catch (e) { /* ignore */ }
     if (cached === '1' || cached === '0') return Promise.resolve(cached === '1');
-    return fetch('/api/geo', { credentials: 'omit' }).then((r) => r.json()).then((d) => {
+    return fetch('/api/geo', { credentials: 'omit', signal: AbortSignal.timeout(3000) }).then((r) => r.json()).then((d) => {
       try { sessionStorage.setItem('geo-consent', d.consent ? '1' : '0'); } catch (e) { /* ignore */ }
       return !!d.consent;
     }).catch(() => true);                                    // unknown: ask

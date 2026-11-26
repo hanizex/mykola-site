@@ -45,12 +45,12 @@ export const MOTIFS = {
   money: `<ellipse cx="40" cy="74" rx="28" ry="9" stroke="{M}"/><path d="M12 74 v-12 M68 74 v-12" stroke="{M}"/><ellipse cx="40" cy="62" rx="28" ry="9" stroke="{M}"/><path d="M12 62 v-12 M68 62 v-12" stroke="{M}"/><ellipse cx="40" cy="50" rx="28" ry="9" stroke="{A}"/><circle cx="76" cy="26" r="16" stroke="{B}"/><path d="M76 18 v16 M71 22 h8 q3 0 3 3 q0 3 -3 3 h-6" stroke="{B}"/>`,
 };
 
-const PALETTES = [
+export const PALETTES = [
   ['#5b9bf8', '#f59e0b'], ['#2dd4bf', '#a78bfa'], ['#f59e0b', '#fb7185'], ['#a78bfa', '#5b9bf8'],
   ['#fb7185', '#2dd4bf'], ['#a3e635', '#5b9bf8'], ['#38bdf8', '#f472b6'], ['#facc15', '#60a5fa'],
 ];
 
-function hash(s) { let h = 2166136261; for (const c of String(s)) { h ^= c.codePointAt(0); h = Math.imul(h, 16777619); } return h >>> 0; }
+export function hash(s) { let h = 2166136261; for (const c of String(s)) { h ^= c.codePointAt(0); h = Math.imul(h, 16777619); } return h >>> 0; }
 function rng(seed) { let a = seed; return () => { a = (a + 0x6d2b79f5) | 0; let t = Math.imul(a ^ (a >>> 15), 1 | a); t = (t + Math.imul(t ^ (t >>> 7), 61 | t)) ^ t; return ((t ^ (t >>> 14)) >>> 0) / 4294967296; }; }
 const r1 = (n) => Math.round(n * 10) / 10;
 
@@ -103,7 +103,7 @@ ${shapes.join('\n')}
 const esc = (s) => String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 const inline = (s) => esc(s).replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
 
-function parseSpec(src) {
+export function parseSpec(src) {
   const meta = {}, items = [], groups = [];
   for (const raw of src.split('\n')) {
     const line = raw.trim();
@@ -118,7 +118,7 @@ function parseSpec(src) {
 
 const num = (v) => { const m = String(v).match(/^(-?\d+(?:[.,]\d+)?)(?:\s*[-–]\s*(-?\d+(?:[.,]\d+)?))?/); return m ? [parseFloat(m[1].replace(',', '.')), m[2] != null ? parseFloat(m[2].replace(',', '.')) : null] : [0, null]; };
 
-function wrapLabel(s, max = 16) {
+export function wrapLabel(s, max = 16) {
   const words = String(s).split(/\s+/), lines = [];
   let cur = '';
   for (const w of words) { if ((cur + ' ' + w).trim().length > max && cur) { lines.push(cur); cur = w; } else cur = (cur + ' ' + w).trim(); }

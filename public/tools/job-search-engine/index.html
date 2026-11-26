@@ -3,6 +3,9 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <meta name="theme-color" content="#0a0d12">
+  <meta name="text-scale" content="scale">
   <title>Job Search Engine (JSE): an automated job-search pipeline with a tracker</title>
   <meta name="description" content="How I run my job search like a delivery project: daily collection from company career systems, filters, ad screening, deduplication, a CV method with an ATS gate and a tracker. Diagrams, code free for personal use and a live demo with invented data.">
   <meta name="robots" content="index, follow, max-image-preview:large">
@@ -22,10 +25,12 @@
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="/assets/style.css">
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Mykola Kalakutskyi","item":"https://mykola.pages.dev/"},{"@type":"ListItem","position":2,"name":"Tools","item":"https://mykola.pages.dev/tools/"},{"@type":"ListItem","position":3,"name":"Job Search Engine","item":"https://mykola.pages.dev/tools/job-search-engine/"}]}</script>
+  <script type="speculationrules">{"prefetch":[{"where":{"and":[{"href_matches":"/*"},{"not":{"href_matches":"/api/*"}}]},"eagerness":"moderate"}]}</script>
 </head>
 <body>
+  <a class="skip" href="#main">Skip to content</a>
   <header class="site"><div class="wrap"><a class="brand" href="/">Mykola Kalakutskyi</a><nav><a href="/cv/">CV</a><a href="/blog/">Blog</a><a href="/tools/" aria-current="page">Tools</a><a href="/uk/tools/job-search-engine/" hreflang="uk" lang="uk" title="Читати українською">UA</a></nav></div></header>
-  <main class="wrap jse">
+  <main id="main" class="wrap jse">
     <nav class="jse-crumb" aria-label="Breadcrumb"><a href="/tools/">Tools</a> / Job Search Engine</nav>
     <h1 style="font-size:2.2rem">Job Search Engine (JSE)</h1>
     <p class="lead">A job search run like a delivery project: automate the repetitive parts, keep a human for the decisions, and measure whether each source is worth keeping.</p>

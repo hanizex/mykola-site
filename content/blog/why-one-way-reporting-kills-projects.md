@@ -19,6 +19,18 @@ If you say this sentence out loud, congratulations: that's control, not manageme
 
 A team must see what is happening in the system it works in.
 
+```visual
+type: iceberg
+title: What hides under the "green statuses"
+top: A theatre of "green statuses"
+topnote: what management sees
+- Guesses instead of context | extra meetings, rework, lost speed | question
+- No improvements | orders come without explanations | x
+- Initiative disappears | decisions look arbitrary | down
+- Trust in priorities is gone | motivation goes to zero | warning
+- Reports to avoid punishment | management can't see business threats | eye
+```
+
 ## Why one-way reporting destroys a project
 
 - **Orders without explanations** remove the team's ability to work on efficiency or suggest improvements.
@@ -48,15 +60,15 @@ right: Two-way reporting
 4. **Results of hypothesis checks.** What worked, what didn't, what we plan to change, which new questions appeared and which blind spots are still unexplored.
 5. **My own commitments and action plan.** What I, as the manager, will do to remove blockers and resolve conflicts between parties, with a clear timeline.
 
-```diagram
-type: cycle
+```visual
+type: hub
 title: My protocol for regular, open communication
 center: One picture for everyone
-- Priorities
-- Reasons for decisions
-- Constraints
-- Hypothesis results
-- My commitments
+- State of priorities | target
+- Reasons for decisions | idea
+- Constraints | lock
+- Hypothesis results | search
+- My commitments | flag
 ```
 
 The format is secondary. What matters is that everyone sees one picture: *our goals and values are the same*, and *I carry responsibility for the success of the project together with you*.

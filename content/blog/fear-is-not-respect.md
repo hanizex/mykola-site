@@ -34,15 +34,16 @@ title: How fear turns into a bill
 
 Fear doesn't hit one spot. It hits five at once.
 
-```diagram
-type: cards
-mark: cross
-title: Five effects of fear in a team
-- It blocks growth | People pick safe tasks instead of the ones that are needed.
-- It kills initiative | Better to keep quiet than risk being punished.
-- It strangles decision quality | The point is not to do it well, but to do it the way the top says.
-- It destroys trust | The leader hears from the team only what they want to hear.
-- It wipes out respect | The team "obeys" until a crisis hits.
+```visual
+type: iceberg
+title: What hides under a short burst of discipline
+top: A short burst of discipline
+topnote: what fear delivers
+- It blocks growth | safe tasks instead of needed ones | down
+- It kills initiative | better to keep quiet than take a risk | x
+- It strangles decisions | not done well, done as the top says | gear
+- It destroys trust | the leader hears only what they want | eye
+- It wipes out respect | the team "obeys" until a crisis hits | warning
 ```
 
 ## Why ruling by fear no longer works
@@ -70,12 +71,16 @@ I use a range of management tools that help the team achieve the best results, n
 A strong leader doesn't make people afraid.
 They set clear rules, [take responsibility](/blog/project-manager-seniority-is-responsibility/) and give people a caring space to reach their goals.
 
-```diagram
-type: compare
-title: What the team brings you
-left: A team that fears its leader
-right: A team that respects its leader
+```visual
+type: versus
+title: A team that fears vs a team that respects
+left: Fears the leader
+right: Respects the leader
+lefticon: warning
+righticon: shield
 - Brings excuses | Brings solutions
+- Keeps uncomfortable truths quiet | Brings uncomfortable truths
+- Looks away | Looks you in the eye
 ```
 
 So do your colleagues look you in the eye, or do they look away?

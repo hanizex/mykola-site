@@ -54,6 +54,17 @@ Where does this urge even come from?
 - They don't know how the company's processes work?
 - Or is it simply a habit of running everything personally?
 
+```visual
+type: iceberg
+title: What hides behind the urge to control every step
+top: "You won't figure it out without me!"
+topnote: what the team hears
+- Missing information | the client isn't getting what they need | eye
+- Broken agreements | the team has broken them before | warning
+- Unfamiliar processes | the client doesn't know how the company works | gear
+- Habit | running everything personally | control
+```
+
 Get to the bottom of the cause, and it's easy to find a solution that fixes the problem without breaking your processes.
 
 ## What to do: cause, roles, meetings, communication format
@@ -62,14 +73,15 @@ PMI materials on leadership say that trust and team autonomy matter.
 And Controlling Interest suggests finding out the reasons behind excessive interference.
 Agree on roles, meeting attendance and [the communication format](/blog/the-real-cost-of-a-quick-two-minute-call/).
 
-```diagram
-type: steps
+```visual
+type: flow
 title: How to bring the client back inside agreed boundaries
-caption: The goal: solve the problem without breaking your processes.
-- Find the cause | Where the urge to interfere comes from
-- Agree on roles
-- Agree on meeting attendance | Dailies, retrospective
-- Agree on the communication format
+end: effect
+- Find the cause | where the urge to interfere comes from | search
+- Agree on roles | who gives tasks to whom | team
+- Agree on meeting attendance | dailies, retrospective | calendar
+- Agree on the communication format | how and where we talk | chat
+- Problem solved | without breaking your processes | check
 ```
 
 ## Red-flag phrases in client communication

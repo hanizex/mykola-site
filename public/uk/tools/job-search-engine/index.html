@@ -3,6 +3,9 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <meta name="theme-color" content="#0a0d12">
+  <meta name="text-scale" content="scale">
   <title>Job Search Engine (JSE): автоматизований конвеєр пошуку роботи з трекером</title>
   <meta name="description" content="Як я веду пошук роботи як проєкт доставки: щоденний збір з кар'єрних систем компаній, фільтри, перевірка оголошень, дедуплікація, метод підготовки резюме з ATS-бар'єром і трекер. Схеми, код для особистого використання і живе демо з вигаданими даними.">
   <meta name="robots" content="index, follow, max-image-preview:large">
@@ -22,10 +25,12 @@
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="/assets/style.css">
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Микола Калакуцький","item":"https://mykola.pages.dev/uk/"},{"@type":"ListItem","position":2,"name":"Інструменти","item":"https://mykola.pages.dev/uk/tools/"},{"@type":"ListItem","position":3,"name":"Job Search Engine","item":"https://mykola.pages.dev/uk/tools/job-search-engine/"}]}</script>
+  <script type="speculationrules">{"prefetch":[{"where":{"and":[{"href_matches":"/*"},{"not":{"href_matches":"/api/*"}}]},"eagerness":"moderate"}]}</script>
 </head>
 <body>
+  <a class="skip" href="#main">Перейти до змісту</a>
   <header class="site"><div class="wrap"><a class="brand" href="/uk/">Микола Калакуцький</a><nav><a href="/uk/cv/">Резюме</a><a href="/uk/blog/">Блог</a><a href="/uk/tools/" aria-current="page">Інструменти</a><a href="/tools/job-search-engine/" hreflang="en" lang="en" title="Read in English">EN</a></nav></div></header>
-  <main class="wrap jse">
+  <main id="main" class="wrap jse">
     <nav class="jse-crumb" aria-label="Breadcrumb"><a href="/uk/tools/">Інструменти</a> / Job Search Engine</nav>
     <h1 style="font-size:2.2rem">Job Search Engine (JSE)</h1>
     <p class="lead">Пошук роботи, організований як проєкт доставки: автоматизуємо рутину, залишаємо людині рішення і міряємо, чи варте джерело того, щоб його лишати.</p>

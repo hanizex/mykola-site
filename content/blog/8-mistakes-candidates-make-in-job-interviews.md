@@ -64,13 +64,14 @@ You deliver a fifteen-minute history of your department.
 Give the answer first. Then add a relevant example: your responsibility, your action, the result.
 If the question is unclear, ask for clarification.
 
-```diagram
-type: steps
+```visual
+type: flow
 title: How to structure an answer
-- The answer | first, to the question you were asked
-- Your responsibility | in the example
-- Your action
-- The result
+end: effect
+- The answer | first, to the question you were asked | chat
+- Your responsibility | in the example | shield
+- Your action | | gear
+- The result | | check
 ```
 
 ## 5. Bluffing or hiding outside assistance
@@ -115,6 +116,17 @@ Practise pausing, asking for a moment and returning to the question.
 Run one [practice interview](/pm-interview-prep/) before the real one.
 Check the call setup, research the role and [prepare examples that show your contribution](/blog/one-question-to-test-a-project-manager/).
 Use these eight mistakes as a review checklist.
+
+```visual
+type: hub
+title: How to prepare for your next interview
+center: Preparation
+- Practice interview | interview
+- Call setup check | phone
+- Researched role | search
+- Contribution examples | star
+- 8-mistake checklist | checklist
+```
 
 If your experience is solid but your interview answers aren't landing, write to me.
 We can work through your cases and practise explaining your contribution in a consultation.

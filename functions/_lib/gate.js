@@ -26,5 +26,8 @@ export async function gated(context) {
   const headers = new Headers(res.headers);
   headers.delete('etag'); headers.delete('content-length');
   headers.set('cache-control', 'public, max-age=0, must-revalidate');
-  return new Response(strip(text, day), { status: 200, headers });
+  // The first two covers on a blog index are above the fold: load them right away (which ones depends on the day).
+  let n = 0;
+  const out = strip(text, day).replace(/(<a class="pcard" [^>]*><img [^>]*?) loading="lazy"/g, (m, a) => (n++ < 2 ? a + ' fetchpriority="high"' : m));
+  return new Response(out, { status: 200, headers });
 }

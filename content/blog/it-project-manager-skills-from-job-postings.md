@@ -103,6 +103,17 @@ Choose the tools, connect the relevant data and configure the workflow.
 Set permissions and human approval points.
 Test the output, handle failures and measure improvements in speed or quality.
 
+```visual
+type: flow
+title: How to implement an AI workflow
+end: effect
+- Tools and data | choose the tools, connect the relevant data | gear
+- Workflow | configure it | cycle
+- Permissions | and human approval points | lock
+- Testing | check the output, handle failures | search
+- Improvement | in speed or quality, measured | up
+```
+
 "I took a course on AI agents" is theory.
 Show me what you've implemented.
 
@@ -116,11 +127,13 @@ For every score, recall a real situation that backs it up.
 "I read about risk management" and "I managed a project risk" deserve different scores.
 So do "I know AI tools" and "I implemented a workflow the team actually uses".
 
-```diagram
-type: compare
+```visual
+type: versus
 title: Same skill, different scores
 left: Lower score
 right: Higher score
+lefticon: book
+righticon: check
 - "I read about risk management" | "I managed a project risk"
 - "I know AI tools" | "I implemented a workflow the team actually uses"
 - "I took a course on AI agents" | "Here is what I implemented"

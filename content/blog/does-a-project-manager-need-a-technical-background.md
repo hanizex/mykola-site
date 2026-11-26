@@ -58,15 +58,16 @@ It's enough to listen carefully to your colleagues and ask clarifying questions.
 
 These days I'd rather recommend exploring what generative AI can do and levelling up your English.
 
-```diagram
-type: cards
-title: Instead of programming languages
-mark: check
-- Basics and principles of software development | to talk properly with every stakeholder
-- Listening carefully to colleagues
-- Asking clarifying questions
-- Generative AI | explore what it can do
-- English | keep levelling it up
+```visual
+type: balance
+title: Technical background: what weighs more
+left: Programming languages
+right: Understanding how software is built
+heavier: right
+- Assembler, C++, Python | Listening to colleagues
+- Servers and networks | Asking clarifying questions
+-  | Generative AI
+-  | English
 ```
 
 I broke down the full list of what companies actually require from PMs in job postings in [IT project manager skills: 10 essentials, including AI](/blog/it-project-manager-skills-from-job-postings/).

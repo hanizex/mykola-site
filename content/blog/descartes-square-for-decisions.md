@@ -34,22 +34,31 @@ y: will happen / won't happen
 In management it only works when the answers are tied to money, time, risk and [responsibility](/blog/project-manager-seniority-is-responsibility/).
 Fantasies, dreams and assumptions have no place here.
 
+```visual
+type: hub
+title: What every answer is measured in
+center: The square's answer
+- Money | money
+- Time | clock
+- Risk | warning
+- Responsibility | shield
+```
+
 ## When the Descartes square fits and when it is overkill
 
 You don't need it for every question.
 
-```diagram
-type: groups
+```visual
+type: versus
 title: The Descartes square: worth it or overkill
-# Worth it
-- Expensive, irreversible crisis decisions
-- You need to separate emotions and deal with reality
-- Under pressure it is easy to miss the hidden cost of haste
-- You doubt whether it's a priority or an impulse
-# Overkill
-- A routine decision: there is a protocol and an owner
-- The data is in, the analysis is done, the decision is obvious
-- A basic question that needs no extra tools
+left: Overkill
+right: Worth it
+lefticon: x
+righticon: check
+tone: neutral
+- A routine decision: there is a protocol and an owner | An expensive, irreversible crisis decision
+- The data is in, the decision is obvious | A doubt: priority or impulse
+- A basic question that needs no extra tools | Emotions and pressure hide the cost of haste
 ```
 
 ## What the Descartes square gives you, and where it stops

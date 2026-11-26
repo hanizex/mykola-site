@@ -17,12 +17,12 @@ A manager's level, their "grade" or "seniority", is first of all not the number 
 
 ## Three stages of responsibility
 
-```diagram
-type: ladder
-title: How a manager's responsibility grows
-- Start | I own the tasks handed down to me. Everything else is not mine
-- Experience | I take on more because it's better for the project. But the line is still blurry
-- Realisation | Everything that happens on the project is ultimately my responsibility
+```visual
+type: stairs
+title: Grade = level of responsibility
+- Start | I own what's handed down to me
+- Experience | I take on more, because it's better for the project
+- Realisation | Everything on the project is ultimately mine
 ```
 
 ## First: only what's handed down
@@ -59,6 +59,17 @@ It's very easy to spot in a crisis.
 
 On the inside, it doesn't feel like a big change.
 It's mostly visible from the outside.
+
+```visual
+type: balance
+title: What defines a manager's grade
+left: Years of experience
+right: Personal responsibility
+heavier: right
+- Years on a CV | What the person actually owned
+-  | Shows in negotiations
+-  | Shows in a crisis
+```
 
 That's why in an interview I care less about the years on a CV and more about what the person was actually responsible for. Here's how I check it: [one question to test a project manager](/blog/one-question-to-test-a-project-manager/).
 

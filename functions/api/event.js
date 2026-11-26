@@ -25,6 +25,8 @@ async function dailyHash(parts) {
 }
 
 export async function onRequestPost({ request, env }) {
+  // Fetch Metadata: browsers mark requests from other websites as cross-site; only this site may post here.
+  if (request.headers.get('sec-fetch-site') === 'cross-site') return new Response(null, { status: 403 });
   const done = new Response(null, { status: 204 });
   try {
     const ua = request.headers.get('user-agent') || '';

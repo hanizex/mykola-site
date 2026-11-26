@@ -389,7 +389,7 @@ function page(c) {
   <main class="wrap">
     <div class="cv-hero hero">
       <div class="hero-top">
-        <img class="photo" src="/assets/mykola.jpg" width="128" height="128" alt="${esc(c.name)}" fetchpriority="high">
+        <img class="photo" src="/assets/mykola-256.jpg" width="128" height="128" alt="${esc(c.name)}" fetchpriority="high">
         <div class="hero-head">
           <p class="eyebrow">${esc(c.eyebrow)}</p>
           <h1>${esc(c.name)}</h1>

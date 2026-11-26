@@ -3,6 +3,9 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <meta name="theme-color" content="#0a0d12">
+  <meta name="text-scale" content="scale">
   <title>Налаштування онлайн трекера Job Search Engine</title>
   <meta name="description" content="Як користуватися онлайн трекером Job Search Engine з Claude, ChatGPT, Gemini чи будь-яким іншим AI-чатом: кроки для MCP-конектора та ручний режим копіювання.">
   <meta name="robots" content="index, follow, max-image-preview:large">
@@ -22,21 +25,23 @@
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="/assets/style.css">
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Микола Калакуцький","item":"https://mykola.pages.dev/uk/"},{"@type":"ListItem","position":2,"name":"Інструменти","item":"https://mykola.pages.dev/uk/tools/"},{"@type":"ListItem","position":3,"name":"Job Search Engine","item":"https://mykola.pages.dev/uk/tools/job-search-engine/"},{"@type":"ListItem","position":4,"name":"Посібник з онлайн трекера","item":"https://mykola.pages.dev/uk/tools/job-search-engine/hosted/"}]}</script>
+  <script type="speculationrules">{"prefetch":[{"where":{"and":[{"href_matches":"/*"},{"not":{"href_matches":"/api/*"}}]},"eagerness":"moderate"}]}</script>
 </head>
 <body>
+  <a class="skip" href="#main">Перейти до змісту</a>
   <header class="site"><div class="wrap"><a class="brand" href="/uk/">Микола Калакуцький</a><nav><a href="/uk/cv/">Резюме</a><a href="/uk/blog/">Блог</a><a href="/uk/tools/" aria-current="page">Інструменти</a><a href="/tools/job-search-engine/hosted/" hreflang="en" lang="en" title="Read in English">EN</a></nav></div></header>
-  <main class="wrap jse">
+  <main id="main" class="wrap jse">
     <nav class="jse-crumb" aria-label="Breadcrumb"><a href="/uk/tools/">Інструменти</a> / <a href="/uk/tools/job-search-engine/">Job Search Engine</a> / Посібник з онлайн трекера</nav>
     <h1 style="font-size:2.1rem">Налаштування онлайн трекера</h1>
     <p class="jse-notice" role="note"><strong class="hp-accent">Безкоштовний доступ на час тестування.</strong> Щоб отримати особисте посилання, напишіть мені (контакти в кінці сторінки). Ваше посилання це ключ: нікому його не передавайте.</p>
     <p class="lead">Онлайн трекер щоранку збирає для вас підхожі вакансії й тримає їхні статуси. Думає ваш AI-чат: він задає пошукові цілі, звіряє оголошення з вашими власними фактами та пише резюме й повідомлення. Ця сторінка показує, як його підключити.</p>
     <h2 class="sub" id="need">Що вам потрібно</h2><ul><li>Особисте посилання на трекер від мене (вебадреса, що закінчується довгим секретом).</li><li>AI-чат із проєктами чи власними інструкціями: підійдуть Claude, ChatGPT чи Gemini (Gems). Безкоштовного тарифу достатньо.</li><li>Ваше резюме, або кілька штук + файл експорту профілю з LinkedIn для збору Банку Фактів, який потім використовується для адаптації резюме та супровідних листів. Ваші дані обробляються у вас локально з вашим чатом. <strong class="hp-accent">В онлайн трекер ніяка чутлива інформація не передається.</strong></li></ul>
-    <h2 class="sub" id="connector">Спосіб A: Claude або ChatGPT <span class="hp-accent">(MCP-конектор, рекомендовано)</span></h2><p>Ви взаємодієте з Трекером і вакансіями в ньому через ваш чат: читаєте зміст, уточнюєте цілі, оновлюєте картки. Трекер виступає єдиним універсальним дашбордом і джерелом статусів по кожній вакансії (тобто трекер виступає трекером 🙂).</p><ol class="hp-steps"><li>Відкрийте своє посилання на трекер у браузері. Внизу сторінки є адреса конектора. Натисніть «Копіювати адресу конектора».</li><li>Claude: відкрийте claude.ai/plugins/yours, натисніть Add, потім Add custom connector. Вставте адресу кастомного MCP (посилання має закінчуватися на «/mcp»). Назву обирайте на власний смак, OAuth-налаштування не чіпайте. Безкоштовний тариф дозволяє один власний конектор.<figure class="hp-shot"><a href="/assets/jse/claude-add-connector.jpg" target="_blank" rel="noopener"><img src="/assets/jse/claude-add-connector.jpg" alt="Claude: меню Add з пунктом «Add custom connector»" loading="lazy"></a><figcaption>Натисніть, щоб збільшити</figcaption></figure></li><li>ChatGPT (безкоштовний тариф теж підходить): відкрийте chatgpt.com/plugins, натисніть «Додати», потім «Додати власний сервер MCP». Вставте адресу кастомного MCP (посилання має закінчуватися на «/mcp»). Тип автентифікації оберіть «Без автентифікації». Опис, назву та іконку обирайте на власний смак.<figure class="hp-shot"><a href="/assets/jse/chatgpt-add-mcp.jpg" target="_blank" rel="noopener"><img src="/assets/jse/chatgpt-add-mcp.jpg" alt="ChatGPT: вікно «Додати власний сервер MCP» зі списком автентифікації" loading="lazy"></a><figcaption>Натисніть, щоб збільшити</figcaption></figure></li><li>Почніть новий чат і напишіть: «Допоможи налаштувати мій пошук роботи з онлайн трекером через MCP». Чат завантажить правила з трекера, розпитає про ваші цілі, запропонує до 3 пошукових термінів і попросить підтвердити.</li><li>Далі треба буде скласти Банк Фактів і підготувати Базове Резюме. У вашого AI-чату вже будуть усі необхідні інструкції, що саме треба зібрати, щоб усього вистачило для роботи: він вам усе пояснить і допоможе це зробити.</li><li>Далі можна починати брати наявні вакансії з вашого трекера в обробку. Я роблю це запитом «Опрацюй наступну вакансію з Трекера».</li></ol><p class="note">Конектор тримає лише правила пошуку та картки вакансій. Ваше ім’я, резюме й факти лишаються у вашому власному проєкті чату.</p>
+    <h2 class="sub" id="connector">Спосіб A: Claude або ChatGPT <span class="hp-accent">(MCP-конектор, рекомендовано)</span></h2><p>Ви взаємодієте з Трекером і вакансіями в ньому через ваш чат: читаєте зміст, уточнюєте цілі, оновлюєте картки. Трекер виступає єдиним універсальним дашбордом і джерелом статусів по кожній вакансії (тобто трекер виступає трекером 🙂).</p><ol class="hp-steps"><li>Відкрийте своє посилання на трекер у браузері. Внизу сторінки є адреса конектора. Натисніть «Копіювати адресу конектора».</li><li>Claude: відкрийте claude.ai/plugins/yours, натисніть Add, потім Add custom connector. Вставте адресу кастомного MCP (посилання має закінчуватися на «/mcp»). Назву обирайте на власний смак, OAuth-налаштування не чіпайте. Безкоштовний тариф дозволяє один власний конектор.<figure class="hp-shot"><a href="/assets/jse/claude-add-connector.jpg" target="_blank" rel="noopener"><img src="/assets/jse/claude-add-connector.jpg" alt="Claude: меню Add з пунктом «Add custom connector»" width="1400" height="417" loading="lazy" decoding="async"></a><figcaption>Натисніть, щоб збільшити</figcaption></figure></li><li>ChatGPT (безкоштовний тариф теж підходить): відкрийте chatgpt.com/plugins, натисніть «Додати», потім «Додати власний сервер MCP». Вставте адресу кастомного MCP (посилання має закінчуватися на «/mcp»). Тип автентифікації оберіть «Без автентифікації». Опис, назву та іконку обирайте на власний смак.<figure class="hp-shot"><a href="/assets/jse/chatgpt-add-mcp.jpg" target="_blank" rel="noopener"><img src="/assets/jse/chatgpt-add-mcp.jpg" alt="ChatGPT: вікно «Додати власний сервер MCP» зі списком автентифікації" width="1400" height="847" loading="lazy" decoding="async"></a><figcaption>Натисніть, щоб збільшити</figcaption></figure></li><li>Почніть новий чат і напишіть: «Допоможи налаштувати мій пошук роботи з онлайн трекером через MCP». Чат завантажить правила з трекера, розпитає про ваші цілі, запропонує до 3 пошукових термінів і попросить підтвердити.</li><li>Далі треба буде скласти Банк Фактів і підготувати Базове Резюме. У вашого AI-чату вже будуть усі необхідні інструкції, що саме треба зібрати, щоб усього вистачило для роботи: він вам усе пояснить і допоможе це зробити.</li><li>Далі можна починати брати наявні вакансії з вашого трекера в обробку. Я роблю це запитом «Опрацюй наступну вакансію з Трекера».</li></ol><p class="note">Конектор тримає лише правила пошуку та картки вакансій. Ваше ім’я, резюме й факти лишаються у вашому власному проєкті чату.</p>
     <h2 class="sub" id="manual">Спосіб B: Gemini та інші чати (ручний режим)</h2><p>Якщо MCP немає можливості налаштувати, то доведеться деяку інформацію копіювати та вставляти самостійно. Для зручності в трекері вже є кнопки «Копіювати для AI» та «Застосувати відповідь AI». Пошукові цілі ви задаєте самі кнопкою «Цілі пошуку» в трекері.</p><ol class="hp-steps"><li>Відкрийте трекер і натисніть «Цілі пошуку». Заповніть посади, до 3 пошукових термінів DOU (і, за бажанням, до 3 ключових слів Djinni), країну, де ви живете, і мови.</li><li>Створіть проєкт (Claude), Gem (Gemini) чи власний GPT і вставте блок «Інструкції проєкту» нижче в його інструкції.</li><li>Додайте модулі (блоки нижче) як файли знань або вставляйте в чат, коли про це просять. Додайте своє резюме текстом.</li><li>Відкрийте картку вакансії (Деталі та повний опис) і натисніть «Копіювати для AI». Вставте в чат і напишіть: «Адаптуй моє резюме до цієї вакансії».</li><li>Чат пройде кроки й наприкінці дасть блок card-update.</li><li>Скопіюйте відповідь, прокрутіть у трекері до «Застосувати відповідь AI», вставте й натисніть «Перевірити». Ви побачите, що зміниться в картці. Натисніть «Зберегти в картку».</li></ol><p class="note">Блок ніколи не змінює супровідне повідомлення картки, з якою ви вже працюєте, і нічого нікуди не надсилає. Ви завжди бачите зміну до збереження.</p>
     <h2 class="sub" id="pack">Пакет промптів для вашого AI-чату</h2><p>Це той самий текст, який конектор передає Claude і ChatGPT. Він публічний: джерело є на GitHub. Скопіюйте блок і вставте у проєкт вашого чату. Тексти англійською, чат відповідатиме вам вашою мовою. <a href="https://github.com/hanizex/job-search-automation/tree/main/assistant" rel="noopener">GitHub →</a></p>
     <div class="hp-blocks"><details class="hp-block"><summary><span>Інструкції проєкту (вставте в інструкції чату)</span><em>10200 символів</em></summary>
-      <div class="hp-actions"><button type="button" class="btn ghost" data-copy-target="hp-0" data-done="Скопійовано">Копіювати</button></div>
-      <pre id="hp-0" class="hp-pre"># Project instructions: Job Search Engine assistant
+      <div class="hp-actions"><button type="button" class="btn ghost" data-copy-target="hp-0" data-done="Скопійовано" aria-label="Копіювати: Інструкції проєкту (вставте в інструкції чату)">Копіювати</button></div>
+      <pre id="hp-0" class="hp-pre" lang="en" tabindex="0" aria-label="Інструкції проєкту (вставте в інструкції чату)"># Project instructions: Job Search Engine assistant
 
 You are the personal job-search assistant of one person. You help them build and use files that they own: `profile.json`, `fact_bank.md`, `master_cv.md`, and `fact_inbox.md` for new facts. Reply in the language the person writes in. Use plain words and short sentences. Explain terms such as &quot;wall&quot; (a hard requirement you do not meet) the first time you use them.
 
@@ -89,8 +94,8 @@ Spaces count; a line break counts as one character. Count with a tool if you hav
 Say plainly what is ready, what is a gap, and what you did not do (nothing was submitted).
 </pre></details>
 <details class="hp-block"><summary><span>Модуль 1: розмова про цілі</span><em>12700 символів</em></summary>
-      <div class="hp-actions"><button type="button" class="btn ghost" data-copy-target="hp-1" data-done="Скопійовано">Копіювати</button></div>
-      <pre id="hp-1" class="hp-pre"># Module 1: the search profile interview
+      <div class="hp-actions"><button type="button" class="btn ghost" data-copy-target="hp-1" data-done="Скопійовано" aria-label="Копіювати: Модуль 1: розмова про цілі">Копіювати</button></div>
+      <pre id="hp-1" class="hp-pre" lang="en" tabindex="0" aria-label="Модуль 1: розмова про цілі"># Module 1: the search profile interview
 
 Goal: write `profile.json`, the one file the engine reads. The person never edits it by hand. You interview them, show the result in plain words, and write the file only after they confirm. A clear &quot;yes&quot;, &quot;ok&quot; or &quot;looks right&quot; is a confirmation; anything vaguer is not.
 
@@ -168,8 +173,8 @@ If the person lives in a country that is not in the list, ask for the nearest on
 The engine checks the file and answers in plain words, for example &quot;location.home_country: unknown country&quot;. Fix exactly what it names, show the change, and write the file again.
 </pre></details>
 <details class="hp-block"><summary><span>Модуль 2: Банк Фактів</span><em>8743 символів</em></summary>
-      <div class="hp-actions"><button type="button" class="btn ghost" data-copy-target="hp-2" data-done="Скопійовано">Копіювати</button></div>
-      <pre id="hp-2" class="hp-pre"># Module 2: the Fact Bank
+      <div class="hp-actions"><button type="button" class="btn ghost" data-copy-target="hp-2" data-done="Скопійовано" aria-label="Копіювати: Модуль 2: Банк Фактів">Копіювати</button></div>
+      <pre id="hp-2" class="hp-pre" lang="en" tabindex="0" aria-label="Модуль 2: Банк Фактів"># Module 2: the Fact Bank
 
 Goal: one file, `fact_bank.md`, with everything true about the person that a CV or a message may use, each fact with its evidence. Only confirmed facts are used. The Bank keeps growing.
 
@@ -235,8 +240,8 @@ Employment history is there for every role; each result has a number or a clear,
 Compare the job titles in the Bank with `roles.titles` in `profile.json`. If the person's own titles or close variants are missing (&quot;Backend Developer&quot; while the list says &quot;backend engineer&quot;), offer to add them. When a new title contains an existing one, say it adds nothing and add only the shorter one. Insisting means asking again after being told; then add it. With the online tracker connected, change titles through the goals flow (`get_search_profile`, then `suggest_terms`, one yes, `update_search_profile`, `get_scan_status` once); otherwise write the updated `profile.json`. Report the result in the chat; the Bank has no section for it.
 </pre></details>
 <details class="hp-block"><summary><span>Модуль 3: Базове Резюме</span><em>3679 символів</em></summary>
-      <div class="hp-actions"><button type="button" class="btn ghost" data-copy-target="hp-3" data-done="Скопійовано">Копіювати</button></div>
-      <pre id="hp-3" class="hp-pre"># Module 3: the Master CV
+      <div class="hp-actions"><button type="button" class="btn ghost" data-copy-target="hp-3" data-done="Скопійовано" aria-label="Копіювати: Модуль 3: Базове Резюме">Копіювати</button></div>
+      <pre id="hp-3" class="hp-pre" lang="en" tabindex="0" aria-label="Модуль 3: базове резюме"># Module 3: the Master CV
 
 Goal: one strong base CV, built from the confirmed Fact Bank, in a structure that works with applicant tracking systems (ATS). The person confirms the result. A Master CV fits almost any job ad without changes; adjusting it to the ad (module 4) raises the chances further. Tell the person both things.
 
@@ -273,8 +278,8 @@ Every line except the header matches a confirmed fact; competency keywords reuse
 Show the working version and the check results. Ask for changes. Save the Master CV when the person confirms. Then tell them it is ready for most jobs as it is, and that tailoring it to a specific ad still raises the chances.
 </pre></details>
 <details class="hp-block"><summary><span>Модуль 4: адаптація до вакансії</span><em>12244 символів</em></summary>
-      <div class="hp-actions"><button type="button" class="btn ghost" data-copy-target="hp-4" data-done="Скопійовано">Копіювати</button></div>
-      <pre id="hp-4" class="hp-pre"># Module 4: tailor a CV and messages to one job
+      <div class="hp-actions"><button type="button" class="btn ghost" data-copy-target="hp-4" data-done="Скопійовано" aria-label="Копіювати: Модуль 4: адаптація до вакансії">Копіювати</button></div>
+      <pre id="hp-4" class="hp-pre" lang="en" tabindex="0" aria-label="Модуль 4: адаптація до вакансії"># Module 4: tailor a CV and messages to one job
 
 Input: a pasted job, usually a tracker card (id, company, role, location, link, screening verdict) plus the full job description. With the online tracker connected, `get_next_job` or `get_job` gives the card, the ad and the id; do not ask for a paste. If the description is missing, ask the person to open the source and paste the text; never guess requirements from the title. If the card says the status is already `applied`, stop and ask before building anything new.
 
@@ -324,8 +329,8 @@ Input: a pasted job, usually a tracker card (id, company, role, location, link, 
 When the person says they applied: with the online tracker, find the card (status `ready`, or the one you just worked on), call `update_job` with `status: &quot;applied&quot;` and a `next`; do not touch the cover. Then remind the person of the one step most people skip: within 3 days, write to 1 or 2 people at the company, using the drafted message.
 </pre></details>
 <details class="hp-block"><summary><span>Модуль 5: після співбесіди</span><em>2362 символів</em></summary>
-      <div class="hp-actions"><button type="button" class="btn ghost" data-copy-target="hp-5" data-done="Скопійовано">Копіювати</button></div>
-      <pre id="hp-5" class="hp-pre"># Module 5: after an interview
+      <div class="hp-actions"><button type="button" class="btn ghost" data-copy-target="hp-5" data-done="Скопійовано" aria-label="Копіювати: Модуль 5: після співбесіди">Копіювати</button></div>
+      <pre id="hp-5" class="hp-pre" lang="en" tabindex="0" aria-label="Модуль 5: після співбесіди"># Module 5: after an interview
 
 Goal: keep the tracking clear and let the Fact Bank learn from every conversation.
 
@@ -341,8 +346,8 @@ Then:
 5. **Patterns.** After several interviews, offer once to look for patterns in the questions asked and the gaps that came up, and what to add to the Fact Bank.
 </pre></details>
 <details class="hp-block"><summary><span>Шаблон: Банк Фактів</span><em>1475 символів</em></summary>
-      <div class="hp-actions"><button type="button" class="btn ghost" data-copy-target="hp-6" data-done="Скопійовано">Копіювати</button></div>
-      <pre id="hp-6" class="hp-pre"># Fact Bank
+      <div class="hp-actions"><button type="button" class="btn ghost" data-copy-target="hp-6" data-done="Скопійовано" aria-label="Копіювати: Шаблон: Банк Фактів">Копіювати</button></div>
+      <pre id="hp-6" class="hp-pre" lang="en" tabindex="0" aria-label="Шаблон: Банк Фактів"># Fact Bank
 
 Only confirmed facts are used. IDs never change. Dates are MM/YYYY – MM/YYYY; a current role ends with Present.
 
@@ -396,8 +401,8 @@ Source: &lt;where it comes from&gt;
 &lt;claims that still need a number, a date or a decision. Never written as facts.&gt;
 </pre></details>
 <details class="hp-block"><summary><span>Шаблон: Fact Inbox</span><em>276 символів</em></summary>
-      <div class="hp-actions"><button type="button" class="btn ghost" data-copy-target="hp-7" data-done="Скопійовано">Копіювати</button></div>
-      <pre id="hp-7" class="hp-pre"># Fact Inbox
+      <div class="hp-actions"><button type="button" class="btn ghost" data-copy-target="hp-7" data-done="Скопійовано" aria-label="Копіювати: Шаблон: Fact Inbox">Копіювати</button></div>
+      <pre id="hp-7" class="hp-pre" lang="en" tabindex="0" aria-label="Шаблон: Fact Inbox"># Fact Inbox
 
 New facts not yet merged into the Fact Bank. They count as Bank facts right away. When the same fact appears twice, the newest line wins.
 
@@ -407,8 +412,8 @@ Role: &lt;title, employer, dates&gt;
 Source: &lt;chat on YYYY-MM-DD&gt;
 </pre></details>
 <details class="hp-block"><summary><span>Шаблон: Базове Резюме</span><em>673 символів</em></summary>
-      <div class="hp-actions"><button type="button" class="btn ghost" data-copy-target="hp-8" data-done="Скопійовано">Копіювати</button></div>
-      <pre id="hp-8" class="hp-pre">&lt;Full name&gt; | &lt;Job title&gt;
+      <div class="hp-actions"><button type="button" class="btn ghost" data-copy-target="hp-8" data-done="Скопійовано" aria-label="Копіювати: Шаблон: Базове Резюме">Копіювати</button></div>
+      <pre id="hp-8" class="hp-pre" lang="en" tabindex="0" aria-label="Шаблон: базове резюме">&lt;Full name&gt; | &lt;Job title&gt;
 &lt;City, Country&gt; | Open to remote | &lt;email&gt; | &lt;phone&gt; | &lt;LinkedIn&gt;
 
 PROFESSIONAL SUMMARY

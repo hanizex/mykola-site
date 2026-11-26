@@ -18,18 +18,14 @@ If it weren't for them, we could hand our whole job over to AI. Stakeholders are
 
 I'm happy to use AI to automate the routine.
 
-```diagram
-type: groups
+```visual
+type: flow
 title: Who does what
-# AI agents
-- Preparing reports
-- Analysis and summaries
-- Document drafts
-- Checklists and brainstorming
-# Me
-- Check
-- Edit
-- Sign off on the result
+end: effect
+- AI agents prepare | reports, analysis and summaries, document drafts, checklists and brainstorming | robot
+- I check |  | search
+- I edit |  | note
+- I sign off on the result |  | check
 ```
 
 AI agents have been doing this and a lot more for a long time.
@@ -58,11 +54,24 @@ title: Working directly with people
 - say a firm "nope!"
 ```
 
+![Two skulls: the "Normal Worker" has a calm brain, the "Project Manager" has a brain covered in sticky notes](/assets/blog/img/normal-worker-vs-project-manager.jpg)
+
 ## Where AI is helpless
 
 In every one of these situations AI is helpless.
 
 However much context you give it, it won't replace live, empathetic communication.
+
+```visual
+type: balance
+title: What weighs more when working with people
+left: Context for AI
+right: Live, empathetic communication
+heavier: right
+- Reports, analysis, drafts | Reading between the lines
+- Any amount of context | Showing initiative
+-  | Saying a firm "nope!"
+```
 
 ## Which PMs are safe for now
 

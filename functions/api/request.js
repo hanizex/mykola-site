@@ -7,6 +7,8 @@ const clip = (v, n) => (typeof v === 'string' ? v.trim().slice(0, n) : '');
 const json = (o, status = 200) => new Response(JSON.stringify(o), { status, headers: { 'content-type': 'application/json' } });
 
 export async function onRequestPost({ request, env }) {
+  // Fetch Metadata: browsers mark requests from other websites as cross-site; only this site may post here.
+  if (request.headers.get('sec-fetch-site') === 'cross-site') return new Response(null, { status: 403 });
   let b;
   try { b = await request.json(); } catch (e) { return json({ error: 'bad_request' }, 400); }
 

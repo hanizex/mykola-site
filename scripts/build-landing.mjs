@@ -349,7 +349,7 @@ function page(L) {
   <main class="wrap">
     <div class="hero">
       <div class="hero-top">
-        <img class="photo" src="/assets/mykola.jpg" width="128" height="128" alt="${esc(L.photoAlt)}" fetchpriority="high">
+        <img class="photo" src="/assets/mykola-256.jpg" width="128" height="128" alt="${esc(L.photoAlt)}" fetchpriority="high">
         <div class="hero-head">
           <p class="eyebrow">${esc(L.eyebrow)}</p>
           <h1${L.h1class ? ` class="${L.h1class}"` : ''}>${esc(L.h1)}</h1>

@@ -20,6 +20,20 @@ The "boring" candidate is the one it's easier to make an offer to than to explai
 Here are my 8 strategies for responding to rejections from recruiters.
 Each one works in its own situation.
 
+```visual
+type: hub
+title: 8 ways to respond to a rejection
+center: A recruiter's rejection
+- Detailed reason | question
+- 15-minute call | phone
+- Other roles | search
+- Paid pilot | calendar
+- Referral | team
+- Value-first | idea
+- SMART agreement | target
+- A joke | chat
+```
+
 ```diagram
 type: compare
 tone: neutral

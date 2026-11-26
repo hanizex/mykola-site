@@ -88,13 +88,16 @@ const G = {
   },
 };
 
+// Screenshot sizes (width, height) so the page does not jump while they load.
+const SHOT_SIZE = { claude: [1400, 417], chatgpt: [1400, 847] };
+
 function page(k, texts) {
   const c = G[k], p = P[k], base = pth(k, '/tools/job-search-engine/'), path = base + 'hosted/';
-  const shot = (s) => (s.img ? `<figure class="hp-shot"><a href="${SHOT[s.img]}" target="_blank" rel="noopener"><img src="${SHOT[s.img]}" alt="${esc(s.alt)}" loading="lazy"></a><figcaption>${esc(c.enlarge)}</figcaption></figure>` : '');
+  const shot = (s) => (s.img ? `<figure class="hp-shot"><a href="${SHOT[s.img]}" target="_blank" rel="noopener"><img src="${SHOT[s.img]}" alt="${esc(s.alt)}"${SHOT_SIZE[s.img] ? ` width="${SHOT_SIZE[s.img][0]}" height="${SHOT_SIZE[s.img][1]}"` : ''} loading="lazy" decoding="async"></a><figcaption>${esc(c.enlarge)}</figcaption></figure>` : '');
   const ol = (a) => `<ol class="hp-steps">${a.map((s) => `<li>${esc(s.t)}${shot(s)}</li>`).join('')}</ol>`;
   const blocks = FILES.map(([f], i) => `<details class="hp-block"><summary><span>${esc(c.files[f])}</span><em>${esc(c.size(texts[f].length))}</em></summary>
-      <div class="hp-actions"><button type="button" class="btn ghost" data-copy-target="hp-${i}" data-done="${esc(c.copied)}">${esc(c.copy)}</button></div>
-      <pre id="hp-${i}" class="hp-pre">${esc(texts[f])}</pre></details>`).join('\n');
+      <div class="hp-actions"><button type="button" class="btn ghost" data-copy-target="hp-${i}" data-done="${esc(c.copied)}" aria-label="${esc(c.copy)}: ${esc(c.files[f])}">${esc(c.copy)}</button></div>
+      <pre id="hp-${i}" class="hp-pre" lang="en" tabindex="0" aria-label="${esc(c.files[f])}">${esc(texts[f])}</pre></details>`).join('\n');
   const need = c.whatList.map(([a, b]) => `<li>${esc(a)}${b ? `<strong class="hp-accent">${esc(b)}</strong>` : ''}</li>`).join('');
   const body = `<nav class="jse-crumb" aria-label="Breadcrumb"><a href="${p.toolsPath}">${esc(p.tools)}</a> / <a href="${base}">Job Search Engine</a> / ${esc(c.crumb)}</nav>
     <h1 style="font-size:2.1rem">${esc(c.h1)}</h1>

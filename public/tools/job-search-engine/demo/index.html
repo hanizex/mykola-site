@@ -3,6 +3,9 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <meta name="theme-color" content="#0a0d12">
+  <meta name="text-scale" content="scale">
   <title>Job Search Engine demo: an interactive tracker with invented data</title>
   <meta name="description" content="Try the Job Search Engine tracker in your browser. All jobs are invented. Your changes stay on your device and nothing is sent to a server.">
   <meta name="robots" content="index, follow, max-image-preview:large">
@@ -22,10 +25,12 @@
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="/assets/style.css">
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Mykola Kalakutskyi","item":"https://mykola.pages.dev/"},{"@type":"ListItem","position":2,"name":"Tools","item":"https://mykola.pages.dev/tools/"},{"@type":"ListItem","position":3,"name":"Job Search Engine","item":"https://mykola.pages.dev/tools/job-search-engine/"},{"@type":"ListItem","position":4,"name":"Demo","item":"https://mykola.pages.dev/tools/job-search-engine/demo/"}]}</script>
+  <script type="speculationrules">{"prefetch":[{"where":{"and":[{"href_matches":"/*"},{"not":{"href_matches":"/api/*"}}]},"eagerness":"moderate"}]}</script>
 </head>
 <body>
+  <a class="skip" href="#main">Skip to content</a>
   <header class="site"><div class="wrap"><a class="brand" href="/">Mykola Kalakutskyi</a><nav><a href="/cv/">CV</a><a href="/blog/">Blog</a><a href="/tools/" aria-current="page">Tools</a><a href="/uk/tools/job-search-engine/demo/" hreflang="uk" lang="uk" title="Читати українською">UA</a></nav></div></header>
-  <main class="wrap jse">
+  <main id="main" class="wrap jse">
     <nav class="jse-crumb" aria-label="Breadcrumb"><a href="/tools/">Tools</a> / <a href="/tools/job-search-engine/">Job Search Engine</a> / Demo</nav>
     <h1 style="font-size:2rem">JSE demo tracker</h1>
     <p class="lead">This is how the tracker works. It does three jobs: it takes you to the job post by a direct link, it holds the status of every job, and it takes you to the right people on LinkedIn. Jobs are not added here by hand. They come from the scan, and each card already holds the full description.</p>

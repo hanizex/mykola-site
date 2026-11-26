@@ -10,6 +10,7 @@ tags: project management, AI in project management, hiring, project manager role
 source: t.me/outstanding_pm/2310 (9 Nov 2026)
 cover: ai-vs-human
 cover_alt: A robot and a person facing each other: what AI does and what a project manager does
+updated: 2026-11-26
 ---
 
 Why hire project managers at all?
@@ -35,17 +36,17 @@ right: What a PM is paid for
 
 ## What companies still pay a project manager for
 
-```diagram
-type: cards
+```visual
+type: hub
 title: Seven things AI won't do for your PM
-mark: num
-- The business problem and success criteria
-- Priorities, budget and deadlines
-- Responsibilities and authority
-- The reason work is stalling
-- Uncomfortable conversations
-- Decisions on changes and risks
-- Bringing AI into the workflow
+center: Project manager
+- Business problem | target
+- Priorities, budget, deadlines | money
+- Authority | shield
+- Why work stalls | search
+- Uncomfortable conversations | chat
+- Decisions on change and risk | balance
+- AI in the workflow | robot
 ```
 
 → **Find out which business problem we are actually solving.**

@@ -24,6 +24,18 @@ As long as every decision, approval and priority goes through one person, the bu
 
 And it's expensive: speed burns, the team loses its agency, and the CEO turns into the bottleneck of the whole system.
 
+```visual
+type: iceberg
+title: What hides behind "I've got it under control"
+top: "I've got everything under control"
+topnote: what the CEO sees
+- Speed burns | every decision waits for one person | clock
+- The team loses its agency | managers learn to seek approval, not to own | team
+- The CEO becomes the bottleneck | lots of motion, little throughput | warning
+- Operational debt grows | even with the CEO working 14+ hours | down
+- A cash gap down the road | the price of a personality cult | money
+```
+
 ## Three red flags: the problem is the CEO, not the team
 
 ```diagram
@@ -41,13 +53,13 @@ And the CEO generates a lot of motion and very little system throughput.
 
 ## My protocol for unblocking growth
 
-```diagram
-type: steps
+```visual
+type: flow
 title: Protocol for unblocking growth
-- Map the dependencies | We record which decisions are wrongly centralised in the CEO and where time is lost.
-- Redraw the lines of authority | We set clear decision levels: ownership sits with functional leaders, not with the CEO "just in case".
-- Behavioural retraining for the CEO | We remove micromanagement and set one rule.
-- Escalation protocol | The team knows when to take an issue upstairs and when it has to close it on its own.
+- Map the dependencies | which decisions sit with the CEO and where time is lost | search
+- Redraw the lines of authority | clear decision levels, ownership with functional leaders | team
+- Behavioural retraining for the CEO | remove micromanagement and set one rule | control
+- Escalation protocol | when an issue goes upstairs and when the team closes it | ladder
 ```
 
 The rule for the CEO is simple: "Don't step into an operational decision unless a risk threshold has been crossed."

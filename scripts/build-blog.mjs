@@ -13,6 +13,7 @@ import { fileURLToPath } from 'node:url';
 import { introLink, ogPath, PREP, toolsLink } from './config.mjs';
 import { marked } from 'marked';
 import { coverSvg, diagram } from './blog-visuals.mjs';
+import { visual } from './blog-infographics.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const SITE = 'https://mykola.pages.dev';
@@ -62,8 +63,22 @@ const LINKEDIN = 'https://www.linkedin.com/in/hanizex/';
 const authorFor = (lang) => ({ '@type': 'Person', name: T[lang].name, alternateName: lang === 'uk' ? NAME : NAME_UK, url: `${SITE}/`, sameAs: [GITHUB, CHANNEL, LINKEDIN] });
 
 marked.setOptions({ gfm: true, breaks: true }); // the author writes short lines: keep single line breaks
-let curLang = 'en';
-marked.use({ renderer: { code(token) { return token.lang === 'diagram' ? diagram(token.text, curLang) : false; } } });
+let curLang = 'en', curKey = 'x';
+// Size of a JPEG/PNG under public/ (for width/height on <img>, so the page does not jump while loading).
+function imgSize(src) {
+  try {
+    const b = readFileSync(join(PUBLIC, src.replace(/^\//, '')));
+    if (b[0] === 0x89) return [b.readUInt32BE(16), b.readUInt32BE(20)];
+    for (let i = 2; i < b.length;) { const len = b.readUInt16BE(i + 2); if (b[i + 1] >= 0xc0 && b[i + 1] <= 0xc3) return [b.readUInt16BE(i + 7), b.readUInt16BE(i + 5)]; i += 2 + len; }
+  } catch (e) { /* missing file: no size */ }
+  return null;
+}
+marked.use({ renderer: { image(token) {
+  const sz = token.href.startsWith('/') ? imgSize(token.href) : null;
+  if (token.href.startsWith('/') && !sz) throw new Error(`image not found: ${token.href}`);
+  return `<img class="pimg" src="${esc(token.href)}" alt="${esc(token.text || '')}"${sz ? ` width="${sz[0]}" height="${sz[1]}"` : ''} loading="lazy" decoding="async">`;
+} } });
+marked.use({ renderer: { code(token) { return token.lang === 'diagram' ? diagram(token.text, curLang) : token.lang === 'visual' ? visual(token.text, curKey) : false; } } });
 
 function parse(file, lang, draft) {
   const raw = readFileSync(file, 'utf8');
@@ -81,8 +96,8 @@ function parse(file, lang, draft) {
   const lane = meta.lane === 'prep' ? 'prep' : '';
   const cta = meta.cta || 'consult';
   if (!['consult', 'comment', 'none'].includes(cta)) throw new Error(`${file}: cta must be consult, comment or none`);
-  const words = m[2].replace(/```diagram[\s\S]*?```/g, ' ').trim().split(/\s+/).length;
-  curLang = lang;
+  const words = m[2].replace(/```(?:diagram|visual)[\s\S]*?```/g, ' ').trim().split(/\s+/).length;
+  curLang = lang; curKey = meta.key;
   return {
     ...meta, lang, draft, cta, lane,
     tags: (meta.tags || '').split(',').map((t) => t.trim()).filter(Boolean),
@@ -206,7 +221,7 @@ function relatedBlock(p) {
 
 function authorBox(p) {
   const t = T[p.lang], uk = p.lang === 'uk' ? '/uk' : '';
-  return `<aside class="author-box"><img src="/assets/mykola.jpg" alt="${t.name}" width="64" height="64" loading="lazy"><div><p>${t.author}</p><p class="ab-links"><a href="${uk}/cv/">${t.aCv} →</a><a href="${uk}/tools/">${t.aTools} →</a><a href="${uk}/examples/">${t.aEx} →</a></p></div></aside>`;
+  return `<aside class="author-box"><img src="/assets/mykola-256.jpg" alt="${t.name}" width="64" height="64" loading="lazy" decoding="async"><div><p>${t.author}</p><p class="ab-links"><a href="${uk}/cv/">${t.aCv} →</a><a href="${uk}/tools/">${t.aTools} →</a><a href="${uk}/examples/">${t.aEx} →</a></p></div></aside>`;
 }
 
 const isoDay = (d) => (d && !String(d).includes('T') ? `${d}T00:00:00Z` : d);
@@ -263,7 +278,7 @@ function indexPage(lang) {
   <main class="wrap">
     <h1 style="font-size:2rem">${t.idxH1}</h1>
     <p class="lead">${t.idxLead}</p>
-    ${sw ? `<p class="note"><a href="${sw}" hreflang="${otherLang}" lang="${otherLang}">${T[otherLang].other.title} →</a></p>` : ''}
+    ${sw ? `<p class="note"><a href="${sw}" hreflang="${otherLang}" lang="${otherLang}">${t.other.title} →</a></p>` : ''}
     <div class="pgrid">
         ${cards}
     </div>
@@ -334,7 +349,7 @@ ${pubAll.filter((p) => p.lang === 'en').map((p) => gate(p, `- [${p.title}](${SIT
 ${published('uk').length ? `\n## Ukrainian (Українською)\n- [Інструменти](${SITE}/uk/tools/): невеликі інструменти, зроблені для власної роботи\n- [Job Search Engine (JSE)](${SITE}/uk/tools/job-search-engine/): безкоштовний онлайн трекер (тестовий доступ, напишіть мені), який щоранку знаходить підхожі вакансії й працює з вашим AI-чатом, і метод за ним: код для особистого використання та живе демо з вигаданими даними ([посібник з онлайн трекера](${SITE}/uk/tools/job-search-engine/hosted/), [посібник з налаштування](${SITE}/uk/tools/job-search-engine/setup/), [демо](${SITE}/uk/tools/job-search-engine/demo/))\n- [Challenge AI](${SITE}/uk/challenge/): безкоштовний тест із 6 запитань: чи вистачить AI для робочої проблеми, чи потрібен погляд людини; працює в браузері\n- [Резюме](${SITE}/uk/cv/): повна історія кар'єри, результати з датами й сумами, навички, власні проєкти; PDF: ${SITE}/assets/cv/Mykola_Kalakutskyi_CV_UA.pdf\n${published('uk').map((p) => gate(p, `- [${p.title}](${SITE}${p.path}): ${p.description}`)).join('\n')}\n` : ''}`;
 
 if (checkOnly) {
-  for (const p of posts) { const h = postPage(p); console.log(`${p.date} ${p.lang} ${p.slug}: ${(p.html.match(/<figure class="dg/g) || []).length} figure(s), ${p.minutes} min${p.date > TODAY ? ' (scheduled)' : ''}`); if (/```|\{\{/.test(h)) throw new Error(p.slug + ': unrendered block'); }
+  for (const p of posts) { const h = postPage(p); console.log(`${p.date} ${p.lang} ${p.slug}: ${(p.html.match(/<figure class="(?:dg|vx)/g) || []).length} figure(s), ${p.minutes} min${p.date > TODAY ? ' (scheduled)' : ''}`); if (/```|\{\{/.test(h)) throw new Error(p.slug + ': unrendered block'); }
   indexPage('en'); indexPage('uk'); rss('en'); rss('uk'); sitemap(); llms();
   console.log('check ok'); process.exit(0);
 }

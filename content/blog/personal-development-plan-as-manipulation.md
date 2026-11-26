@@ -71,14 +71,15 @@ For example:
 
 (win-win)
 
-```diagram
-type: steps
+```visual
+type: flow
 title: How PDP training becomes an argument for a raise
 caption: win-win
-- Training from your PDP
-- Three times more, and better, than before | With AI
-- A workshop for colleagues | Hacks so they can work three times faster and better too
-- A request for a raise | Written by the manager
+end: effect
+- Training from your PDP | the employee does the training | book
+- Three times more, and better | with AI, than before | up
+- A workshop for colleagues | hacks so they can work three times faster too | team
+- A request for a raise | written by the manager | money
 ```
 
 ## Simple in theory, unclear in practice

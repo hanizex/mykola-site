@@ -16,14 +16,16 @@ How much does "jump on a call for 2 minutes, we need to discuss something quickl
 
 ## What happens to the person you pull into a "quick" call
 
-```diagram
-type: steps
-title: What hides behind "two minutes"
-- Leaving deep focus
-- Switching context
-- Recalling the details
-- Getting into the conversation
-- The call drags on | New topics come up, or it turns out the question should have gone to someone else
+```visual
+type: iceberg
+title: What a "2-minute call" really costs
+top: "2 minutes, we need to discuss something quickly"
+topnote: what the manager sees
+- Leaving deep focus | pulled out at the most expensive moment of concentration | eye
+- Switching context | recall the details, get into the conversation | cycle
+- The call drags on | new topics, the wrong person on the call | clock
+- Getting back to the task | often harder than starting it | down
+- A chain of interruptions | one call drags the next ones behind it | warning
 ```
 
 Even a perfect "short" call with a clear goal still breaks the process: the focus is already gone, and the priorities have to be put back together from scratch.
@@ -44,16 +46,16 @@ Multiply that by a week and you get a hidden productivity tax. It rarely shows u
 
 ## My approach to "quick" questions
 
-```diagram
-type: cards
-mark: check
-title: Before I pull people into a call
-- Prepare first | How urgent is it, what's the goal, what are the options.
-- Only the people responsible | I check who exactly owns it, so I don't drag in extra people.
-- Context in writing | I share the context in advance, so the person can answer without a call.
-- A slot in the calendar | I check whether the time suits them and book a slot in advance.
-- The work chat | I go for the work chat if the question doesn't need a live conversation.
-- Notes | After the call I write notes and record the outcome and next steps.
+```visual
+type: flow
+title: My approach to "quick" questions
+end: effect
+- Prepare first | urgency, goal, options | checklist
+- Only the people responsible | check who exactly should answer | user
+- Context in writing | so they can answer without a call | note
+- The work chat | if it doesn't need a live conversation | chat
+- A slot in the calendar | check that the time suits them | calendar
+- Outcome and next steps | notes after the call | flag
 ```
 
 ## Speed or an expensive habit

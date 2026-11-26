@@ -58,15 +58,18 @@ How to practise:
 - Write documentation, task descriptions and reports in English (at least for yourself, if the team doesn't understand it or pushes back).
 - Go to English speaking clubs, take the lead in conversations, practise spoken English as much as you can.
 
-```diagram
-type: compare
+```visual
+type: versus
 title: Tips for learning English
 left: Don't
 right: Instead
-- Overcomplicate things | Express your thoughts in simple phrases
-- Use forms and structures you haven't practised | Start with Present, Past and Future Simple
-- Use words, phrases or abbreviations you don't 100% understand | Explain the idea with a few "simple" synonyms
-- Use spoken-language rules in emails | Learn formal phrases for email
+lefticon: x
+righticon: check
+tone: bad-good
+- Overcomplicate things | Simple phrases
+- Forms you haven't practised | Present, Past and Future Simple
+- Words you don't 100% understand | A few "simple" synonyms
+- Spoken-language rules in emails | Formal email phrases
 ```
 
 It's better to explain your idea with a few "simple" synonyms everyone understands than with one "fancy" word that confuses everyone.
@@ -179,12 +182,13 @@ Collect statistics. Lots of statistics!
 - How time is split between design, preparing requirements, writing task descriptions, development, testing and bug fixing
 - Any other statistic you can measure or calculate about everything you and your team do
 
-```diagram
-type: steps
+```visual
+type: flow
 title: From numbers to an argument
-- Collect | Everything you can measure or calculate
-- Convert into money | Dry numbers as a money equivalent
-- Use them | Negotiations, processes, career
+end: effect
+- Collect | everything you can measure or calculate | chart
+- Convert into money | dry numbers as a money equivalent | money
+- Use them | negotiations, processes, career | up
 ```
 
 These statistics are your support, your protection and your strongest argument in any negotiation.

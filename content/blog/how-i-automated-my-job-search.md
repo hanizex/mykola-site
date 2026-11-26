@@ -19,6 +19,18 @@ I know 28 job sites and 14 Telegram channels. The search alone takes anywhere fr
 Most jobs need an updated CV that highlights the key skills: 5 to 30 minutes each.
 Then you read the ad, the company page and the reviews. You talk to recruiters. You keep a document with progress, statuses and comments: 20 minutes to an hour.
 
+```visual
+type: iceberg
+title: What 10-14 hours of job search a day are made of
+top: A couple of clicks on Djinni
+topnote: what it looks like from outside
+- Search | 28 sites and 14 channels: 2 minutes to 2 hours | search
+- A CV for each job | 5 to 30 minutes each | cv
+- Ad, company, reviews | read before applying | book
+- Recruiters | talking to them | mail
+- Progress document | 20 minutes to an hour | note
+```
+
 Sure, you can click twice on Djinni and not bother with the rest.
 Then your job search can drag on for months.
 
@@ -104,6 +116,17 @@ Warm contacts and referrals noticeably raise your chances of reaching the techni
 The tracker gives you ready LinkedIn searches: 1st circle, recruiter, head or CEO. And it reminds you to write.
 
 Two good applications beat eight lazy ones.
+
+```visual
+type: balance
+title: Two good applications beat eight lazy ones
+left: Two good applications
+right: Eight lazy ones
+heavier: left
+- A keyword with a fact behind it | Keyword stuffing
+- A CV, cover and messages for this job | An invented number
+- Writing to 1-2 people at the company | Apply and wait
+```
 
 ## The online tracker: a free test with your AI chat
 

@@ -3,6 +3,9 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="color-scheme" content="dark">
+  <meta name="theme-color" content="#0a0d12">
+  <meta name="text-scale" content="scale">
   <title>Демо Job Search Engine: інтерактивний трекер з вигаданими даними</title>
   <meta name="description" content="Спробуйте трекер Job Search Engine у браузері. Усі вакансії вигадані. Ваші зміни лишаються на вашому пристрої, нічого не надсилається на сервер.">
   <meta name="robots" content="index, follow, max-image-preview:large">
@@ -22,10 +25,12 @@
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
   <link rel="stylesheet" href="/assets/style.css">
   <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Микола Калакуцький","item":"https://mykola.pages.dev/uk/"},{"@type":"ListItem","position":2,"name":"Інструменти","item":"https://mykola.pages.dev/uk/tools/"},{"@type":"ListItem","position":3,"name":"Job Search Engine","item":"https://mykola.pages.dev/uk/tools/job-search-engine/"},{"@type":"ListItem","position":4,"name":"Демо","item":"https://mykola.pages.dev/uk/tools/job-search-engine/demo/"}]}</script>
+  <script type="speculationrules">{"prefetch":[{"where":{"and":[{"href_matches":"/*"},{"not":{"href_matches":"/api/*"}}]},"eagerness":"moderate"}]}</script>
 </head>
 <body>
+  <a class="skip" href="#main">Перейти до змісту</a>
   <header class="site"><div class="wrap"><a class="brand" href="/uk/">Микола Калакуцький</a><nav><a href="/uk/cv/">Резюме</a><a href="/uk/blog/">Блог</a><a href="/uk/tools/" aria-current="page">Інструменти</a><a href="/tools/job-search-engine/demo/" hreflang="en" lang="en" title="Read in English">EN</a></nav></div></header>
-  <main class="wrap jse">
+  <main id="main" class="wrap jse">
     <nav class="jse-crumb" aria-label="Breadcrumb"><a href="/uk/tools/">Інструменти</a> / <a href="/uk/tools/job-search-engine/">Job Search Engine</a> / Демо</nav>
     <h1 style="font-size:2rem">Демо-трекер JSE</h1>
     <p class="lead">Ось як працює трекер. Він робить три речі: веде вас до оголошення за прямим посиланням, тримає статус кожної вакансії й веде до потрібних людей у LinkedIn. Вакансії тут не додаються вручну. Вони приходять зі сканування, і кожна картка вже містить повний опис.</p>

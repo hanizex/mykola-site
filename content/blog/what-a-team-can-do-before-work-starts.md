@@ -22,13 +22,13 @@ Next up: Discovery.
 
 And there is work here for more than just the people who talk to the client.
 
-```diagram
-type: steps
+```visual
+type: funnel
 title: From presale to the start of work
-- Presale | The idea is agreed with the client
-- Discovery | While we clarify details with the client, the team checks its own part in parallel
-- Team findings | Go back into the discussion with the client
-- Requirements, budget or the whole idea | Can change before anything starts
+- Presale | the idea is agreed with the client
+- Discovery | questions to the client and the team's checks
+- Team findings | go back into the discussion with the client
+- Start of work | requirements, budget or the whole idea can change
 ```
 
 ## What we find out on the client side
@@ -64,6 +64,14 @@ title: What the team checks during Discovery
 
 The team's findings go back into the [discussion with the client](/blog/why-one-way-reporting-kills-projects/).
 They can change the requirements, the budget or the whole idea.
+
+```visual
+type: venn
+title: Discovery: two parallel parts of the work
+center: Shared discussion
+- Client | result, budget, deadlines, constraints
+- Team | implementation, dependencies, resources, hypotheses
+```
 
 Nothing has started yet, and look how much work there already is!!!
 

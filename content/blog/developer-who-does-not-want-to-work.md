@@ -48,6 +48,17 @@ by: Mykola Kalakutskyi
 Driving everyone into the fucking ground with work is not part of that job.
 
 If the project is on track and agreements are kept, why demand more hours?
+
+```visual
+type: balance
+title: What weighs more for a manager
+left: Hours worked
+right: Project result
+heavier: right
+- A feeling he works 3-4 hours | On time
+- Comparison with the others | Within budget
+- More hours | At the expected quality
+```
 Better to have him [teach the others](/blog/personal-development-plan-as-manipulation/) to get their tasks done faster too, so everyone can rest more.
 
 ## If there really is a problem: a conversation in three steps
@@ -56,12 +67,12 @@ If there really is a problem, I suggest the Managing underperformance guidance f
 
 In a one-on-one conversation you need to do three things:
 
-```diagram
-type: steps
+```visual
+type: timeline
 title: The one-on-one about performance
-- Name the broken agreement | "Your tasks are regularly delayed. That blocks other people and affects the whole project."
-- Find out the cause | Missing skills? Unclear tasks? Too much workload? Personal circumstances?
-- Agree on a solution | Help, mentoring, a change in workload or working conditions.
+- Step 1 | Name the broken agreement | delays block other people and the whole project
+- Step 2 | Find out the cause | skills, tasks, workload or personal circumstances
+- Step 3 | Agree on a solution | help, mentoring, a change in workload or conditions
 ```
 
 ## When to prepare a replacement

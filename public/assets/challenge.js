@@ -36,7 +36,7 @@
       Object.keys(ov.if).forEach((qid) => forced.push(picked.find((x) => x.q.id === qid)));
       const t = C.bands.findIndex((b) => b.id === ov.minBand); if (t > bi) bi = t;
     });
-    const ranked = picked.slice().sort((a, b) => (b.o.human - a.o.human) || (a.i - b.i));
+    const ranked = picked.toSorted((a, b) => (b.o.human - a.o.human) || (a.i - b.i));
     const sig = []; [...forced, ...ranked].forEach((p) => { if (!sig.includes(p) && sig.length < 2) sig.push(p); });
     return { band: C.bands[bi], signals: sig.map((p) => p.o.signal), picked };
   }
