@@ -13,7 +13,9 @@ export function strip(text, day = today()) {
 }
 
 export async function gated(context) {
-  const res = await context.next();
+  // HEAD has no body, so read the page with GET to apply the same rules (a future post must answer 404 to HEAD too).
+  const head = context.request.method === 'HEAD';
+  const res = head ? await context.env.ASSETS.fetch(new Request(context.request.url, { headers: context.request.headers })) : await context.next();
   const type = res.headers.get('content-type') || '';
   if (res.status !== 200 || !/text\/html|xml|text\/plain/.test(type)) return res;
   const text = await res.text();
@@ -21,7 +23,7 @@ export async function gated(context) {
   const m = text.match(/<meta name="pub-date" content="(\d{4}-\d{2}-\d{2})">/);
   if (m && m[1] > day) {
     const nf = await context.env.ASSETS.fetch(new URL('/404.html', context.request.url));
-    return new Response(nf.body, { status: 404, headers: { 'content-type': 'text/html; charset=utf-8', 'cache-control': 'no-store' } });
+    return new Response(head ? null : nf.body, { status: 404, headers: { 'content-type': 'text/html; charset=utf-8', 'cache-control': 'no-store' } });
   }
   const headers = new Headers(res.headers);
   headers.delete('etag'); headers.delete('content-length');
@@ -29,5 +31,5 @@ export async function gated(context) {
   // The first two covers on a blog index are above the fold: load them right away (which ones depends on the day).
   let n = 0;
   const out = strip(text, day).replace(/(<a class="pcard" [^>]*><img [^>]*?) loading="lazy"/g, (m, a) => (n++ < 2 ? a + ' fetchpriority="high"' : m));
-  return new Response(out, { status: 200, headers });
+  return new Response(head ? null : out, { status: 200, headers });
 }
