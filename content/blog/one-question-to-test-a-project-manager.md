@@ -8,6 +8,9 @@ cta: consult
 summary: Ask the candidate to describe their responsibilities and actual work in each phase of the software development life cycle, in 5 to 10 minutes. The number of phases they cover and how concrete they are tells you their level.
 tags: project management, hiring, interview questions, SDLC
 source: t.me/outstanding_pm/288 (17 May 2024)
+cover: question
+cover_alt: Large question mark inside a dotted circle with nine points
+updated: 2026-11-26
 ---
 
 Want a PM salary? Tell me what you actually manage.
@@ -33,6 +36,20 @@ These are the nine areas I want to explore.
 → Closure. Who accepted the result? What did you hand over?
 → Maintenance. What was your role in support, stability, and changes?
 
+```diagram
+type: steps
+title: The nine SDLC areas I listen for
+- Initiation | why the project existed
+- Planning | scope, estimates, resources, risks, schedule, budget
+- Analysis | agreement on real needs
+- Design | decisions and approvals
+- Development | when reality eats the plan
+- Testing | quality checks and acceptance
+- Deployment | who must be ready for the release
+- Closure | acceptance and handover
+- Maintenance | support, stability, changes
+```
+
 My rough read of the answer:
 
 ① Beginner. Covers 2–4 areas. Broad phrases. Needs constant prompting to explain their own work.
@@ -40,6 +57,15 @@ My rough read of the answer:
 ② Intermediate. Covers 3–5 areas. Mostly concrete, with gaps worth digging into.
 
 ③ Professional. Covers 6–9 areas. Explains decisions and responsibilities clearly. Has examples ready when asked.
+
+```diagram
+type: bars
+title: How many of the 9 areas a candidate covers
+max: 9
+- Beginner | 2-4 | broad phrases, needs prompting
+- Intermediate | 3-5 | mostly concrete, with gaps
+- Professional | 6-9 | clear decisions, examples ready
+```
 
 Different phase names? Fine.
 Different lifecycle? Explain how it worked and where your responsibility started and ended.
@@ -55,4 +81,4 @@ Try answering the question about your own last project.
 Set a timer. You have ten minutes.
 
 If you get stuck somewhere between "managed" and "controlled", write to me.
-We can work through your experience and prepare your answer in a consultation.
+We can work through your experience and [prepare your answer](/pm-interview-prep/) in a consultation.

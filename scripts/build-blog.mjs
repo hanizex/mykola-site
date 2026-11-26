@@ -12,6 +12,7 @@ import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { introLink, ogPath, PREP, toolsLink } from './config.mjs';
 import { marked } from 'marked';
+import { coverSvg, diagram } from './blog-visuals.mjs';
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), '..');
 const SITE = 'https://mykola.pages.dev';
@@ -22,6 +23,13 @@ const GITHUB = 'https://github.com/hanizex';
 const PHOTO = `${SITE}/assets/mykola.jpg`;
 const PUBLIC = join(ROOT, 'public');
 const withDrafts = process.argv.includes('--drafts');
+const checkOnly = process.argv.includes('--check'); // render everything, write nothing (for checking new posts)
+// Daily publishing: a post whose date is in the future is built but hidden until that day (Europe/Sofia) by the
+// Pages Functions gate (functions/_lib/gate.js). Lists wrap each entry in <!--pub:DATE-->...<!--/pub--> markers.
+const TODAY = new Intl.DateTimeFormat('en-CA', { timeZone: 'Europe/Sofia', year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date());
+const gate = (p, s) => (p.draft ? s : `<!--pub:${p.date}-->${s}<!--/pub-->`);
+const live = (p) => !p.draft && p.date <= TODAY;
+const coverUrl = (p) => `/assets/blog/covers/${p.key}.svg`;
 
 const T = {
   en: {
@@ -29,6 +37,7 @@ const T = {
     blog: 'Blog', consult: 'Consultation', min: 'min read', short: 'In short:', topics: 'Topics', privacyLabel: 'Privacy', draft: 'DRAFT: not published.',
     cta: { consult: 'Discuss your case in a free intro call', comment: 'Argue with me in the Telegram channel' },
     follow: 'Not ready for a call? I share short management notes in my Telegram channel:', followLink: 'Outstanding PM', lane: 'Preparing for a PM interview?', laneLink: 'Mock interview and CV review, one hour',
+    related: 'Read next', author: 'Mykola Kalakutskyi: IT project and delivery manager, 12+ years in IT, 400+ consultation and mentorship sessions.', aCv: 'My CV', aTools: 'Free tools, including a job search tracker', aEx: 'Real feedback examples',
     idxTitle: `Blog – ${NAME}`, idxH1: 'Blog',
     idxDesc: 'Practical, sharp notes on project, product, delivery and operational management, for managers, founders and people starting out.',
     idxLead: 'Practical notes on project, product, delivery and operational management.',
@@ -39,6 +48,7 @@ const T = {
     blog: 'Блог', consult: 'Консультація', min: 'хв читання', short: 'Коротко:', topics: 'Теми', privacyLabel: 'Конфіденційність', draft: 'ЧЕРНЕТКА: не опубліковано.',
     cta: { consult: 'Обговорити мій кейс на безкоштовному знайомстві', comment: 'Посперечатися в Telegram-каналі' },
     follow: 'Ще не час для розмови? Короткі нотатки про менеджмент я публікую в Telegram-каналі:', followLink: 'Outstanding PM', lane: 'Готуєтесь до співбесіди на PM?', laneLink: 'Пробна співбесіда й розбір резюме, одна година',
+    related: 'Читайте також', author: 'Микола Калакуцький: IT project і delivery менеджер, 12+ років в IT, 400+ консультацій і менторських сесій.', aCv: 'Моє резюме', aTools: 'Безкоштовні інструменти, зокрема трекер вакансій', aEx: 'Приклади реальних відгуків',
     idxTitle: `Блог – ${NAME_UK}`, idxH1: 'Блог',
     idxDesc: 'Практичні й різкі нотатки про проєктний, продуктовий, delivery та операційний менеджмент: для менеджерів, засновників і тих, хто тільки починає.',
     idxLead: 'Практичні нотатки про проєктний, продуктовий, delivery та операційний менеджмент.',
@@ -52,6 +62,8 @@ const LINKEDIN = 'https://www.linkedin.com/in/hanizex/';
 const authorFor = (lang) => ({ '@type': 'Person', name: T[lang].name, alternateName: lang === 'uk' ? NAME : NAME_UK, url: `${SITE}/`, sameAs: [GITHUB, CHANNEL, LINKEDIN] });
 
 marked.setOptions({ gfm: true, breaks: true }); // the author writes short lines: keep single line breaks
+let curLang = 'en';
+marked.use({ renderer: { code(token) { return token.lang === 'diagram' ? diagram(token.text, curLang) : false; } } });
 
 function parse(file, lang, draft) {
   const raw = readFileSync(file, 'utf8');
@@ -69,7 +81,8 @@ function parse(file, lang, draft) {
   const lane = meta.lane === 'prep' ? 'prep' : '';
   const cta = meta.cta || 'consult';
   if (!['consult', 'comment', 'none'].includes(cta)) throw new Error(`${file}: cta must be consult, comment or none`);
-  const words = m[2].trim().split(/\s+/).length;
+  const words = m[2].replace(/```diagram[\s\S]*?```/g, ' ').trim().split(/\s+/).length;
+  curLang = lang;
   return {
     ...meta, lang, draft, cta, lane,
     tags: (meta.tags || '').split(',').map((t) => t.trim()).filter(Boolean),
@@ -107,14 +120,14 @@ function alternates(self, other) {
   return [{ l: 'en', h: SITE + en.path }, { l: 'uk', h: SITE + uk.path }, { l: 'x-default', h: SITE + en.path }];
 }
 
-const head = ({ lang, title, description, path, type = 'website', extra = '', noindex = false, alts = [] }) => `<!doctype html>
+const head = ({ lang, title, description, path, type = 'website', extra = '', noindex = false, alts = [], pub = '' }) => `<!doctype html>
 <html lang="${lang}">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>${esc(title)}</title>
   <meta name="description" content="${esc(description)}">
-  <meta name="author" content="${T[lang].name}">
+  <meta name="author" content="${T[lang].name}">${pub ? `\n  <meta name="pub-date" content="${pub}">` : ''}
   <link rel="canonical" href="${SITE}${path}">
   ${alts.map((a) => `<link rel="alternate" hreflang="${a.l}" href="${a.h}">`).join('\n  ')}
   ${noindex ? '<meta name="robots" content="noindex">' : '<meta name="robots" content="index, follow, max-image-preview:large">'}
@@ -160,7 +173,40 @@ function body(p) {
   // The summary box goes right AFTER the hook (the first paragraph), never before it.
   const t = T[p.lang];
   const box = p.summary ? `<p class="lead tldr"><strong>${t.short}</strong> ${esc(p.summary)}</p>` : '';
-  return p.html.startsWith('<p>') ? p.html.replace('</p>', '</p>\n' + box) : box + p.html;
+  const html = gateLinks(p);
+  return html.startsWith('<p>') ? html.replace('</p>', '</p>\n' + box) : box + html;
+}
+
+// In-text links to a post that comes out later than this one: until that day the gate shows the link text only.
+function gateLinks(p) {
+  return p.html.replace(/<a href="(\/(?:uk\/)?blog\/[a-z0-9-]+\/)"[^>]*>([\s\S]*?)<\/a>/g, (m, href, text) => {
+    const q = posts.find((x) => x.path === href);
+    if (!q) { if (!withDrafts) console.warn(`warning: ${p.path} links to missing post ${href}`); return m; }
+    return !p.draft && !q.draft && q.date > p.date ? `<!--pla:${q.date}-->${m}<!--/pla-->` : m;
+  });
+}
+
+function postCard(p, cls = '') {
+  const t = T[p.lang];
+  return gate(p, `<a class="pcard${cls}" href="${p.path}"><img src="${coverUrl(p)}" alt="" width="1200" height="630" loading="lazy"><span class="pc-b"><strong>${esc(p.title)}${p.draft ? ' (draft)' : ''}</strong><span>${esc(p.description)}</span><span class="note">${fmt(p.date, p.lang)} · ${p.minutes} ${t.min}</span></span></a>`);
+}
+
+// Read next: same language, most shared topics first, then the same lane, then the newest. Future posts are hidden by the gate.
+function relatedBlock(p) {
+  const pool = byLang(p.lang).filter((q) => q !== p && (withDrafts || !q.draft));
+  const score = (q) => q.tags.filter((x) => p.tags.includes(x)).length * 3 + (q.lane && q.lane === p.lane ? 2 : 0);
+  const rank = (l) => l.sort((a, b) => score(b) - score(a) || b.date.localeCompare(a.date));
+  const older = rank(pool.filter((q) => q.date <= p.date)), newer = rank(pool.filter((q) => q.date > p.date));
+  const pick = [...older.slice(0, 3), ...newer].slice(0, 4);
+  if (!pick.length) return '';
+  const first = pick.map((q) => q.date).sort()[0]; // the block shows once at least one of its posts is out
+  const sec = `<section class="related"><h2>${T[p.lang].related}</h2><div class="pgrid">${pick.map((q) => postCard(q, ' sm')).join('')}</div></section>`;
+  return p.draft ? sec : `<!--pubs:${first}-->${sec}<!--/pubs-->`;
+}
+
+function authorBox(p) {
+  const t = T[p.lang], uk = p.lang === 'uk' ? '/uk' : '';
+  return `<aside class="author-box"><img src="/assets/mykola.jpg" alt="${t.name}" width="64" height="64" loading="lazy"><div><p>${t.author}</p><p class="ab-links"><a href="${uk}/cv/">${t.aCv} →</a><a href="${uk}/tools/">${t.aTools} →</a><a href="${uk}/examples/">${t.aEx} →</a></p></div></aside>`;
 }
 
 const isoDay = (d) => (d && !String(d).includes('T') ? `${d}T00:00:00Z` : d);
@@ -179,7 +225,7 @@ function postPage(p) {
       { '@type': 'ListItem', position: 3, name: p.title, item: `${SITE}${p.path}` },
     ],
   }];
-  return `${head({ lang: p.lang, title: fullTitle(p.title, p.lang), description: p.description, path: p.path, type: 'article', noindex: p.draft,
+  return `${head({ lang: p.lang, title: fullTitle(p.title, p.lang), description: p.description, path: p.path, type: 'article', noindex: p.draft, pub: p.draft ? '' : p.date,
     alts: alternates(p, other), extra: ld.map(jsonLd).join('\n  ') })}
 <body>
   ${header(p.lang, other ? other.path : '')}
@@ -188,11 +234,14 @@ function postPage(p) {
     <article class="post">
       <p class="note" style="margin-bottom:6px"><a href="${t.base}">${t.blog}</a> · <time datetime="${p.date}">${fmt(p.date, p.lang)}</time> · ${p.minutes} ${t.min}${other ? ` · <a href="${other.path}" hreflang="${other.lang}" lang="${other.lang}">${t.other.title} →</a>` : ''}</p>
       <h1>${esc(p.title)}</h1>
+      <figure class="cover"><img src="${coverUrl(p)}" alt="${esc(p.cover_alt || p.title)}" width="1200" height="630" fetchpriority="high"></figure>
       ${body(p)}
       ${p.tags.length ? `<p class="note">${t.topics}: ${p.tags.map(esc).join(' · ')}</p>` : ''}
     </article>
     ${ctaBlock(p)}
+    ${authorBox(p)}
     ${followBlock(p)}
+    ${relatedBlock(p)}
   </main>
   ${footer(p.lang)}
 </body>
@@ -204,9 +253,9 @@ function indexPage(lang) {
   const t = T[lang], list = byLang(lang);
   const otherLang = lang === 'en' ? 'uk' : 'en';
   const sw = hasLang(otherLang) ? T[otherLang].base : '';
-  const cards = list.map((p) => `<a class="card" href="${p.path}"><strong>${esc(p.title)}${p.draft ? ' (draft)' : ''}</strong><span>${esc(p.description)}</span><span class="note" style="display:block;margin-top:6px">${fmt(p.date, lang)} · ${p.minutes} ${t.min}</span></a>`).join('\n        ');
+  const cards = list.map((p) => postCard(p)).join('\n        ');
   const ld = { '@context': 'https://schema.org', '@type': 'Blog', name: `${t.name} – ${t.blog}`, url: `${SITE}${t.base}`, inLanguage: lang, author: authorFor(lang),
-    blogPost: list.filter((p) => !p.draft).map((p) => ({ '@type': 'BlogPosting', headline: p.title, url: SITE + p.path, datePublished: isoDay(p.date) })) };
+    blogPost: list.filter(live).map((p) => ({ '@type': 'BlogPosting', headline: p.title, url: SITE + p.path, datePublished: isoDay(p.date) })) };
   const alts = sw ? [{ l: 'en', h: `${SITE}/blog/` }, { l: 'uk', h: `${SITE}/uk/blog/` }, { l: 'x-default', h: `${SITE}/blog/` }] : [];
   return `${head({ lang, title: t.idxTitle, description: t.idxDesc, path: t.base, noindex: list.every((p) => p.draft), alts, extra: jsonLd(ld) })}
 <body>
@@ -215,7 +264,7 @@ function indexPage(lang) {
     <h1 style="font-size:2rem">${t.idxH1}</h1>
     <p class="lead">${t.idxLead}</p>
     ${sw ? `<p class="note"><a href="${sw}" hreflang="${otherLang}" lang="${otherLang}">${T[otherLang].other.title} →</a></p>` : ''}
-    <div class="cards">
+    <div class="pgrid">
         ${cards}
     </div>
   </main>
@@ -228,7 +277,7 @@ function indexPage(lang) {
 const rss = (lang) => `<?xml version="1.0" encoding="UTF-8"?>
 <rss version="2.0"><channel>
 <title>${T[lang].name} – ${T[lang].blog}</title><link>${SITE}${T[lang].base}</link><description>${T[lang].feedDesc}</description><language>${lang}</language>
-${published(lang).map((p) => `<item><title>${esc(p.title)}</title><link>${SITE}${p.path}</link><guid>${SITE}${p.path}</guid><pubDate>${new Date(p.date + 'T09:00:00Z').toUTCString()}</pubDate><description>${esc(p.description)}</description></item>`).join('\n')}
+${published(lang).map((p) => gate(p, `<item><title>${esc(p.title)}</title><link>${SITE}${p.path}</link><guid>${SITE}${p.path}</guid><pubDate>${new Date(p.date + 'T09:00:00Z').toUTCString()}</pubDate><description>${esc(p.description)}</description></item>`)).join('\n')}
 </channel></rss>
 `;
 
@@ -258,9 +307,10 @@ function sitemap() {
   }
   const enIdx = published('en'), ukIdx = published('uk');
   const idxAlts = enIdx.length && ukIdx.length ? [{ l: 'en', h: `${SITE}/blog/` }, { l: 'uk', h: `${SITE}/uk/blog/` }, { l: 'x-default', h: `${SITE}/blog/` }] : [];
-  if (enIdx.length) rows.push(x(`${SITE}/blog/`, enIdx[0].updated, idxAlts));
-  if (ukIdx.length) rows.push(x(`${SITE}/uk/blog/`, ukIdx[0].updated, idxAlts));
-  for (const p of pubAll) { const o = twin(p); rows.push(x(SITE + p.path, p.updated, o && !o.draft ? alternates(p, o) : [])); }
+  const lastLive = (l) => (l.find(live) || l[l.length - 1]).updated;
+  if (enIdx.length) rows.push(x(`${SITE}/blog/`, lastLive(enIdx), idxAlts));
+  if (ukIdx.length) rows.push(x(`${SITE}/uk/blog/`, lastLive(ukIdx), idxAlts));
+  for (const p of pubAll) { const o = twin(p); rows.push(gate(p, x(SITE + p.path, p.updated, o && !o.draft ? alternates(p, o) : []))); }
   return `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
 ${rows.join('\n')}
@@ -280,9 +330,17 @@ const llms = () => `# ${NAME}
 - [Tools](${SITE}/tools/): small tools built for my own work and shared
 - [Job Search Engine (JSE)](${SITE}/tools/job-search-engine/): a free online tracker (test access, write to me) that finds fitting jobs every morning and works with your AI chat, plus the method behind it: daily collection from company career systems, filters, ad screening, deduplication, a CV method with an ATS gate and a tracker; code free for personal use and a live demo with invented data ([online tracker guide](${SITE}/tools/job-search-engine/hosted/), [setup guide](${SITE}/tools/job-search-engine/setup/), [demo](${SITE}/tools/job-search-engine/demo/))
 - [Challenge AI](${SITE}/challenge/): free 6-question quiz that tells whether AI is enough for a work problem or a human view is needed; runs in the browser
-${pubAll.filter((p) => p.lang === 'en').map((p) => `- [${p.title}](${SITE}${p.path}): ${p.description}`).join('\n')}
-${published('uk').length ? `\n## Ukrainian (Українською)\n- [Інструменти](${SITE}/uk/tools/): невеликі інструменти, зроблені для власної роботи\n- [Job Search Engine (JSE)](${SITE}/uk/tools/job-search-engine/): безкоштовний онлайн трекер (тестовий доступ, напишіть мені), який щоранку знаходить підхожі вакансії й працює з вашим AI-чатом, і метод за ним: код для особистого використання та живе демо з вигаданими даними ([посібник з онлайн трекера](${SITE}/uk/tools/job-search-engine/hosted/), [посібник з налаштування](${SITE}/uk/tools/job-search-engine/setup/), [демо](${SITE}/uk/tools/job-search-engine/demo/))\n- [Challenge AI](${SITE}/uk/challenge/): безкоштовний тест із 6 запитань: чи вистачить AI для робочої проблеми, чи потрібен погляд людини; працює в браузері\n- [Резюме](${SITE}/uk/cv/): повна історія кар'єри, результати з датами й сумами, навички, власні проєкти; PDF: ${SITE}/assets/cv/Mykola_Kalakutskyi_CV_UA.pdf\n${published('uk').map((p) => `- [${p.title}](${SITE}${p.path}): ${p.description}`).join('\n')}\n` : ''}`;
+${pubAll.filter((p) => p.lang === 'en').map((p) => gate(p, `- [${p.title}](${SITE}${p.path}): ${p.description}`)).join('\n')}
+${published('uk').length ? `\n## Ukrainian (Українською)\n- [Інструменти](${SITE}/uk/tools/): невеликі інструменти, зроблені для власної роботи\n- [Job Search Engine (JSE)](${SITE}/uk/tools/job-search-engine/): безкоштовний онлайн трекер (тестовий доступ, напишіть мені), який щоранку знаходить підхожі вакансії й працює з вашим AI-чатом, і метод за ним: код для особистого використання та живе демо з вигаданими даними ([посібник з онлайн трекера](${SITE}/uk/tools/job-search-engine/hosted/), [посібник з налаштування](${SITE}/uk/tools/job-search-engine/setup/), [демо](${SITE}/uk/tools/job-search-engine/demo/))\n- [Challenge AI](${SITE}/uk/challenge/): безкоштовний тест із 6 запитань: чи вистачить AI для робочої проблеми, чи потрібен погляд людини; працює в браузері\n- [Резюме](${SITE}/uk/cv/): повна історія кар'єри, результати з датами й сумами, навички, власні проєкти; PDF: ${SITE}/assets/cv/Mykola_Kalakutskyi_CV_UA.pdf\n${published('uk').map((p) => gate(p, `- [${p.title}](${SITE}${p.path}): ${p.description}`)).join('\n')}\n` : ''}`;
 
+if (checkOnly) {
+  for (const p of posts) { const h = postPage(p); console.log(`${p.date} ${p.lang} ${p.slug}: ${(p.html.match(/<figure class="dg/g) || []).length} figure(s), ${p.minutes} min${p.date > TODAY ? ' (scheduled)' : ''}`); if (/```|\{\{/.test(h)) throw new Error(p.slug + ': unrendered block'); }
+  indexPage('en'); indexPage('uk'); rss('en'); rss('uk'); sitemap(); llms();
+  console.log('check ok'); process.exit(0);
+}
+rmSync(join(PUBLIC, 'assets', 'blog', 'covers'), { recursive: true, force: true });
+mkdirSync(join(PUBLIC, 'assets', 'blog', 'covers'), { recursive: true });
+for (const p of posts) writeFileSync(join(PUBLIC, 'assets', 'blog', 'covers', `${p.key}.svg`), coverSvg(p.key, p.cover));
 rmSync(join(PUBLIC, 'blog'), { recursive: true, force: true });
 rmSync(join(PUBLIC, 'uk', 'blog'), { recursive: true, force: true }); // keep the hand-written /uk/ landing
 for (const lang of ['en', 'uk']) {
@@ -296,4 +354,5 @@ for (const lang of ['en', 'uk']) {
 writeFileSync(join(PUBLIC, 'sitemap.xml'), sitemap());
 writeFileSync(join(PUBLIC, 'llms.txt'), llms());
 const drafts = posts.length - pubAll.length;
-console.log(`blog: ${published('en').length} en + ${published('uk').length} uk published${drafts ? `, ${drafts} draft(s) rendered for preview` : ''}`);
+const later = pubAll.filter((p) => p.date > TODAY).length;
+console.log(`blog: ${published('en').length} en + ${published('uk').length} uk published${later ? ` (${later} scheduled after ${TODAY})` : ''}${drafts ? `, ${drafts} draft(s) rendered for preview` : ''}`);

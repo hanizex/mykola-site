@@ -10,12 +10,29 @@ summary: "Eight job interview mistakes to avoid: arriving late without communica
 author: Mykola Kalakutskyi
 tags: job interview, interview preparation, IT careers, project manager interview, hiring, soft skills
 source: t.me/outstanding_pm/336 (10 June 2024)
+cover: interview
+cover_alt: Line drawing of two people facing each other across a table at a job interview
+updated: 2026-11-26
 ---
 
 You can lose an offer before you answer a single question.
 
 I'm often asked how to prepare for job interviews.
 Here are eight mistakes I see most often, and what to do instead.
+
+```diagram
+type: cards
+mark: cross
+title: 8 interview mistakes and what to do instead
+- Arriving late without a word | Confirm the time zone, leave a buffer, warn early
+- No technical check | Test the platform, sound and camera beforehand
+- Knowing nothing about the company | Research the business and the role, bring questions
+- Answering a different question | Give the answer first, then an example
+- Bluffing or hidden help | Explain in your own words, admit what you don't know
+- Trashing a former employer | What happened, the impact, what you did
+- Endless apologies | Acknowledge, correct, move on
+- Nerves derail your answers | Record a mock interview, practise pausing
+```
 
 ## 1. Arriving late without communicating
 
@@ -46,6 +63,15 @@ You deliver a fifteen-minute history of your department.
 
 Give the answer first. Then add a relevant example: your responsibility, your action, the result.
 If the question is unclear, ask for clarification.
+
+```diagram
+type: steps
+title: How to structure an answer
+- The answer | first, to the question you were asked
+- Your responsibility | in the example
+- Your action
+- The result
+```
 
 ## 5. Bluffing or hiding outside assistance
 
@@ -86,8 +112,8 @@ Practise pausing, asking for a moment and returning to the question.
 
 ## How to prepare for your next job interview
 
-Run one practice interview before the real one.
-Check the call setup, research the role and prepare examples that show your contribution.
+Run one [practice interview](/pm-interview-prep/) before the real one.
+Check the call setup, research the role and [prepare examples that show your contribution](/blog/one-question-to-test-a-project-manager/).
 Use these eight mistakes as a review checklist.
 
 If your experience is solid but your interview answers aren't landing, write to me.

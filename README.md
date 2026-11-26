@@ -22,9 +22,16 @@ POST-only, HMAC token, token in the URL fragment).
 Markdown posts in `content/blog/` are built into `public/blog/` (plus sitemap.xml, rss.xml, llms.txt) by `scripts/build-blog.mjs`.
 Drafts live in `content/drafts/` (git-ignored, never built for production). `npm run preview` renders them locally with a DRAFT banner.
 Front matter: title, description, date (YYYY-MM-DD), slug, optional summary, tags, updated.
+Visuals: `cover:` picks the motif of the main image (SVG generated per `key` into `public/assets/blog/covers/`, list in
+`scripts/blog-visuals.mjs`), and ```diagram blocks inside a post become figures (steps, compare, bars, matrix, ladder, cycle,
+cards, groups, quote, stats; syntax at the top of `scripts/blog-visuals.mjs`). Every post: one cover + at least 2 diagrams.
+Daily publishing: posts can be written ahead with a future `date`. They are built and deployed, but until that day
+(Europe/Sofia) the page answers 404 and the entry is hidden from the blog index, related posts, RSS, sitemap and llms.txt
+by `functions/_lib/gate.js` (middleware in `functions/blog/`, `functions/uk/blog/`, `functions/sitemap.xml.js`, `functions/llms.txt.js`).
+No redeploy is needed on the day. `node scripts/build-blog.mjs --check` renders everything and writes nothing.
 
 ## Deploy (only after owner approval)
-    npm run deploy        # builds the blog, then wrangler pages deploy
+    npm run build && npm run og && npx wrangler pages deploy public --project-name mykola --branch main --commit-dirty=true
 Never run `wrangler deploy` here (creates a Workers project instead).
 
 ## Secrets (Pages project, production; never in files/chat)

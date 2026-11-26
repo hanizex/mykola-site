@@ -9,12 +9,32 @@ lane: prep
 summary: "A practical checklist of 10 IT project manager skills: eight areas drawn from job postings, plus English and hands-on implementation of AI tools, AI agents and workflows."
 tags: project management, project manager skills, IT careers, job requirements, AI in project management, AI agents
 source: t.me/outstanding_pm/1045 (20 May 2025)
+cover: checklist
+cover_alt: Checklist with two ticked items and one still open
+updated: 2026-11-26
 ---
 
 Your CV says "AI-driven". Your last project says "copy-paste into ChatGPT".
 
 My analysis of IT project manager job postings produced eight groups of skills.
 This updated checklist adds English and practical work with AI tools and AI agents.
+
+```diagram
+type: groups
+title: 10 IT project manager skills
+# From job postings
+- Organisation and resources
+- Communication and stakeholders
+- Problem solving and decisions
+- Leadership and negotiation
+- Risk management
+- Time and priorities
+- Budget and cost estimation
+- PM methods and tools
+# Added in this update
+- English
+- AI tools, agents and automation
+```
 
 ## 1. Organisation and resource management
 
@@ -52,7 +72,7 @@ Someone will pay for every "small adjustment". Know who, and how much.
 
 ## 8. Project management methods and tools
 
-Understand methods, frameworks, tools and the processes from planning to closure.
+Understand methods, frameworks, tools and the [processes from planning to closure](/blog/one-question-to-test-a-project-manager/).
 Be able to explain why you're using them on this project.
 
 ## 9. English for IT project management
@@ -70,6 +90,15 @@ You also need to implement AI tools and agents in real project workflows.
 For example:
 Meeting notes → draft tasks → checks for missing owners → status update for approval.
 
+```diagram
+type: steps
+title: Example: an AI workflow in a real project
+- Meeting notes
+- Draft tasks
+- Check for missing owners
+- Status update | goes to a human for approval
+```
+
 Choose the tools, connect the relevant data and configure the workflow.
 Set permissions and human approval points.
 Test the output, handle failures and measure improvements in speed or quality.
@@ -86,6 +115,16 @@ For every score, recall a real situation that backs it up.
 
 "I read about risk management" and "I managed a project risk" deserve different scores.
 So do "I know AI tools" and "I implemented a workflow the team actually uses".
+
+```diagram
+type: compare
+title: Same skill, different scores
+left: Lower score
+right: Higher score
+- "I read about risk management" | "I managed a project risk"
+- "I know AI tools" | "I implemented a workflow the team actually uses"
+- "I took a course on AI agents" | "Here is what I implemented"
+```
 
 Pick the two weakest areas that matter for the role you want.
 Now you have something specific to work on.

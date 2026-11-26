@@ -8,6 +8,9 @@ cta: comment
 summary: One-way reporting turns status updates into a theatre of green statuses. A manager who shares priorities, reasons, constraints, test results and their own commitments keeps everyone looking at the same picture.
 tags: management, leadership, team communication, reporting
 source: t.me/outstanding_pm/1841 (19 May 2026)
+cover: chat
+cover_alt: Two speech bubbles answering each other, a two-way conversation
+updated: 2026-11-26
 ---
 
 "I'm the manager, and I don't have to tell the team what I'm working on or explain my decisions."
@@ -25,6 +28,18 @@ A team must see what is happening in the system it works in.
 
 When a manager does not give context, priorities and real needs, people fill the gaps with guesses. That costs extra meetings, rework and lost speed, where one honest conversation would have been enough.
 
+```diagram
+type: compare
+title: One-way vs two-way reporting
+left: One-way reporting
+right: Two-way reporting
+- Orders without explanations | Reasons and consequences of decisions
+- Priorities change and nobody says why | The state of priorities, said openly
+- People fill the gaps with guesses | Context, constraints and real needs
+- Reports written to avoid punishment | Hypothesis results: what worked and what didn't
+- A theatre of green statuses | One picture of the whole system for everyone
+```
+
 ## My protocol for regular, open communication
 
 1. **State of priorities.** What is first right now, and what is not worth spending attention on.
@@ -32,6 +47,17 @@ When a manager does not give context, priorities and real needs, people fill the
 3. **Constraints.** Budget, time, conditions, dependencies and blockers. Every detail matters: clear boundaries let people find solutions that satisfy the requirements and expectations.
 4. **Results of hypothesis checks.** What worked, what didn't, what we plan to change, which new questions appeared and which blind spots are still unexplored.
 5. **My own commitments and action plan.** What I, as the manager, will do to remove blockers and resolve conflicts between parties, with a clear timeline.
+
+```diagram
+type: cycle
+title: My protocol for regular, open communication
+center: One picture for everyone
+- Priorities
+- Reasons for decisions
+- Constraints
+- Hypothesis results
+- My commitments
+```
 
 The format is secondary. What matters is that everyone sees one picture: *our goals and values are the same*, and *I carry responsibility for the success of the project together with you*.
 
