@@ -25,7 +25,7 @@ I'm listening for decisions, responsibilities, and results.
 A polished list of PM verbs won't take long to fall apart.
 
 These are the nine areas I want to explore.
-The classic SDLC has 6 or 7 phases, from requirements to maintenance. I add initiation and closure from the project life cycle, because a PM owns those too.
+The classic SDLC has 6 or 7 phases, from planning (or requirements) to maintenance. I add initiation and closure from the project life cycle, because a PM owns those too.
 
 → Initiation. Why did the project exist? Who needed it? What made it worth doing?
 → Planning. Scope, estimates, resources, risks, schedule, budget.

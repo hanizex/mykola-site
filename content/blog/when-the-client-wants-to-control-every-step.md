@@ -70,8 +70,9 @@ Get to the bottom of the cause, and it's easy to find a solution that fixes the 
 ## What to do: cause, roles, meetings, communication format
 
 PMI materials on leadership say that trust and team autonomy matter.
-And Controlling Interest suggests finding out the reasons behind excessive interference.
-Agree on roles, meeting attendance and [the communication format](/blog/the-real-cost-of-a-quick-two-minute-call/).
+So first find out the reasons behind excessive interference.
+Then agree on roles, meeting attendance and [the communication format](/blog/the-real-cost-of-a-quick-two-minute-call/).
+Under the Scrum Guide, the daily and the retrospective are the team's internal events. Invite the client to the Sprint Review instead: that is where they see the result and influence priorities.
 
 ```visual
 type: flow
@@ -79,7 +80,7 @@ title: How to bring the client back inside agreed boundaries
 end: effect
 - Find the cause | where the urge to interfere comes from | search
 - Agree on roles | who gives tasks to whom | team
-- Agree on meeting attendance | dailies, retrospective | calendar
+- Agree on meeting attendance | Sprint Review instead of dailies and retros | calendar
 - Agree on the communication format | how and where we talk | chat
 - Problem solved | without breaking your processes | check
 ```

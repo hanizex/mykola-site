@@ -70,7 +70,7 @@ type: steps
 title: Before I start the work
 - Measure | What exists and how it works
 - Collect data | Statistics are both insurance and working material
-- Set goals | OKRs, SLOs, ER
+- Set goals | OKRs, SLOs
 - Get to work | Now there is a direction and there are limits
 ```
 
@@ -79,9 +79,9 @@ It also sets the limits: what you can do and what is "not in the budget".
 
 ## A goal sets the budget too
 
-For example, if the goal is "cut Cycle Time by 20%", that also means keeping a certain share of the team's costs. Let's say XXX$.
+For example, if the goal is "cut Cycle Time by 20%", the team delivers more in the same time and the business gets results sooner. That has a price in money. Let's say XXX$ a year.
 
-And if my approach costs the company YYY$, and YYY > XXX, those changes aren't worth making.
+And if my approach costs the company YYY$ over the same year, and YYY > XXX, those changes aren't worth making.
 Obviously))
 
 ```visual
@@ -92,7 +92,7 @@ right: XXX$
 heavier: left
 caption: YYY > XXX – those changes aren't worth making
 - The cost of my approach | Goal: Cycle Time -20%
--  | The share of team costs kept
+-  | Benefit per year: more delivered, sooner
 ```
 
 ```diagram

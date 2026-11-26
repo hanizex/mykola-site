@@ -17,7 +17,7 @@ A Personal Development Plan is a legal tool for manipulating people so that they
 
 ## What a Personal Development Plan (PDP) is
 
-In PMI materials on competency development, this plan has two foundations and four components:
+The way I see it (in the spirit of PMI's competency development framework, PMCDF), the plan has two foundations and four components:
 
 ```diagram
 type: groups

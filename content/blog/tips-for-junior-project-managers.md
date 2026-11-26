@@ -160,7 +160,7 @@ When you check against your goal, it's much easier to resolve a conflict even if
 - Based on the fact that your needs and requirements are different now
 - Taking into account what you've learned and discovered
 
-At the start, there's a lot we don't know, so we can't plan or set goals.
+At the start, there's a lot we don't know, so we can't plan far ahead. That is why we refine the goal with every step.
 
 With every step of growth, we see better what lies ahead.
 
