@@ -1124,3 +1124,9 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 2px soli
 .mx-cert-t { font-weight: 800; letter-spacing: .03em; color: var(--accent); margin: 0 0 6px; }
 .mx-cert-n { font-size: 1.5rem; font-weight: 800; margin: 0; color: var(--head, var(--fg)); }
 .mx-q legend:focus, #mx-rep:focus, #mx-title:focus { outline: none; }
+.mx-breadth { font-size: 1.3rem; font-weight: 800; color: var(--head, var(--fg)); margin: 6px 0 16px; }
+.mx-strengths { display: grid; gap: 10px; padding-left: 1.3em; } .mx-strengths li p { margin: 0 0 4px; }
+.mx-dev { padding: 12px 16px; border-left: 3px solid var(--amber, #f59e0b); background: var(--surface); border-radius: 0 12px 12px 0; }
+.mx-tech { margin: 22px 0; } .mx-tech summary { cursor: pointer; font-weight: 700; color: var(--accent); }
+.mx-card svg { display: block; width: 100%; height: auto; max-width: 720px; border-radius: 14px; }
+.mx-v2-slot { margin-top: 26px; padding-top: 10px; border-top: 1px solid var(--line); }

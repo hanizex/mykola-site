@@ -241,7 +241,7 @@
         h('button', { class: 'linkbtn', type: 'button', onclick: (ev) => confirmBox(ev.target.parentNode, T.finishConfirm, T.finishYes, finish) }, T.finishEarly)));
     show(progressBox(prog, q.seq), form);
     legend.focus({ preventScroll: false });
-    sendEvents([{ type: 'display', display_id: q.display_id }]);
+    sendEvents([{ type: 'display', display_id: q.display_id }].concat(document.visibilityState === 'visible' ? [{ type: 'visibility', visible: true }] : []));
     startBeat();
   }
 
@@ -276,7 +276,7 @@
   // ---------------------------------------------------------------- report
   const domainName = (d) => (L === 'uk' && cfg.domainsUk[d.id]) || d.name;
   const pct = (v) => (v === null || v === undefined ? '–' : v + '%');
-  const dur = (ms) => { if (ms === null || ms === undefined) return '–'; const s = Math.round(ms / 1000); return s < 60 ? `${s} s` : `${Math.floor(s / 60)} min ${s % 60} s`; };
+  const dur = (ms) => { if (ms === null || ms === undefined) return '–'; const s = Math.round(ms / 1000); const [sec, min] = L === 'uk' ? ['с', 'хв'] : ['s', 'min']; return s < 60 ? `${s} ${sec}` : `${Math.floor(s / 60)} ${min} ${s % 60} ${sec}`; };
 
   async function report(id) {
     const r = await api('GET', `/attempts/${id}/report?locale=${L}`);
@@ -284,6 +284,7 @@
     if (r.status !== 200) return show(say(T.error, 'note mx-err'));
     const d = r.data;
     if (d.status !== 'ready') return show(say(T.partialNote));
+    if (d.v2 && !d.v2.preview) return show(...renderV2(id, d), h('p', {}, h('a', { href: location.pathname }, T.backToList)));
     const byId = Object.fromEntries(d.domains.map((x) => [x.id, x]));
     const findList = (items) => items.length ? h('ul', { class: 'mx-find' }, items.map((f) =>
       h('li', {}, h('span', { lang: 'en' }, f.statement), h('span', { class: 'note' }, ` · ${domainName(byId[f.domain])} · ${f.observed}% · ${f.support === 'corroborated' ? T.corroborated : T.single}`)))) : say(T.none);
@@ -319,6 +320,7 @@
       h('h3', {}, T.nextStepH), say(T.nextStepText),
       cert,
       say(fmt(T.versions, { p: d.versions.policy, f: d.versions.framework, r: d.versions.registry })),
+      v2Slot(id),
       h('p', {}, h('a', { href: location.pathname }, T.backToList)));
     document.getElementById('mx-rep').focus();
   }
@@ -341,6 +343,124 @@
     } }, T.certBtn);
     box.append(h('h3', { id: 'mx-cert-h' }, T.certH), h('p', {}, h('label', { for: 'mx-consent' }, consent, ' ', T.certConsent)), h('p', {}, btn));
     return box;
+  }
+
+  // ---------------------------------------------------------------- report V2 (plan express-24-v2, or a preview for V1 attempts)
+  function v2Slot(id) {
+    const slot = h('section', { class: 'mx-v2-slot' });
+    const btn = h('button', { class: 'btn ghost', type: 'button', onclick: async () => {
+      btn.disabled = true;
+      const r = await api('GET', `/attempts/${id}/report?locale=${L}&v=2`);
+      if (r.status !== 200 || !r.data.v2) { btn.disabled = false; return slot.append(say(T.error, 'note mx-err')); }
+      slot.replaceChildren(...renderV2(id, r.data));
+      slot.querySelector('h2')?.focus();
+    } }, T.showV2);
+    slot.append(h('p', {}, btn));
+    return slot;
+  }
+
+  function renderV2(id, d) { return renderV2Parts(id, d).flat(2).filter((x) => x !== ''); }
+  function renderV2Parts(id, d) {
+    const v = d.v2, c = v.copy || {};
+    const scen = (n) => (n > 1 ? fmt(T.manyScenarios, { n }) : T.oneScenario);
+    const byId = Object.fromEntries(v.technical.domains.map((x) => [x.id, x]));
+    const strengths = v.strengths.length ? h('ol', { class: 'mx-strengths' }, v.strengths.map((s, i) => {
+      const txt = (c.strengths || [])[i];
+      return h('li', {}, h('p', {}, txt ? txt[L] : s.statement), h('p', { class: 'note' }, `${domainName(byId[s.domain])} · ${scen(s.scenarios)} · ${T.evidence}: ${s.evidence_ids.join(', ')}`));
+    })) : say(T.noStrengths);
+    const dev = v.development ? h('div', { class: 'mx-dev' }, h('p', {}, c.development ? c.development[L] : v.development.statement),
+      v.development.recheck ? h('p', { class: 'note' }, T.recheckNote) : '', h('p', { class: 'note' }, `${domainName(byId[v.development.domain])} · ${T.evidence}: ${v.development.evidence_ids.join(', ')}`)) : '';
+    const tm = v.time || {};
+    const themes = h('ul', { class: 'mx-find' }, v.themes.map((t) => h('li', {}, `${t[L]} · ${t.eligible ? T.eligibleTheme : T.notEligibleTheme}`,
+      t.eligible ? h('span', { class: 'note' }, ` · ${scen(t.scenarios)} · ${T.evidence}: ${t.evidence_ids.join(', ')}`) : '')));
+    const tech = h('details', { class: 'mx-tech' }, h('summary', {}, T.techH),
+      h('dl', { class: 'mx-head' },
+        h('div', {}, h('dt', {}, T.observed), h('dd', {}, pct(v.technical.headline.observed))),
+        h('div', {}, h('dt', {}, T.coverageM), h('dd', {}, pct(v.technical.headline.coverage))),
+        h('div', {}, h('dt', {}, T.confidenceM), h('dd', {}, pct(v.technical.headline.confidence)))),
+      say(T.measuresExplain),
+      h('div', { class: 'mx-table' }, h('table', {}, h('caption', {}, T.domainsH),
+        h('thead', {}, h('tr', {}, h('th', { scope: 'col' }, T.domainCol), h('th', { scope: 'col' }, T.observedCol), h('th', { scope: 'col' }, T.coverageCol), h('th', { scope: 'col' }, T.confidenceCol))),
+        h('tbody', {}, v.technical.domains.map((x) => h('tr', { class: x.sampled ? '' : 'off' }, h('th', { scope: 'row' }, domainName(x)),
+          x.sampled ? [h('td', {}, pct(x.observed)), h('td', {}, pct(x.coverage)), h('td', {}, pct(x.confidence))] : h('td', { colspan: '3' }, T.notMeasured)))))),
+      v.technical.lows.length ? [h('h4', {}, T.improveH), h('ul', { class: 'mx-find' }, v.technical.lows.map((f) => h('li', {}, h('span', { lang: 'en' }, f.statement),
+        h('span', { class: 'note' }, ` · ${domainName(byId[f.domain])} · ${f.observed}% · ${scen(f.scenarios)}${f.recheck ? ' · ' + T.recheckNote : ''}`))))] : '');
+    return [
+      h('h2', { tabindex: '-1' }, v.preview ? T.showV2.replace(/^Show |^Показати /, '') : T.reportTitle),
+      v.preview ? say(T.previewNote) : '',
+      h('p', { class: 'mx-breadth' }, fmt(T.breadth, { n: v.breadth.domains_sampled, t: v.breadth.domains_total, q: v.breadth.answered })),
+      h('h3', {}, T.strengthsV2H), strengths,
+      dev ? [h('h3', {}, T.devH), dev] : '',
+      h('h3', {}, T.themesH), themes,
+      certV2Block(id, v.preview),
+      h('h3', {}, T.timingH),
+      h('ul', { class: 'mx-find' },
+        h('li', {}, `${T.activeTime}: ${dur(tm.active_ms)}`), h('li', {}, `${T.pausedTime}: ${dur(tm.paused_ms)}`),
+        h('li', {}, `${T.elapsedTime}: ${dur(tm.elapsed_ms)}`), h('li', {}, `${T.unclassified}: ${dur(tm.unclassified_ms)}`)),
+      tech,
+      say(c.source === 'gemini' ? T.wordingAi : T.wordingTpl),
+    ];
+  }
+
+  function certV2Block(id, preview) {
+    const box = h('section', { class: 'mx-cert-block' });
+    const consent = h('input', { type: 'checkbox', id: 'mx-consent2' });
+    const btn = h('button', { class: 'btn ghost', type: 'button', onclick: async () => {
+      if (!consent.checked) { consent.focus(); return; }
+      btn.disabled = true;
+      const r = await api('POST', `/attempts/${id}/certificate${preview ? '?v=2' : ''}`, { consent: true });
+      if (r.status !== 200) { btn.disabled = false; return box.append(say(T.error, 'note mx-err')); }
+      if (r.data.status !== 'ready') return box.replaceChildren(h('h3', {}, T.certV2H), say(T.noTheme));
+      const c = r.data;
+      const svg = cardSvg(c);
+      const dl = h('button', { class: 'btn', type: 'button', onclick: () => downloadPng(svg, `managerial-dna-${c.date.slice(0, 10)}.png`) }, T.download);
+      box.replaceChildren(h('h3', {}, T.certV2H), c.themes.length < 3 ? say(fmt(T.fewerThemes, { n: c.themes.length })) : '',
+        h('div', { class: 'mx-card' }, svg), h('p', {}, dl),
+        h('ul', { class: 'mx-find' }, c.themes.map((t) => h('li', { class: 'note' }, `${t[L]} · ${T.evidence}: ${t.evidence_ids.join(', ')}`))),
+        say(c.copy_source === 'gemini' ? T.wordingAi : T.wordingTpl));
+    } }, T.certBtn);
+    box.append(h('h3', {}, T.certV2H), h('p', {}, h('label', { for: 'mx-consent2' }, consent, ' ', T.certConsent)), h('p', {}, btn));
+    return box;
+  }
+
+  // 1200x630 card, drawn as SVG (shown inline) and exported to PNG through a canvas.
+  const NS = 'http://www.w3.org/2000/svg';
+  function s(tag, attrs, text) { const e = document.createElementNS(NS, tag); for (const [k, v] of Object.entries(attrs)) e.setAttribute(k, v); if (text !== undefined) e.textContent = text; return e; }
+  function wrap(text, max) { const out = []; let cur = ''; for (const w of String(text).split(/\s+/)) { if ((cur + ' ' + w).trim().length > max && cur) { out.push(cur); cur = w; } else cur = (cur + ' ' + w).trim(); } if (cur) out.push(cur); return out; }
+  function cardSvg(c) {
+    const svg = s('svg', { viewBox: '0 0 1200 630', width: '1200', height: '630', role: 'img', 'aria-label': `${T.certTitle}: ${c.name[L]}` });
+    const g = s('linearGradient', { id: 'mxg', x1: '0', y1: '0', x2: '1', y2: '1' });
+    g.append(s('stop', { offset: '0', 'stop-color': '#0b1020' }), s('stop', { offset: '1', 'stop-color': '#16213d' }));
+    const defs = s('defs', {}); defs.append(g); svg.append(defs);
+    const font = 'Inter, system-ui, -apple-system, Segoe UI, Roboto, sans-serif';
+    svg.append(s('rect', { width: '1200', height: '630', fill: 'url(#mxg)' }), s('rect', { x: '24', y: '24', width: '1152', height: '582', rx: '28', fill: 'none', stroke: '#5b9bf8', 'stroke-opacity': '.55', 'stroke-width': '2' }));
+    svg.append(s('text', { x: '72', y: '108', fill: '#5b9bf8', 'font-family': font, 'font-size': '30', 'font-weight': '800', 'letter-spacing': '1' }, 'MANAGERIAL DNA'));
+    svg.append(s('text', { x: '72', y: '146', fill: '#94a3b8', 'font-family': font, 'font-size': '22' }, T.certSub));
+    svg.append(s('text', { x: '72', y: '220', fill: '#ffffff', 'font-family': font, 'font-size': '52', 'font-weight': '800' }, c.name[L]));
+    const n = c.themes.length, w = (1056 - (n - 1) * 24) / Math.max(n, 1);
+    c.themes.forEach((t, i) => {
+      const x = 72 + i * (w + 24);
+      svg.append(s('rect', { x, y: '262', width: w, height: '236', rx: '18', fill: '#ffffff', 'fill-opacity': '.06', stroke: '#f59e0b', 'stroke-opacity': '.6' }));
+      const title = wrap(t[L], n === 1 ? 50 : n === 2 ? 30 : 20).slice(0, 3);
+      title.forEach((line, j) => svg.append(s('text', { x: x + 24, y: 304 + j * 32, fill: '#ffffff', 'font-family': font, 'font-size': '26', 'font-weight': '800' }, line)));
+      const copy = t.copy ? t.copy[L] : '';
+      const top = 304 + title.length * 32 + 12;
+      wrap(copy, n === 1 ? 84 : n === 2 ? 46 : 31).slice(0, Math.floor((486 - top) / 24) + 1).forEach((line, j) => svg.append(s('text', { x: x + 24, y: top + j * 24, fill: '#cbd5e1', 'font-family': font, 'font-size': '18' }, line)));
+    });
+    const date = new Date(c.date).toLocaleDateString(L === 'uk' ? 'uk-UA' : 'en-GB', { dateStyle: 'long' });
+    svg.append(s('text', { x: '72', y: '552', fill: '#e2e8f0', 'font-family': font, 'font-size': '21' }, fmt(T.certContext, { q: c.context.questions, d: c.context.domains_sampled, t: c.context.domains_total })));
+    svg.append(s('text', { x: '72', y: '584', fill: '#94a3b8', 'font-family': font, 'font-size': '18' }, `${date} · mykola.pages.dev/challenge · ${T.certNotice.split('.')[0]}.`));
+    return svg;
+  }
+  function downloadPng(svg, name) {
+    const xml = new XMLSerializer().serializeToString(svg);
+    const img = new Image();
+    img.onload = () => {
+      const cv = document.createElement('canvas'); cv.width = 1200; cv.height = 630;
+      cv.getContext('2d').drawImage(img, 0, 0);
+      cv.toBlob((blob) => { const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = name; document.body.append(a); a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 1000); }, 'image/png');
+    };
+    img.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(xml);
   }
 
   route();
