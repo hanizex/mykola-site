@@ -11,5 +11,20 @@
       "database_name": "mykola-site",
       "database_id": "f7cdd98d-3d4c-4c66-adec-91b4d152193e"
     }
-  ]
+  ],
+  // Managerial DNA (Express) pilot: the private Worker behind /api/challenge/express/*.
+  // This file is the source of truth for bindings: a `wrangler pages deploy` replaces what the dashboard has.
+  "services": [{ "binding": "EXPRESS", "service": "mdna-express" }],
+  "env": {
+    "preview": {
+      "d1_databases": [
+        {
+          "binding": "DB",
+          "database_name": "mykola-site",
+          "database_id": "f7cdd98d-3d4c-4c66-adec-91b4d152193e"
+        }
+      ],
+      "services": [{ "binding": "EXPRESS", "service": "mdna-express-preview" }]
+    }
+  }
 }
