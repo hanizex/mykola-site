@@ -22,7 +22,7 @@
     for (const c of kids.flat()) if (c !== null && c !== undefined && c !== false) e.append(c instanceof Node ? c : document.createTextNode(String(c)));
     return e;
   }
-  const show = (...nodes) => { root.replaceChildren(...nodes); };
+  const show = (...nodes) => { root.replaceChildren(...nodes); debugPanel(null); };
   const say = (msg, cls = 'note') => h('p', { class: cls, role: cls.includes('err') ? 'alert' : null }, msg);
 
   async function api(method, path, body) {
@@ -152,7 +152,7 @@
       if (l.status === 200) A.revision = l.data.revision;
     }
     if (s.data.status === 'paused') return pausedView(s.data.progress);
-    if (s.data.current && s.data.locale === L) return question(s.data.current, s.data.progress);
+    if (s.data.current && s.data.locale === L) return question(s.data.current, s.data.progress, s.data.debug);
     return nextQuestion(s.data.progress);
   }
 
@@ -161,9 +161,9 @@
     if (n.status === 409) { root.prepend(say(T.stale)); return attempt(A.id); }
     if (n.status !== 200) return show(say(T.error, 'note mx-err'));
     A.revision = n.data.revision;
-    if (n.data.done) return planReached(n.data.progress || prog);
+    if (n.data.done) { planReached(n.data.progress || prog); return debugPanel(n.data.debug); }
     const p = prog || (await api('GET', `/attempts/${A.id}`)).data.progress;
-    question(n.data.current, p);
+    question(n.data.current, p, n.data.debug);
   }
 
   function progressBox(p, seq) {
@@ -176,7 +176,7 @@
       h('p', { class: 'note' }, T.measuresHint));
   }
 
-  function question(q, prog) {
+  function question(q, prog, dbg) {
     cur = { attempt: A.id, display_id: q.display_id };
     const sel = q.selection;
     const multi = q.format === 'multiple_choice';
@@ -240,6 +240,7 @@
         h('button', { class: 'linkbtn', type: 'button', onclick: pause }, T.pause), ' · ',
         h('button', { class: 'linkbtn', type: 'button', onclick: (ev) => confirmBox(ev.target.parentNode, T.finishConfirm, T.finishYes, finish) }, T.finishEarly)));
     show(progressBox(prog, q.seq), form);
+    debugPanel(dbg);
     legend.focus({ preventScroll: false });
     sendEvents([{ type: 'display', display_id: q.display_id }].concat(document.visibilityState === 'visible' ? [{ type: 'visibility', visible: true }] : []));
     startBeat();
@@ -461,6 +462,48 @@
       cv.toBlob((blob) => { const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = name; document.body.append(a); a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 1000); }, 'image/png');
     };
     img.src = 'data:image/svg+xml;charset=utf-8,' + encodeURIComponent(xml);
+  }
+
+  // ---------------------------------------------------------------- TEMPORARY debug panel (testing only; remove later)
+  // Shown only when the owner-session API sends `debug` (Worker flag EXPRESS_DEBUG) and only on wide desktop screens
+  // (CSS .mx-dbg in style.css hides it below 1280px). Left: impact of the last answer. Right: the prepared next question.
+  // To remove: delete this block, the `debugPanel(...)` calls and the `.mx-dbg` CSS block.
+  function debugPanel(d) {
+    document.querySelectorAll('.mx-dbg').forEach((x) => x.remove());
+    if (!d) return;
+    const sign = (v) => (v === null || v === undefined ? '–' : (v > 0 ? '+' : '') + v);
+    const ba = (x, unit = '%') => `${x.before ?? '–'} → ${x.after ?? '–'}${unit} (${sign(x.delta)})`;
+    const row = (k, v, cls) => h('div', { class: cls || null }, h('dt', {}, k), h('dd', {}, v));
+    const left = h('aside', { class: 'mx-dbg mx-dbg-l', 'aria-label': 'Debug: answer impact' }, h('p', { class: 'mx-dbg-h' }, 'DEBUG · last answer impact'));
+    const l = d.last;
+    if (!l) left.append(h('p', {}, 'No answer yet.'));
+    else {
+      left.append(h('p', {}, `Q${l.seq} · ${l.item_id} · ${l.format}`),
+        h('dl', {}, row('Outcome', l.outcome + (l.uncertain ? ' (not sure)' : '')), l.choice ? row('Choice', l.choice) : ''));
+      for (const t of l.targets) left.append(h('div', { class: 'mx-dbg-t' },
+        h('p', {}, h('b', {}, t.unit), ` · ${t.domain}${t.core ? ' · core' : ''} · ${t.dimension}`),
+        h('p', { class: 'note', lang: 'en' }, t.statement),
+        h('dl', {}, row('Score', `${t.score}/${t.max} (${t.pct}%) · best ${t.best}/${t.max}`, t.score < t.best ? 'mx-dbg-lo' : 'mx-dbg-hi'),
+          row('Weight', String(t.strength)), row('Unit observed', ba(t.unit_score)), row('Unit confidence', ba(t.unit_confidence)),
+          row('Families', String(t.families) + (t.conflict ? ' · conflict' : '')))));
+      if (l.note) left.append(h('p', { class: 'note' }, 'No effective evidence: scores unchanged.'));
+      for (const x of l.domains) left.append(h('div', { class: 'mx-dbg-t' }, h('p', {}, h('b', {}, `${x.id} · ${domainName(x)}`)),
+        h('dl', {}, row('Observed', ba(x.observed)), row('Coverage', ba(x.coverage)), row('Confidence', ba(x.confidence)))));
+      left.append(h('div', { class: 'mx-dbg-t' }, h('p', {}, h('b', {}, 'Overall')),
+        h('dl', {}, row('Observed', ba(l.headline.observed)), row('Coverage', ba(l.headline.coverage)), row('Confidence', ba(l.headline.confidence)),
+          row('Domains', ba(l.headline.domains, '')))));
+    }
+    const right = h('aside', { class: 'mx-dbg mx-dbg-r', 'aria-label': 'Debug: next question' }, h('p', { class: 'mx-dbg-h' }, 'DEBUG · next question'));
+    const c = d.current, n = d.next;
+    if (c) right.append(h('p', { class: 'note' }, `Now: ${c.item_id} · ${c.domain} · ${c.purpose || 'v1'} · ${c.target_unit}${c.match !== null ? ' · match ' + c.match : ''}`));
+    if (!n) right.append(h('p', {}, 'No open question.'));
+    else if (n.status !== 'selected') right.append(h('p', {}, `No next question: ${n.status}`));
+    else right.append(
+      h('p', {}, `${n.item_id} · ${n.format} · L${n.difficulty}`),
+      h('p', { class: 'note' }, `${n.domain} · ${n.purpose || 'v1'} · ${n.target_unit}${n.match !== null ? ' · match ' + n.match : ''}${n.fallback ? ' · fallback' : ''}`),
+      h('p', { class: n.stable ? 'mx-dbg-hi' : 'mx-dbg-lo' }, n.stable ? 'Fixed: does not depend on your answer.' : 'May change with your answer.'),
+      h('p', { class: 'mx-dbg-stem' }, n.stem), h('ol', {}, n.options.map((o) => h('li', {}, o))));
+    document.body.append(left, right);
   }
 
   route();
