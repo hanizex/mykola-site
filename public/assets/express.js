@@ -493,16 +493,22 @@
         h('dl', {}, row('Observed', ba(l.headline.observed)), row('Coverage', ba(l.headline.coverage)), row('Confidence', ba(l.headline.confidence)),
           row('Domains', ba(l.headline.domains, '')))));
     }
-    const right = h('aside', { class: 'mx-dbg mx-dbg-r', 'aria-label': 'Debug: next question' }, h('p', { class: 'mx-dbg-h' }, 'DEBUG · next question'));
-    const c = d.current, n = d.next;
+    const right = h('aside', { class: 'mx-dbg mx-dbg-r', 'aria-label': 'Debug: next questions' }, h('p', { class: 'mx-dbg-h' }, 'DEBUG · next questions'));
+    const c = d.current;
     if (c) right.append(h('p', { class: 'note' }, `Now: ${c.item_id} · ${c.domain} · ${c.purpose || 'v1'} · ${c.target_unit}${c.match !== null ? ' · match ' + c.match : ''}`));
-    if (!n) right.append(h('p', {}, 'No open question.'));
-    else if (n.status !== 'selected') right.append(h('p', {}, `No next question: ${n.status}`));
-    else right.append(
-      h('p', {}, `${n.item_id} · ${n.format} · L${n.difficulty}`),
-      h('p', { class: 'note' }, `${n.domain} · ${n.purpose || 'v1'} · ${n.target_unit}${n.match !== null ? ' · match ' + n.match : ''}${n.fallback ? ' · fallback' : ''}`),
-      h('p', { class: n.stable ? 'mx-dbg-hi' : 'mx-dbg-lo' }, n.stable ? 'Fixed: does not depend on your answer.' : 'May change with your answer.'),
-      h('p', { class: 'mx-dbg-stem' }, n.stem), h('ol', {}, n.options.map((o) => h('li', {}, o))));
+    const preview = (label, n) => {
+      const box = h('div', { class: 'mx-dbg-t' }, h('p', {}, h('b', {}, label)));
+      if (!n) box.append(h('p', {}, 'No open question.'));
+      else if (n.status !== 'selected') box.append(h('p', {}, `None: ${n.status}`));
+      else box.append(
+        h('p', {}, `${n.item_id} · ${n.format} · L${n.difficulty}`),
+        h('p', { class: 'note' }, `${n.domain} · ${n.purpose || 'v1'} · ${n.target_unit}${n.match !== null ? ' · match ' + n.match : ''}${n.fallback ? ' · fallback' : ''}`),
+        h('p', { class: n.stable ? 'mx-dbg-hi' : 'mx-dbg-lo' }, n.stable ? 'Fixed: does not depend on your answers.' : 'May change with your answers.'),
+        h('p', { class: 'mx-dbg-stem' }, n.stem), h('ol', {}, n.options.map((o) => h('li', {}, o))));
+      return box;
+    };
+    right.append(preview('Next question', d.next));
+    if (d.next && d.next.status === 'selected') right.append(preview('Question after next', d.after_next));
     document.body.append(left, right);
   }
 

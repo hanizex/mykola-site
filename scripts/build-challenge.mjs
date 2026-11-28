@@ -3,6 +3,7 @@
 // The quiz runs fully in the browser; answers are never sent. Only start/finish counts are posted by public/assets/challenge.js.
 
 import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
+import { createHash } from 'node:crypto';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { introLink, ogPath, CHANNEL, toolsLink } from './config.mjs';
@@ -132,6 +133,8 @@ const DOMAINS_UK = { SM: 'Стратегічний менеджмент', FCM: '
   MEL: 'Вимірювання, оцінювання й навчання', TM: 'Управління технологіями', AIM: 'Управління ШІ й автоматизацією', IE: 'Інновації й експерименти' };
 const X = JSON.parse(readFileSync(join(ROOT, 'content', 'express.json'), 'utf8'));
 
+// Asset version for the Express page: a content hash, so a deploy reaches the browser at once despite the asset cache.
+const ASSET_V = createHash('sha256').update(readFileSync(join(ROOT, 'public', 'assets', 'express.js'))).update(readFileSync(join(ROOT, 'public', 'assets', 'style.css'))).digest('hex').slice(0, 10);
 function expressPage(k) {
   const u = UI[k];
   const t = X[k];
@@ -152,7 +155,7 @@ function expressPage(k) {
   <meta property="og:url" content="${SITE}${u.pre}/challenge/express/">
   <meta property="og:image" content="${SITE}${ogPath(`${u.pre}/challenge/`)}">
   <link rel="icon" href="/favicon.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="/assets/style.css">
+  <link rel="stylesheet" href="/assets/style.css?v=${ASSET_V}">
 </head>
 <body>
   <header class="site"><div class="wrap"><a class="brand" href="${u.home}">${esc(u.name)}</a><nav><a href="${u.pre}/challenge/">Challenge AI</a><a href="${u.blogPath}">${u.blog}</a>${toolsLink(u.home)}<a href="${cfg.other}" hreflang="${u.otherHl}" lang="${u.otherHl}" title="${u.otherTitle}" id="mx-lang">${u.otherLabel}</a></nav></div></header>
@@ -165,7 +168,7 @@ function expressPage(k) {
   <footer class="site"><div class="wrap">© <span id="y">2026</span> ${esc(u.name)} · <a href="${u.pre}/challenge/">Challenge AI</a> · <a href="${u.privacyPath}">${u.privacy}</a> · <a href="${u.termsPath}">${u.terms}</a></div></footer>
   <script type="application/json" id="mx-cfg">${JSON.stringify(cfg).replace(/</g, '\\u003c')}</script>
   <script src="/assets/site.js" defer></script>
-  <script src="/assets/express.js" defer></script>
+  <script src="/assets/express.js?v=${ASSET_V}" defer></script>
 </body>
 </html>
 `;
