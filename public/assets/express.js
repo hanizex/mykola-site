@@ -490,7 +490,24 @@
     out.push(h('div', { class: 'mx-dbg-t' }, h('p', {}, h('b', {}, 'Overall')),
       h('dl', {}, dbgRow('Observed', dbgBA(x.headline.observed)), dbgRow('Coverage', dbgBA(x.headline.coverage)), dbgRow('Confidence', dbgBA(x.headline.confidence)),
         dbgRow('Domains', dbgBA(x.headline.domains, '')))));
+    if (x.secondary) out.push(dbgSecondary(x.secondary));
     return out;
+  }
+  // Secondary mappings are not counted (policy use_secondary_mappings = false): a shadow "if they were counted" view.
+  function dbgSecondary(sx) {
+    const why = { no_closed_rule: 'no closed rule (written only)', no_score_for_choice: 'no score for this choice', no_effective_answer: 'no effective answer' };
+    const box = h('div', { class: 'mx-dbg-t mx-dbg-sec' }, h('p', {}, h('b', {}, 'Secondary · not counted')),
+      h('p', { class: 'note' }, 'Shown as if secondary evidence counted. Real scores ignore it.'));
+    for (const t of sx.targets) box.append(h('div', { class: 'mx-dbg-t' },
+      h('p', {}, h('b', {}, t.unit), ` · ${t.layer}${t.domain ? ' · ' + t.domain : ''}`),
+      t.statement ? h('p', { class: 'note', lang: 'en' }, t.statement) : '',
+      t.status === 'scored'
+        ? h('dl', {}, dbgRow('Score', `${t.score}/${t.max} (${t.pct}%) · best ${t.best}/${t.max}`, t.score < t.best ? 'mx-dbg-lo' : 'mx-dbg-hi'),
+          dbgRow('Weight', String(t.strength)), dbgRow('Unit observed', dbgBA(t.unit_score)), dbgRow('Unit confidence', dbgBA(t.unit_confidence)))
+        : h('p', { class: 'note' }, why[t.status] || t.status)));
+    box.append(h('dl', {}, dbgRow('Competency coverage', dbgBA(sx.layers.competency_coverage)),
+      dbgRow('Capability coverage', dbgBA(sx.layers.capability_coverage)), dbgRow('Style coverage', dbgBA(sx.layers.style_coverage))));
+    return box;
   }
   // Called by question() whenever the selection changes: ids in answer order (ranking) or as checked.
   function debugSelect(ids) {

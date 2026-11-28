@@ -1149,4 +1149,5 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 2px soli
   .mx-dbg-t { margin: 8px 0; padding-top: 8px; border-top: 1px solid var(--line); }
   .mx-dbg-hi dd, p.mx-dbg-hi { color: var(--accent); } .mx-dbg-lo dd, p.mx-dbg-lo { color: var(--amber, #f59e0b); }
   .mx-dbg-stem { font-weight: 700; }
+  .mx-dbg-sec { opacity: .8; } .mx-dbg-sec > p:first-child b { color: var(--muted); }
 }
