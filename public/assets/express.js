@@ -187,7 +187,7 @@
     let choices;
     if (rank) {
       const list = h('ol', { class: 'mx-rank', 'aria-describedby': 'mx-hint' });
-      const draw = () => {
+      let draw = () => {
         list.replaceChildren(...order.map((id, i) => {
           const o = q.options.find((x) => x.id === id);
           const move = (d) => () => { const j = i + d; if (j < 0 || j >= order.length) return; [order[i], order[j]] = [order[j], order[i]]; draw(); list.querySelectorAll('li')[j].querySelector(d < 0 ? '.up' : '.down')?.focus(); };
@@ -198,6 +198,8 @@
         }));
       };
       draw();
+      const drawn = draw;
+      draw = () => { drawn(); debugSelect(order.slice(0, sel.min)); };   // TEMPORARY debug panel
       choices = list;
     } else {
       choices = h('div', { class: 'mx-opts' }, q.options.map((o, i) => {
@@ -210,6 +212,7 @@
         return h('label', { class: 'mx-opt', for: id }, input, h('span', {}, o.label));
       }));
     }
+    if (!rank) choices.addEventListener('change', () => debugSelect([...choices.querySelectorAll('input:checked')].map((x) => x.value)));   // TEMPORARY debug panel
     const unsure = h('input', { type: 'checkbox', id: 'mx-unsure', name: 'unsure' });
     const msg = h('p', { class: 'mx-err', role: 'alert', hidden: true });
     const send = async (skip) => {
@@ -241,6 +244,7 @@
         h('button', { class: 'linkbtn', type: 'button', onclick: (ev) => confirmBox(ev.target.parentNode, T.finishConfirm, T.finishYes, finish) }, T.finishEarly)));
     show(progressBox(prog, q.seq), form);
     debugPanel(dbg);
+    if (rank) debugSelect(order.slice(0, sel.min));
     legend.focus({ preventScroll: false });
     sendEvents([{ type: 'display', display_id: q.display_id }].concat(document.visibilityState === 'visible' ? [{ type: 'visibility', visible: true }] : []));
     startBeat();
@@ -466,33 +470,58 @@
 
   // ---------------------------------------------------------------- TEMPORARY debug panel (testing only; remove later)
   // Shown only when the owner-session API sends `debug` (Worker flag EXPRESS_DEBUG) and only on wide desktop screens
-  // (CSS .mx-dbg in style.css hides it below 1280px). Left: impact of the last answer. Right: the prepared next question.
-  // To remove: delete this block, the `debugPanel(...)` calls and the `.mx-dbg` CSS block.
+  // (CSS .mx-dbg in style.css hides it below 1280px). Left of the question: what the selected answer would change (live)
+  // and the impact of the last answer; right: the next question and the one after it.
+  // To remove: delete this block, the `debugPanel(...)` / `debugSelect(...)` calls and the `.mx-dbg` CSS block.
+  let dbgWhatIf = null, dbgNowBox = null;
+  const dbgSign = (v) => (v === null || v === undefined ? '–' : (v > 0 ? '+' : '') + v);
+  const dbgBA = (x, unit = '%') => `${x.before ?? '–'} → ${x.after ?? '–'}${unit} (${dbgSign(x.delta)})`;
+  const dbgRow = (k, v, cls) => h('div', { class: cls || null }, h('dt', {}, k), h('dd', {}, v));
+  function dbgEffect(x) {      // targets, domains and overall of one (real or hypothetical) answer
+    const out = [];
+    for (const t of x.targets) out.push(h('div', { class: 'mx-dbg-t' },
+      h('p', {}, h('b', {}, t.unit), ` · ${t.domain}${t.core ? ' · core' : ''}${t.dimension ? ' · ' + t.dimension : ''}`),
+      t.statement ? h('p', { class: 'note', lang: 'en' }, t.statement) : '',
+      h('dl', {}, dbgRow('Score', `${t.score}/${t.max} (${t.pct}%) · best ${t.best}/${t.max}`, t.score < t.best ? 'mx-dbg-lo' : 'mx-dbg-hi'),
+        dbgRow('Weight', String(t.strength)), dbgRow('Unit observed', dbgBA(t.unit_score)), dbgRow('Unit confidence', dbgBA(t.unit_confidence)),
+        dbgRow('Families', String(t.families) + (t.conflict ? ' · conflict' : '')))));
+    for (const d of x.domains) out.push(h('div', { class: 'mx-dbg-t' }, h('p', {}, h('b', {}, `${d.id} · ${domainName(d)}`)),
+      h('dl', {}, dbgRow('Observed', dbgBA(d.observed)), dbgRow('Coverage', dbgBA(d.coverage)), dbgRow('Confidence', dbgBA(d.confidence)))));
+    out.push(h('div', { class: 'mx-dbg-t' }, h('p', {}, h('b', {}, 'Overall')),
+      h('dl', {}, dbgRow('Observed', dbgBA(x.headline.observed)), dbgRow('Coverage', dbgBA(x.headline.coverage)), dbgRow('Confidence', dbgBA(x.headline.confidence)),
+        dbgRow('Domains', dbgBA(x.headline.domains, '')))));
+    return out;
+  }
+  // Called by question() whenever the selection changes: ids in answer order (ranking) or as checked.
+  function debugSelect(ids) {
+    if (!dbgNowBox) return;
+    const head = h('p', { class: 'mx-dbg-h' }, 'DEBUG · if you answer now');
+    if (!dbgWhatIf) return dbgNowBox.replaceChildren(head, h('p', {}, 'No preview for this question.'));
+    if (!ids.length) return dbgNowBox.replaceChildren(head, h('p', {}, 'Pick an answer to see what it changes. Skip or “Not sure” alone change no score.'));
+    const key = dbgWhatIf.format === 'multiple_choice' ? [...ids].sort().join('+') : ids.join(dbgWhatIf.sep);
+    const x = dbgWhatIf.answers[key];
+    dbgNowBox.replaceChildren(head, h('p', {}, `Selection: ${key}`), ...(x ? dbgEffect(x) : [h('p', {}, 'Not a complete answer yet.')]));
+  }
   function debugPanel(d) {
     document.querySelectorAll('.mx-dbg').forEach((x) => x.remove());
+    dbgWhatIf = null; dbgNowBox = null;
     if (!d) return;
-    const sign = (v) => (v === null || v === undefined ? '–' : (v > 0 ? '+' : '') + v);
-    const ba = (x, unit = '%') => `${x.before ?? '–'} → ${x.after ?? '–'}${unit} (${sign(x.delta)})`;
-    const row = (k, v, cls) => h('div', { class: cls || null }, h('dt', {}, k), h('dd', {}, v));
-    const left = h('aside', { class: 'mx-dbg mx-dbg-l', 'aria-label': 'Debug: answer impact' }, h('p', { class: 'mx-dbg-h' }, 'DEBUG · last answer impact'));
+    const last = h('section', { class: 'mx-dbg-box', 'aria-label': 'Debug: last answer impact' }, h('p', { class: 'mx-dbg-h' }, 'DEBUG · last answer impact'));
     const l = d.last;
-    if (!l) left.append(h('p', {}, 'No answer yet.'));
+    if (!l) last.append(h('p', {}, 'No answer yet.'));
     else {
-      left.append(h('p', {}, `Q${l.seq} · ${l.item_id} · ${l.format}`),
-        h('dl', {}, row('Outcome', l.outcome + (l.uncertain ? ' (not sure)' : '')), l.choice ? row('Choice', l.choice) : ''));
-      for (const t of l.targets) left.append(h('div', { class: 'mx-dbg-t' },
-        h('p', {}, h('b', {}, t.unit), ` · ${t.domain}${t.core ? ' · core' : ''} · ${t.dimension}`),
-        h('p', { class: 'note', lang: 'en' }, t.statement),
-        h('dl', {}, row('Score', `${t.score}/${t.max} (${t.pct}%) · best ${t.best}/${t.max}`, t.score < t.best ? 'mx-dbg-lo' : 'mx-dbg-hi'),
-          row('Weight', String(t.strength)), row('Unit observed', ba(t.unit_score)), row('Unit confidence', ba(t.unit_confidence)),
-          row('Families', String(t.families) + (t.conflict ? ' · conflict' : '')))));
-      if (l.note) left.append(h('p', { class: 'note' }, 'No effective evidence: scores unchanged.'));
-      for (const x of l.domains) left.append(h('div', { class: 'mx-dbg-t' }, h('p', {}, h('b', {}, `${x.id} · ${domainName(x)}`)),
-        h('dl', {}, row('Observed', ba(x.observed)), row('Coverage', ba(x.coverage)), row('Confidence', ba(x.confidence)))));
-      left.append(h('div', { class: 'mx-dbg-t' }, h('p', {}, h('b', {}, 'Overall')),
-        h('dl', {}, row('Observed', ba(l.headline.observed)), row('Coverage', ba(l.headline.coverage)), row('Confidence', ba(l.headline.confidence)),
-          row('Domains', ba(l.headline.domains, '')))));
+      last.append(h('p', {}, `Q${l.seq} · ${l.item_id} · ${l.format}`),
+        h('dl', {}, dbgRow('Outcome', l.outcome + (l.uncertain ? ' (not sure)' : '')), l.choice ? dbgRow('Choice', l.choice) : ''), ...dbgEffect(l));
+      if (l.note) last.append(h('p', { class: 'note' }, 'No effective evidence: scores unchanged.'));
     }
+    const left = h('aside', { class: 'mx-dbg mx-dbg-l', 'aria-label': 'Debug: scoring' });
+    if (d.current) {
+      dbgWhatIf = d.what_if || null;
+      dbgNowBox = h('section', { class: 'mx-dbg-box mx-dbg-now', 'aria-live': 'polite', 'aria-label': 'Debug: what this answer would change' });
+      left.append(dbgNowBox);
+      debugSelect([]);
+    }
+    left.append(last);
     const right = h('aside', { class: 'mx-dbg mx-dbg-r', 'aria-label': 'Debug: next questions' }, h('p', { class: 'mx-dbg-h' }, 'DEBUG · next questions'));
     const c = d.current;
     if (c) right.append(h('p', { class: 'note' }, `Now: ${c.item_id} · ${c.domain} · ${c.purpose || 'v1'} · ${c.target_unit}${c.match !== null ? ' · match ' + c.match : ''}`));
