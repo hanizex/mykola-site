@@ -493,13 +493,20 @@
     if (x.secondary) out.push(dbgSecondary(x.secondary));
     return out;
   }
-  // Secondary mappings are not counted (policy use_secondary_mappings = false): a shadow "if they were counted" view.
+  // Secondary mappings. Today: not counted (policy use_secondary_mappings = false) and all provisional drafts, shown as a
+  // shadow "as if counted". Once reviewed mappings are counted by the engine, the same section shows them as counted.
   function dbgSecondary(sx) {
     const why = { no_closed_rule: 'no closed rule (written only)', no_score_for_choice: 'no score for this choice', no_effective_answer: 'no effective answer' };
-    const box = h('div', { class: 'mx-dbg-t mx-dbg-sec' }, h('p', {}, h('b', {}, 'Secondary · not counted')),
-      h('p', { class: 'note' }, 'Shown as if secondary evidence counted. Real scores ignore it.'));
-    for (const t of sx.targets) box.append(h('div', { class: 'mx-dbg-t' },
+    const title = { counted: 'Secondary · counted', mixed: 'Secondary · partly counted', not_counted: 'Secondary · not counted' }[sx.mode] || 'Secondary';
+    const note = sx.mode === 'counted' ? 'Included in the real scores above.'
+      : sx.mode === 'mixed' ? 'Counted targets are in the real scores; the others are shown as if counted.'
+      : 'Shown as if secondary evidence counted. Real scores ignore it.';
+    const tag = (t) => `${t.counted ? 'counted' : 'not counted'} · ${t.draft ? 'draft (' + t.review + ')' : t.review}`;
+    const box = h('div', { class: 'mx-dbg-t mx-dbg-sec' + (sx.mode === 'not_counted' ? ' off' : '') }, h('p', {}, h('b', {}, title)),
+      h('p', { class: 'note' }, note + (sx.drafts ? ` ${sx.drafts} of ${sx.targets.length} mapping(s) still draft.` : '')));
+    for (const t of sx.targets) box.append(h('div', { class: 'mx-dbg-t' + (t.counted ? '' : ' off') },
       h('p', {}, h('b', {}, t.unit), ` · ${t.layer}${t.domain ? ' · ' + t.domain : ''}`),
+      h('p', { class: 'note' }, tag(t)),
       t.statement ? h('p', { class: 'note', lang: 'en' }, t.statement) : '',
       t.status === 'scored'
         ? h('dl', {}, dbgRow('Score', `${t.score}/${t.max} (${t.pct}%) · best ${t.best}/${t.max}`, t.score < t.best ? 'mx-dbg-lo' : 'mx-dbg-hi'),
